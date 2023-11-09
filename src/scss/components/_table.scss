@@ -1,0 +1,61 @@
+.wrap {
+  overflow: hidden;
+  width: 1028px;
+
+  table {
+    border-collapse: collapse;
+
+
+    th {
+      background-color: $black;
+      color: $white;
+      width: 25vw;
+      height: 64px;
+
+      &:nth-child(5),
+      &:nth-child(6) {
+        color: $black;
+      }
+
+
+    }
+
+    td {
+      background-color: $white;
+      width: 25vw;
+      height: 64px;
+      text-align: center;
+
+      div.block {
+        width: 100%;
+        max-width: 25vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      div.edit {
+        cursor: pointer;
+        padding: 15px 0;
+
+      }
+
+    }
+
+    tr {
+      border-bottom: 1px solid $gray-700;
+
+
+
+      &:nth-of-type(odd) td {
+        background-color: $gray-300;
+      }
+
+      &:hover td {
+        background-color: $secondary-y1;
+      }
+
+
+    }
+  }
+}

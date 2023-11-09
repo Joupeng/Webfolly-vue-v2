@@ -1,0 +1,202 @@
+@import "../base/color";
+@import "../base/font";
+
+.frontheader {
+  min-width: 320px;
+  width: 100%;
+  padding: 15px 8vw 15px 8vw;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+  background-color: $secondary-y1;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+
+  &-background {
+    width: 100%;
+    height: 80px;
+  }
+
+  &_frame {
+    max-width: 1440px;
+    width: 100%;
+  }
+
+  & img {
+    display: block;
+    float: left;
+  }
+
+  &_menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    clear: both;
+    max-height: 0;
+    transition: all 1s;
+
+    span {
+      font-size: 18px;
+      display: block;
+      width: fit-content;
+      margin: 20px 0px;
+      padding: 8px 4px;
+      position: relative;
+      color: $black;
+
+      &:hover {
+        color: $primary-b;
+        font-weight: bolder;
+      }
+    }
+
+    &-on {
+      color: $black;
+
+      &:hover {
+        color: $primary-b;
+        font-weight: bolder;
+      }
+    }
+  }
+
+  &_menuicon {
+    cursor: pointer;
+    float: right;
+    padding: 23px 8px;
+    position: relative;
+    user-select: none;
+  }
+
+  &_menuline {
+    background: $primary-b;
+    display: block;
+    height: 4px;
+    width: 28px;
+    border-radius: 32px;
+    position: relative;
+    transition: background .2s ease-out;
+
+    &:before,
+    &:after {
+      background: $primary-b;
+      content: '';
+      display: block;
+      border-radius: 32px;
+      height: 100%;
+      position: absolute;
+      transition: all .2s ease-out;
+      width: 28px;
+    }
+
+    &:before {
+      top: 10px;
+    }
+
+    &:after {
+      top: -10px;
+    }
+  }
+
+  &_menubtn {
+    display: none;
+
+    &:checked~.frontheader_menu {
+      max-height: unset;
+      min-height: 100vh;
+      padding: 40px 0px 0px;
+    }
+
+    &:checked~.frontheader_menuicon:not(.steps) .frontheader_menuline {
+      background: transparent;
+    }
+
+    &:checked~.frontheader_menuicon:not(.steps) .frontheader_menuline:before {
+      transform: rotate(-45deg);
+      top: 0;
+    }
+
+    &:checked~.frontheader_menuicon:not(.steps) .frontheader_menuline:after {
+      transform: rotate(45deg);
+      top: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .frontheader {
+    padding: 11.25px 5vw 11.25px 8vw;
+
+    &_menu {
+      clear: none;
+      float: right;
+      max-height: unset;
+      min-height: 50px;
+      padding-top: calc((50px - 16px - 13.5px)/2);
+      padding-bottom: calc((50px - 16px - 13.5px)/2);
+
+      & li {
+        float: left;
+        margin: 0px 30px 0px 0px;
+      }
+
+      & span {
+        font-size: $fontbase-14;
+        margin: 0px;
+
+        &:before,
+        &:after {
+          position: absolute;
+          height: 1px;
+          content: '';
+          transition: all 0.5s;
+          background: $primary-b;
+        }
+
+        &:before {
+          left: 0px;
+          top: 0px;
+          opacity: 0;
+          width: 0%;
+        }
+
+        &:after {
+          right: 0px;
+          bottom: 0px;
+          opacity: 0;
+          width: 0%;
+        }
+
+        &:hover:before,
+        &:hover:after {
+          opacity: 1;
+          width: 100%;
+        }
+      }
+
+      &-on {
+        color: $primary-b !important;
+        font-weight: bolder !important;
+      }
+
+      &-on:before,
+      &-on:after {
+        opacity: 1 !important;
+        width: 100% !important;
+      }
+    }
+
+    &_menuicon {
+      display: none;
+    }
+
+    &_menubtn:checked~.frontheader_menu {
+      max-height: unset;
+      min-height: 50px;
+      padding-top: calc((50px - 16px - 13.5px)/2);
+      padding-bottom: calc((50px - 16px - 13.5px)/2);
+    }
+  }
+}

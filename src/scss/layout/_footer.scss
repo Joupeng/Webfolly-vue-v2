@@ -1,0 +1,91 @@
+@import "../base/color";
+@import "../base/font";
+
+.frontfooter {
+  min-width: 320px;
+  width: 100%;
+  padding: 15px 8vw 15px 8vw;
+  display: flex;
+  justify-content: center;
+  background-color: $neutral-dark;
+
+  &_frame {
+    text-align: center;
+    max-width: 1440px;
+    width: 100%;
+
+    & img {
+      margin-bottom: 1em;
+    }
+  }
+
+  &_text {
+    display: flex;
+    flex-direction: column-reverse;
+
+    p {
+      text-align: left;
+      font-size: 12px;
+      color: $primary-y;
+      line-height: 1.5em;
+      padding: 1.5em;
+      margin: 0;
+    }
+
+    br {
+      display: none;
+    }
+
+    span {
+      font-size: $fontbase-14;
+      color: $primary-y;
+
+      &:hover {
+        color: $secondary-y1;
+      }
+    }
+  }
+
+  &_scrolltop {
+    position: fixed;
+    bottom: 2em;
+    right: 1em;
+    z-index: 998;
+    display: none;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .frontfooter {
+    &_frame {
+      display: flex;
+      align-items: center;
+
+      & img {
+        margin-bottom: 0;
+      }
+    }
+
+    &_text {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+
+      p {
+        width: 80%;
+        padding-left: 3em;
+
+      }
+
+      br {
+        display: unset;
+      }
+
+      span {
+        margin: 0vw 0vw 0vw 0vw;
+      }
+    }
+  }
+}

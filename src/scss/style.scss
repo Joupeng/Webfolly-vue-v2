@@ -1,0 +1,42 @@
+//base
+@import "./base/color";
+@import "./base/var";
+@import "./base/font";
+
+// components
+@import "components/btn";
+@import "components/input";
+@import "components/pagination";
+@import "components/table";
+
+
+// layout
+@import "layout/frontheader";
+@import "layout/footer"; //前後台共用
+@import "layout/backheader";
+@import "layout/backaside";
+
+
+// pages 前台
+@import "pages/home.scss";
+@import "pages/fakenews.scss";
+@import "pages/clickbait.scss";
+@import "pages/game.scss";
+@import "pages/game_fakenews.scss";
+@import "pages/game_clickbait.scss";
+@import "pages/medialiteracy.scss";
+@import "pages/donate.scss";
+@import "pages/donate_basicinformation.scss";
+@import "pages/donate_finish.scss";
+@import "pages/donate_faq.scss";
+@import "pages/donate_log.scss";
+@import "pages/donate_privacypolicy";
+@import "pages/aboutus.scss";
+
+// pages 後台
+@import "pages/back_login.scss";
+@import "pages/back_account.scss";
+@import "pages/back_password.scss";
+@import "pages/back_medialiteracy.scss";
+@import "pages/back_game.scss";
+@import "pages/back_donate.scss";
