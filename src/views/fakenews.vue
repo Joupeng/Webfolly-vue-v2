@@ -183,7 +183,7 @@
                     </div>
 
                     <div id="Blacky_block">
-                        <img src="/images/fakenews_Vector.svg" alt="" id="Blacky">
+                        <img src="/src/images/fakenews/fakenews_Vector.svg" alt="" id="Blacky">
                     </div>
 
 
