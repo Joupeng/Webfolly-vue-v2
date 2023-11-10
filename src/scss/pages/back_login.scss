@@ -1,2 +1,111 @@
 @import "../base/color";
 @import "../base/font";
+
+
+.backloginMain {
+  width: 100%;
+
+  .header {
+    background-color: $secondary-y1;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 34px;
+  }
+
+  .body {
+    // 主體
+    // border: 3px solid $yellow;
+    padding-top: 84px;
+    padding-bottom: 159px;
+
+    .logo {
+      // logo
+      text-align: center;
+
+
+      .img {
+        // border: 1px solid $blue;
+        width: 175px;
+        height: 98px;
+        margin-bottom: 27px;
+      }
+    }
+
+    .form {
+      // 表單
+      // border: 3px solid $green;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .input {
+        // 輸入框
+
+        width: 480px;
+        height: 52px;
+
+        padding-left: 20px;
+        font-size: $font-M-16 ;
+        margin-bottom: 10px;
+      }
+
+      .validation {
+        // 驗證碼區塊
+        // border: 1px solid saddlebrown;
+        width: 480px;
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+
+        .inputvalid {
+          // 驗證碼輸入
+          border: 3px solid $indigo;
+          width: 280px;
+          height: 54px;
+          border-radius: 32px;
+          padding-left: 30px;
+          font-size: $font-M-16 ;
+          margin: 8px 0;
+
+        }
+
+        .validcode {
+          // 驗證碼
+          border: 3px solid $red;
+          margin-left: 10px;
+          width: 180px;
+          height: 54px;
+          font-size: $font-M-16;
+        }
+      }
+
+      .btn {
+        // 登入按鈕
+        color: $secondary-y2;
+        width: 480px;
+        font-size: $font-M-16 ;
+        justify-content: center;
+        height: 52px;
+
+        &:hover {
+          color: $black;
+        }
+      }
+
+      .btn_PW {
+        // 忘記密碼按鈕
+        border: 0;
+        background-color: transparent;
+        $fontbase-14 : 14px;
+        color: $indigo;
+        height: 52px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+      }
+    }
+  }
+}
