@@ -38,8 +38,10 @@ Password：
 * Bootstrap
 
 #### Back-End
-* MySQL
 * PHP
+
+#### Database
+* MySQL
 
 #### UI/UX
 * Figma
