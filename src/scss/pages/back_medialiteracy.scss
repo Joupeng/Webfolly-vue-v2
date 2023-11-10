@@ -1,2 +1,134 @@
 @import "../base/color";
 @import "../base/font";
+
+.container {
+  display: flex;
+
+  main {
+    margin: 46px 87px;
+
+    .title {
+      // max-width: 1028px;
+      height: 55px;
+      background-color: $black;
+      color: $white;
+      display: flex;
+      border-radius: 32px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: flex;
+      margin-bottom: 30px;
+
+      .btn {
+        @extend .btn;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 160px;
+        height: 44px;
+        margin-right: 8px;
+        color: $white;
+
+        &:hover {
+          color: $black;
+
+        }
+
+      }
+    }
+
+
+  }
+
+
+}
+
+// ===刪除彈窗===
+.popupWarning {
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+
+
+  ul {
+
+    padding: 90px 150px;
+    background-color: $secondary-y2;
+
+
+    li {
+      list-style-type: none;
+      text-align: center;
+      margin: 30px;
+
+      .button {
+        display: flex;
+
+        .btn {
+          @extend .btn;
+          align-items: center;
+          justify-content: center;
+          width: 160px;
+          height: 44px;
+          margin: 20px 50px;
+          color: $white;
+
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+//  ===分類彈窗===
+
+.category {
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+
+  &_frame {
+    max-width: 1030px;
+    background-color: $secondary-y2;
+
+    form {
+      display: flex;
+      justify-content: space-evenly;
+
+      input {
+        margin: 20px 30px;
+        height: 43px;
+      }
+
+
+      .inputcategory {
+        width: 730px;
+      }
+
+      .inputsave {
+        color: $white;
+        @extend .btn;
+        width: 160px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          color: $black;
+        }
+      }
+
+
+
+    }
+  }
+
+}
