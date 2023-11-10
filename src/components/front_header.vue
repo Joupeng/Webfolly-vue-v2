@@ -2,7 +2,7 @@
     <div>
         <div class="frontheader">
             <div class="frontheader_frame">
-                <router-link :to="{ name: 'home' }"><img src="../images/common/logo.svg" alt="網中愚商標"></router-link>
+                <router-link :to="{ name: 'home' }"><img src="../assets/images/common/logo.svg" alt="網中愚商標"></router-link>
                 <input type="checkbox" class="frontheader_menubtn" id="menuBtn" />
                 <label class="frontheader_menuicon" for="menuBtn"><span class="frontheader_menuline"></span></label>
                 <ul class="frontheader_menu">
