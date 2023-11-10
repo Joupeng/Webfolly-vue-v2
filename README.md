@@ -35,6 +35,7 @@ Password：
 * Ajax
 * JQuery
 * Scss
+* GSAP
 * Bootstrap
 
 #### Back-End
