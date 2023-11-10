@@ -1,5 +1,3 @@
-
-import router from '../router';
 <template>
     <div>
         <div class="frontheader">
