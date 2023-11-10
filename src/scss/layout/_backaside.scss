@@ -1,1 +1,55 @@
 @import "../base/color";
+
+.backaside {
+  background-color: $neutral-dark;
+
+  div {
+    list-style: none;
+    padding: 40px 20px;
+
+    .accordion {
+      padding: 0;
+
+      .accordion-button {
+        padding: 0;
+
+        /* icon打開時轉角度 */
+        img.icon_chevronDown.open {
+          transform: rotate(180deg);
+        }
+      }
+
+      .accordion-content {
+        padding: 0;
+        display: block;
+
+        a {
+          display: none;
+        }
+      }
+    }
+
+
+
+    a {
+      width: 220px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      margin-bottom: 20px;
+      font-weight: bold;
+
+      &:hover {
+        background-color: $secondary-y1;
+        border-radius: 32px;
+        color: $black;
+      }
+
+
+    }
+
+
+  }
+}

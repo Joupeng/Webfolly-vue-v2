@@ -1,0 +1,299 @@
+@import"../base/_font.scss";
+@import"../base/_color.scss";
+
+
+//BN區塊---------------------------------------------
+
+@mixin modile {
+    @media(max-width:375px) {
+        @content;
+    }
+}
+
+div.ImgSection {
+    border: 3px solid rgb(7, 2, 51);
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+
+    @include modile {
+        border: 1px solid rgb(19, 13, 207);
+        width: 100%;
+        height: 400px;
+        position: relative;
+    }
+
+    img {
+        display: block;
+        position: absolute;
+        bottom: 0px;
+        max-height: 120%;
+        object-fit: cover;
+
+        @include modile {
+            display: block;
+            border: 1px solid rgb(229, 16, 204);
+            position: absolute;
+            bottom: 20px;
+            height: 10%;
+        }
+    }
+
+    span {
+        z-index: 10;
+        position: absolute;
+        left: 820px;
+        top: 130px;
+        font-size: 48px;
+        line-height: 60px;
+        color: #ffffff;
+    }
+
+    p {
+        // border: 1px solid blue;
+        margin: 0px;
+        line-height: 70px;
+    }
+
+    p.parttwo {
+        border: 1px solid rgb(255, 0, 0);
+        margin-left: 100px;
+    }
+}
+
+//文案區塊---------------------------------------------
+div.TextSection {
+    border: 1px solid red;
+    margin: 100px 0px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    div.WebsiteText {
+        border: 1px solid rgb(21, 104, 248);
+        display: inline-block;
+        align-self: center;
+
+        h1 {
+            font-size: $title-24;
+            margin: 0px;
+            margin-bottom: 24px;
+            line-height: 36px;
+        }
+
+        h3 {
+            font-size: $font-M-16 ;
+            line-height: 24px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 28px;
+        }
+    }
+
+    div.VerticalLine {
+        width: 2px;
+        height: 700px;
+        background-color: #000000;
+        margin: 0px 90px 0px 101px;
+    }
+
+    div.DonationPlan {
+        border: 1px solid rgb(196, 3, 115);
+        width: 557px;
+        height: auto;
+        background-color: $secondary-y2 ;
+        border: 4px solid $primary-y;
+        border-radius: 32px;
+        align-self: center;
+
+        h1 {
+            font-size: $title-24;
+            background-color: $secondary-y1 ;
+            border-radius: 29px 29px 0px 0px;
+            margin: 0px 0px 52px;
+            padding: 27px 48px;
+            vertical-align: baseline;
+            border-bottom: 4px solid $primary-y;
+        }
+
+        div.DonationSteps {
+            border: 1px solid rgb(1, 254, 26);
+            display: flex;
+            justify-content: center;
+            margin-bottom: 52px;
+            width: 100%;
+
+            div.item {
+                border: 1px solid rgb(24, 100, 5);
+                display: flex;
+                flex-direction: column;
+
+                h2 {
+                    // border: 1px solid rgb(203, 10, 232);
+                    font-size: 38px;
+                    background-color: #F7DD6D;
+                    width: 60px;
+                    height: 60px;
+                    line-height: 60px;
+                    text-align: center;
+                    align-self: center;
+                    border-radius: 50px;
+                    margin: 0px;
+                }
+
+                p {
+                    margin: 0px;
+                    margin-top: 12px;
+                    font-size: 20px;
+                    white-space: nowrap;
+                }
+            }
+
+            div.RightArrow {
+                max-width: 18px;
+                align-self: center;
+                margin: 0px 16px;
+
+                img {
+                    max-width: 18px;
+                }
+            }
+        }
+
+        div.DonationCategory {
+            border: 2px solid rgb(237, 158, 0);
+            display: flex;
+            margin: 52px 44px;
+
+            h3 {
+                border: 1px solid blueviolet;
+                font-size: $font-L-20;
+                margin: 0px 0px;
+                margin-right: 32px;
+            }
+
+            div.item {
+                border: 1px solid red;
+                display: flex;
+
+                div {
+                    width: 20px;
+                    height: 20px;
+                    background: #ffffff;
+                    border-radius: 50%;
+                    border: 3px solid #000000;
+                    align-self: center;
+                    margin-right: 12px;
+                }
+
+                p {
+                    border: 1px solid rgb(29, 84, 5);
+                    font-size: $font-L-20;
+                    margin: 0px;
+                    align-self: center;
+                }
+            }
+
+        }
+
+        div.DonationAmount {
+            border: 1px solid red;
+            display: flex;
+            margin: 52px 44px;
+
+
+            h3 {
+                display: inline-block;
+                border: 1px solid blueviolet;
+                font-size: $font-L-20;
+                margin: 0px 0px;
+                margin-right: 32px;
+            }
+
+            div.AmountItem {
+                border: 1px solid rgb(56, 17, 255);
+                display: flex;
+                flex-grow: 1;
+                justify-content: space-between;
+            }
+
+            div.AmountItem p {
+                border: 2px solid rgb(0, 0, 0);
+                margin: 0px;
+                font-size: $font-M-16;
+                padding: 2px 16px;
+                border-radius: 50px;
+                align-self: center;
+            }
+        }
+    }
+
+    a {
+
+        button.btn {
+            border: 2px solid rgb(5, 124, 19);
+            margin: 55px 190px;
+            padding: 0px;
+
+            span {
+                margin: 15px 48px;
+                font-size: 20px;
+            }
+
+        }
+    }
+}
+
+//連結區塊-------------------------------------------
+
+hr {
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 84px;
+}
+
+div.linkBlock {
+    border: 1px solid rgb(51, 237, 34);
+    display: flex;
+    margin: 50px 136px;
+    justify-content: center;
+
+
+    div.PageLink {
+        border: 1px solid rgb(77, 15, 222);
+        display: inline;
+        margin-right: 124px;
+
+        p {
+            font-size: $font-M-16;
+            padding-bottom: 15px;
+            margin: 0px;
+            white-space: nowrap;
+        }
+    }
+
+    div.lnformation {
+        font-size: $fontbase-14;
+        margin: 0px;
+
+        p {
+            margin: 0px;
+            line-height: 24px;
+        }
+
+        ul {
+            border: 1px solid rgb(216, 7, 167);
+            margin: 0px;
+            padding-left: 16px;
+
+            li {
+                line-height: 24px;
+
+            }
+        }
+    }
+}

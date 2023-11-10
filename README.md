@@ -30,21 +30,23 @@ Password：
 
 ## Technologies
 #### Front-End
-* Vue
-* Sass
-* Bootstrap
-* Node.js
+* Vue (bundling with Vite)
+* Vue Router
+* Ajax
 * JQuery
+* Scss
+* Bootstrap
 
 #### Back-End
-* MySQL
 * PHP
-* Ajax
+
+#### Database
+* MySQL
 
 #### UI/UX
 * Figma
 * Adobe Illustrator
 
 #### Others
-* Version Control: Git,GitHub,Sourcetree
-* Scrum: Trello,Slack
+* Version Control: Git, GitHub, Sourcetree
+* Scrum: Trello, Slack

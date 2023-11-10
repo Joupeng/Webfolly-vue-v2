@@ -1,2 +1,202 @@
-@import "../base/color";
-@import "../base/font";
+.medialiteracy {
+
+
+
+  // ---------RWD----------
+  // --------平板斷點---------
+  $tablet_BP : 768px;
+
+  @mixin t() {
+    @media all and (max-width : $tablet_BP) {
+      @content
+    }
+  }
+
+  ;
+  // --------手機版斷點-------
+  $mobile_BP : 576px;
+
+  @mixin m() {
+    @media all and (max-width : $mobile_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+  // --------------標題文字區-----------------
+  .titleBlock {
+    border: none;
+    margin: 0px 200px 0px 200px;
+
+    @include t() {
+      margin: 0px 100px 0px 100px;
+    }
+
+    .titleBlockA {
+      margin: 0;
+
+      .titleText {
+        font-size: $title-24;
+        text-align: center;
+        margin: 0;
+      }
+
+      .contentText {
+        font-size: $font-M-16;
+        margin: 0;
+      }
+
+    }
+
+
+  }
+
+
+  // -------------最外層
+  .outerblock {
+    border: 4px solid #F3CA1E;
+    border-radius: 32px;
+    width: 80%;
+    height: 788px;
+    margin: 60px auto;
+    background-color: #FEFCF0;
+
+    @include m() {
+      width: 100%;
+    }
+
+    // ---------頁籤標題匡
+    #myTab {
+
+      border-radius: 28px 28px 0 0;
+      // border-bottom: 4px solid #F3CA1E;
+      // height: 100%;
+      display: flex;
+      margin: 0 auto;
+      background-color: #F5DE75;
+      margin: 0px 0px 0 0px;
+      border: none;
+
+
+      // FEFCF0
+      // 相關連結相關課程按鈕
+      .nav-item {
+        // color: grey;
+        // border: 1px solid red;
+        margin: 20px 0 0 0;
+        border: none;
+
+
+
+        .nav-link {
+          margin: 0 0px 0 20px;
+          width: 200px;
+          height: 60px;
+          font-size: 20px;
+          border-radius: 16px 16px 0 0;
+          color: black;
+          border: none;
+          // margin: 20px 0 0 0;
+          padding: 10px 0 20px 0;
+          font-size: 18px;
+          font-weight: lighter;
+
+          &:hover {
+            font-size: 20px;
+          }
+        }
+
+        .nav-link.active {
+          background-color: #FEFCF0;
+          border: none;
+          font-weight: bold;
+          font-size: 20px;
+        }
+      }
+
+    }
+
+    // ------------內層捲軸區
+    .for_overflow {
+      overflow: auto;
+      width: 97%;
+      height: 640px;
+      margin: 10px auto;
+
+      ul {
+        list-style: none;
+
+        .li_block {
+          display: flex;
+          padding: 20px 0 20px 0;
+          border-bottom: 1px solid lightgray;
+          // flex-direction: column;
+          // border: 1px solid red;
+
+          .link_01_img {
+            width: 150px;
+            height: 112px;
+            min-width: 150px;
+            background-color: #fff;
+            background-image: url(/images/medialiteracy_B1.png);
+            background-size: cover;
+            margin-right: 20px;
+          }
+
+          @include m() {
+            min-width: 150px;
+          }
+
+          .text_block {
+            margin: auto 20px auto 0px;
+            border: 1px solid green;
+
+            p:first-child {
+              font-style: 20px;
+              font-weight: bold;
+              margin: 0;
+            }
+
+            p:nth-child(2) {
+              font-size: 14px;
+              margin: 10px 0;
+
+              @include t() {
+                margin: 10px 0 0 0;
+              }
+            }
+
+            p:nth-child(3) {
+              font-size: 14px;
+              margin: 0;
+
+              @include t() {
+                display: none;
+              }
+            }
+
+
+          }
+
+        }
+
+
+      }
+
+    }
+
+
+
+
+
+  }
+
+
+
+  // 不知道為啥沒用
+  // .nav-tabs .nav-link.active {
+  //   background-color: black;
+  // }
+}
