@@ -45,6 +45,10 @@
                 <p>假訊息的樣態</p>
             </div>
 
+
+
+
+
             <!-- 假訊息的特徵 -->
 
             <div class="newsCardBlock">
@@ -183,7 +187,10 @@
                     </div>
                     <p>test</p>
                     <div id="Blacky_block">
-                        <img src="/src/images/fakenews/fakenews_Vector.svg" alt="" id="Blacky">
+                        <div class="Blacky_block_overflow">
+                            <img src="/src/assets/images/fakenews/Black_Gif01.gif" alt="" id="Blacky">
+
+                        </div>
                     </div>
 
 
@@ -210,7 +217,6 @@ import '/node_modules/jquery/dist/jquery.min'
 
 
 export default {
-
     data() {
         return {
             cards: [
@@ -219,7 +225,7 @@ export default {
                     title: "聯合國「該吃素了」，世衛組織：40年內全球吃素！必須吃素​！刻不容緩",
                     content: "假如你得知,全人類在22年後大限將至你會作何反應？也許你會無動於衷覺得事不關己,但是朋友們,這個絕不是危言聳聽。就在前幾天,聯合國向全人類發出了，「只剩22年，地球將陷入危機」的警告，卻被無數人忽視了…",
                     source: "來源：小編",
-                    imageUrl: "/src/images/fakenews/fakenews_img01.jpg", // 添加图片地址
+                    imageUrl: "/src/assets/images/fakenews/fakenews_img01.jpg", // 添加图片地址
 
                 },
                 {
@@ -227,7 +233,7 @@ export default {
                     title: "仔細看看圖片！是否能在其中找到駱駝？這不僅是一個視覺的考驗，更能測試您有無失智！",
                     content: "德國阿爾茨海默症協會宣稱：這個挑戰只要成功找到駱駝，就能免疫老年痴呆。這是人類重大抉擇，為了預防22年後的老年痴呆，你的選擇或成最後防線。別輕忽，這是未來的保障！找到駱駝，就能讓你的頭腦保持聰慧，直到遲遲老矣仍然思緒清晰！",
                     source: "來源：網路謠傳",
-                    imageUrl: "/src/images/fakenews/fakenews_img01.jpg", // 添加图片地址
+                    imageUrl: "/src/assets/images/fakenews/fakenews_img02.jpg", // 添加图片地址
 
                 },
                 {
@@ -235,7 +241,7 @@ export default {
                     title: "空氣炸鍋，不僅致癌，更是你營養的大敵！使用它，就像是用生命在交換方便。現在就抛棄空氣炸鍋吧！",
                     content: "空氣炸鍋，看似方便，實則是一場毒宴！狡猾的熱風中藏著致命的陷阱，食物在高溫下變形，不只製造致癌的丙烯醯胺，更是營養的墓地！葡萄糖、果糖經此高溫煎熬，竟成為健康的頭號殺手。而維生素A、D、E、K等寶貴的營養，在炸鍋的猛烈攻擊下，溶於空氣，化為泡影。別再被外表迷惑，空氣炸鍋並非飲食的救星，而是健康的毀滅者！",
                     source: "小編3",
-                    imageUrl: "/src/images/fakenews/fakenews_img01.jpg", // 添加图片地址
+                    imageUrl: "/src/assets/images/fakenews/fakenews_img03.jpg", // 添加图片地址
 
                 },
 
@@ -273,4 +279,8 @@ export default {
 
     }
 }
+
+
+
+
 </script>
