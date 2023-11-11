@@ -34,7 +34,8 @@ Password：
 * Vue Router
 * Ajax
 * JQuery
-* Scss
+* SCSS
+* GSAP
 * Bootstrap
 
 #### Back-End
