@@ -243,14 +243,31 @@ div.game_fakenews {
     height: 104px;
   }
 
-  div.yellow.-on {
-    animation-name: walk;
-    animation-duration: 4s;
-    animation-delay: 5s;
-    animation-fill-mode: forwards;
-  }
+  // div.yellow.-on {
+  //   animation-name: walk;
+  //   animation-duration: 4s;
+  //   animation-delay: 5s;
+  //   animation-fill-mode: forwards;
+  // }
 
   // 腳色走路動畫============================================
+  // @keyframes walk {
+  //   0% {
+  //     // bottom: 100%;
+  //     // left: 0;
+  //     transform: translate(0px);
+  //   }
+
+  //   100% {
+  //     // bottom: 100%;
+  //     // left: 200px;
+  //     transform: translate(200px);
+  //   }
+
+  // }
+
+
+
   @keyframes walk {
     0% {
       // bottom: 100%;
@@ -265,6 +282,29 @@ div.game_fakenews {
     }
 
   }
+
+  // .yellow.-on {
+  //   animation-name: walk;
+  //   animation-duration: 4s;
+  //   animation-delay: 5s;
+  //   animation-fill-mode: forwards;
+
+  //   @media(max-width: 667px) {
+  //     transform: translate(200px);
+  //   }
+
+  //   @media (min-width: 668px) and (max-width: 992px) {
+  //     transform: translate(200px);
+  //   }
+
+  //   @media (min-width: 993px) and (max-width: 1200px) {
+  //     transform: translate(200px);
+  //   }
+  // }
+
+
+
+
 
   div.yellow,
   div.black img {
@@ -443,14 +483,25 @@ div.game_fakenews {
 }
 
 // 遊戲題目
+.score {
+  text-align: center;
+  font-size: 24px;
+  position: fixed;
+  right: 6%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+}
+
 div.container_qs {
   display: flex;
+  display: none;
   gap: 60px;
   border: 1px solid red;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  // opacity: 0;
 
   div.right_QA,
   div.left_QA {
