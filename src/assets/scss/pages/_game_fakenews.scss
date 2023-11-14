@@ -243,29 +243,17 @@ div.game_fakenews {
     height: 104px;
   }
 
-  // div.yellow.-on {
-  //   animation-name: walk;
-  //   animation-duration: 4s;
-  //   animation-delay: 5s;
-  //   animation-fill-mode: forwards;
-  // }
-
   // 腳色走路動畫============================================
-  // @keyframes walk {
-  //   0% {
-  //     // bottom: 100%;
-  //     // left: 0;
-  //     transform: translate(0px);
-  //   }
+  div.yellow.-on {
+    animation-name: walk;
+    animation-duration: 4s;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
 
-  //   100% {
-  //     // bottom: 100%;
-  //     // left: 200px;
-  //     transform: translate(200px);
-  //   }
-
-  // }
-
+    @media(min-width:768px) {
+      animation-name: walk_large;
+    }
+  }
 
 
   @keyframes walk {
@@ -283,28 +271,22 @@ div.game_fakenews {
 
   }
 
-  // .yellow.-on {
-  //   animation-name: walk;
-  //   animation-duration: 4s;
-  //   animation-delay: 5s;
-  //   animation-fill-mode: forwards;
-
-  //   @media(max-width: 667px) {
-  //     transform: translate(200px);
-  //   }
-
-  //   @media (min-width: 668px) and (max-width: 992px) {
-  //     transform: translate(200px);
-  //   }
-
-  //   @media (min-width: 993px) and (max-width: 1200px) {
-  //     transform: translate(200px);
-  //   }
-  // }
 
 
+  @keyframes walk_large {
+    0% {
+      // bottom: 100%;
+      // left: 0;
+      transform: translate(0px);
+    }
 
+    100% {
+      // bottom: 100%;
+      // left: 200px;
+      transform: translate(400px);
+    }
 
+  }
 
   div.yellow,
   div.black img {
@@ -490,71 +472,100 @@ div.game_fakenews {
   right: 6%;
   top: 10%;
   transform: translate(-50%, -50%);
+
 }
 
-div.container_qs {
-  display: flex;
-  display: none;
-  gap: 60px;
-  border: 1px solid red;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  // opacity: 0;
+div.card_show {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  /* 平滑過渡 */
 
-  div.right_QA,
-  div.left_QA {
-    border: 7px solid $primary-b;
-    margin: 10px;
-    width: 315px;
-    height: 355px;
-    font-size: 16px;
-    border-radius: 32px;
-    padding: 15px;
-    background-color: #fff;
-    display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
+  div.container_qs {
+    display: flex;
+    // display: none;
+    gap: 60px;
+    // border: 1px solid red;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // opacity: 0;
 
-    @media(min-width:992px) and (max-width:1200px) {
-      width: 284px;
-      height: 320px;
+    div.right_QA,
+    div.left_QA {
+      border: 7px solid $primary-b;
+      margin: 10px;
+      width: 315px;
+      height: 355px;
+      font-size: 16px;
+      border-radius: 32px;
+      padding: 15px;
+      background-color: #fff;
+      display: grid;
+      grid-template-rows: 1fr 5fr 1fr;
+
+      @media(min-width:992px) and (max-width:1200px) {
+        width: 284px;
+        height: 320px;
+      }
+
+      @media(min-width:768px) and (max-width:992px) {
+        width: 252px;
+        height: 284px;
+        font-size: 14px;
+      }
+
+      //要改成換頁的方式，手機板
+      @media(max-width:768px) {
+        width: 252px;
+        height: 284px;
+        font-size: 14px;
+      }
+
+
     }
 
-    @media(min-width:768px) and (max-width:992px) {
-      width: 252px;
-      height: 284px;
-      font-size: 14px;
+
+    .title_qs {
+      // border: 1px solid red;
+      margin: 0 auto;
+      height: 27px;
     }
 
-    //要改成換頁的方式，手機板
-    @media(max-width:768px) {
-      width: 252px;
-      height: 284px;
-      font-size: 14px;
+    .content_qs {
+      // border: 1px solid blue;
+      margin-bottom: 10px;
     }
 
+    .ans_qs {
+      margin: 0;
+    }
+
+    button {
+      // border: 1px solid green;
+      margin: 0 auto;
+    }
 
   }
 
+  &.-on {
 
-  .title_qs {
-    border: 1px solid red;
-    margin: 0 auto;
-    height: 27px;
+    // pointer-events: auto;
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-delay: 12s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
   }
 
-  .content_qs {
-    border: 1px solid blue;
-    margin-bottom: 10px;
-  }
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
 
-  .ans_qs {
-    margin: 0;
-  }
-
-  button {
-    border: 1px solid green;
-    margin: 0 auto;
+    100% {
+      opacity: 1;
+    }
   }
 }

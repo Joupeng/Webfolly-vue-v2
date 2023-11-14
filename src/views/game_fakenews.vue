@@ -34,7 +34,7 @@
       <img src="../assets/images/game_fakenews/game_fakenews_medium_stand.svg" class="medium_stand" alt="">
     </div>
 
-
+    <!-- :class="{ '-on': isCharacterWalking }" -->
     <div id="app" class="card_show">
       <div class="outside_container">
         <div class="score_bar">
@@ -76,6 +76,8 @@ export default {
     return {
       bridgeSizeClass: '',  //初始化橋的
       isCharacterWalking: false, //初始化腳色的
+      // isShow: false,
+      rolePosition: { x: 0, y: 0 },
       text_small: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       text_big: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       isVisible: true,
@@ -94,6 +96,12 @@ export default {
         }
       ],
     }
+  },
+  watch: {
+    'rolePosition'(newPosition, oldPosition) {
+      console.log('改變了');
+    }
+
   },
   methods: {
     // 點選略過鈕
@@ -139,6 +147,11 @@ export default {
         alert("請將螢幕轉向橫向以顯示內容！");
       }
     },
+    /* quenstionShow() {
+       if (this.isShow) {
+         alert('123');
+       }
+     }*/
   },
   mounted() {
     // 頁面加載後立即檢查螢幕方向

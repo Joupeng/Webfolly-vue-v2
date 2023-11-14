@@ -72,11 +72,18 @@ const routes = [
         component: () => import('../views/donate_finish.vue')
     },
     {
-        // 前台 捐款徵信紀錄
+        // 前台 捐款徵信紀錄查詢
         path: '/donate_log',
         name: 'donate_log',
         component: () => import('../views/donate_log.vue')
     },
+    {
+        // 前台 捐款徵信紀錄結果
+        path: '/donate_record_result',
+        name: 'donate_record_result',
+        component: () => import('../views/donate_record_result.vue')
+    },
+
     {
         // 前台 捐款常見問題
         path: '/donate_faq',
