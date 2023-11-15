@@ -1,11 +1,10 @@
 <template>
-  <!-- wrapper  -->
-  <div class="backpasswordMain wrapper">
+  <div class="wrapper backpasswordMain">
     <!-- header -->
     <div class="header">
-      <router-link to="/back/login" class="ToBackLogin">登入頁面</router-link>
-      / 忘記密碼
-      <!-- <a class="link" href="./backlogin.html">登入頁面</a> / 忘記密碼 -->
+      <span @click="backToLogin">登入頁面</span>
+      <span> / 忘記密碼</span>
+
     </div>
     <!-- main -->
     <div class="body">
@@ -13,30 +12,55 @@
         <div class="title">重設密碼</div>
         <div class="content">
           <div class="input">
-            <label class="container">
-              <input type="radio" name="way" value="phone">
+            <label class="container" @click="byPhone">
+              <input class="input" type="radio" name="way" value="phone">
               <span class="checkmark"></span>
-              <span class="way">透過簡訊傳送新密碼</span>
-              <div class="input span">09******65</div>
+              <span class="span">透過簡訊傳送新密碼</span>
             </label>
           </div>
+          <div class="input span local">09******65</div>
 
           <div class="input">
-            <label class="container">
-              <input type="radio" name="way" value="mail">
+            <label class="container" @click="byMail">
+              <input class="input" type="radio" name="way" value="mail">
               <span class="checkmark"></span>
-              <span class="way">透過電子信箱傳送新密碼</span>
-              <div class="input span">123@gmail.com</div>
+              <span class="span">透過電子信箱傳送新密碼</span>
             </label>
           </div>
+          <div class="input span local">123@gmail.com</div>
         </div>
       </form>
     </div>
-    <!-- footer -->
-
 
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      // byPhone: '已寄送至您的手機',
+      // byMail: '已寄送至您的信箱',
+
+    }
+  },
+  methods: {
+    // 返回登入頁
+    backToLogin() {
+      this.$router.push('/back_login');
+    },
+    // 寄送簡訊
+    // label標籤會alert 2次
+    byPhone() {
+      alert(`已寄送至您的手機`);
+    },
+    // 寄送mail
+    byMail() {
+      alert('已寄送至您的信箱');
+    },
 
 
+  }
+}
+
+</script>

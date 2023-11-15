@@ -2,7 +2,7 @@
   <backlogin class="backloginMain">
     <div class="header"></div>
     <div class="body">
-      <div class="logo"><img class="img" src="../images/common/logo.svg"></div>
+      <div class="logo"><img class="img" src="../assets/images/common/logo.svg"></div>
       <form class="form" @submit.prevent="handleLogin">
         <!-- 輸入名稱/密碼/ -->
         <input class="unified_input input" type="text" placeholder="請輸入使用者名稱" v-model="userName"><br>
@@ -39,7 +39,7 @@ export default {
     handleLogin() {
       // 判斷名稱或密碼
       if (this.userName.trim() != '' && this.password.trim() != '' && this.validcode.trim() != '') {
-        this.$router.push('/back/account');
+        this.$router.push('/back_account');
       }
       if (this.userName.trim() === '') {
         alert('請輸入使用者名稱');
@@ -59,7 +59,7 @@ export default {
     },
     forgotPassword() {
       // 導向page back_password
-      this.$router.push('/back/password');
+      this.$router.push('/back_password');
     }
   }
 }
