@@ -1,3 +1,345 @@
+@import "../base/color";
+@import "../base/font";
+
 .home {
-  height: 2000px;
+  // ---------RWD----------
+  // --------平板斷點---------
+  $tablet_BP : 768px;
+
+  @mixin t() {
+    @media all and (max-width : $tablet_BP) {
+      @content
+    }
+  }
+
+  ;
+
+  // --------手機版斷點-------
+  $mobile_BP : 576px;
+
+  @mixin m() {
+    @media all and (max-width : $mobile_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+
+
+
+
+  h1 {
+    color: $primary-y
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+
+
+
+
+  // --------------banner-----------------
+  .banner {
+    height: 100vh;
+    background-color: #FEFCF0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+
+    p {
+      margin: auto 0;
+      font-size: $title-24;
+    }
+  }
+
+  .outerBlock {
+    // margin: 0 0 260px 0;
+    border: 1px solid green;
+  }
+
+
+
+  // --------------標題文字區-----------------
+  .titleBlock {
+    border: 1px solid red;
+    margin: 100px 200px 260px 200px;
+
+    @include t() {
+      margin: 100px 100px 260px 100px;
+    }
+
+    @include m() {
+      margin: 100px 30px 260px 30px;
+
+    }
+
+    .titleText {
+      font-size: $title-24;
+      // border: 1px solid blue;
+      text-align: center;
+    }
+
+    .titleBlockA {
+      margin: 0 0 60px 0;
+    }
+
+    .titleBlockB {
+      border: 1px solid pink;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 0 0px 0px 0px;
+
+
+      .block_column {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+
+        @include m() {
+          flex-direction: column;
+
+        }
+
+
+        div {
+          margin: 0;
+
+          // 角色框框
+          .image_block {
+            width: 60%;
+            display: flex;
+            border: 1px solid red;
+            justify-content: center;
+            margin: 0px auto -70px auto;
+
+
+
+            img {
+              width: 100%;
+              position: relative;
+              z-index: 1;
+            }
+          }
+
+          .titleBlockB_inner {
+            border: 4px solid $primary-y;
+            background-color: #FEFCF0;
+            border-radius: 16px;
+            // height: 200px;
+
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+
+
+
+            .titleText2 {
+              font-size: 18px;
+              color: #4961AB;
+              margin: 40px 20px;
+            }
+          }
+        }
+
+
+
+
+
+
+      }
+    }
+  }
+
+
+  // 網中愚可以提供什麼服務
+  .three_block {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+
+    @media(max-width:768px) {
+      flex-direction: column;
+    }
+
+    .three_block_inner {
+      border: 1px solid red;
+      text-align: center;
+    }
+
+    .three_block_yellow {
+      font-size: 20px;
+      border: 4px solid $primary-y;
+      background-color: #FEFCF0;
+      border-radius: 16px;
+      margin: 0px auto 20px auto;
+      width: 190px;
+      min-width: 190px;
+
+      p {
+        margin: 10px 30px 10px 30px;
+        color: #4961AB;
+      }
+    }
+  }
+
+
+
+  // 你也可以加入這場改變
+  .yellow_block_outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin: 200px 0px 0px 0px;
+    border: 1px solid blue;
+
+
+
+
+
+
+    .yellow_block {
+      border: 4px solid $primary-y;
+      border-radius: 32px;
+      background-color: #FEFCF0;
+      width: 100%;
+
+
+
+
+
+      .yellow_block_inner {
+        margin: 80px 80px;
+
+        @media (max-width:900px) {
+          margin: 40px 40px;
+        }
+
+        .h1 {
+          font-size: 24px;
+          margin: 0;
+        }
+
+        ul {
+          border: 1px solid red;
+          margin: 0;
+          padding: 0;
+
+
+
+          li {
+            list-style-type: none;
+            border: 1px solid green;
+            font-size: 16px;
+            margin: 10px 0 0px 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    // 小黑
+    #Blacky_block {
+      border: 1px solid violet;
+      display: flex;
+      margin: -200px 0px 0px 00px;
+      width: 900px;
+      position: relative;
+      left: -430px;
+      bottom: 0px;
+
+      @media (max-width:900px) {
+        left: -200px;
+        margin: -100px 0px 0px 00px;
+        width: 800px;
+      }
+
+      @media (max-width:600px) {
+        justify-content: center;
+        width: 100%;
+        left: 0px;
+      }
+
+
+      .Blacky_block_overflow {
+        height: 500px;
+        overflow: hidden;
+
+        @media (max-width:900px) {
+          height: 400px;
+        }
+
+        @media (max-width:600px) {
+          height: 240px;
+        }
+
+        img {
+          width: 100%;
+        }
+
+      }
+
+    }
+  }
+
+  // --------------你也可以加入這場改---------------
+  .base_BG {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: #484848;
+    border: 1px solid red;
+    // justify-content: center;
+
+    .lamp {
+      border: 1px solid green;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      width: 100%;
+
+      .line {
+        width: 4px;
+        height: 100px;
+        border: 1px solid white;
+        background-color: white;
+        display: flex;
+        align-self: center;
+
+      }
+
+      .half_circle {
+        width: 100px;
+        height: 50px;
+        background-color: white;
+        border-radius: 50px 50px 0 0;
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          display: flex;
+          font-size: 14px;
+          border: 1px solid red;
+          margin: 10px 0 0 0;
+
+        }
+      }
+    }
+  }
+
+
+
 }
