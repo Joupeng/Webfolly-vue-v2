@@ -7,6 +7,9 @@
             <p>互動</p>
         </section>
 
+
+
+
         <div class="outerBlock">
 
 
@@ -43,8 +46,201 @@
 
             <div class="sevenBlock">
                 <p>假訊息的樣態</p>
-            </div>
 
+                <!-- 七種樣式區域 -->
+                <swiper :slidesPerView="1" :spaceBetween="10" :pagination="{ clickable: true, }" :breakpoints="{
+                    '640': { slidesPerView: 2, spaceBetween: 20, }, '768': { slidesPerView: 4, spaceBetween: 40, }, '1024': { slidesPerView: 5, spaceBetween: 50, },
+                }" class="mySwiper" :autoplay="{ delay: 2000 }" direction="horizontal" :loop="true"
+                    :mousewheel="{ enabled: true }" :modules="modules">
+
+                    <!-- 原本上面要加這個 :modules="modules" -->
+
+
+                    <!-- 第一組 -->
+                    <swiper-slide class="swiper-slide">
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_1">諷刺惡搞</p>
+                                <p>無意造成傷害，但有愚弄別人的可能</p>
+                            </div>
+                        </div>
+
+                    </swiper-slide>
+
+                    <!-- 第二組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_2">題文不符</p>
+                                <p>標題、視覺資料或其說明與內文不符</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+
+                    <!-- 第三組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_3">誤導性內容</p>
+                                <p>誤導性使用資訊以形塑議題或人的認知</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+
+                    <!-- 第四組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_4">脈絡錯置</p>
+                                <p>真實內容被置於錯誤的脈絡</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                    <!-- 第五組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_5">假冒性內容</p>
+                                <p>冒用真實的消息來源</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                    <!-- 第六組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_6">操弄性內容</p>
+                                <p>真實訊息或意象被刻意操弄來欺騙</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                    <!-- 第七組 -->
+                    <swiper-slide>
+                        <div class="swiper_block">
+                            <div class="swiper_img_block">
+                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                            </div>
+                            <div class="swiper_p_block">
+                                <p class="swiper_p_7">虛構性內容</p>
+                                <p>完全虛構新內容以欺騙讀者並造成傷害</p>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+
+                <!-- rwd_768px -->
+
+                <div class="RWD_swiper">
+                    <!-- 第一組 -->
+
+                    <div class="RWD_swiper_block">
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_1">諷刺惡搞</p>
+                            <p>無意造成傷害，但有愚弄別人的可能</p>
+                        </div>
+                    </div>
+
+
+
+                    <!-- 第二組 -->
+
+                    <div class="RWD_swiper_block_right">
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_2">題文不符</p>
+                            <p>標題、視覺資料或其說明與內文不符</p>
+                        </div>
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+
+                    </div>
+
+
+                    <!-- 第三組 -->
+
+                    <div class="RWD_swiper_block">
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_3">誤導性內容</p>
+                            <p>誤導性使用資訊以形塑議題或人的認知</p>
+                        </div>
+                    </div>
+
+
+                    <!-- 第四組 -->
+
+                    <div class="RWD_swiper_block_right">
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_4">脈絡錯置</p>
+                            <p>真實內容被置於錯誤的脈絡</p>
+                        </div>
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+
+                    </div>
+
+                    <!-- 第五組 -->
+
+                    <div class="RWD_swiper_block">
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_5">假冒性內容</p>
+                            <p>冒用真實的消息來源</p>
+                        </div>
+                    </div>
+
+                    <!-- 第六組 -->
+
+                    <div class="RWD_swiper_block_right">
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_6">操弄性內容</p>
+                            <p>真實訊息或意象被刻意操弄來欺騙</p>
+                        </div>
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+
+                    </div>
+
+                    <!-- 第七組 -->
+
+                    <div class="RWD_swiper_block">
+                        <div class="RWD_swiper_img_block">
+                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        </div>
+                        <div class="RWD_swiper_p_block">
+                            <p class="RWD_swiper_p_7">虛構性內容</p>
+                            <p>完全虛構新內容以欺騙讀者並造成傷害</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -162,10 +358,10 @@
                 </div>
                 <!-- 換頁按鈕 -->
                 <div class="unified_pagination" :actpage="currentPage">
-                    <a href="#!-1" class="unified_pagination_i" @click="changePage(-1)">上一頁</a>
-                    <a v-for="page in totalPages" :key="page" :href="'#!' + page" class="unified_pagination_i"
-                        @click="changePage(page)">{{ page }}</a>
-                    <a href="#!+1" class="unified_pagination_i" @click="changePage(1)">下一頁</a>
+                    <a class="unified_pagination_i" @click="changePage('prev')">上一頁</a>
+                    <a v-for="page in totalPages" :key="page" class="unified_pagination_i" @click="changePage(page)">{{ page
+                    }}</a>
+                    <a class="unified_pagination_i" @click="changePage('next')">下一頁</a>
                 </div>
 
 
@@ -216,7 +412,16 @@ import '/node_modules/jquery/dist/jquery.min'
 
 
 
+// swipper
+import 'swiper/swiper-bundle.css';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 export default {
+
+
+
+
     data() {
         return {
             cards: [
@@ -236,10 +441,11 @@ export default {
                     imageUrl: "/src/assets/images/fakenews/fakenews_img02.jpg", // 添加图片地址
 
                 },
+
                 {
                     id: 3,
                     title: "空氣炸鍋，不僅致癌，更是你營養的大敵！使用它，就像是用生命在交換方便。現在就抛棄空氣炸鍋吧！",
-                    content: "空氣炸鍋，看似方便，實則是一場毒宴！狡猾的熱風中藏著致命的陷阱，食物在高溫下變形，不只製造致癌的丙烯醯胺，更是營養的墓地！葡萄糖、果糖經此高溫煎熬，竟成為健康的頭號殺手。而維生素A、D、E、K等寶貴的營養，在炸鍋的猛烈攻擊下，溶於空氣，化為泡影。別再被外表迷惑，空氣炸鍋並非飲食的救星，而是健康的毀滅者！",
+                    content: "空氣炸鍋，看似方便，實則是一場騙局！食物在空氣炸鍋的摧殘下，除了會製造致癌的丙烯醯胺，還會將營養素如：維生素A、D、E、K等，溶於空氣中。別再被酷炫的外表所迷惑，珍惜健康的話就遠離空氣炸鍋吧！空氣炸鍋是健康的毀滅者！",
                     source: "小編3",
                     imageUrl: "/src/assets/images/fakenews/fakenews_img03.jpg", // 添加图片地址
 
@@ -248,6 +454,15 @@ export default {
             ],
             itemsPerPage: 1, // 每页显示的卡片数量
             currentPage: 1,  // 当前页数
+
+
+        };
+
+
+    },
+    setup() {
+        return {
+            modules: [Autoplay, Pagination, Navigation],
         };
     },
     computed: {
@@ -263,21 +478,24 @@ export default {
     },
     methods: {
         changePage(page) {
-            if (page === -1 && this.currentPage > 1) {
-                this.currentPage--;
-            } else if (page === 1 && this.currentPage < this.totalPages) {
-                this.currentPage++;
-
-            } else if (page !== -1 && page !== 1) {
+            if (page !== 'prev' && page !== 'next') {
                 this.currentPage = page;
+                return
+            }
+            if (page === 'prev' && this.currentPage > 1) {
+                this.currentPage--;
+            } else if (page === 'next' && this.currentPage < this.totalPages) {
+                this.currentPage++;
             }
         },
     },
     components: {
         frontnav,
         frontfooter,
-
+        Swiper,
+        SwiperSlide,
     }
+
 }
 
 

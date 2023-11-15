@@ -2,6 +2,7 @@
 @import "../base/font";
 
 
+
 .fakenews {
 
 
@@ -49,7 +50,7 @@
 
   // --------------banner-----------------
   .banner {
-    height: 819px;
+    height: 100vh;
     background-color: #FEFCF0;
     display: flex;
     justify-content: center;
@@ -135,17 +136,247 @@
 
   // --------------假訊息的樣態-----------------
   .sevenBlock {
-    height: 440px;
-    background-color: #FEFCF0;
+    // height: 440px;
+    // background-color: #FEFCF0;
     display: flex;
     justify-content: center;
-    margin: 0 0 260px 0;
+    margin: 0 0px 260px 0px;
+    flex-direction: column;
 
     p {
-      margin: auto 0;
+      margin: 0px auto 40px auto;
       font-size: $title-24;
     }
   }
+
+
+
+  // ｓｗｉｐｅｒ
+  .swiper-pagination {
+    display: flex;
+    margin: 40px auto 0 auto;
+    // border: 1px solid red;
+    justify-content: center;
+    bottom: 0px;
+    position: relative;
+    scale: 1.5;
+
+    @media(max-width:768px) {
+      display: none;
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    // background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // tsetswiper
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    // background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+
+  .swiper-slide {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    @media (max-width:768px) {
+      display: none;
+    }
+
+
+    .swiper_block {
+      margin: 0 20px 0 20px;
+
+
+
+
+      .swiper_p_block {
+        margin: 0;
+
+
+
+        p {
+          font-size: 14px;
+          margin: 0;
+        }
+
+        p:first-child {
+          font-size: 20px;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+
+        .swiper_p_1 {
+          color: #9D3E26;
+        }
+
+        .swiper_p_2 {
+          color: #AE742B;
+        }
+
+        .swiper_p_3 {
+          color: #B29339;
+        }
+
+        .swiper_p_4 {
+          color: #204A33;
+        }
+
+        .swiper_p_5 {
+          color: #6C89A1;
+        }
+
+        .swiper_p_6 {
+          color: #1F3264;
+        }
+
+        .swiper_p_7 {
+          color: #715276;
+        }
+      }
+
+    }
+
+
+  }
+
+  // -------RWD_swiper------
+  .RWD_swiper {
+    display: none;
+    flex-direction: column;
+    border: 1px solid red;
+    margin: 0 40px;
+
+    @media (max-width:768px) {
+      display: flex;
+    }
+
+    .RWD_swiper_block {
+      display: flex;
+      margin: 0px 0 60px 0;
+      border: 1px solid green;
+
+      .RWD_swiper_p_block {
+        margin: auto 0 auto 20px;
+
+
+        p {
+          font-size: 14px;
+          margin: 0;
+        }
+
+        p:first-child {
+          font-size: 20px;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+
+        .RWD_swiper_p_1 {
+          color: #9D3E26;
+        }
+
+
+
+        .RWD_swiper_p_3 {
+          color: #B29339;
+        }
+
+        .RWD_swiper_p_5 {
+          color: #6C89A1;
+        }
+
+
+        .RWD_swiper_p_7 {
+          color: #715276;
+        }
+      }
+    }
+
+    .RWD_swiper_block_right {
+      display: flex;
+      margin: 0px 0 60px 0;
+      border: 1px solid green;
+      justify-content: flex-end;
+
+      .RWD_swiper_p_block {
+        margin: auto 20px auto 0px;
+
+
+        p {
+          font-size: 14px;
+          margin: 0;
+        }
+
+        p:first-child {
+          font-size: 20px;
+          font-weight: bold;
+          margin-top: 10px;
+        }
+
+
+        .RWD_swiper_p_2 {
+          color: #AE742B;
+        }
+
+
+        .RWD_swiper_p_4 {
+          color: #204A33;
+        }
+
+
+        .RWD_swiper_p_6 {
+          color: #1F3264;
+        }
+
+      }
+    }
+
+  }
+
 
   // --------------假訊息的特徵-----------------
   .newsCardBlock {
@@ -528,6 +759,8 @@
     margin: 0px 0 0 0;
 
   }
+
+
 }
 
 
@@ -604,13 +837,16 @@
     left: -430px;
     bottom: 0px;
 
-    // test
-    left: 4000px;
-
     @media (max-width:900px) {
       left: -200px;
       margin: -100px 0px 0px 00px;
       width: 800px;
+    }
+
+    @media (max-width:600px) {
+      justify-content: center;
+      width: 100%;
+      left: 0px;
     }
 
 
@@ -620,6 +856,10 @@
 
       @media (max-width:900px) {
         height: 400px;
+      }
+
+      @media (max-width:600px) {
+        height: 240px;
       }
 
       img {
