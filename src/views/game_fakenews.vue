@@ -1,8 +1,10 @@
 <template>
   <div class="game_fakenews">
     <div class="pillar_left" @click="createGrowRectangle">
-      <div class="bridge"></div>
-      <div class="yellow"><img src="../assets/images/game_fakenews/game_fakenews_yellow.svg" class="yellow_img" alt="">
+      <div class="bridge" :class="bridgeSizeClass"></div>
+      <!-- 監聽腳色走到橋中間之後才觸發題目出現-->
+      <div class="yellow" :class="{ '-on': isCharacterWalking }"><img
+          src="../assets/images/game_fakenews/game_fakenews_yellow.svg" class="yellow_img" alt="">
       </div>
     </div>
     <div class="pillar_right">
@@ -32,10 +34,11 @@
       <img src="../assets/images/game_fakenews/game_fakenews_medium_stand.svg" class="medium_stand" alt="">
     </div>
 
+    <!-- :class="{ '-on': isCharacterWalking }" -->
     <div id="app" class="card_show">
       <div class="outside_container">
         <div class="score_bar">
-          <p>分數:{{ score }}</p>
+          <div class="score">Score:{{ score }}</div>
         </div>
         <div class="container_qs">
           <div class="left_QA">
@@ -71,6 +74,10 @@ import { gsap } from 'gsap';
 export default {
   data() {
     return {
+      bridgeSizeClass: '',  //初始化橋的
+      isCharacterWalking: false, //初始化腳色的
+      // isShow: false,
+      rolePosition: { x: 0, y: 0 },
       text_small: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       text_big: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       isVisible: true,
@@ -90,29 +97,37 @@ export default {
       ],
     }
   },
+  watch: {
+    'rolePosition'(newPosition, oldPosition) {
+      console.log('改變了');
+    }
+
+  },
   methods: {
     // 點選略過鈕
     skipButton(e) {
       // alert(123);
       this.isVisible = false;
     },
+
     // 造橋
     createGrowRectangle() {
       // alert(123);
-      let bridge = document.getElementsByClassName("bridge")[0];
       if (window.innerWidth <= 667) {
-        bridge.classList.add("-bridge-small");
+        this.bridgeSizeClass = '-bridge-small';
+        this.isCharacterWalking = true;
+        // console.log(this.bridgeSizeClass);
+        // console.log(this.character_walkClass);
       } else if (window.innerWidth <= 992) {
-        bridge.classList.add("-bridge-medium");
+        this.bridgeSizeClass = '-bridge-medium';
+        this.isCharacterWalking = true;
       } else if (window.innerWidth <= 1200) {
-        bridge.classList.add("-bridge-large");
+        this.bridgeSizeClass = '-bridge-large';
+        this.isCharacterWalking = true;
       } else {
-        bridge.classList.add("-bridge-largest");
-
+        this.bridgeSizeClass = '-bridge-largest';
+        this.isCharacterWalking = true;
       }
-
-      let character_walk = document.getElementsByClassName("yellow")[0];
-      character_walk.classList.add("-on");
     },
     addScore(index, ans) {
       // console.log(ans);
@@ -132,6 +147,11 @@ export default {
         alert("請將螢幕轉向橫向以顯示內容！");
       }
     },
+    /* quenstionShow() {
+       if (this.isShow) {
+         alert('123');
+       }
+     }*/
   },
   mounted() {
     // 頁面加載後立即檢查螢幕方向
@@ -152,6 +172,9 @@ export default {
       y: 50,
       ease: "power1.out"
     });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.createGrowRectangle); // 在组件消毁前移除窗口大小變化的監聽器
   }
 
 }
