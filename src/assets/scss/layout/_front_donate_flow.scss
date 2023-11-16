@@ -1,0 +1,201 @@
+@import "../base/color";
+@import "../base/font";
+
+.front_donate_flow {
+  margin: 0 auto;
+  width: fit-content;
+  display: flex;
+
+  .unit {
+    // border: 1px solid firebrick;
+    height: 132px;
+    position: relative;
+
+    .box {
+      // border: 1px solid darkcyan;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      height: 132px;
+
+      .number {
+        grid-area: 1/1/2/2;
+        // border: 1px solid goldenrod;
+        font-size: 50px;
+        font-weight: bold;
+        width: 78px;
+        height: 78px;
+        // 文字置中對齊
+        margin: 0 auto;
+        text-align: center;
+        // 樣式調整
+        background-color: $gray-700;
+        border-radius: 50%;
+        color: $white;
+
+        &.-on {
+          color: $black;
+          background-color: $primary-y;
+        }
+      }
+
+      .text {
+        grid-area: 2/1/2/2;
+        // border: 1px solid chocolate;
+        font-size: 28px;
+        width: 116px;
+
+        &.-on {
+          font-weight: bold;
+        }
+      }
+
+      .link {
+        grid-area: 1/2/3/3;
+        // border: 1px solid red;
+        padding: 0 54px;
+
+
+        // height: 132px;
+        svg {
+          scale: 2;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .front_donate_flow {
+    scale: 0.75;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .front_donate_flow {
+    .unit {
+      // border: 1px solid firebrick;
+      height: 120px;
+
+
+      .box {
+        // border: 1px solid darkcyan;
+        height: 120px;
+
+        .number {
+          // border: 1px solid goldenrod;
+          font-size: 42px;
+          font-weight: bold;
+          width: 68px;
+          height: 68px;
+        }
+
+        .text {
+          // border: 1px solid chocolate;
+          font-size: 24px;
+          width: 96px;
+
+        }
+
+        .link {
+          grid-area: 1/2/3/3;
+          // border: 1px solid red;
+          padding: 0 32px;
+
+
+          svg {
+            scale: 1.5;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+  .front_donate_flow {
+    // background-color: lavenderblush;
+
+    .unit {
+      // border: 1px solid firebrick;
+      height: 100px;
+
+
+      .box {
+        // border: 1px solid darkcyan;
+        height: 100px;
+
+        .number {
+          // border: 1px solid goldenrod;
+          font-size: 32px;
+          font-weight: bold;
+          width: 48px;
+          height: 48px;
+        }
+
+        .text {
+          // border: 1px solid chocolate;
+          font-size: 18px;
+          width: 72px;
+
+        }
+
+        .link {
+          grid-area: 1/2/3/3;
+          // border: 1px solid red;
+          padding: 0 20px;
+
+
+          svg {
+            scale: 1.2;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .front_donate_flow {
+    // background-color: lavenderblush;
+
+    .unit {
+      // border: 1px solid firebrick;
+      height: 60px;
+
+
+      .box {
+        // border: 1px solid darkcyan;
+        height: 60px;
+
+        .number {
+          // border: 1px solid goldenrod;
+          font-size: 20px;
+          font-weight: bold;
+          width: 32px;
+          height: 32px;
+        }
+
+        .text {
+          // border: 1px solid chocolate;
+          font-size: 14px;
+          width: 56px;
+
+        }
+
+        .link {
+          grid-area: 1/2/3/3;
+          // border: 1px solid red;
+          padding: 0 10px;
+
+
+          svg {
+            scale: 1.0;
+          }
+        }
+      }
+    }
+  }
+
+}

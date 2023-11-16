@@ -54,17 +54,17 @@
       </div>
 
       <!-- 目前狀態 : 套版跑版 -->
-      <div class="section">
-        <!-- <div class="wrap"> -->
-        <table class="table2">
-          <!-- <table class="table"> -->
+      <!-- <div class="section"> -->
+      <div class="wrap">
+        <!-- <table class="table2"> -->
+        <table class="table">
           <thead class="thead">
             <tr class="tr">
-              <td class="td w100">使用者編號</td>
-              <td class="td w100">使用者名稱</td>
-              <td class="td w100">使用者權限</td>
-              <td class="td w200">電子信箱</td>
-              <td class="td w100">電話</td>
+              <th class="td w100">使用者編號</th>
+              <th class="td w100">使用者名稱</th>
+              <th class="td w100">使用者權限</th>
+              <th class="td w200">電子信箱</th>
+              <th class="td w100">電話</th>
             </tr>
           </thead>
           <tbody class="tbody">
