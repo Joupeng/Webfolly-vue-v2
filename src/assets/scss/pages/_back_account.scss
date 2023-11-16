@@ -96,52 +96,56 @@
     }
 
     // 右邊的表格格式
-    .table2 {
-
-      width: 636px;
-      height: 64px;
-      border-collapse: collapse;
-
-      .thead {
-        background-color: $black;
-        border: 2px solid $black;
-        color: $white;
-        font-size: $font-M-16;
-        height: 64px;
-        text-align: center;
-      }
-
-      .tbody {
-        border: 2px solid $gray-700;
-        border-top: 0;
-
-        .tr {
-          &:nth-child(n) {
-            background-color: $gray-300;
-            ;
-          }
-
-          &:nth-child(2n) {
-            background-color: $gray-700;
-          }
+    .table {
+      th {
+        &:nth-child(5) {
+          color: $white;
         }
 
-        .td {
-          text-align: center;
-          height: 64px;
-        }
       }
 
-      // 設定td的不同寬度
-      .w100 {
-        width: 100px;
-      }
-
-      .w200 {
-        width: 200px;
-      }
 
     }
+
+    // .table2 {
+
+    //   width: 636px;
+    //   height: 64px;
+    //   border-collapse: collapse;
+
+    //   .thead {
+    //     background-color: $black;
+    //     border: 2px solid $black;
+    //     color: $white;
+    //     font-size: $font-M-16;
+    //     height: 64px;
+    //     text-align: center;
+    //   }
+
+    //   .tbody {
+    //     border: 2px solid $gray-700;
+    //     border-top: 0;
+
+    //     .tr {
+    //       &:nth-child(n) {
+    //         background-color: $gray-300;
+    //         ;
+    //       }
+
+    //       &:nth-child(2n) {
+    //         background-color: $gray-700;
+    //       }
+    //     }
+
+    //     .td {
+    //       text-align: center;
+    //       height: 64px;
+    //     }
+    //   }
+
+    //   // 設定td的不同寬度
+
+    // }
 
     // 右邊的按鈕設定
     .btnBox {
@@ -166,5 +170,13 @@
 
       }
     }
+  }
+}
+
+
+.icon {
+  &:hover {
+    fill: red;
+    transform: rotate(180);
   }
 }
