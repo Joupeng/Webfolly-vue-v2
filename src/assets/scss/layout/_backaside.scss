@@ -1,29 +1,36 @@
 @import "../base/color";
 
-.backaside {
+.backAside {
   background-color: $neutral-dark;
 
   div {
     list-style: none;
     padding: 40px 20px;
 
-    .accordion {
+    .backAccordion {
       padding: 0;
 
       .accordion-button {
         padding: 0;
 
+        .donateBtn::after {
+          content: url(/src/assets/images/common/iconChervon/white.svg);
+
+        }
+
         /* icon打開時轉角度 */
-        img.icon_chevronDown.open {
+        .donateBtn::after.open {
           transform: rotate(180deg);
         }
+
+
       }
 
       .accordion-content {
         padding: 0;
         display: block;
 
-        a {
+        .donateBtnQA {
           display: none;
         }
       }
