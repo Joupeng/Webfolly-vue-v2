@@ -7,22 +7,22 @@
 
   </header>
 
-  <div class="container">
+  <div class="back_container">
 
-    <aside class="backaside">
+    <aside class="backAside">
       <div>
-        <a href="">媒體識讀 - 外網連結</a>
-        <a href=""> 媒體識讀 - 相關課程</a>
-        <a href="">標題猜一猜 - 題庫 </a>
-        <a href="">假訊息追擊 - 題庫</a>
-        <div class="accordion">
+        <router-link to="/back_account">媒體識讀 - 外網連結</router-link>
+        <router-link to="/back_login">媒體識讀 - 相關課程</router-link>
+        <router-link to="/back_login">假訊息追擊 - 題庫</router-link>
+        <div class="backAccordion">
 
           <div class="accordion-button">
-            <a href="">捐款管理&nbsp;&nbsp;<img class="icon_chevronDown" src="../images/common/back_iconChevronDown.svg"
-                alt="icon_chevronDown"></a>
+            <router-link to="/back_login" class="donateBtn">捐款管理&nbsp;&nbsp;</router-link>
+
           </div>
 
-          <div class="accordion-content"><a href="">捐款Q&A</a>
+          <div class="accordion-content"><router-link class="donateBtnQA" to="/back_login">捐款&nbsp;Q
+              &amp;&nbsp;A</router-link>
           </div>
 
 
@@ -73,7 +73,7 @@
                 <div class="edit">編輯</div>
               </td>
               <td>
-                <div class="edit"><img src="./images/back_iconTrashcan.svg" alt=""></div>
+                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
               </td>
             </tr>
             <tr>
@@ -89,7 +89,7 @@
                 <div class="edit">編輯</div>
               </td>
               <td>
-                <div class="edit"><img src="./images/back_iconTrashcan.svg" alt=""></div>
+                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
               </td>
             </tr>
             <tr>
@@ -105,7 +105,7 @@
                 <div class="edit">編輯</div>
               </td>
               <td>
-                <div class="edit"><img src="./images/back_iconTrashcan.svg" alt=""></div>
+                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
               </td>
             </tr>
             <tr>
@@ -121,7 +121,7 @@
                 <div class="edit">編輯</div>
               </td>
               <td>
-                <div class="edit"><img src="./images/back_iconTrashcan.svg" alt=""></div>
+                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
               </td>
             </tr>
             <tr>
@@ -137,25 +137,70 @@
                 <div class="edit">編輯</div>
               </td>
               <td>
-                <div class="edit"><img src="./images/back_iconTrashcan.svg" alt=""></div>
+                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
               </td>
             </tr>
           </tbody>
 
+
+
         </table>
       </div>
+
+      <!-- 頁數 -->
+      <div class="unified_pagination" :actpage="paginationPage">
+        <a href="#!-1" class="unified_pagination_i">上一頁</a>
+        <a href="#!1" class="unified_pagination_i">1</a>
+        <a href="#!2" class="unified_pagination_i">2</a>
+        <a href="#!3" class="unified_pagination_i">3</a>
+        <a href="#!4" class="unified_pagination_i">4</a>
+        <a href="#!5" class="unified_pagination_i">5</a>
+        <a href="#!6" class="unified_pagination_i">6</a>
+        <a href="#!+1" class="unified_pagination_i">下一頁</a>
+      </div>
+
     </main>
+
+
   </div>
+
+
 
   <backfooter></backfooter>
 </template>
 
 <script>
+
 import backfooter from '@/components/back_footer.vue'
+
 
 export default {
   components: {
+
     backfooter,
-  }
-}
-</script>
+  },
+  data() {
+    return {
+      paginationPage: 1,
+    };
+  },
+  mounted() {
+    const unifiedPagination = document.querySelector('.unified_pagination');
+    const paginationLinks = unifiedPagination.querySelectorAll('.unified_pagination_i');
+
+    paginationLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const go = link.getAttribute('href').replace('#!', '');
+        if (go === '+1') {
+          this.paginationPage++;
+        } else if (go === '-1') {
+          this.paginationPage--;
+        } else {
+          this.paginationPage = parseInt(go, 10);
+        }
+      });
+    });
+  },
+};
+
+</script> 
