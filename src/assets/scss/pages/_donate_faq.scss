@@ -1,0 +1,93 @@
+@import "../base/color";
+@import "../base/font";
+
+.outside_box {
+  border: 1px solid red;
+
+  .title_qa {
+    text-align: center;
+    font-size: $title-24;
+    margin-top: 100px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .list_content_box {
+    width: 1200px;
+    margin: 0 auto;
+    // border: 1px solid purple;
+
+    @media (min-width:991.98px) and (max-width:1200px) {
+      width: 900px;
+    }
+
+    @media (min-width: 767.98px) and (max-width:992px) {
+      width: 700px;
+    }
+
+    @media (max-width:768px) {
+      width: 600px;
+    }
+
+
+    // @media (min-width:668px) and (max-width:)
+    // ul
+    .inner_context_box {
+      padding: 0;
+      // width: 800px;
+      margin: 0 auto;
+
+      .list_qa {
+        list-style: none;
+        font-size: $fontbase-14;
+        border: 2px solid $primary-b;
+        border-radius: 32px;
+        margin: 30px auto;
+        width: 100%;
+        background-color: #fff;
+
+        .qs_content {
+          display: flex;
+          justify-content: space-between;
+          padding: 20px;
+          border-radius: 32px;
+
+          .qs {
+            // border: 1px solid green;
+            // width: 100%;
+            font-size: $font-M-16;
+            font-weight: 600;
+          }
+
+          // 無法更改預設
+          .qa_button {
+            border: none;
+            background-color: #fff;
+          }
+        }
+      }
+
+      .qs_hr {
+        margin: 0 auto;
+        padding: 0;
+        width: 90%;
+      }
+
+      .ans {
+        // border: 1px solid orange;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        // width: 100%;
+        font-size: $fontbase-14;
+        padding: 0 20px;
+        display: none;
+
+        &.-on {
+          display: block;
+        }
+      }
+    }
+  }
+}
