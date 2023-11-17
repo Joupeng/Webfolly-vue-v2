@@ -90,12 +90,12 @@ const routes = [
         name: 'donate_faq',
         component: () => import('../views/donate_faq.vue')
     },
-    {
-        // 前台 隱私權政策
-        path: '/donate_privacypolicy',
-        name: 'donate_privacypolicy',
-        component: () => import('../views/donate_privacypolicy.vue')
-    },
+    // {
+    //     // 前台 隱私權政策
+    //     path: '/donate_privacypolicy',
+    //     name: 'donate_privacypolicy',
+    //     component: () => import('../views/donate_privacypolicy.vue')
+    // },
     {
         // 前台 關於我們
         path: '/aboutus',

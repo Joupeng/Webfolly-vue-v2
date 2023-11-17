@@ -12,9 +12,6 @@
                     <li><router-link :to="{ name: 'fakenews' }" @click="closeNav"><span
                                 :class="{ 'frontheader_menu-on': $route.name == 'fakenews' }">關於假訊息</span></router-link>
                     </li>
-                    <li><router-link :to="{ name: 'clickbait' }" @click="closeNav"><span
-                                :class="{ 'frontheader_menu-on': $route.name == 'clickbait' }">關於誘餌式標題</span></router-link>
-                    </li>
                     <li><router-link :to="{ name: 'game' }" @click="closeNav"><span
                                 :class="{ 'frontheader_menu-on': $route.name == 'game' }">趣味小測驗</span></router-link>
                     </li>

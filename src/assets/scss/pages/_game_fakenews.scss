@@ -2,33 +2,34 @@
 @import "../base/font";
 
 
-// 包一個大外框再開始
+// index
+// 電腦版關主(99) +分數 => 文字含按鈕電腦版(77) => 電腦版黑幕(55) => 手機板關主+文字(44) => 手機黑幕(30) => 柱子(15) => 角色(10) => 橋(5) => 背景(1)
 
-
-div.game_fakenews {
+.game_fakenews {
   margin: 0;
+  position: relative;
   background-image: url("@/assets/images/game_fakenews/game_fakenews_background.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   width: 100%;
   height: 100vh;
-  /* width: 1440px; */
-  /* height: 600px; */
-  min-height: 450px;
+  // min-height: 450px;
 
   @media screen and (orientation: portrait) {
     display: none;
+
   }
 
 
   // 電腦版暗幕
-  div.black_background {
+  .black_background {
     // border: 1px solid red;
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 0.6;
+    background-color: rgba(black, 0.6);
+    z-index: 55;
+    position: relative;
 
     @media(max-width: 767px) {
       display: none;
@@ -40,269 +41,238 @@ div.game_fakenews {
   .black_background_phone {
     width: 100%;
     height: 100%;
-    // background-color: black;
-    // opacity: 0.6;
     display: none;
+    opacity: 0;
+    z-index: 30;
+    position: relative;
 
     @media(max-width: 767px) {
       display: block;
-      background-color: black;
-      opacity: 0.6;
+      background-color: rgba(black, 0.6);
+      // opacity: 0.6;
 
+    }
+
+    &.-start {
+      animation-name: fadeInAndOut;
+      animation-duration: 4s;
+      opacity: 0;
+      // 維持那個狀態
+      animation-fill-mode: forwards;
+
+      // z-index: 30;
+    }
+
+  }
+
+  // 手機關主文字訊息框=======================================================
+  .window {
+    // fixed是不會占空間
+    // border: 1px solid red;
+    z-index: 44;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // z-index: 99;
+    // margin: auto auto;
+    opacity: 0;
+
+    @media(max-width: 768px) {
+      display: flex;
+
+
+
+
+      &.-start {
+        animation-name: fadeInAndOut;
+        animation-duration: 4s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+
+      }
+
+
+      .text_window {
+        border: 4px solid black;
+        width: 295px;
+        height: 152px;
+        background-color: #fff;
+        border-radius: 32px;
+        margin-right: 40px;
+
+
+        // margin: auto;
+        p {
+          text-align: center;
+          padding: 20px;
+          font-size: 16px;
+        }
+      }
+
+      .stand_circle_photo {
+        flex-basis: 200px;
+        // border: 1px solid blue;
+        width: 110px;
+        height: 110px;
+        align-self: center;
+
+        .img {
+          width: 100%;
+        }
+      }
     }
   }
 
-  div.pillar_left,
-  div.pillar_right {
+
+  @keyframes fadeInAndOut {
+    0% {
+      opacity: 0;
+      /* 一开始不可见 */
+    }
+
+    50% {
+      opacity: 1;
+      /* 10%時開始出現 */
+    }
+
+    90% {
+      opacity: 1;
+      transform: scaleY(0);
+      /* 90%時保持可見 */
+    }
+
+    100% {
+      opacity: 0;
+      // display: none;
+      /* 100%时消失 */
+      pointer-events: none;
+      transform: scaleY(0);
+      /* 確保不再占據空间 */
+    }
+  }
+
+
+  .pillar_left,
+  .pillar_right {
     width: 137px;
     height: 230px;
     background-color: #989898;
     /* border: 1px solid red; */
     border-radius: 32px 32px 0 0;
-
+    z-index: 15;
   }
 
 
 
-  div.pillar_left {
+  .pillar_left {
     cursor: pointer;
     position: fixed;
-    left: 25%;
+    left: 15%;
     bottom: 0;
-    transform: translate(-50%, 0%);
-
-    // border: 1px solid red;
-    @media(max-width: 992px) {
-      // position: fixed;
-      left: 20%;
-      bottom: 0;
-      transform: translate(-50%, 0%);
-
-
-    }
-
   }
 
-  // 橋但是一開始沒有高度所以不會顯示
+  // 橋的動畫做兩層，先做第一層功能再做第二層，下一層delay 1s
   .bridge {
-    height: 0;
-    width: 20px;
-    background-color: #B5B5B5;
+    height: 20px;
+    display: block;
+    width: calc(100% - 15%*2 - 137px*2 + 32px + 32px);
     position: absolute;
-    bottom: 95%;
-    left: 70%;
+    bottom: 210px;
+    // 橋用算的取長度
+    left: calc(15% + 137px - 32px);
+    transform: scaleY(0);
+    transition: transform 1s;
+    transform-origin: 0;
+    z-index: 5;
+
+    &.-on {
+      transform: scaleY(1);
+
+    }
+
+    &__inner {
+      background-color: #B5B5B5;
+      width: 100%;
+      height: 100%;
+      transition: transform 1s 1s;
+      transform-origin: 0;
+
+
+      transform: rotate(-90deg);
+
+      &.-on {
+        transform: rotate(0deg);
+      }
+
+    }
+
+
   }
 
-  //橋的動畫套用根據不同視窗大小加上class
-  .bridge.-bridge-largest {
-    animation-name: bridge-largest;
-    /* 动画名称 */
-    animation-duration: 4s;
-    /* 持续时间 */
-    /*   animation-delay:6s; */
-    background-color: #B5B5B5;
-    /*   animation-direction:reverse;反方向又回去 */
-    animation-fill-mode: forwards;
-    /*  保持最终状态 */
-    // position: absolute;
-    // bottom: 95%;
-    // left: 70%;
-    transform-origin: bottom;
-  }
-
-  .bridge.-bridge-large {
-    animation-name: bridge-large;
-    /* 动画名称 */
-    animation-duration: 4s;
-    /* 持续时间 */
-    /*   animation-delay:6s; */
-    background-color: #B5B5B5;
-    /*   animation-direction:reverse;反方向又回去 */
-    animation-fill-mode: forwards;
-    /*  保持最终状态 */
-    // position: absolute;
-    // bottom: 95%;
-    // left: 70%;
-    transform-origin: bottom;
-  }
-
-  .bridge.-bridge-medium {
-    animation-name: bridge-medium;
-    /* 动画名称 */
-    animation-duration: 4s;
-    /* 持续时间 */
-    /*   animation-delay:6s; */
-    background-color: #B5B5B5;
-    /*   animation-direction:reverse;反方向又回去 */
-    animation-fill-mode: forwards;
-    /*  保持最终状态 */
-    // position: absolute;
-    // bottom: 75%;
-    // left: 20%;
-    transform-origin: bottom;
-  }
-
-  .bridge.-bridge-small {
-    animation-name: bridge-small;
-    /* 动画名称 */
-    animation-duration: 4s;
-    /* 持续时间 */
-    /*   animation-delay:6s; */
-    background-color: #B5B5B5;
-    /*   animation-direction:reverse;反方向又回去 */
-    animation-fill-mode: forwards;
-    /*  保持最终状态 */
-    // position: absolute;
-    // bottom: 75%;
-    // left: 20%;
-    transform-origin: bottom;
-  }
-
-  // 橋動畫套用
-  @keyframes bridge-largest {
-    0% {
-      height: 0;
-    }
-
-    50% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(90deg);
-      height: 630px;
-    }
-  }
-
-  @keyframes bridge-large {
-    0% {
-      height: 0;
-    }
-
-    50% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(90deg);
-      height: 610px;
-    }
-  }
-
-  @keyframes bridge-medium {
-    0% {
-      height: 0;
-    }
-
-    50% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(90deg);
-      height: 400px;
-    }
-  }
-
-  @keyframes bridge-small {
-    0% {
-      height: 0;
-    }
-
-    50% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(90deg);
-      height: 320px;
-    }
-  }
-
-
-  div.pillar_right {
+  .pillar_right {
     position: fixed;
-    left: 75%;
+    right: 15%;
     bottom: 0;
-    transform: translate(-50%, 0%);
-
-    @media(max-width: 992px) {
-      // position: fixed;
-      left: 80%;
-      bottom: 0;
-      transform: translate(-50%, 0%);
-
-
-    }
   }
 
-  // 黃的框
-  div.yellow {
+  // 黃的框角色
+  .yellow {
     // border: 1px solid blue;
     width: 102px;
     height: 104px;
+    position: absolute;
+    // 15%是柱子定位點，68.5是柱子的寬，然後是腳色的一半寬
+    left: calc(15% + 68.5px - 51px);
+    bottom: 230px;
+    z-index: 10;
   }
 
   // 腳色走路動畫============================================
-  div.yellow.-on {
+  .yellow.-on {
     animation-name: walk;
-    animation-duration: 4s;
-    animation-delay: 5s;
+    animation-duration: 3s;
+    animation-delay: 2s;
     animation-fill-mode: forwards;
 
-    @media(min-width:768px) {
-      animation-name: walk_large;
-    }
-  }
 
 
-  @keyframes walk {
-    0% {
-      // bottom: 100%;
-      // left: 0;
-      transform: translate(0px);
-    }
+    @keyframes walk {
+      0% {
+        // bottom: 100%;
+        // left: 0;
+        transform: translate(0px);
+      }
 
-    100% {
-      // bottom: 100%;
-      // left: 200px;
-      transform: translate(200px);
-    }
+      100% {
+        // bottom: 100%;
+        // left: 200px;
+        //100vw是因為人物有可能會有視窗邊框的問題，橋長中間則不用
+        // transform: translate(calc((100% - 15%*2 - 137px*2 + 68.5*2)/2 + 68.5px + 51px)); 取代如下要算到柱子的一半加上
+        transform: translate(50vw) translate(-15vw) translate(-137px) translate(-68.5px) translate(68.5px) translate(51px);
+      }
 
-  }
-
-
-
-  @keyframes walk_large {
-    0% {
-      // bottom: 100%;
-      // left: 0;
-      transform: translate(0px);
-    }
-
-    100% {
-      // bottom: 100%;
-      // left: 200px;
-      transform: translate(400px);
     }
 
   }
 
-  div.yellow,
-  div.black img {
+  .black img {
     position: absolute;
     left: 10%;
     bottom: 230px;
+    z-index: 10;
     /* width: 100%; */
   }
 
-  div.return {
+  // 返回鍵需要加link直接貼路徑header再改樣式給他div
+  .return {
     width: 57px;
     height: 57px;
     position: absolute;
     left: 6%;
     top: 10%;
     transform: translate(-50%, -50%);
+    z-index: 99;
 
     @media(max-width: 768px) {
       width: 40px;
@@ -317,61 +287,16 @@ div.game_fakenews {
 
   }
 
-  // 文字訊息框=======================================================
-  div.window {
-    // fixed是不會占空間
-    // border: 1px solid red;
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 99;
-    // margin: auto auto;
 
-    @media(max-width: 768px) {
-      display: flex;
-
-    }
-
-
-    .text_window {
-      border: 4px solid black;
-      width: 295px;
-      height: 152px;
-      background-color: #fff;
-      border-radius: 32px;
-      margin-right: 40px;
-
-      // margin: auto;
-      p {
-        text-align: center;
-        padding: 20px;
-        font-size: 16px;
-      }
-    }
-
-    .stand_circle_photo {
-      flex-basis: 200px;
-      // border: 1px solid blue;
-      width: 110px;
-      height: 110px;
-      align-self: center;
-
-      .img {
-        width: 100%;
-      }
-    }
-
-  }
-
-  div.show_text {
+  // 電腦版關主訊息
+  .show_text {
     width: 100%;
     height: 120px;
     background-color: #D6D6D6;
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 77;
 
     p {
       font-size: 16px;
@@ -414,18 +339,19 @@ div.game_fakenews {
     color: #fff;
   }
 
-  div.show_text p,
+  .show_text p,
   button.button {
     display: inline-block;
   }
 
 
 
-  div.img_container {
+  .img_container {
     /* border: 1px solid red; */
     position: fixed;
     bottom: 0;
     right: 0;
+    z-index: 99;
     // width: 245px;
     // height: 297px;
 
@@ -452,7 +378,7 @@ div.game_fakenews {
     }
   }
 
-  div.bottom_set {
+  .bottom_set {
     border: 1px solid yellow;
     position: absolute;
     bottom: 0;
@@ -472,28 +398,32 @@ div.game_fakenews {
   right: 6%;
   top: 10%;
   transform: translate(-50%, -50%);
+  z-index: 99;
 
 }
 
-div.card_show {
+.card_show {
   opacity: 0;
+  position: relative;
+  z-index: 99;
   pointer-events: none;
   transition: opacity 0.3s ease;
   /* 平滑過渡 */
 
-  div.container_qs {
+  .container_qs {
     display: flex;
     // display: none;
     gap: 60px;
     // border: 1px solid red;
     position: fixed;
+
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     // opacity: 0;
 
-    div.right_QA,
-    div.left_QA {
+    .right_QA,
+    .left_QA {
       border: 7px solid $primary-b;
       margin: 10px;
       width: 315px;
@@ -549,12 +479,13 @@ div.card_show {
 
   }
 
+  // 是用點選柱子class判斷是否為on,加上-on觸發動畫，原本是5秒(長出+倒下 => 2s + 角色走路3s ) 多留時間
   &.-on {
 
     // pointer-events: auto;
     animation-name: fade;
     animation-duration: 3s;
-    animation-delay: 12s;
+    animation-delay: 7s;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
   }
