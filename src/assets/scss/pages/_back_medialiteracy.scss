@@ -1,7 +1,7 @@
 @import "../base/color";
 @import "../base/font";
 
-.container {
+.back_container {
   display: flex;
 
   main {
@@ -41,6 +41,11 @@
       }
     }
 
+
+    .unified_pagination {
+      margin-top: 0;
+
+    }
 
   }
 
