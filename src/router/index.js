@@ -66,7 +66,7 @@ const routes = [
         component: () => import('../views/donate_basicinformation.vue')
     },
     {
-        // 前台 捐款完成
+        // 前台 捐款完成     
         path: '/donate_finish',
         name: 'donate_finish',
         component: () => import('../views/donate_finish.vue')
@@ -124,7 +124,7 @@ const routes = [
         component: () => import('../views/back_donate.vue')
     },
     {
-        // 後台 測驗管理
+        // 後台 測驗管理(假訊息追擊題庫)
         path: '/back_game',
         name: 'back_game',
         component: () => import('../views/back_game.vue')
@@ -136,7 +136,7 @@ const routes = [
         component: () => import('../views/back_password.vue')
     },
     {
-        // 後台 媒體識讀管理
+        // 後台 媒體識讀管理用了四頁媒體識讀 - 相關課程/媒體識讀 - 外網連結/捐款FAQ
         path: '/back_medialiteracy',
         name: 'back_medialiteracy',
         component: () => import('../views/back_medialiteracy.vue')
