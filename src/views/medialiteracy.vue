@@ -122,12 +122,7 @@
             </ul>
           </div>
         </div>
-        <!-- <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-      333333333333333333
-    </div>
-    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-      4444444444444
-    </div> -->
+
       </div>
     </div>
 

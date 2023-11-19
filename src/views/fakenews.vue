@@ -4,7 +4,7 @@
 
         <!-- banner -->
         <section class="banner">
-            <p>互動</p>
+            <!-- <p>互動</p> -->
         </section>
 
 
@@ -60,7 +60,7 @@
                     <swiper-slide class="swiper-slide">
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style01.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_1">諷刺惡搞</p>
@@ -74,7 +74,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style02.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_2">題文不符</p>
@@ -87,7 +87,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style03.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_3">誤導性內容</p>
@@ -100,7 +100,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style04.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_4">脈絡錯置</p>
@@ -112,7 +112,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style05.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_5">假冒性內容</p>
@@ -124,7 +124,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style06.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_6">操弄性內容</p>
@@ -136,7 +136,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style07.png" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_7">虛構性內容</p>
@@ -152,8 +152,7 @@
                     <!-- 第一組 -->
 
                     <div class="RWD_swiper_block">
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_01">
                         </div>
                         <div class="RWD_swiper_p_block">
                             <p class="RWD_swiper_p_1">諷刺惡搞</p>
@@ -170,8 +169,7 @@
                             <p class="RWD_swiper_p_2">題文不符</p>
                             <p>標題、視覺資料或其說明與內文不符</p>
                         </div>
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_02">
                         </div>
 
                     </div>
@@ -180,8 +178,7 @@
                     <!-- 第三組 -->
 
                     <div class="RWD_swiper_block">
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_03">
                         </div>
                         <div class="RWD_swiper_p_block">
                             <p class="RWD_swiper_p_3">誤導性內容</p>
@@ -197,8 +194,7 @@
                             <p class="RWD_swiper_p_4">脈絡錯置</p>
                             <p>真實內容被置於錯誤的脈絡</p>
                         </div>
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_04">
                         </div>
 
                     </div>
@@ -206,8 +202,7 @@
                     <!-- 第五組 -->
 
                     <div class="RWD_swiper_block">
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_05">
                         </div>
                         <div class="RWD_swiper_p_block">
                             <p class="RWD_swiper_p_5">假冒性內容</p>
@@ -222,8 +217,7 @@
                             <p class="RWD_swiper_p_6">操弄性內容</p>
                             <p>真實訊息或意象被刻意操弄來欺騙</p>
                         </div>
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_06">
                         </div>
 
                     </div>
@@ -231,8 +225,7 @@
                     <!-- 第七組 -->
 
                     <div class="RWD_swiper_block">
-                        <div class="RWD_swiper_img_block">
-                            <img src="/src/assets/images/fakenews/fakenews_seven_01.svg" alt="">
+                        <div class="RWD_swiper_img_block_07">
                         </div>
                         <div class="RWD_swiper_p_block">
                             <p class="RWD_swiper_p_7">虛構性內容</p>
@@ -381,7 +374,6 @@
                             </ul>
                         </div>
                     </div>
-                    <p>test</p>
                     <div id="Blacky_block">
                         <div class="Blacky_block_overflow">
                             <img src="/src/assets/images/fakenews/Black_Gif01.gif" alt="" id="Blacky">
@@ -447,7 +439,7 @@ export default {
                     title: "空氣炸鍋，不僅致癌，更是你營養的大敵！使用它，就像是用生命在交換方便。現在就抛棄空氣炸鍋吧！",
                     content: "空氣炸鍋，看似方便，實則是一場騙局！食物在空氣炸鍋的摧殘下，除了會製造致癌的丙烯醯胺，還會將營養素如：維生素A、D、E、K等，溶於空氣中。別再被酷炫的外表所迷惑，珍惜健康的話就遠離空氣炸鍋吧！空氣炸鍋是健康的毀滅者！",
                     source: "小編3",
-                    imageUrl: "/src/assets/images/fakenews/fakenews_img03.jpg", // 添加图片地址
+                    imageUrl: "/src/assets/images/fakenews/fakenews_img03.jpeg", // 添加图片地址
 
                 },
 
