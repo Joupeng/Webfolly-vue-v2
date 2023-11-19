@@ -97,9 +97,13 @@
                         推動團隊繼續行動，實踐改變。</p>
                 </div>
                 <!-- 按鈕 -->
-                <router-link :to="{ name: 'donate' }" @click="closeNav"><span
-                        :class="{ 'frontheader_menu-on': $route.name == 'donate' }">捐款支持</span></router-link>
+                <router-link :to="{ name: 'donate' }" @click="closeNav" class="donate_btn"><span
+                        :class="{ 'frontheader_menu-on': $route.name == 'donate' }">捐款支持</span>
+                </router-link>
 
+                <div class="lamp_man_block">
+                    <img src="/src/assets/images/home/home_lamp_man.svg" alt="">
+                </div>
             </div>
 
 
@@ -108,14 +112,11 @@
 
 
 
+
         </div>
+        <frontfooter></frontfooter>
+
     </section>
-
-
-
-
-
-    <frontfooter></frontfooter>
 </template>
 
 <script>

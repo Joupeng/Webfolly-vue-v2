@@ -1,0 +1,359 @@
+@import "../base/color";
+@import "../base/font";
+
+
+
+.donate_log {
+
+
+  // ---------RWD----------
+  // --------平板斷點---------
+  $tablet_BP : 768px;
+
+  @mixin t() {
+    @media all and (max-width : $tablet_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+
+  // --------手機版斷點-------
+  $mobile_BP : 576px;
+
+  @mixin m() {
+    @media all and (max-width : $mobile_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+
+
+
+
+  h1 {
+    color: $primary-y
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+
+
+  // --------------捐款徵信紀錄
+  .titleBlock {
+    // border: 1px solid red;
+    margin: 100px 200px 80px 200px;
+
+    @include t() {
+      margin: 100px 100px 80px 100px;
+    }
+
+    @include m() {
+      margin: 100px 30px 80px 30px;
+
+    }
+
+    .titleText {
+      font-size: $title-24;
+      // border: 1px solid blue;
+      text-align: center;
+      margin: 0;
+    }
+
+    .titleBlockA {
+      margin: 0 0 0px 0;
+    }
+  }
+
+  // 兩欄區域
+  .two_block {
+    display: flex;
+    // border: 1px solid red;
+    margin: 0 200px 80px 200px;
+
+    @media(max-width:1160px) {
+      margin: 0 60px 80px 60px;
+
+    }
+
+    @media(max-width:869px) {
+      flex-direction: column;
+      margin: 0 40px 80px 40px;
+    }
+
+    .img_block {
+      display: flex;
+      flex: 1;
+      // border: 1px solid green;
+      margin: 0;
+
+
+      img {
+        margin: 0;
+        width: 100%;
+        min-width: 400px;
+
+        @media(max-width:500px) {
+          min-width: 100px;
+
+        }
+
+      }
+
+    }
+
+    .content_block {
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid blue;
+      flex: 1;
+      height: 100%;
+      margin: 0;
+      justify-content: space-between;
+
+      p {
+        font-size: 20px;
+        margin: 0 0 30px 0;
+      }
+
+      .drop-down_menu_block {
+        display: flex;
+        // border: 1px solid red;
+        height: 50px;
+        gap: 20px;
+        margin: auto 0;
+        margin: 0 0 30px 0;
+
+
+        @media(max-width:500px) {
+          flex-direction: column;
+          height: 100%;
+
+        }
+      }
+
+      // 下拉式選單一
+      .list_block {
+        width: 100%;
+        height: 50px;
+        border: 4px solid #50589D;
+        background-color: #EFEFEF;
+        color: #B4B4B4;
+        border-radius: 32px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url('/src/assets/images/donate/donate_button.svg');
+        background-repeat: no-repeat;
+        background-position: right center;
+        padding-left: 20px;
+        cursor: pointer;
+        outline: none; // 取消默认的外部轮廓
+        box-shadow: none; // 取消默认的阴影边框
+
+        &:hover {
+          box-shadow: 0px 0px 15px #5D92CD;
+          border-radius: 32px;
+        }
+
+
+      }
+
+      // 下拉式選單bootstap寫法
+
+      // .btn-group {
+      //   width: 100%;
+
+      //   display: flex;
+
+      //   &:hover,
+      //   &:focus,
+      //   &:active {
+      //     box-shadow: 0px 0px 15px #5D92CD;
+      //     border-radius: 32px;
+      //   }
+
+      //   .btn-danger {
+      //     /* 按钮的基本样式，根据需要进行调整 */
+      //     background-color: #EFEFEF;
+      //     color: #B4B4B4;
+      //     border: 4px solid #50589D;
+      //     display: flex;
+      //     flex: 3;
+
+
+      //     &.disabled {
+      //       pointer-events: none;
+      //       /* 禁用点击事件 */
+      //     }
+
+      //     &:hover,
+      //     &:focus,
+      //     &:active {
+      //       cursor: auto;
+      //       box-shadow: none;
+      //     }
+      //   }
+
+      //   .dropdown-toggle {
+      //     /* 下拉按钮的样式，根据需要进行调整 */
+      //     display: flex;
+      //     flex: 1;
+      //     justify-content: center;
+      //     align-items: center;
+      //     background-color: #50589D;
+      //     color: #fff;
+      //     border: 4px solid #50589D;
+
+      //     &:hover,
+      //     &:focus {
+      //       background-color: #50589D;
+      //       /* 鼠标悬停或获取焦点时的颜色 */
+      //       border: 4px solid #50589D;
+      //       cursor: pointer;
+      //       box-shadow: none;
+
+      //     }
+
+      //   }
+
+      //   .dropdown-toggle-split {
+      //     /* 下拉按钮的分隔符样式，根据需要进行调整 */
+      //     background-color: #50589D;
+      //     color: #fff;
+      //     border: 4px solid #50589D;
+
+      //     &:hover,
+      //     &:focus {
+      //       background-color: #50589D;
+      //       /* 鼠标悬停或获取焦点时的颜色 */
+      //       border: 4px solid #50589D;
+      //       box-shadow: none;
+
+      //     }
+      //   }
+
+      //   .dropdown-menu {
+      //     /* 下拉菜单的样式，根据需要进行调整 */
+      //     background-color: #fff;
+      //     border: 1px solid rgba(0, 0, 0, 0.125);
+      //     margin-top: 2px;
+      //     /* 使下拉菜单与按钮紧密连接 */
+      //     max-height: 100%; // 设置最大高度为32px
+      //     overflow-y: auto;
+      //   }
+
+      //   .dropdown-item {
+      //     /* 下拉菜单项的样式，根据需要进行调整 */
+      //     color: #333;
+      //     padding: 0.5rem 1rem;
+
+      //     &:hover,
+      //     &:focus {
+      //       background-color: #f8f9fa;
+      //       /* 鼠标悬停或获取焦点时的背景颜色 */
+      //     }
+
+      //     &:active {
+      //       background-color: #e9ecef;
+      //       /* 按下按钮时的背景颜色 */
+      //     }
+      //   }
+      // }
+    }
+
+  }
+
+  .verification_code_block {
+    display: flex;
+    // border: 1px solid red;
+    height: 50px;
+    gap: 20px;
+    margin: auto 0;
+    margin: 0 0 60px 0;
+
+    @media(max-width:500px) {
+      flex-direction: column;
+      height: 100%;
+
+    }
+
+    .text_here {
+      display: flex;
+      width: 100%;
+      height: 50px;
+      border: 4px solid #50589D;
+      border-radius: 32px;
+      background-color: white;
+      color: black;
+      padding: 0 0 0 20px;
+      outline: none; // 取消默认的外部轮廓
+      box-shadow: none; // 取消默认的阴影边框
+    }
+
+    .text_here2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+      border-radius: 5px;
+      background-color: #EDEDED;
+      color: black;
+      text-align: center;
+
+    }
+
+    .underline {
+      display: flex;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .underline::after {
+      content: '';
+      position: absolute;
+      width: 70%;
+      height: 1px;
+      background-color: #000;
+      /* 下划线颜色 */
+      bottom: 50%;
+      // left: 0;
+      transform: translateY(50%);
+      pointer-events: none;
+      /* 使下划线不影响文字的点击事件 */
+    }
+  }
+
+  .donate_btn_outer {
+    display: flex;
+    // border: 1px solid red;
+    justify-content: center;
+
+    .donate_btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 180px;
+      height: 50px;
+      border: 4px solid #50589D;
+      border-radius: 32px;
+      background-color: #50589D;
+      color: white;
+
+      &:hover {
+        box-shadow: 0px 0px 15px #5D92CD;
+        border-radius: 32px;
+      }
+    }
+  }
+
+
+}
