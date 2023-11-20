@@ -124,7 +124,7 @@
         </table>
       </div>
 
-      <pagination></pagination>
+      <!-- <pagination></pagination> -->
 
     </main>
     <!-- 捐款fqa -->
@@ -245,7 +245,7 @@
         </table>
       </div>
 
-      <pagination></pagination>
+      <!-- <pagination></pagination> -->
 
     </main>
 
@@ -257,13 +257,13 @@
 <script>
 import backfooter from '@/components/back_footer.vue'
 import backaside from '@/components/back_aside.vue'
-import pagination from '@/components/pagination.vue'
+// import pagination from '@/components/pagination.vue'
 
 export default {
   components: {
     backfooter,
     backaside,
-    pagination,
+    // pagination,
   }
 
 }
