@@ -1,0 +1,49 @@
+@import "../base/color";
+@import "../base/font";
+@import "../components/modalheader";
+
+//  ===分類彈窗===
+
+.category {
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+
+  &_frame {
+    max-width: 1030px;
+    background-color: $secondary-y2;
+
+    form {
+      display: flex;
+      justify-content: space-evenly;
+
+      input {
+        margin: 20px 30px;
+        height: 43px;
+      }
+
+
+      .inputcategory {
+        width: 730px;
+      }
+
+      .inputsave {
+        color: $white;
+        @extend .btn;
+        width: 160px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          color: $black;
+        }
+      }
+
+    }
+  }
+
+
+
+
+}
