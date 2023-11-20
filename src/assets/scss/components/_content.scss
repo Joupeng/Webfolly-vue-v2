@@ -1,0 +1,52 @@
+@import "../base/color";
+@import "../base/font";
+@import "../components/modalheader";
+
+.content {
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+
+  &_frame {
+    max-width: 1030px;
+    background-color: $secondary-y2;
+
+
+  }
+
+  .wrap {
+
+    label {
+      margin: 50px;
+    }
+  }
+
+
+  .button {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: right;
+
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 160px;
+      height: 44px;
+      margin-right: 8px;
+      color: $white;
+
+
+
+      &:hover {
+        color: $black;
+
+      }
+
+    }
+  }
+
+
+
+}

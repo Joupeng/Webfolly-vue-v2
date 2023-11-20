@@ -3,6 +3,7 @@
 @import "base/var";
 @import "base/font";
 
+
 // components
 @import "components/btn";
 @import "components/input";
@@ -11,6 +12,10 @@
 @import "components/front_donate_subfooter";
 @import "components/front_donate_flow";
 @import "components/front_aboutusMain";
+@import "components/warning";
+@import "components/category";
+@import "components/modalheader.scss";
+@import "components/content.scss";
 
 
 // layout
@@ -18,7 +23,6 @@
 @import "layout/footer"; //前後台共用
 @import "layout/backheader";
 @import "layout/backaside";
-
 
 
 // pages 前台
@@ -37,6 +41,7 @@
 @import "pages/donate_record_result.scss";
 @import "pages/donate_privacypolicy";
 @import "pages/aboutus.scss";
+
 
 // pages 後台
 @import "pages/back_login.scss";

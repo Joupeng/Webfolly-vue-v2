@@ -19,7 +19,7 @@
         }
 
         /* icon打開時轉角度 */
-        .donateBtn::after.open {
+        .donateBtn::after.-on {
           transform: rotate(180deg);
         }
 
@@ -30,8 +30,8 @@
         padding: 0;
         display: block;
 
-        .donateBtnQA {
-          display: none;
+        .donateBtnQA.-on {
+          display: block;
         }
       }
     }

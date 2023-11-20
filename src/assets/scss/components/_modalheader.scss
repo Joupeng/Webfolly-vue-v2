@@ -1,0 +1,13 @@
+@import "../base/color";
+@import "../base/font";
+
+.modalheader {
+  display: flex;
+  justify-content: space-between;
+  background-color: $black;
+
+  span {
+    margin: 10px 34px;
+    color: $white;
+  }
+}
