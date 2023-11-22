@@ -10,7 +10,7 @@
     <div class="body">
       <form class="form" value="">
         <div class="title">重設密碼</div>
-        <div class="content">
+        <div class="contentBox">
           <div class="input">
             <label class="container">
               <input class="input" type="radio" name="way" value="phone" @click="byPhone">
