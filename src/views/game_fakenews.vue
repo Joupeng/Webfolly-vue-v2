@@ -24,12 +24,13 @@
       </div>
     </div>
 
-    <div class="black_background" id="black_background" :class="{ '-on': isVisible, '-qs_hidden': isCharacterWalking }">
+    <div class="black_background" id="black_background" :class="{ '-on': isVisibleBlack }">
     </div>
     <!-- 觸發關主手機板出現+class -on再次出現會有問題 -->
     <!-- <div class="black_background_phone" id="black_background_phone" :class="{'-start':start_animation,'-qs_hidden': isCharacterWalking}"></div>-->
-    <div class="black_background_phone" id="black_background_phone" :class="{ '-start': start_animation }"></div>
-    <div class="return"><router-link :to="{ name: 'game' }" @click="closeNav"><span
+    <div class="black_background_phone" id="black_background_phone"
+      :class="{ '-start': start_animation, '-on': isQsappear }"></div>
+    <div class="return"><router-link :to="{ name: 'game' }"><span
           :class="{ 'frontheader_menu-on': $route.name == 'game' }"> <img
             src="../assets/images/game_fakenews/game_fakenews_return.svg" class="return_photo"></span></router-link></div>
     <div class="show_text" id="show_text" :class="{ '-on': isVisible }">
@@ -41,53 +42,85 @@
       <img src="../assets/images/game_fakenews/game_fakenews_medium_stand.svg" class="medium_stand" alt="">
     </div>
     <!-- 題目======================================================= -->
-
-    <div id="app_qs" class="card_show" :class="{ '-on': isCharacterWalking }">
+    <div class="score_bar">
+      <div class="qs_number">第{{ questionNumber }}題</div>
+      <div class="score">Score:{{ score }}</div>
+    </div>
+    <div id="app_qs" class="card_show" :class="{ '-on': isCharacterWalking, '-result_correct': isResult }">
       <div class="outside_container">
-        <div class="score_bar">
 
-          <div class="qs_number">第{{ questionNumber }}題</div>
-          <div class="score">Score:{{ score }}</div>
-        </div>
         <div class="container_qs">
           <div class="left_QA">
             <p class="title_qs">選項一</p>
             <div class="inner_qs">
               <div class="content_qs" v-for="(item1, index) in questionText1">
-                <div v-if="current_question === index"></div>
-                {{ item1.text }}
+                <div v-if="current_question === index">
+                  {{ item1.text }}
+                </div>
               </div>
-              <p class="content_qs"></p>
-              <!-- <p class="content_qs">{{ questionText1 }} </p> -->
-              <p class="ans_qs">預留詳解位置，但是是要用觸發的方式才會出現,此種毒性，即使高溫加熱也無法去除。</p>
+
+              <div class="ans_qs" v-for="(item1, index) in questionText1" :class="{ '-on': showAnswerQs }">
+                <div v-if="current_question === index">{{ item1.answer }}</div>
+              </div>
             </div>
-            <button type="button" @click="addScore(index, '1')">確認</button>
+            <!-- <button type="button" @click="nextQs" >下一題</button> -->
+            <button type="button" @click="nextQs" v-if="isCorrectFail">下一題</button>
+            <button type="button" @click="addScore(index, '1', '1')" v-else=" isCorrectFail">確認</button>
           </div>
           <div class="right_QA">
             <p class="title_qs">選項二</p>
             <div class="inner_qs">
-              <p class="content_qs" v-for="(item2, index) in questionText2">
-                {{ item2.text }}
-              </p>
-              <p class="content_qs"></p>
-              <!-- <p class="content_qs">{{ questionText2 }} </p> -->
-              <p class="ans_qs"></p>
+              <div class="content_qs" v-for="(item2, index) in questionText2">
+                <div v-if="current_question === index">
+                  {{ item2.text }}
+                </div>
+              </div>
+              <!-- <div class="ans_qs" v-for="(item2, index) in questionText2" :class="{ '-on': showAnswerQs }"></div> -->
+              <div class="ans_qs" v-for="(item2, index) in questionText2" :class="{ '-on': showAnswerQs }">
+                <div v-if="current_question === index">{{ item2.answer }}</div>
+              </div>
             </div>
-            <button type="button" @click="addScore(index, '2')">確認</button>
+            <button type="button" @click="addScore(index, '2', '2')" :class="{ '-fail': isCorrectFail }">確認</button>
           </div>
         </div>
       </div>
     </div>
     <!-- 可以搭配v-if跟else -->
-    <!-- <div class="correct_box">
-      <div class="img_character"><img src="../assets/images/game_fakenews/correct.svg" alt=""></div>
+    <!-- 故意讓相同的true判斷加上的class相同比較好確認 -->
+    <div v-if="questionText1[(questionNumber - 1)].choosed || questionText2[(questionNumber - 1)].choosed != null"
+      class="correct_box" :class="{ 'appear': isCorrect }">
+      <div v-if="isCorrectOk" class="img_character"><img src="../assets/images/game_fakenews/correct.svg" alt=""></div>
+      <div v-else="isCorrectOk" class="img_character"><img src="../assets/images/game_fakenews/fail.svg" alt=""></div>
       <div class="correct_text">
         <div class="text">
-          <p>答對囉!!</p>
+          <p v-if="isCorrectOk">答對囉!!</p>
+          <p v-else="isCorrectOk">答錯囉!!</p>
         </div>
-        <button type="button">下一題</button>
+        <button type="button" @click="nextQs">下一題</button>
+        <button type="button" @click="showAnswer">看解答</button>
+        <button type="button" @click="showScore" v-if="questionNumber == 4">看分數</button>
       </div>
-    </div> -->
+    </div>
+    <div class="score_result">
+      <div class="score_best" v-if="isEnd">
+        <div class="score_text">
+          <div class="title">優秀的閱聽者</div>
+          <div class="score_total">
+            <div class="score_title">你的分數</div>
+            <div class="score"></div>
+          </div>
+          <div class="button_for_again"> <button type="button">再玩一次</button></div>
+        </div>
+        <div class="score_img">
+          <!-- 用v-if來做文字 -->
+          <div class="champion"><img src="../assets/images/game_fakenews/game_fakenews_champion.svg" alt=""></div>
+          <!-- <div class="text_result">錯誤題數:</div> -->
+        </div>
+      </div>
+      <!-- <div class="soce"></div>
+    <div></div>
+    <div></div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -103,6 +136,8 @@ export default {
       text_small: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       text_big: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
       isVisible: false,
+      isVisibleBlack: false,
+      isQsappear: false,   //手機黑幕跟qs出現
 
       // 左側的題庫
       questionText1: [
@@ -111,55 +146,79 @@ export default {
           ans: "2",
           // 是否有選擇，到時候判斷式要確認不能選第二個
           choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
+          answer: "解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。"
 
         },
         {
           text: "日本排放核廢水引起恐慌，食用碘鹽抗輻射可以抗輻射?",
+          ans: "2",
+          // 是否有選擇，到時候判斷式要確認不能選第二個
+          choosed: null,
+          answer: "解答:因為碘鹽中的碘元素含量遠低於需要達到防輻射效果的劑量。 且若是要達到防輻射的量，可能會過量，造成高血壓等併發症。"
+        },
+        {
+          text: "包裝飲用水也會過期? ",
           ans: "1",
           // 是否有選擇，到時候判斷式要確認不能選第二個
           choosed: null,
+        },
+        {
+          text: "植物肉組成很多元，但幾乎都是植物性蛋白，包含豌豆蛋白、大豆蛋白等 ",
+          ans: "1",
+          // 是否有選擇，到時候判斷式要確認不能選第二個
+          choosed: null,
+          answer: ""
         }
       ],
       // 右側的題庫
       questionText2: [
         {
           text: "澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?",
-          ans: "1",
+          ans: "2",
           choosed: null,
+          answer: ""
         },
         {
           text: "碘如果攝取不足，成年人的話會使甲狀腺腫大，出現疲倦、代謝下降等問題?",
           ans: "2",
           choosed: null,
+          answer: ""
+        },
+        {
+          text: "純蜂蜜放冰箱會結晶，是一種變質現象?",
+          ans: "1",
+          choosed: null,
+          answer: "解答:市售蜂蜜含水量較低，放冰箱會結晶，但這不是「變質」"
+        },
+        {
+          text: "美國新上市培育雞肉來自人體細胞?",
+          ans: "1",
+          choosed: null,
+          answer: "解答:據查證，其產品是由雞細胞培育而成，完全沒有人體細胞。"
         }
       ],
       // 關於題目整體的預設值
       questionNumber: 1,   //題號
       current_question: 0,//每動一題要加一
       score: 0,    //分數初始
-      isAnswered: false,//答案未被確認的初始值
-      showNextButton: false,   //下一題的按鈕
-      showAnswerBoardContent: false   //詳解   
+      // isAnswered: false,//答案未被確認的初始值
+      showAnswerQs: false, //解答顯現
+      isCorrect: false,   //判斷答案已答會出現吉祥物
+      isResult: false,  //  QS要出現，因為初始是動畫這個是用來代表直接出現的狀態
+      isCorrectOk: false,    //為答對的選項
+      isCorrectFail: false,    //為答錯的選項
+      isEnd: false,
 
 
 
     }
   },
-  // // 讓題目下一頁會出現
-  // computed: {
-  //   questionText1() {
-  //     return this.questionText1[this.questionNumber - 1].text;
-  //   },
-  //   questionText2() {
-  //     return this.questionText2[this.questionNumber - 1].text;
-  //   }
-
-  // },
   methods: {
     // 點選略過鈕
     skipButton(e) {
       // alert(123);
       this.isVisible = true;
+      this.isVisibleBlack = true;
     },
 
     // 造橋
@@ -167,40 +226,102 @@ export default {
       // alert(123);
       this.bridgeSizeClass = '-on';
       this.isCharacterWalking = true;
+      this.start_animation = false;
       // console.log(this.bridgeSizeClass);
       // console.log(this.character_walkClass);
-    },
-    addScore(index, ans) {
-      if (this.questionText1[this.questionNumber - 1].choosed || this.questionText2[this.questionNumber - 1] === null) {
+      // 計時讓黑幕在造橋完成然後腳色到位黑幕跟題目一起出現
+      setTimeout(() => {
+        // alert('123')
+        // this.isVisible = false;
+        this.isVisibleBlack = false;
+        this.isQsappear = true;
+      }, 5000)
 
-      }
-      // console.log(ans);
-      // console.log(this.questionText1[0].ans);
-      if (this.questionText1[this.questionNumber - 1].ans == ans || this.questionText2[this.questionNumber - 1].ans == ans) {
-        console.log(this.questionText1[this.questionNumber - 1].ans)
-        console.log(this.questionNumber - 1)
-        alert("答對囉");
-        this.questionText1[this.questionNumber - 1].ans =
-          console.log(this.questionText1[this.questionNumber - 1].ans)
-        // console.log(ans)
-        // console.log(this.questionText2[this.questionNumber - 1].ans)
+    },
+    // questionSet選左選右
+    addScore(index, ans, questionSet) {
+      if (questionSet == 1) {
+
+        // alert(typeof (ans))
+        // alert(typeof (this.questionNumber))
+        if (this.questionText1[this.questionNumber - 1].ans === ans) {
+          // console.log(this.questionNumber - 1)
+
+          // alert("答對囉");
+          // alert('123');
+          this.questionText1[this.questionNumber - 1].choosed = ans
+          this.isCorrect = true;
+          this.isCorrectOk = true;
+          this.isCharacterWalking = false;
+          this.score += 25;
+          this.isResult = false;
+
+
+        } else {
+          // alert("答錯囉");
+          // alert('123');
+          //this.questionText1[this.questionNumber -1].an
+          this.questionText1[this.questionNumber - 1].choosed = ans
+          this.isCorrect = true;
+          this.isResult = false;
+          this.isCharacterWalking = false;
+          this.isCorrectFail = true;
+        }
+
       } else {
-        alert("答錯囉");
+        if (this.questionText2[this.questionNumber - 1].ans === ans) {
+          // console.log(this.questionNumber - 1)
+          // alert("答對囉");
+          this.questionText2[this.questionNumber - 1].choosed = ans
+          this.isCorrect = true;
+          this.isCharacterWalking = false;
+          this.score += 25;
+          // 把初始設定放在答對時，再點選下一題再進行true的觸發，Qs才可以在吉祥物出現的時候消失 this.isResult = false; this.isCharacterWalking = false;
+          this.isCorrectOk = true;
+          this.isResult = false;
+          this.isCorrect = true;
+        } else {
+          // alert("答錯囉");
+          this.questionText2[this.questionNumber - 1].choosed = ans
+          this.isCorrect = true;
+          this.isResult = false;
+          this.isCharacterWalking = false;
+          this.isCorrectOk = false;
+          this.isCorrectFail = true;
+        }
       }
+      // console.log(this.questionText2[this.questionNumber - 1].ans)
+      // console.log(ans)
+      // this.choosed = ans
 
     },
-    // choose_answer(answer,value) {
-    // if (this.questionText1[this.questionNumber - 1].choosed === null) {
+    nextQs() {
+      // 題目判斷要全部迴盪flase
+      this.isCorrect = false;
+      this.isResult = true;
+      this.isCorrectOk = false;
+      this.isCorrectFail = false;
+      // 題號變成2
+      this.questionNumber += 1;
+      // 題目變成第二題
+      this.current_question += 1;
+      this.showAnswerQs = false;
 
-    // this.questionText1[this.questionNumber - 1].choosed = answer;
-    // console.log( this.questionText1[this.questionNumber - 1].choosed);
-    // } else if (this.questionText2[this.questionNumber - 1].choosed === null) {
-    // this.questionText2[this.questionNumber - 1].choosed = answer;
-    // }
 
-    // },
-
-
+    },
+    showAnswer() {
+      this.isCorrect = false;
+      this.isResult = true;
+      this.showAnswerQs = true;
+      // 這樣會出現下一題的按鈕
+      this.isCorrectFail = true;
+    },
+    showScore() {
+      this.isEnd = true;
+      this.isCorrect = false;
+      // alert('123');
+    },
+    // 螢幕手機限制橫向
     checkOrientation() {
       if (window.matchMedia("(orientation: portrait)").matches) {
         alert("請將螢幕轉向橫向以顯示內容！");
@@ -231,8 +352,8 @@ export default {
     //   y: 50,
     //   ease: "power1.out"
     // });
-
   }
+
 }
 
 </script>
