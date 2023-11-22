@@ -1,5 +1,6 @@
 <template>
     <frontnav></frontnav>
+
     <frontfooter></frontfooter>
 </template>
 

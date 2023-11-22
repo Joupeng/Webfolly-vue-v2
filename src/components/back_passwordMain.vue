@@ -12,8 +12,8 @@
         <div class="title">重設密碼</div>
         <div class="content">
           <div class="input">
-            <label class="container" @click="byPhone">
-              <input class="input" type="radio" name="way" value="phone">
+            <label class="container">
+              <input class="input" type="radio" name="way" value="phone" @click="byPhone">
               <span class="checkmark"></span>
               <span class="span">透過簡訊傳送新密碼</span>
             </label>
@@ -21,8 +21,8 @@
           <div class="input span local">09******65</div>
 
           <div class="input">
-            <label class="container" @click="byMail">
-              <input class="input" type="radio" name="way" value="mail">
+            <label class="container">
+              <input class="input" type="radio" name="way" value="mail" @click="byMail">
               <span class="checkmark"></span>
               <span class="span">透過電子信箱傳送新密碼</span>
             </label>
@@ -39,8 +39,6 @@
 export default {
   data() {
     return {
-      // byPhone: '已寄送至您的手機',
-      // byMail: '已寄送至您的信箱',
 
     }
   },
@@ -52,11 +50,18 @@ export default {
     // 寄送簡訊
     // label標籤會alert 2次
     byPhone() {
-      alert(`已寄送至您的手機`);
+      setTimeout(() => {
+        alert(`已寄送至您的手機`);
+      }, 100)
+
     },
     // 寄送mail
     byMail() {
-      alert('已寄送至您的信箱');
+      setTimeout(() => {
+        alert('已寄送至您的信箱');
+      }, 100)
+
+
     },
 
 
@@ -64,3 +69,4 @@ export default {
 }
 
 </script>
+

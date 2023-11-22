@@ -11,8 +11,9 @@
         <!-- 輸入驗證碼 -->
         <div class="validation">
           <input class=" unified_input input" type="text" placeholder="請輸入驗證碼(不分大小寫)" v-model="validcode">
-          <div class="validcode"> 驗證碼套件還沒放</div>
-          <!-- 驗證碼參考 https://codepen.io/ayugioh2003/pen/VwKozNo?editors=1011 -->
+
+          <div class="validcode" id="validcode">{{ codeGenerator() }} </div>
+
         </div><br>
         <!-- 輸入驗證碼 -->
         <input class="btn" type="submit" value="登入"><br>
@@ -22,29 +23,28 @@
     </div>
   </backlogin>
 </template>
-
-
 <script>
-
 export default {
   data() {
     return {
-      userName: '',
-      password: '',
-      validcode: '',
+      userName: "",
+      password: "",
+      validCode: "",
+
     }
   },
   methods: {
 
     handleLogin() {
       // 判斷名稱或密碼
+
       if (this.userName.trim() != '' && this.password.trim() != '' && this.validcode.trim() != '') {
         this.$router.push('/back_account');
       }
       if (this.userName.trim() === '') {
         alert('請輸入使用者名稱');
       } else {
-        alert(this.userName);
+        alert('請輸入正確的使用者名稱')
       }
       if (this.password.trim() === '') {
         alert('請輸入密碼');
@@ -53,15 +53,39 @@ export default {
       }
       if (this.validcode.trim() === '') {
         alert('請輸入驗證碼');
+      } else if (this.validcode.trim().toUpperCase() === codeGenerator().value
+      ) {
+        alert('驗證碼正確');
       } else {
-        alert(this.validcode);
+        alert('驗證碼錯誤');
       }
     },
     forgotPassword() {
       // 導向page back_password
       this.$router.push('/back_password');
+    },
+
+
+    codeGenerator() {
+      // 改成英文字母
+      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      let validCode = "";
+      for (let i = 1; i <= 4; i++) {
+
+        let randomIndex = Math.floor(Math.random() * letters.length);
+        validCode += letters.charAt(randomIndex);
+      }
+      return validCode
+
     }
+
+
+  },
+  mounted() {
+    this.codeGenerator()
+
   }
+
 }
 </script>
 

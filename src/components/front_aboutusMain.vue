@@ -4,7 +4,12 @@
   <div class="front_aboutusMain">
     <!-- banner -->
     <div class="banner">
-      <img class="img" src="../assets/images/aboutus/aboutus_banner.svg" alt="aboutus_banner">
+      <img class="img" src="@/assets/images/aboutus/aboutus_banner.svg" alt="aboutus_banner">
+      <div class="divLeft"><img src="@/assets/images/aboutus/aboutus_blue.svg" alt="aboutus_blue"
+          :class="{ '-disappear': isDisappeared }" @click="disappear">
+      </div>
+      <div class="divRight"><img src="@/assets/images/aboutus/aboutus_happy.svg" alt="aboutus_happy"
+          :class="{ '-appear': !isDisappeared }" @click="disappear"></div>
     </div>
     <!-- description -->
     <div class="description">
@@ -41,7 +46,7 @@
           <div class="leftBox">
             <div class="person">
               <div class="name colorOne">范芯瑜
-                <img class="img  colorOne" src="../assets/images/aboutus/aboutus_mascot1.svg" alt="mascot1">
+                <img class="img  colorOne" src="@/assets/images/aboutus/aboutus_mascot1.svg" alt="mascot1">
 
               </div>
               <div class="motto">想要每天都能好好吃飯!</div>
@@ -50,7 +55,6 @@
               擔任團體專題副組長<br>
               管理員帳號管理：功能規劃、介面設計<br>
               測驗管理：功能規劃、介面設計、前端開發<br>
-              媒體識讀管理：功能規劃、介面設計、前端開發<br>
               捐款管理：功能規劃、介面設計、前端開發<br>
               後端：資料庫建置、撰寫API、資料串接與測試<br>
 
@@ -64,7 +68,7 @@
               <div class="item">後台規劃</div>
 
             </div>
-            <div class="memberImg"><img src="" alt=""> member.img</div>
+            <div class="memberImg"><img src="../assets/images/aboutus/member1.png" alt="member1"></div>
           </div>
 
         </div>
@@ -73,7 +77,7 @@
           <div class="leftBox">
             <div class="person">
               <div class="name colorTwo">彭柔芝
-                <img class="img" src="../assets/images/aboutus/aboutus_mascot2.svg" alt="mascot2">
+                <img class="img" src="@/assets/images/aboutus/aboutus_mascot2.svg" alt="mascot2">
 
               </div>
               <div class="motto">專注於前方！</div>
@@ -94,7 +98,7 @@
               <div class="item">介面設計</div>
 
             </div>
-            <div class="memberImg "><img class="img" src="../assets/images/aboutus/member2.png" alt="member2"></div>
+            <div class="memberImg "><img class="img" src="@/assets/images/aboutus/member2.png" alt="member2"></div>
           </div>
 
         </div>
@@ -102,7 +106,7 @@
           <div class="leftBox">
             <div class="person">
               <div class="name colorthree">謝佳真
-                <img class="img" src="../assets/images/aboutus/aboutus_mascot3.svg" alt="mascot3">
+                <img class="img" src="@/assets/images/aboutus/aboutus_mascot3.svg" alt="mascot3">
 
               </div>
               <div class="motto">Honest, Passion, Learning, Creative.</div>
@@ -124,7 +128,7 @@
               <div class="item">後台規劃</div>
 
             </div>
-            <div class="memberImg"><img class="img" src="../assets/images/aboutus/member3.png" alt="member3"></div>
+            <div class="memberImg"><img class="img" src="@/assets/images/aboutus/member3.png" alt="member3"></div>
           </div>
 
         </div>
@@ -132,7 +136,7 @@
           <div class="leftBox">
             <div class="person">
               <div class="name colorFour">郭泓鈞
-                <img class="img" src="../assets/images/aboutus/aboutus_mascot4.svg" alt="mascot4">
+                <img class="img" src="@/assets/images/aboutus/aboutus_mascot4.svg" alt="mascot4">
 
               </div>
               <div class="motto">To be or not to be. That is a question.</div>
@@ -153,7 +157,7 @@
               <div class="item">後台規劃</div>
 
             </div>
-            <div class="memberImg"><img src="" alt=""> member.img</div>
+            <div class="memberImg"><img src="../assets/images/aboutus//member4.jpg" alt="member4"></div>
           </div>
 
         </div>
@@ -168,3 +172,19 @@
 
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isDisappeared: false,
+    }
+  },
+  methods: {
+    disappear() {
+      this.isDisappeared = !this.isDisappeared;
+    },
+  }
+
+}
+</script>

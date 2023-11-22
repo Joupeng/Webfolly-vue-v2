@@ -15,79 +15,80 @@
     <!-- main -->
     <div class="body">
       <!-- 左邊的資料區 -->
-      <div class="section Left">
-        <form class="leftForm" action="">
-          <label class="label" for="userID">使用者編號</label>
-          <input class="unified_input" type="text" name="userID" value="99165140" disabled><br>
-          <label class="label" for="userName">使用者名稱</label>
-          <input class="unified_input" type="text" name="userName" value="孫武" disabled><br>
-          <label class="label" for="account">使用者權限</label>
-          <input class="unified_input" type="text" name="account" value="管理員" disabled><br>
-          <label class="label" for="mail">電子信箱</label>
-          <input class="unified_input" type="text" name="mail" value="banks7764@gmail.com" disabled><br>
-          <label class="label" for="phone">電話</label>
-          <input class="unified_input" type="text" name="phone" value="0927663751" disabled><br>
+      <div class=" Left">
 
-          <div class="password">
-            <label class="label" id="changePassword_btn" for="changePassword">更改密碼
-              <svg class="icon" id="changePassword_btn" name="changePassword" xmlns="http://www.w3.org/2000/svg"
-                height="1em" viewBox="0 0 512 512">
-                <path
-                  d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
-              </svg>
+        <label class="label grid11" for="userID">使用者編號</label>
+        <input class="unified_input grid12" type="text" name="userID" value="99165140" disabled>
 
-            </label>
-            <input class="unified_input" type="password" name="" placeholder="請輸入舊密碼"><br>
-            <label class="label hidden" for="phone">輸入新密碼</label>
-            <input class="unified_input" type="NewPassword" name="" value="" placeholder="請輸入新密碼"><br>
-            <label class="label hidden" for="phone">確認新密碼</label>
-            <input class="unified_input" type="ConfirmNewPassword" name="" value="" placeholder="請確認新密碼"><br>
-          </div>
-        </form>
 
-        <div class="submitBox">
-          <div class="forgetPWD">
-            <RouterLink class="link" to="back_password"> 忘記密碼</RouterLink>
-          </div>
+
+        <label class="label grid21" for="userName">使用者名稱</label>
+        <input class="unified_input grid22" type="text" name="userName" value="孫武" disabled>
+
+
+        <label class="label grid31" for="account">使用者權限</label>
+        <input class="unified_input grid32" type="text" name="account" value="管理員" disabled>
+
+
+        <label class="label grid41" for="mail">電子信箱</label>
+        <input class="unified_input grid42" type="text" name="mail" value="banks7764@gmail.com" disabled>
+
+
+        <label class="label grid51" for="phone">電話</label>
+        <input class="unified_input grid52" type="text" name="phone" value="0927663751" disabled>
+
+
+        <label class="label grid61" id="changePassword_btn" for="changePassword">更改密碼
+          <svg class="icon" id="changePassword_btn" name="changePassword" xmlns="http://www.w3.org/2000/svg" height="1em"
+            viewBox="0 0 512 512">
+            <path
+              d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+          </svg>
+        </label>
+        <input class="unified_input grid62" type="password" name="" placeholder="請輸入舊密碼">
+        <input class="unified_input grid72" type="NewPassword" name="" value="" placeholder="請輸入新密碼">
+        <input class="unified_input grid82" type="ConfirmNewPassword" name="" value="" placeholder="請確認新密碼">
+
+        <div class="forgetPWD  grid91">
+          <RouterLink class="link" to="back_password"> 忘記密碼</RouterLink>
+        </div>
+        <div class="submitBox grid92">
           <button class="btn" type="button" value="">儲存變更</button>
         </div>
       </div>
 
-      <!-- 目前狀態 : 套版跑版 -->
-      <!-- <div class="section"> -->
-      <div class="wrap">
-        <!-- <table class="table2"> -->
+      <div class="wrap right">
         <table class="table">
           <thead class="thead">
             <tr class="tr">
-              <th class="td w100">使用者編號</th>
-              <th class="td w100">使用者名稱</th>
-              <th class="td w100">使用者權限</th>
-              <th class="td w200">電子信箱</th>
-              <th class="td w100">電話</th>
+              <th class="th w100">使用者編號</th>
+              <th class="th w100">使用者名稱</th>
+              <th class="th w100">使用者權限</th>
+              <th class="th w200">電子信箱</th>
+              <th class="th w100">電話</th>
             </tr>
           </thead>
           <tbody class="tbody">
             <tr class="tr">
-              <td class="td">99165140</td>
-              <td class="td">孫武</td>
-              <td class="td">管理員</td>
-              <td class="td">banks7764@gmail.com</td>
-              <td class="td">0927663751</td>
+              <td class="td w100">99165140</td>
+              <td class="td w100">孫武</td>
+              <td class="td w100">管理員</td>
+              <td class="td w200">banks7764@gmail.com</td>
+              <td class="td w100">0927663751</td>
             </tr>
             <tr class="tr">
-              <td class="td">99165141</td>
-              <td class="td">孫權</td>
-              <td class="td">編輯</td>
-              <td class="td">banks7749@gmail.com</td>
-              <td class="td">0927421761</td>
+              <td class="td w100">99165141</td>
+              <td class="td w100">孫權</td>
+              <td class="td w100">編輯</td>
+              <td class="td w200">banks7749@gmail.com</td>
+              <td class="td w100">0927421761</td>
             </tr>
             <tr class="tr">
-              <td class="td">99165142</td>
-              <td class="td">孫尚香</td>
-              <td class="td">編輯</td>
-              <td class="td">banks7777@gmail.com</td>
-              <td class="td">0925363755</td>
+              <td class="td w100">99165142</td>
+              <td class="td w100">孫尚香</td>
+              <td class="td w100">編輯</td>
+              <td class="td w200">banks7777@gmail.com</td>
+              <td class="td w100">0925363755</td>
             </tr>
 
           </tbody>
@@ -97,13 +98,11 @@
           <button class="btn">儲存變更</button>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
 
 export default {
   data() {
