@@ -12,12 +12,8 @@
 @import "components/front_donate_subfooter";
 @import "components/front_donate_flow";
 @import "components/front_aboutusMain";
-@import "components/warning";
-@import "components/category";
 @import "components/modalheader.scss";
-@import "components/content.scss";
-@import "components/front_donate_success.scss";
-@import "components/front_donate_fail.scss";
+
 
 
 // layout
@@ -25,7 +21,10 @@
 @import "layout/footer"; //前後台共用
 @import "layout/backheader";
 @import "layout/backaside";
-
+@import "layout/modal_warning.scss";
+@import "layout/modal_category.scss";
+@import "layout/modal_content.scss";
+@import "layout/modal_quiz.scss";
 
 // pages 前台
 @import "pages/home.scss";

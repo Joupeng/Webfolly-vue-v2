@@ -19,9 +19,11 @@
 
 
   </div>
-  <warning></warning>
-  <category></category>
+  <modal_warning></modal_warning>
+  <!-- <category></category>
   <content></content>
+  <quiz></quiz> -->
+
 
 
 
@@ -35,9 +37,10 @@ import backaside from '@/components/back_aside.vue'
 import mediaNetwork from '@/components/back_mediaNetwork.vue'
 import mediaClass from '@/components/back_mediaClass.vue'
 import fackNews from '@/components/back_fackNews.vue'
-import warning from '@/components/modal/warning.vue'
-import category from '@/components/modal/category.vue'
-import content from '@/components/modal/content.vue'
+import modal_warning from '@/components/modal/modal_warning.vue'
+// import modal_category from '@/components/modal/modal_category.vue'
+// import modal_content from '@/components/modal/modal_content.vue'
+// import modal_quiz from '@/components/modal/modal_quiz.vue'
 
 export default {
   components: {
@@ -46,9 +49,10 @@ export default {
     mediaNetwork,
     mediaClass,
     fackNews,
-    warning,
-    category,
-    content,
+    modal_warning,
+    // modal_category,
+    // modal_content,
+    // modal_quiz,
   },
 
 

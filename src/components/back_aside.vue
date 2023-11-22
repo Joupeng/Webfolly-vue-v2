@@ -1,7 +1,7 @@
 <template>
   <aside class="backAside">
     <div>
-      <router-link to="/back_medialiteracy" class="mediaNetwork">媒體識讀 - 外網連結</router-link>
+      <router-link to="/back_medialiteracy" class="mediaNetwork" v-on:click="showmediaNetwork">媒體識讀 - 外網連結</router-link>
       <router-link to="/back_medialiteracy" class="mediaClass">媒體識讀 - 相關課程</router-link>
       <router-link to="/back_medialiteracy">假訊息追擊 - 題庫</router-link>
       <div class="backAccordion">
