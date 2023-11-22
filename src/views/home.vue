@@ -5,7 +5,7 @@
 
         <!-- banner -->
         <section class="banner">
-            <p>互動</p>
+            <img src="/src/assets/images/home/home_Banner.png" alt="">
         </section>
 
 

@@ -4,7 +4,7 @@
 
         <!-- banner -->
         <section class="banner">
-            <!-- <p>互動</p> -->
+            <img src="/src/assets/images/fakenews/fakenews_banner.png" alt="">
         </section>
 
 

@@ -3,14 +3,19 @@
 
   <section class="donate">
     <!-- banner -->
-    <div class="ImgSection">
+    <!-- <div class="ImgSection">
       <div class="p_block">
         <p class="partone">小額捐款</p>
         <p class="parttwo">一起改善閱聽環境</p>
       </div>
-    </div>
+    </div> -->
     <!-- banner -->
 
+    <!-- bannerNew -->
+    <div class="banner">
+      <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
+    </div>
+    <!-- bannerNew -->
 
     <div class="TextSection">
 
