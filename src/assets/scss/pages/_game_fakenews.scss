@@ -1,9 +1,10 @@
 @import "../base/color";
 @import "../base/font";
 
+// z-index是要跟同一層進行比較，每一層外層要看得到
 
 // index
-// 電腦版關主(99) +分數 => 文字含按鈕電腦版(77) => 電腦版黑幕(55) => 手機板關主+文字(44) => 手機黑幕(30) => 柱子(15) => 角色(10) => 橋(5) => 背景(1)
+// 答題訊息(100)=> 電腦版關主(99) +分數 => 文字含按鈕電腦版(77) => 電腦版黑幕(55) => 手機板關主+文字(44) => 手機黑幕(30) => 柱子(15) => 角色(10) => 橋(5) => 背景(1)
 
 .game_fakenews {
   margin: 0;
@@ -15,6 +16,7 @@
   width: 100%;
   height: 100vh;
   // min-height: 450px;
+  // border: 1px solid red;
 
 
   @media screen and (orientation: portrait) {
@@ -34,7 +36,8 @@
     @media(max-width: 767px) {
       // display: none;
       transform: scaleY(0);
-      opacity: 0;
+      // opacity: 0;
+      display: none;
 
     }
 
@@ -44,13 +47,6 @@
       // opacity: 0;
     }
 
-    //     &.-qs_hidden {
-    //   animation-name: fade;
-    //   animation-duration: 3s;
-    //   animation-delay: 7s;
-    //   animation-timing-function: ease-in;
-    //   animation-fill-mode: forwards;
-    // }
 
 
   }
@@ -88,6 +84,12 @@
     //   animation-timing-function: ease-in;
     //   animation-fill-mode: forwards;
     // }
+
+    &.-on {
+      // display: none;
+      // transform: scaleY(0);
+      opacity: 1;
+    }
 
   }
 
@@ -229,6 +231,7 @@
       &.-on {
         transform: rotate(0deg);
       }
+
 
     }
 
@@ -441,20 +444,26 @@
     opacity: 0;
     position: relative;
     z-index: 99;
+    // 禁止點選
     pointer-events: none;
     transition: opacity 0.3s ease;
     /* 平滑過渡 */
+    border: 1px solid green;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 
     .container_qs {
       display: flex;
       // display: none;
       gap: 60px;
       // border: 1px solid red;
-      position: fixed;
+      // position: fixed;
 
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
 
       // opacity: 0;
       @media(max-width:767px) {
@@ -475,8 +484,8 @@
         grid-template-rows: 1fr 5fr 1fr;
 
         &:hover {
-          width: 330px;
-          height: 372px;
+          // width: 330px;
+          // height: 372px;
           border: 7px solid $primary-y;
 
         }
@@ -486,21 +495,21 @@
           height: 320px;
 
           &:hover {
-            width: 315px;
-            height: 355px;
+            // width: 315px;
+            // height: 355px;
             border: 7px solid $primary-y;
 
           }
         }
 
         @media(min-width:768px) and (max-width:992px) {
-          width: 252px;
-          height: 284px;
+          // width: 252px;
+          // height: 284px;
           font-size: 14px;
 
           &:hover {
-            width: 284px;
-            height: 320px;
+            // width: 284px;
+            // height: 320px;
             border: 7px solid $primary-y;
 
           }
@@ -513,8 +522,8 @@
           font-size: 14px;
 
           &:hover {
-            width: 265px;
-            height: 298px;
+            // width: 265px;
+            // height: 298px;
             border: 7px solid $primary-y;
 
           }
@@ -537,11 +546,22 @@
 
       .ans_qs {
         margin: 0;
+        display: none;
+
+        &.-on {
+          display: block;
+        }
       }
 
+      // 答題確認的按鈕
       button {
         // border: 1px solid green;
         margin: 0 auto;
+
+        &.-fail {
+          display: none;
+        }
+
 
         &:hover {
           color: black;
@@ -571,6 +591,12 @@
         opacity: 1;
       }
     }
+
+    &.-result_correct {
+      // display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
   .correct_box {
@@ -580,14 +606,19 @@
     z-index: 100;
     top: 50%;
     left: 50%;
-    border: 1px solid red;
+    // border: 1px solid red;
 
     transform: translate(-50%, -50%);
     display: flex;
     gap: 30px;
+    display: none;
+
+    &.appear {
+      display: flex;
+    }
 
     .correct_text {
-      border: 1px solid blue;
+      // border: 1px solid blue;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -596,6 +627,18 @@
         text-align: center;
         color: $primary-y;
         font-size: 24px;
+
+      }
+
+      // 吉祥物的button
+      button {
+        margin: 5px;
+
+        &:hover {
+          background-color: $primary-y;
+          color: #000;
+
+        }
       }
     }
 
@@ -605,6 +648,23 @@
         width: 100%;
       }
 
+
+    }
+  }
+
+
+
+  .score_result {
+    border: 1px solid red;
+    position: absolute;
+    z-index: 110;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    .score_best {
+      display: flex;
     }
   }
 

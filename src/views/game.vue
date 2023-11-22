@@ -25,8 +25,8 @@
                 <li>當玩家選擇錯誤時，橋會從中間斷裂，共有三次機會，題目共四題。</li>
               </ol>
             </div>
-            <div class="enter_game"><router-link :to="{ name: 'game_fakenews' }" @click="closeNav"><span
-                  :class="{ 'frontheader_menu-on': $route.name == 'game_fakenews' }">進入遊戲</span></router-link></div>
+            <router-link :to="{ name: 'game_fakenews' }" @click="closeNav"><span
+                :class="{ 'frontheader_menu-on': $route.name == 'game_fakenews' }">進入遊戲</span></router-link>
           </div>
         </div>
       </div>
