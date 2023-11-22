@@ -20,11 +20,15 @@
       input {
         margin: 20px 30px;
         height: 43px;
+
       }
 
 
       .inputcategory {
         width: 730px;
+        border: 2px solid $primary-b;
+        border-radius: 32px;
+        padding: 0 16px;
       }
 
       .inputsave {
@@ -40,6 +44,10 @@
         }
       }
 
+    }
+
+    .wrap {
+      padding: 30px;
     }
   }
 

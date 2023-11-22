@@ -20,8 +20,10 @@
 
   </div>
   <warning></warning>
-  <category></category>
+  <!-- <category></category>
   <content></content>
+  <quiz></quiz> -->
+
 
 
 
@@ -36,8 +38,9 @@ import mediaNetwork from '@/components/back_mediaNetwork.vue'
 import mediaClass from '@/components/back_mediaClass.vue'
 import fackNews from '@/components/back_fackNews.vue'
 import warning from '@/components/modal/warning.vue'
-import category from '@/components/modal/category.vue'
-import content from '@/components/modal/content.vue'
+// import category from '@/components/modal/category.vue'
+// import content from '@/components/modal/content.vue'
+// import quiz from '@/components/modal/quiz.vue'
 
 export default {
   components: {
@@ -47,8 +50,9 @@ export default {
     mediaClass,
     fackNews,
     warning,
-    category,
-    content,
+    // category,
+    // content,
+    // quiz,
   },
 
 
