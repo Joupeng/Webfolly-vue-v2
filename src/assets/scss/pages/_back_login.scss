@@ -68,11 +68,17 @@
 
         .validcode {
           // 驗證碼
-          border: 3px solid $red;
+          background-color: $gray-500;
           margin-left: 10px;
           width: 180px;
           height: 54px;
           font-size: $font-M-16;
+          // 密碼置中
+          line-height: 54px;
+          font-size: $title-24;
+          font-weight: bold;
+          text-decoration: line-through;
+          text-decoration-thickness: 2px;
         }
       }
 
@@ -83,6 +89,7 @@
         font-size: $font-M-16 ;
         justify-content: center;
         height: 52px;
+
 
         &:hover {
           color: $black;
