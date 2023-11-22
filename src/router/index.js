@@ -124,6 +124,12 @@ const routes = [
         component: () => import('../views/back_donate.vue')
     },
     {
+        // 後台 捐款管理_捐款者資訊頁面
+        path: '/back_donate_basicinformation_02',
+        name: 'back_donate_basicinformation_02',
+        component: () => import('../views/back_donate_basicinformation_02.vue')
+    },
+    {
         // 後台 測驗管理(假訊息追擊題庫)
         path: '/back_game',
         name: 'back_game',

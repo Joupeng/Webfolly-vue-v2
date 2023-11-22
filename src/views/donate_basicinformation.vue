@@ -2,6 +2,15 @@
     <frontnav></frontnav>
     <section class="donate_basicinformation">
 
+        <!-- banner -->
+        <div class="ImgSection">
+            <div class="p_block">
+                <p class="partone">小額捐款</p>
+                <p class="parttwo">一起改善閱聽環境</p>
+            </div>
+        </div>
+        <!-- banner -->
+
         <front_donate_flow></front_donate_flow>
 
         <div class="main_block">
@@ -151,7 +160,7 @@
 
         <!-- 查詢捐款按鈕 -->
         <div class="donate_btn_outer">
-            <router-link :to="{ name: 'donate_basicinformation' }" class="donate_btn"><span
+            <router-link :to="{ name: 'back_donate_basicinformation_02' }" class="donate_btn"><span
                     :class="{ 'frontheader_menu-on': $route.name == 'donate' }">確認送出</span>
             </router-link>
         </div>

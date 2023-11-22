@@ -2,12 +2,65 @@
 @import"../base/_color";
 
 .donate_basicinformation {
+
+  // --------banner
+  .ImgSection {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 450px;
+    background-image: url(/src/assets/images/donate/donate_BG.png);
+    background-position: 0px, 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-self: center;
+
+    @media(max-width:1440px) {
+      background-position: 0, 0;
+    }
+
+
+    .p_block {
+      // border: 1px solid green;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      margin-left: 200px;
+
+      @media(max-width:620px) {
+        margin-left: 0px;
+      }
+
+      p {
+        width: 100%;
+        // border: 1px solid red;
+        color: white;
+        font-size: 32px;
+      }
+
+      p:last-child {
+        margin-left: 50px;
+
+        @media(max-width:620px) {
+          margin-left: 0px;
+        }
+      }
+
+    }
+
+  }
+
+
   .front_donate_flow {
     margin: 40px auto;
   }
 
+
   .main_block {
-    border: 1px solid green;
+    // border: 1px solid green;
     margin: 0 40px 0 40px;
     display: flex;
     justify-content: center;
@@ -28,7 +81,7 @@
       display: flex;
       flex: 1;
       flex-direction: column;
-      border: 1px solid rgb(196, 3, 115);
+      // border: 1px solid rgb(196, 3, 115);
       width: 100%;
       height: auto;
       background-color: $secondary-y2 ;
@@ -46,12 +99,15 @@
         vertical-align: baseline;
         border-bottom: 4px solid $primary-y;
         text-align: center;
+        font-size: 24px;
+        font-weight: bolder;
+
       }
 
       div {
         display: flex;
         flex-direction: column;
-        border: 1px solid violet;
+        // border: 1px solid violet;
         margin: 0 30px 20px 30px;
 
         p {
@@ -71,14 +127,14 @@
       .gender-options {
         p {
           display: flex;
-          border: 1px solid red;
+          // border: 1px solid red;
           margin: 0 0 6px 0;
         }
 
         .gender-inner {
           display: block;
           width: 100%;
-          border: 1px solid green;
+          // border: 1px solid green;
           margin: 0;
 
           label {
@@ -98,7 +154,7 @@
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        border: 1px solid blue;
+        // border: 1px solid blue;
         margin: 10px 0;
 
         @media(max-width:374px) {
@@ -154,7 +210,7 @@
   // 確認送出按鈕
   .donate_btn_outer {
     display: flex;
-    border: 1px solid red;
+    // border: 1px solid red;
     justify-content: center;
     margin: 40px 0 40px 0;
 

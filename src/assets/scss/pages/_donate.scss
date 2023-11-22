@@ -25,7 +25,7 @@
 
 
         .p_block {
-            border: 1px solid green;
+            // border: 1px solid green;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -38,13 +38,17 @@
 
             p {
                 width: 100%;
-                border: 1px solid red;
+                // border: 1px solid red;
                 color: white;
                 font-size: 32px;
             }
 
             p:last-child {
                 margin-left: 50px;
+
+                @media(max-width:620px) {
+                    margin-left: 0px;
+                }
             }
 
         }
@@ -53,7 +57,7 @@
 
     //文案區塊---------------------------------------------
     .TextSection {
-        border: 1px solid red;
+        // border: 1px solid red;
         margin: 100px 80px;
         display: flex;
 
@@ -86,7 +90,7 @@
             }
 
             div.WebsiteText {
-                border: 1px solid rgb(21, 104, 248);
+                // border: 1px solid rgb(21, 104, 248);
                 display: flex;
                 width: 100%;
                 // min-width: 460px;
@@ -141,7 +145,7 @@
                 display: flex;
                 flex: 1;
                 flex-direction: column;
-                border: 1px solid rgb(196, 3, 115);
+                // border: 1px solid rgb(196, 3, 115);
                 width: 100%;
                 height: auto;
                 background-color: $secondary-y2 ;
@@ -162,10 +166,10 @@
 
                 // 捐款四部揍
                 div.DonationSteps {
-                    border: 1px solid rgb(1, 254, 26);
+                    // border: 1px solid rgb(1, 254, 26);
                     display: flex;
                     justify-content: center;
-                    margin: 0px 0 40px 0;
+                    margin: 0px 20px 40px 0px;
                     width: 100%;
 
 
@@ -174,7 +178,7 @@
                     }
 
                     div.item {
-                        border: 1px solid rgb(24, 100, 5);
+                        // border: 1px solid rgb(24, 100, 5);
                         display: flex;
                         flex-direction: column;
 
@@ -233,12 +237,12 @@
 
                 // 捐款類別
                 div.DonationCategory {
-                    border: 2px solid #F3CA1E;
+                    // border: 2px solid #F3CA1E;
                     display: flex;
                     margin: 0px 40px 40px 40px;
 
                     h3 {
-                        border: 1px solid blueviolet;
+                        // border: 1px solid blueviolet;
                         font-size: $font-L-20;
                         margin: auto 0px;
                         margin-right: 32px;
@@ -248,7 +252,7 @@
                     .custom-checkbox {
                         font-size: 20px;
                         display: flex;
-                        border: 1px solid red;
+                        // border: 1px solid red;
                         width: auto;
 
                         .checkbox_img {
@@ -274,7 +278,7 @@
 
                 // 捐款金額
                 div.DonationAmount {
-                    border: 1px solid red;
+                    // border: 1px solid red;
                     display: flex;
                     margin: 0px 40px 40px 40px;
 
@@ -287,7 +291,7 @@
 
                     h3 {
                         display: flex;
-                        border: 1px solid blueviolet;
+                        // border: 1px solid blueviolet;
                         font-size: $font-L-20;
                         margin: auto 32px auto 0px;
                         min-width: 82px;
@@ -305,7 +309,7 @@
 
                     #app {
                         display: flex;
-                        border: 1px solid blue;
+                        // border: 1px solid blue;
                         gap: 20px;
 
                         @media(max-width:550px) {
@@ -346,7 +350,7 @@
                 // 確認送出按鈕
                 .donate_btn_outer {
                     display: flex;
-                    border: 1px solid red;
+                    // border: 1px solid red;
                     justify-content: center;
                     margin: 0 0 40px 0;
 
@@ -401,19 +405,19 @@
 
     hr {
         width: 100%;
-        border: 1px solid rgb(0, 0, 0);
+        // border: 1px solid rgb(0, 0, 0);
         margin-top: 84px;
     }
 
     div.linkBlock {
-        border: 1px solid rgb(51, 237, 34);
+        // border: 1px solid rgb(51, 237, 34);
         display: flex;
         margin: 50px 136px;
         justify-content: center;
 
 
         div.PageLink {
-            border: 1px solid rgb(77, 15, 222);
+            // border: 1px solid rgb(77, 15, 222);
             display: inline;
             margin-right: 124px;
 
@@ -435,7 +439,7 @@
             }
 
             ul {
-                border: 1px solid rgb(216, 7, 167);
+                // border: 1px solid rgb(216, 7, 167);
                 margin: 0px;
                 padding-left: 16px;
 
