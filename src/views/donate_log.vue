@@ -54,28 +54,7 @@
                     </select>
 
 
-                    <!-- bootstap寫法 -->
-                    <!-- <div class="btn-group">
-                        <button type="button" class="btn btn-danger">月</button>
-                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">一月</a></li>
-                            <li><a class="dropdown-item" href="#">二月</a></li>
-                            <li><a class="dropdown-item" href="#">三月</a></li>
-                            <li><a class="dropdown-item" href="#">四月</a></li>
-                            <li><a class="dropdown-item" href="#">五月</a></li>
-                            <li><a class="dropdown-item" href="#">六月</a></li>
-                            <li><a class="dropdown-item" href="#">七月</a></li>
-                            <li><a class="dropdown-item" href="#">八月</a></li>
-                            <li><a class="dropdown-item" href="#">九月</a></li>
-                            <li><a class="dropdown-item" href="#">十月</a></li>
-                            <li><a class="dropdown-item" href="#">十一月</a></li>
-                            <li><a class="dropdown-item" href="#">十二月</a></li>
-                        </ul>
-                    </div> -->
+
                 </div>
 
                 <div class="verification_code_block">
@@ -100,14 +79,14 @@
         </div>
 
 
-
     </section>
 
-
+    <front_donate_subfooter></front_donate_subfooter>
     <frontfooter></frontfooter>
 </template>
 
 <script>
+import front_donate_subfooter from '@/components/front_donate_subfooter.vue'
 import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 
@@ -115,6 +94,7 @@ export default {
     components: {
         frontnav,
         frontfooter,
+        front_donate_subfooter
     }
 }
 </script>
