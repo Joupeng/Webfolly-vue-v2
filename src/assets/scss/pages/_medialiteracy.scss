@@ -28,10 +28,10 @@
   // --------------標題文字區-----------------
   .titleBlock {
     border: none;
-    margin: 0px 200px 0px 200px;
+    margin: 100px 200px 0px 200px;
 
     @include t() {
-      margin: 0px 100px 0px 100px;
+      margin: 100px 100px 0px 100px;
     }
 
     .titleBlockA {
@@ -40,7 +40,7 @@
       .titleText {
         font-size: $title-24;
         text-align: center;
-        margin: 0;
+        margin: 0 0 20px 0;
       }
 
       .contentText {

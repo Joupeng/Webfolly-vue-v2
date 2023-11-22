@@ -49,29 +49,30 @@
 
 
   // --------------banner-----------------
-  .banner {
-    height: 100vh;
-    background-color: #FEFCF0;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    background-image: url(/src/assets/images/fakenews/fakenews_banner.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  // .banner {
+  //   height: 100vh;
+  //   background-color: #FEFCF0;
+  //   display: flex;
+  //   justify-content: center;
+  //   margin: 0;
+  //   background-image: url(/src/assets/images/fakenews/fakenews_banner.png);
+  //   background-size: cover;
+  //   background-position: center;
+  //   background-repeat: no-repeat;
 
-    p {
-      margin: auto 0;
-      font-size: $title-24;
-    }
-
-  }
-
-  // .outerBlock {
-  //   margin: 0 0 260px 0;
-  //   border: 1px solid green;
+  //   p {
+  //     margin: auto 0;
+  //     font-size: $title-24;
+  //   }
 
   // }
+  .banner {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
 
 
   // --------------標題文字區-----------------
@@ -522,7 +523,7 @@
       background-color: #FEFCF0;
 
       @media (max-width:768px) {
-        width: 100%;
+        width: 85%;
 
       }
 
@@ -535,6 +536,7 @@
           border-radius: 28px 28px 0 0;
 
           background-size: cover;
+          background-position: center;
           background-repeat: no-repeat;
 
         }
@@ -966,11 +968,23 @@
     left: -450px;
     bottom: 0px;
 
+    @media (max-width:1100px) {
+      left: -375px;
+
+      margin: -100px 0px 0px 00px;
+      width: 850px;
+    }
+
     @media (max-width:900px) {
       left: -300px;
 
       margin: -50px 0px 0px 00px;
       width: 800px;
+    }
+
+    @media (max-width:800px) {
+      left: -225px;
+      margin: -50px 0px 0px 00px;
     }
 
     @media (max-width:600px) {

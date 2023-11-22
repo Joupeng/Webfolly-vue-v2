@@ -2,13 +2,19 @@
   <frontnav></frontnav>
   <section class="back_donate_basicinformation">
     <!-- banner -->
-    <div class="ImgSection">
+    <!-- <div class="ImgSection">
       <div class="p_block">
         <p class="partone">小額捐款</p>
         <p class="parttwo">一起改善閱聽環境</p>
       </div>
-    </div>
+    </div> -->
     <!-- banner -->
+
+    <!-- bannerNew -->
+    <div class="banner">
+      <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
+    </div>
+    <!-- bannerNew -->
     <front_donate_flow></front_donate_flow>
 
     <div class="main_block">
@@ -56,8 +62,7 @@
                 <p class="p_title_1">收據寄發方式</p>
                 <label class="Receipt-option">
                   <input type="radio" name="Receipt" value="male" checked> 直接上傳至國稅局，免寄紙本收據
-                  (為節省資源建議選此項，需填身分
-                  證字號)
+                  (為節省資源建議選此項，需填身分證字號)
                 </label>
               </div>
 
@@ -79,10 +84,8 @@
             <p class="visa_main_title">信用卡支付與須知</p>
             <div>
               <p class="p_border">*信用卡捐款僅適用VISA、MasterCard、JCB</p>
-              <p>*我們會即時進行首次信用卡款，如為定
-                期定額捐款，次月起扣款日為每月25號。</p>
-              <p>*此刷卡系統使用國際發卡組織EMV代碥
-                規格，將自動與發卡行更新卡片有效期限。</p>
+              <p>*我們會即時進行首次信用卡款，如為定期定額捐款，次月起扣款日為每月25號。</p>
+              <p>*此刷卡系統使用國際發卡組織EMV代碥規格，將自動與發卡行更新卡片有效期限。</p>
               <p>*本頁面採用喬睿科技TapPay SSL 2048 bit交易系統，直接在系統端交易，卡號不會留存本站。</p>
             </div>
 

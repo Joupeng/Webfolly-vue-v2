@@ -43,33 +43,42 @@
 
 
   // --------------banner-----------------
-  .banner {
-    height: 100vh;
-    background-color: #FEFCF0;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    background-image: url(/src/assets/images/home/home_Banner.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  // .banner {
+  //   height: 100vh;
+  //   background-color: #FEFCF0;
+  //   display: flex;
+  //   justify-content: center;
+  //   margin: 0;
+  //   background-image: url(/src/assets/images/home/home_Banner.png);
+  //   background-position: center;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
 
-    p {
-      margin: auto 0;
-      font-size: $title-24;
+  //   p {
+  //     margin: auto 0;
+  //     font-size: $title-24;
+  //   }
+  // }
+
+  .banner {
+    width: 100%;
+
+    img {
+      width: 100%;
     }
   }
 
   .outerBlock {
     // margin: 0 0 260px 0;
-    border: 1px solid green;
+    margin: 0;
+    // border: 1px solid green;
   }
 
 
 
   // --------------標題文字區-----------------
   .titleBlock {
-    border: 1px solid red;
+    // border: 1px solid red;
     margin: 100px 200px 260px 200px;
 
     @include t() {
@@ -92,7 +101,7 @@
     }
 
     .titleBlockB {
-      border: 1px solid pink;
+      // border: 1px solid pink;
       display: flex;
       flex-direction: column;
       gap: 30px;
@@ -103,7 +112,7 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        border: 1px solid black;
+        // border: 1px solid black;
 
         @include m() {
           flex-direction: column;
@@ -118,7 +127,7 @@
           .image_block {
             width: 60%;
             display: flex;
-            border: 1px solid red;
+            // border: 1px solid red;
             justify-content: center;
             margin: 0px auto -70px auto;
 
@@ -175,7 +184,7 @@
     }
 
     .three_block_inner {
-      border: 1px solid red;
+      // border: 1px solid red;
       text-align: center;
     }
 
@@ -205,7 +214,7 @@
     align-items: center;
     justify-self: center;
     margin: 200px 0px 0px 0px;
-    border: 1px solid blue;
+    // border: 1px solid blue;
 
 
 
@@ -235,7 +244,7 @@
         }
 
         ul {
-          border: 1px solid red;
+          // border: 1px solid red;
           margin: 0;
           padding: 0;
 
@@ -243,7 +252,7 @@
 
           li {
             list-style-type: none;
-            border: 1px solid green;
+            // border: 1px solid green;
             font-size: 16px;
             margin: 10px 0 0px 0;
             padding: 0;
@@ -254,7 +263,7 @@
 
     // 小黑
     #Blacky_block {
-      border: 1px solid violet;
+      // border: 1px solid violet;
       display: flex;
       margin: -200px 0px 0px 00px;
       width: 900px;
@@ -318,7 +327,7 @@
     // max-width: 1440px;
     height: auto;
     background-color: #484848;
-    border: 1px solid red;
+    // border: 1px solid red;
     background-image: url(/src/assets/images/home/home_lamp_bg_01.png);
     background-size: cover;
     background-position: center;
@@ -326,7 +335,7 @@
 
 
     .lamp {
-      border: 1px solid green;
+      // border: 1px solid green;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -361,7 +370,7 @@
         p {
           display: flex;
           font-size: 14px;
-          border: 1px solid red;
+          // border: 1px solid red;
           margin: 10px 0 0 0;
 
         }
@@ -372,7 +381,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border: 1px solid red;
+      // border: 1px solid red;
       margin: 100px 0px 60px 0px;
       width: 360px;
       align-self: center;
@@ -394,7 +403,7 @@
         align-self: center;
         font-size: 20px;
         width: 100%;
-        border: 1px solid green;
+        // border: 1px solid green;
         margin: 10px 0 0 0;
       }
 
@@ -402,7 +411,7 @@
 
     .donate_btn {
       display: flex;
-      border: 1px solid red;
+      // border: 1px solid red;
       align-self: center;
       justify-content: center;
       margin: auto 0;
@@ -432,7 +441,7 @@
 
 
     .lamp_man_block {
-      border: 1px solid pink;
+      // border: 1px solid pink;
       margin: -100px 0px 0px 0;
       position: relative;
       z-index: 1;
@@ -445,7 +454,7 @@
 
 
       img {
-        border: 1px solid red;
+        // border: 1px solid red;
         margin: 0 0px 0 60px;
 
         @media (max-width:768px) {
