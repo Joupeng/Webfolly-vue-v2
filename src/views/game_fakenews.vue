@@ -101,15 +101,15 @@
         <button type="button" @click="showScore" v-if="questionNumber == 4">看分數</button>
       </div>
     </div>
-    <div class="score_result">
-      <div class="score_best" v-if="isEnd">
+    <div class="score_result" v-if="isEnd">
+      <div class="score_best">
         <div class="score_text">
-          <div class="title">優秀的閱聽者</div>
+          <div class="title_name">優秀的閱聽者</div>
           <div class="score_total">
             <div class="score_title">你的分數</div>
-            <div class="score"></div>
+            <p class="score">{{ score }}</p>
           </div>
-          <div class="button_for_again"> <button type="button">再玩一次</button></div>
+          <div class="button_for_again"> <button type="button" @click="playAgain">再玩一次</button></div>
         </div>
         <div class="score_img">
           <!-- 用v-if來做文字 -->
@@ -315,11 +315,34 @@ export default {
       this.showAnswerQs = true;
       // 這樣會出現下一題的按鈕
       this.isCorrectFail = true;
+
     },
     showScore() {
       this.isEnd = true;
       this.isCorrect = false;
       // alert('123');
+    },
+    playAgain() {
+      // alert('123');
+      // 分數牌消失
+      this.isEnd = false;
+      this.questionNumber = 1;  //題號
+      this.current_question = 0;//每動一題要加一
+      this.score = 0;    //分數初始
+      // isAnswered: false,//答案未被確認的初始值
+      this.showAnswerQs = false; //解答顯現
+      this.isCorrect = false;   //判斷答案已答會出現吉祥物
+      this.isResult = true;  //  QS要出現，因為初始是動畫這個是用來代表直接出現的狀態
+      this.isCorrectOk = false;    //為答對的選項
+      this.isCorrectFail = false;   //為答錯的選項
+      // 將填入的答案通通拿掉
+      this.questionText1.forEach(item => {
+        item.choosed = null;
+      });
+
+      this.questionText2.forEach(item => {
+        item.choosed = null;
+      });
     },
     // 螢幕手機限制橫向
     checkOrientation() {
