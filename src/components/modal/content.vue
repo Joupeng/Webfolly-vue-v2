@@ -12,59 +12,65 @@
         <!-- 分類 -->
         <div>
 
-          <span>
+          <span class="selectTitle">
             <label for="category">分類選擇</label>
           </span>
-
-          <select v-model="selectedCategory" id="categorys" name="categorys">
-            <option disabled value="">分類</option>
-            <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
-          </select>
-
+          <span>
+            <select class="selectText" v-model="selectedCategory" id="categorys" name="categorys">
+              <option disabled value="">分類</option>
+              <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
+            </select>
+          </span>
         </div>
 
         <!-- 文章標題 -->
         <div>
-
-          <span><label for="title">文章標題</label></span>
+          <span class="selectTitle"><label for="title">文章標題</label></span>
           <span>
-            <textarea v-model="title" placeholder="請輸入標題"></textarea>
+            <textarea v-model="title" class="selectText" placeholder="請輸入標題"></textarea>
             <p>{{ title }}</p>
           </span>
         </div>
 
         <!-- 檔案上傳 -->
         <div>
-          <label for="file">文章縮圖</label>
-          <input type="file" ref="fileInput" @change="handleFileUpload">
+          <span class="selectTitle">
+            <label for="file">文章縮圖</label>
+          </span>
 
-          <!-- 顯示選擇的檔案名稱 -->
-          <div v-if="selectedFile">
-            <p>選擇的檔案：{{ selectedFile.name }}</p>
-          </div>
+          <span> <input class="selectText" type="file" ref="fileInput" @change="handleFileUpload">
+            <!-- 顯示選擇的檔案名稱 -->
+          <!-- <div v-if="selectedFile">
+              <p>選擇的檔案：{{ selectedFile.name }}</p>
+                                    </div> -->
+          </span>
+
         </div>
 
         <!-- 影音連結輸入 -->
         <div>
+          <span class="selectTitle"> <label for="video">影音連結</label></span>
 
-          <label for="video">影音連結</label>
+          <span><input class="selectText" type="text" v-model="videoLink" placeholder="輸入影音連結">
 
-          <input type="text" v-model="videoLink" placeholder="輸入影音連結">
+            <!-- 顯示影音連結 -->
+          <!-- <div v-if="videoLink">
+              <p>您輸入的影音連結：{{ videoLink }}</p>
+              <video :src="videoLink" controls autoplay></video>
+                                  </div> -->
+          </span>
 
-          <!-- 顯示影音連結 -->
-          <div v-if="videoLink">
-            <p>您輸入的影音連結：{{ videoLink }}</p>
-            <!-- 在此顯示影片（示例） -->
-            <video :src="videoLink" controls autoplay></video>
-          </div>
         </div>
 
         <!-- 文章內容 -->
         <div>
+          <span class="selectTitle"> <label for="message">文章內容</label></span>
 
-          <label for="message">文章內容</label>
-          <textarea v-model="title" placeholder="請輸入內容"></textarea>
-          <p>{{ title }}</p>
+          <span> <textarea class="selectContent" v-model="title" placeholder="請輸入內容"></textarea>
+            <p>{{ title }}</p>
+          </span>
+
+
         </div>
 
       </div>
