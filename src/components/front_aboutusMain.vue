@@ -68,7 +68,7 @@
               <div class="item">後台規劃</div>
 
             </div>
-            <div class="memberImg"><img src="../assets/images/aboutus/member1.png" alt="member1"></div>
+            <div class="memberImg"><img src="@/assets/images/aboutus/member1.png" alt="member1"></div>
           </div>
 
         </div>
@@ -157,7 +157,7 @@
               <div class="item">後台規劃</div>
 
             </div>
-            <div class="memberImg"><img src="../assets/images/aboutus//member4.jpg" alt="member4"></div>
+            <div class="memberImg"><img src="@/assets/images/aboutus//member4.jpg" alt="member4"></div>
           </div>
 
         </div>

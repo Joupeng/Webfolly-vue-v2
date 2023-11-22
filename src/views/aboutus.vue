@@ -1,7 +1,7 @@
 <template>
     <frontnav></frontnav>
     <front_aboutusMain> </front_aboutusMain>
-    <frontfooter></frontfooter>
+    <frontfooter class="back_account_f"></frontfooter>
 </template>
 
 <script>
