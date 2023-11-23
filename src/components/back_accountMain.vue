@@ -47,7 +47,7 @@
         <div class="passWord_block">
           <div class="passWord_inner_block">
             <p>更改密碼</p>
-            <img src="/src/assets/images/donate/donate_rightarrow.svg" alt="">
+            <!-- <img src="/src/assets/images/donate/donate_rightarrow.svg" alt=""> -->
           </div>
           <div class="input_block">
             <input class="unified_input" type="password" name="" placeholder="請輸入舊密碼">

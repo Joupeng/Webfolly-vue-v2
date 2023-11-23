@@ -42,12 +42,12 @@ export default {
         this.$router.push('/back_account');
       }
       if (this.userName.trim() === '') {
-        alert('請輸入使用者名稱');
+        // alert('請輸入使用者名稱');
       } else {
-        alert('請輸入正確的使用者名稱')
+        // alert('請輸入正確的使用者名稱')
       }
       if (this.password.trim() === '') {
-        alert('請輸入密碼');
+        // alert('請輸入密碼');
       } else {
         alert(this.password);
       }
