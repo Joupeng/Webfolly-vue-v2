@@ -1,16 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/views/home.vue'
-
+import MyCom from "@/views/MyCom.vue";
+import MyAbout from "@/views/MyAbout.vue";
 
 const routes = [
-    {
-        // 預設
-        path: '/index.html',
-        name: 'index',
-        component: Home
-    },
 
-    /*--------------------------  frontside --------------------------*/
+    //--------------------------  frontside --------------------------
     {
         // 前台 首頁
         path: '/',
@@ -103,7 +98,7 @@ const routes = [
         component: () => import('../views/aboutus.vue')
     },
 
-    /*--------------------------  backside --------------------------*/
+    //--------------------------  backside --------------------------
 
     {
         // 後台 登入頁
@@ -152,10 +147,61 @@ const routes = [
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 
 
 
 export default router
+
+
+
+
+
+
+// 1. Define route components.
+// These can be imported from other files
+// const Home = { template: '<div>Home</div>' }
+// const About = { template: '<div>About</div>' }
+
+// // 2. Define some routes
+// // Each route should map to a component.
+// // We'll talk about nested routes later.
+// const routes = [
+//     { path: '/', component: Home },
+//     // { path: '/about', component: About },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ]
+
+// // 3. Create the router instance and pass the `routes` option
+// // You can pass in additional options here, but let's
+// // keep it simple for now.
+// const router = VueRouter.createRouter({
+//     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+//     history: VueRouter.createWebHashHistory(),
+//     routes, // short for `routes: routes`
+// })
+
+// // 5. Create and mount the root instance.
+// const app = Vue.createApp({})
+// // Make sure to _use_ the router instance to make the
+// // whole app router-aware.
+// app.use(router)
+
+// app.mount('#app')
