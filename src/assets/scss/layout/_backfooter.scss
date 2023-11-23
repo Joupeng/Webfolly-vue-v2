@@ -1,0 +1,67 @@
+@import "../base/color";
+@import "../base/font";
+
+.backfooter {
+  min-width: 1200px;
+  height: 144px;
+  background-color: $neutral-dark;
+  padding: 15px 100px 15px 100px;
+  // border: 1px solid red;
+  display: flex;
+
+  .backfooter_frame {
+    border: green;
+    display: flex;
+    align-items: center;
+    /* 垂直居中，根據需要調整 */
+    justify-content: space-between;
+    /* 在容器中平均分配元素，根據需要調整 */
+
+    img {
+      max-width: 100px;
+      /* 設定最大寬度，根據需要調整 */
+    }
+
+    .backfooter_text {
+      // border: 1px solid blue;
+
+      display: flex;
+      // flex-direction: column;
+      flex-grow: 1;
+      /* 填滿剩餘空間，讓文字區域擴展 */
+      margin-left: 20px;
+      /* 設定左邊間距，根據需要調整 */
+
+      p {
+        margin-bottom: 10px;
+        // border: 1px solid violet;
+        // width: 100%;
+        min-width: 830px;
+        text-align: left;
+        font-size: 12px;
+        color: $primary-y;
+        line-height: 1.5em;
+        // padding: 1.5em;
+        margin: 0;
+        /* 設定段落底邊距，根據需要調整 */
+      }
+
+
+
+      span {
+        font-size: $fontbase-14;
+        color: $primary-y;
+        // border: 1px solid violet;
+        min-width: 100px;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          color: $secondary-y1;
+        }
+      }
+
+
+    }
+  }
+}
