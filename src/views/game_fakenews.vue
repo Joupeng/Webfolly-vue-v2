@@ -64,8 +64,11 @@
               </div>
             </div>
             <!-- <button type="button" @click="nextQs" >下一題</button> -->
-            <button type="button" @click="nextQs" v-if="isCorrectFail">下一題</button>
-            <button type="button" @click="addScore(index, '1', '1')" v-else=" isCorrectFail">確認</button>
+            <button type="button" @click="nextQs" v-if="isCorrectFail && questionNumber < 4">下一題</button>
+            <button type="button" @click="addScore(index, '1', '1')"
+              v-if="this.choosed == null && !isCorrectFail && !isCorrectOk">確認</button>
+
+            <button type="button" @click="showScore" v-if="isCorrectFail && questionNumber === 4">看分數</button>
           </div>
           <div class="right_QA">
             <p class="title_qs">選項二</p>
@@ -96,7 +99,8 @@
           <p v-if="isCorrectOk">答對囉!!</p>
           <p v-else="isCorrectOk">答錯囉!!</p>
         </div>
-        <button type="button" @click="nextQs">下一題</button>
+        <!-- 按鈕吉祥物旁 -->
+        <button type="button" @click="nextQs" v-if="questionNumber < 4">下一題</button>
         <button type="button" @click="showAnswer">看解答</button>
         <button type="button" @click="showScore" v-if="questionNumber == 4">看分數</button>
       </div>
@@ -140,6 +144,24 @@ export default {
       isQsappear: false,   //手機黑幕跟qs出現
 
       // 左側的題庫
+      quections: [
+        {
+          choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
+          answers: [
+            {
+              text: '馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？',
+              answer: '"解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。'
+            },
+            {
+              text: '"澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?"',
+              answer: '"解答:s。'
+            }
+
+          ],
+          ans: 1
+        }
+
+      ],
       questionText1: [
         {
           text: "馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？",
@@ -308,6 +330,8 @@ export default {
       this.showAnswerQs = false;
 
 
+
+
     },
     showAnswer() {
       this.isCorrect = false;
@@ -320,6 +344,8 @@ export default {
     showScore() {
       this.isEnd = true;
       this.isCorrect = false;
+      this.isResult = false;
+      // this.isQsappear = false;
       // alert('123');
     },
     playAgain() {
@@ -361,6 +387,7 @@ export default {
       this.start_animation = true
 
     }, 3000);
+    // console.log(456);
     // gsap.to("#window", {
     //   scaleY: 0,
     //   delay: 5,
@@ -375,6 +402,12 @@ export default {
     //   y: 50,
     //   ease: "power1.out"
     // });
+  },
+  // 摧毀
+  beforeUnmount() {
+    // console.log(4444);
+    window.removeEventListener('resize', this.checkOrientation);
+
   }
 
 }
