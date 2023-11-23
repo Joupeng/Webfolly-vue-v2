@@ -7,7 +7,8 @@
         <div class="list_content_box">
             <ul class="inner_context_box">
                 <li v-for="(item, index) in qa_items" class="list_qa" :key="index">
-                    <div class="qs_content">
+                    <div class="qs_content" @click="item.isBoxOpen = !item.isBoxOpen"
+                        :class="{ '-on': item.isBoxOpen === true }">
                         <div class="qs">Q{{ index + 1 }}.{{ item.qs }}</div>
                         <button type="button" class="qa_button" @click="item.isBoxOpen = !item.isBoxOpen"
                             :class="{ '-on': item.isBoxOpen === true }">
@@ -15,16 +16,17 @@
                                 <img src="../assets/images/donate/faq/donate_qa_open.svg" alt="" class="down">
                                 <img src="../assets/images/donate/faq/donate_qa_close.svg" alt="" class="close">
                             </div>
+                            <!-- 方式1的click跟判斷式 -->
                             <!-- @click="downSlide(index)" -->
                             <!-- :class="{ '-on': index == currnIndex }" -->
                         </button>
                     </div>
-                    <!-- 當BoxOpen是true和index與點下的index相同就加class -->
+                    <!-- 方式1的click跟判斷式 -->
                     <!-- <hr class="qs_hr" :class="{ '-on': index == currnIndex }">
                     <div class="ans" :class="{ '-on': index == currnIndex }">{{ item.ans }}</div> -->
 
 
-                    <hr class="qs_hr" :class="{ '-on': item.isBoxOpen === true }">
+                    <div class="horizontal-line" :class="{ '-on': item.isBoxOpen === true }"></div>
                     <div class="ans" :class="{ '-on': item.isBoxOpen === true }">{{ item.ans }}</div>
                 </li>
             </ul>

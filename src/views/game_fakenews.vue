@@ -1,7 +1,7 @@
 <template>
   <div class="game_fakenews">
     <!-- 監聽腳色走到橋中間之後才觸發題目出現-->
-    <div class="yellow" :class="{ '-on': isCharacterWalking }"><img
+    <div class="yellow" :class="{ '-on': isCharacterWalking }" @click="createGrowRectangle"><img
         src="../assets/images/game_fakenews/game_fakenews_yellow.svg" class="yellow_img" alt="">
     </div>
     <!-- 包覆兩層一層控制長高一層控制往下倒 -->
@@ -66,7 +66,7 @@
             <!-- <button type="button" @click="nextQs" >下一題</button> -->
             <button type="button" @click="nextQs" v-if="isCorrectFail && questionNumber < 4">下一題</button>
             <button type="button" @click="addScore(index, '1', '1')"
-              v-if="this.choosed == null && !isCorrectFail && !isCorrectOk">確認</button>
+              v-if="this.choosed == null && !isCorrectFail && !isCorrectOk">正確</button>
 
             <button type="button" @click="showScore" v-if="isCorrectFail && questionNumber === 4">看分數</button>
           </div>
@@ -83,7 +83,7 @@
                 <div v-if="current_question === index">{{ item2.answer }}</div>
               </div>
             </div>
-            <button type="button" @click="addScore(index, '2', '2')" :class="{ '-fail': isCorrectFail }">確認</button>
+            <button type="button" @click="addScore(index, '2', '2')" :class="{ '-fail': isCorrectFail }">正確</button>
           </div>
         </div>
       </div>
@@ -137,8 +137,8 @@ export default {
       start_animation: false,
       bridgeSizeClass: '',  //初始化橋的
       isCharacterWalking: false, //初始化腳色的
-      text_small: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
-      text_big: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的 ?",
+      text_small: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的，請點選小黃或是小黃站立的柱子，啟動遊戲吧 ?",
+      text_big: "為了讓你擁有正確媒體識別能力，我將出幾道題目，讓你猜猜哪一個是正確的,請點選小黃或是小黃站立的柱子，啟動遊戲吧 ?",
       isVisible: false,
       isVisibleBlack: false,
       isQsappear: false,   //手機黑幕跟qs出現
@@ -403,7 +403,7 @@ export default {
     //   ease: "power1.out"
     // });
   },
-  // 摧毀
+  // 摧毀，這樣其他頁不會因為寬大於長而跳視窗
   beforeUnmount() {
     // console.log(4444);
     window.removeEventListener('resize', this.checkOrientation);
@@ -413,4 +413,3 @@ export default {
 }
 
 </script>
-

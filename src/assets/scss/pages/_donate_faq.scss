@@ -61,6 +61,7 @@
           justify-content: space-between;
           padding: 20px;
           border-radius: 32px;
+          cursor: pointer;
 
           .qs {
             // border: 1px solid green;
@@ -98,11 +99,13 @@
         }
       }
 
-      .qs_hr {
+      .horizontal-line {
         margin: 0 auto;
         padding: 0;
         width: 95%;
         display: none;
+        height: 1px;
+        background-color: $gray-700;
 
         &.-on {
           display: block;

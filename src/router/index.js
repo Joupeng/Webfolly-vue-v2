@@ -65,6 +65,12 @@ const routes = [
         component: () => import('../views/donate_finish.vue')
     },
     {
+        // 前台 捐款失敗    
+        path: '/donate_unfinish',
+        name: 'donate_unfinish',
+        component: () => import('../views/donate_unfinish.vue')
+    },
+    {
         // 前台 捐款徵信紀錄查詢
         path: '/donate_log',
         name: 'donate_log',

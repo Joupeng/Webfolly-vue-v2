@@ -254,6 +254,7 @@
     left: calc(15% + 68.5px - 51px);
     bottom: 230px;
     z-index: 10;
+    cursor: pointer;
   }
 
   // 腳色走路動畫============================================
@@ -472,7 +473,7 @@
 
       .right_QA,
       .left_QA {
-        border: 7px solid $primary-b;
+        border: 9px solid $primary-b;
         margin: 10px;
         width: 315px;
         height: 355px;
@@ -486,7 +487,7 @@
         &:hover {
           // width: 330px;
           // height: 372px;
-          border: 7px solid $primary-y;
+          border: 9px solid $secondary-b1;
 
         }
 
