@@ -89,6 +89,7 @@ export default {
     };
   },
   methods: {
+
     handleFileUpload(event) {
       const file = event.target.files[0]; // 獲取上傳的檔案
       this.selectedFile = file; // 將選擇的檔案存儲在 data 中
