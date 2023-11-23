@@ -42,7 +42,8 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete" @click="deletePicture"><img src="../assets/images/common/back_iconTrashcan.svg"
+                  alt="iconTrashcan"></div>
             </td>
           </tr>
           <tr>
@@ -117,7 +118,7 @@
     </div>
 
     <!-- 刪除彈跳視窗 -->
-    <div class="modalWarning">
+    <!-- <div class="modalWarning" :class="{ '-on': deletePic }">
       <ul>
         <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
         </li>
@@ -132,13 +133,13 @@
           </div>
         </li>
       </ul>
-    </div>
+    </div> -->
 
 
     <!-- <modal_warning></modal_warning> -->
-    <modal_category></modal_category>
+    <!-- <modal_category></modal_category>
     <modal_content></modal_content>
-    <modal_quiz></modal_quiz>
+    <modal_quiz></modal_quiz> -->
 
     <pagination></pagination>
 
@@ -165,6 +166,7 @@ export default {
     return {
       addSortOpen: false,
       addDetailOpen: false,
+      deletePic: false,
     };
   },
   methods: {
@@ -173,6 +175,10 @@ export default {
     },
     addDetail() {
       this.addDetailOpen = !this.addDetailOpen
+    },
+    deletePicture() {
+      this.deletePic = true;
+      // alert('fjosa');
     }
   }
 }
