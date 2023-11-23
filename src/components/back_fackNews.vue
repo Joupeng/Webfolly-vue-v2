@@ -116,17 +116,17 @@
       </table>
     </div>
 
-    <!-- <pagination></pagination> -->
+    <pagination></pagination>
 
   </main>
 </template>
 
 <script>
-// import pagination from '@/components/pagination.vue'
+import pagination from '@/components/pagination.vue'
 
 export default {
   components: {
-    // pagination,
+    pagination,
   }
 }
 </script>

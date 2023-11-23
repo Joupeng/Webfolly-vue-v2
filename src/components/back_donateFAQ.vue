@@ -1,7 +1,7 @@
 <template>
-  <main>
+  <main class="backDonateFQA">
     <div class="title">
-      <h2>媒體識讀 - 相關課程</h2>
+      <h2>捐款FQA</h2>
     </div>
 
 
@@ -20,7 +20,7 @@
           <tr>
             <th>編號</th>
             <th>標題</th>
-            <th>內容</th>
+            <th>解答</th>
             <th>日期</th>
             <th>編輯</th>
             <th>刪除<i class="fa-solid fa-trash"></i></th>

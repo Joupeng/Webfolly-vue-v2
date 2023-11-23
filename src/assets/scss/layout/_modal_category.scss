@@ -3,9 +3,8 @@
 @import "../components/modalheader";
 
 //  ===分類彈窗===
-
 .category {
-  background: rgba(0, 0, 0, 0.3);
+
   display: flex;
   justify-content: center;
 
@@ -52,6 +51,17 @@
   }
 
 
+
+
+}
+
+.modaloutside {
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: fixed;
+  // top: 200px;
 
 
 }

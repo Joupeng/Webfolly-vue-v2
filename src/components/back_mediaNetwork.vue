@@ -6,12 +6,12 @@
 
 
     <div class="button">
-      <a href="">
-        <div class="btn">+ 新增分類</div>
-      </a>
-      <a href="">
-        <div class="btn">+ 新增內容</div>
-      </a>
+
+      <div class="btn" v-on:click="addSort" :class="{ '-on': addSortOpen }">+ 新增分類</div>
+
+
+      <div class="btn" v-on:click="addDetail" :class="{ '-on': addDetailOpen }">+ 新增內容</div>
+
     </div>
 
     <div class="wrap">
@@ -42,7 +42,7 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
             </td>
           </tr>
           <tr>
@@ -58,7 +58,7 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
             </td>
           </tr>
           <tr>
@@ -74,7 +74,7 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
             </td>
           </tr>
           <tr>
@@ -90,7 +90,7 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
             </td>
           </tr>
           <tr>
@@ -106,7 +106,7 @@
               <div class="edit">編輯</div>
             </td>
             <td>
-              <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
+              <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
             </td>
           </tr>
         </tbody>
@@ -116,17 +116,64 @@
       </table>
     </div>
 
-    <!-- <pagination></pagination> -->
+    <!-- 刪除彈跳視窗 -->
+    <div class="modalWarning">
+      <ul>
+        <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
+        </li>
+        <li>您確定要刪除這筆資料嗎？</li>
+        <li>
+          <div class="button">
+
+            <div class="btn">確認刪除</div>
+
+            <div class="btn">取消刪除</div>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
+    <!-- <modal_warning></modal_warning> -->
+    <modal_category></modal_category>
+    <modal_content></modal_content>
+    <modal_quiz></modal_quiz>
+
+    <pagination></pagination>
 
   </main>
 </template>
 
 <script>
-// import pagination from '@/components/pagination.vue'
+import modal_warning from '@/components/modal/modal_warning.vue'
+import modal_category from '@/components/modal/modal_category.vue'
+import modal_content from '@/components/modal/modal_content.vue'
+import modal_quiz from '@/components/modal/modal_quiz.vue'
+
+import pagination from '@/components/pagination.vue'
 
 export default {
   components: {
-    // pagination,
+    pagination,
+    modal_warning,
+    modal_category,
+    modal_content,
+    modal_quiz,
+  },
+  data() {
+    return {
+      addSortOpen: false,
+      addDetailOpen: false,
+    };
+  },
+  methods: {
+    addSort() {
+      this.addSortOpen = !this.addSortOpen;
+    },
+    addDetail() {
+      this.addDetailOpen = !this.addDetailOpen
+    }
   }
 }
 </script>

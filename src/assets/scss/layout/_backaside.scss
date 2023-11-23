@@ -1,7 +1,10 @@
 @import "../base/color";
+@import "../base/font";
 
 .backAside {
   background-color: $neutral-dark;
+
+
 
   div {
     list-style: none;
@@ -59,4 +62,14 @@
 
 
   }
+}
+
+.backDonate {
+  display: block;
+
+  &.-on {
+    display: none;
+  }
+
+
 }
