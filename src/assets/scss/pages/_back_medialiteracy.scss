@@ -3,9 +3,22 @@
 
 .back_container {
   display: flex;
+  position: relative;
 
   main {
     margin: 46px 87px;
+
+    // .modalWarning {
+    //   display: none;
+    //   position: fixed;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
+
+    //   &.-on {
+    //     display: block;
+    //   }
+    // }
 
     .title {
       // max-width: 1028px;
@@ -48,7 +61,6 @@
 
     }
 
+
   }
-
-
 }
