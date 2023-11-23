@@ -2,15 +2,7 @@
     <frontnav></frontnav>
     <section class="donate_basicinformation">
 
-        <!-- banner -->
-        <!-- <div class="ImgSection">
-            <div class="p_block">
-                <p class="partone">小額捐款</p>
-                <p class="parttwo">一起改善閱聽環境</p>
-            </div>
-        </div> -->
-        <!-- banner -->
-        <!-- bannerNew -->
+
         <div class="banner">
             <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
         </div>
@@ -61,7 +53,7 @@
                 <!-- 地址 -->
                 <div>
                     <p>地址</p>
-                    <input type="text" placeholder="郵遞區號" class="PostalCode">
+                    <input type="text" placeholder=" 郵遞區號" class="PostalCode">
 
                     <div class="drop-down_menu_block">
 
