@@ -1,9 +1,11 @@
 .wrap {
   overflow: hidden;
-  width: 1028px;
+
+
 
   table {
     border-collapse: collapse;
+    min-width: 1028px;
 
 
     th {
