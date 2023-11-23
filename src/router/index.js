@@ -95,6 +95,12 @@ const routes = [
         name: 'aboutus',
         component: () => import('../views/aboutus.vue')
     },
+    {
+        // 前台 捐款管理_捐款者資訊頁面
+        path: '/back_donate_basicinformation_02',
+        name: 'back_donate_basicinformation_02',
+        component: () => import('../views/back_donate_basicinformation_02.vue')
+    },
 
     //--------------------------  backside --------------------------
 
@@ -111,35 +117,46 @@ const routes = [
         component: () => import('../views/back_account.vue')
     },
     {
-        // 後台 捐款管理
-        path: '/back_donate',
-        name: 'back_donate',
-        component: () => import('../views/back_donate.vue')
-    },
-    {
-        // 後台 捐款管理_捐款者資訊頁面
-        path: '/back_donate_basicinformation_02',
-        name: 'back_donate_basicinformation_02',
-        component: () => import('../views/back_donate_basicinformation_02.vue')
-    },
-    {
-        // 後台 測驗管理(假訊息追擊題庫)
-        path: '/back_game',
-        name: 'back_game',
-        component: () => import('../views/back_game.vue')
-    },
-    {
         // 後台 忘記密碼
         path: '/back_password',
         name: 'back_password',
         component: () => import('../views/back_password.vue')
     },
+
+
     {
-        // 後台 媒體識讀管理用了四頁媒體識讀 - 相關課程/媒體識讀 - 外網連結/捐款FAQ
-        path: '/back_medialiteracy',
-        name: 'back_medialiteracy',
-        component: () => import('../views/back_medialiteracy.vue')
+        // 後台 外網連結
+        path: '/back_medianetwork',
+        name: 'back_medianetwork',
+        component: () => import('../views/back_mediaNetwork.vue')
     },
+    {
+        // 後台 媒體識讀
+        path: '/back_mediaclass',
+        name: 'back_mediaclass',
+        component: () => import('../views/back_mediaClass.vue')
+    },
+
+    {
+        // 後台 測驗管理(假訊息追擊題庫)
+        path: '/back_fakenews',
+        name: 'back_fakenews',
+        component: () => import('../views/back_fakeNews.vue')
+    },
+    {
+        // 後台 捐款管理
+        path: '/back_donatemanage',
+        name: 'back_donatemanage',
+        component: () => import('../views/back_donateManage.vue')
+    },
+
+    {
+        // 後台 捐款FAQ
+        path: '/back_donatefaq',
+        name: 'back_donatefaq',
+        component: () => import('../views/back_donateFAQ.vue')
+    },
+
 
 ]
 
@@ -187,18 +204,18 @@ export default router
 
 // ]
 
-// // 3. Create the router instance and pass the `routes` option
+// // 3. Create the router instance and pass the routes option
 // // You can pass in additional options here, but let's
 // // keep it simple for now.
 // const router = VueRouter.createRouter({
 //     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
 //     history: VueRouter.createWebHashHistory(),
-//     routes, // short for `routes: routes`
+//     routes, // short for routes: routes
 // })
 
 // // 5. Create and mount the root instance.
 // const app = Vue.createApp({})
-// // Make sure to _use_ the router instance to make the
+// // Make sure to use the router instance to make the
 // // whole app router-aware.
 // app.use(router)
 
