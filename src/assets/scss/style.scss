@@ -33,10 +33,8 @@
 // pages 前台
 @import "pages/home.scss";
 @import "pages/fakenews.scss";
-@import "pages/clickbait.scss";
 @import "pages/game.scss";
 @import "pages/game_fakenews.scss";
-@import "pages/game_clickbait.scss";
 @import "pages/medialiteracy.scss";
 @import "pages/donate.scss";
 @import "pages/donate_basicinformation.scss";
@@ -52,7 +50,9 @@
 @import "pages/back_login.scss";
 @import "pages/back_account.scss";
 @import "pages/back_password.scss";
-@import "pages/back_medialiteracy.scss";
-@import "pages/back_game.scss";
-@import "pages/back_donate.scss";
+@import "pages/back_mediaNetwork.scss";
+@import "pages/back_mediaClass.scss";
+@import "pages/back_fakeNews.scss";
+@import "pages/back_donateFAQ.scss";
+@import "pages/back_donateManage.scss";
 @import "pages/back_donate_basicinformation_02";
