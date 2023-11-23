@@ -8,17 +8,24 @@
   main {
     margin: 46px 87px;
 
-    // .modalWarning {
-    //   display: none;
-    //   position: fixed;
-    //   top: 50%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
+    .modalWarning {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      justify-content: center;
+      align-items: center;
 
-    //   &.-on {
-    //     display: block;
-    //   }
-    // }
+
+      &.-on {
+        display: flex;
+
+      }
+    }
 
     .title {
       // max-width: 1028px;

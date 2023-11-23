@@ -37,7 +37,8 @@
         text-overflow: ellipsis;
       }
 
-      div.edit {
+      div.edit,
+      div.delete {
         cursor: pointer;
         padding: 15px 0;
 

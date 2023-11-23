@@ -118,7 +118,7 @@
     </div>
 
     <!-- 刪除彈跳視窗 -->
-    <!-- <div class="modalWarning" :class="{ '-on': deletePic }">
+    <div class="modalWarning" :class="{ '-on': deletePic }">
       <ul>
         <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
         </li>
@@ -126,14 +126,16 @@
         <li>
           <div class="button">
 
-            <div class="btn">確認刪除</div>
+            <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
+            <div class="btn" @click="deleteRow">確認刪除</div>
 
-            <div class="btn">取消刪除</div>
+            <!-- 點選取消刪除，只關閉彈窗 -->
+            <div class="btn" @click="closeModal">取消刪除</div>
 
           </div>
         </li>
       </ul>
-    </div> -->
+    </div>
 
 
     <!-- <modal_warning></modal_warning> -->
@@ -176,9 +178,20 @@ export default {
     addDetail() {
       this.addDetailOpen = !this.addDetailOpen
     },
+    // ====刪除警告===
     deletePicture() {
       this.deletePic = true;
       // alert('fjosa');
+    },
+    deleteRow() {
+      // 在此加入程式碼以刪除該行的表格項目（<tr>）
+      // 例如，可以使用您的 deletePicture 方法來處理
+      this.deletePicture();
+      // 接著可以在此加入刪除表格項目的邏輯
+    },
+    closeModal() {
+      // 關閉彈窗
+      this.deletePic = false;
     }
   }
 }
