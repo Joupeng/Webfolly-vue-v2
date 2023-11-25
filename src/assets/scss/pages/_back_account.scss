@@ -1,5 +1,5 @@
-@import"../base/_font";
-@import"../base/_color";
+@import "../base/color";
+@import "../base/font";
 
 .back_accountMain {
   // border: 1px solid red;
@@ -52,7 +52,8 @@
         input {
           display: flex;
           width: 400px;
-
+          height: 54px;
+          padding-left: 20px;
         }
       }
 
@@ -101,6 +102,14 @@
             .forgetPassword {
               display: flex;
               align-items: center;
+
+              .link {
+                color: $indigo;
+
+                &:hover {
+                  font-weight: bold;
+                }
+              }
             }
 
             .submitBox {
@@ -168,6 +177,13 @@
         display: flex;
         // border: 1px solid red;
         justify-content: flex-end;
+
+        .btn {
+
+          &:first-child {
+            margin-right: 8px;
+          }
+        }
 
         button {
           width: 160px;

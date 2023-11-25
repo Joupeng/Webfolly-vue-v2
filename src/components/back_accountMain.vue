@@ -5,7 +5,7 @@
 
     <!-- 返回鍵 -->
     <div class="backheader backheaderAcount ">
-      <RouterLink to="back_medialiteracy">
+      <RouterLink to="back_medianetwork">
         <div class="svg_block">
           <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 512 512" class="svg">
             <path
