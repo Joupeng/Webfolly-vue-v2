@@ -50,7 +50,7 @@
         font-size: $title-24;
         background-color: $secondary-y1 ;
         border-radius: 29px 29px 0px 0px;
-        margin: 0px 0px 20px 0;
+        margin: 0px 0px 0px 0;
         padding: 15px 0px;
         vertical-align: baseline;
         border-bottom: 4px solid $primary-y;
@@ -60,113 +60,176 @@
 
       }
 
-      div {
-        display: flex;
-        flex-direction: column;
-        // border: 1px solid violet;
-        margin: 0 30px 20px 30px;
+      .grid_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        // border: 1px solid red;
+        margin: 40px 40px 0px 40px;
 
-        p {
-          margin: 0 0 6px 0;
+        div {
+          p {
+            font-size: 20px;
+            margin: 0 0 6px 0;
+          }
+
+          input {
+            width: 100%;
+            height: 40px;
+            background-color: #EFEFEF;
+            border-radius: 4px;
+            border: 1px solid black;
+            margin: 0 0 10px 0;
+
+          }
         }
 
-        input {
-          background-color: #EFEFEF;
-          border-radius: 4px;
-          border: 1px solid black;
-          margin: 0 0 0px 0;
-          height: 40px;
-
-        }
-      }
-
-      // 性別
-      .gender-options {
-        p {
-          display: flex;
-          // border: 1px solid red;
-          margin: 0 0 6px 0;
-        }
-
-        .gender-inner {
-          display: block;
-          width: 100%;
-          // border: 1px solid green;
+        // 性別
+        .gender-options {
           margin: 0;
+
+          p {
+            font-size: 20px;
+            // border: 1px solid red;
+            margin: 0 0 6px 0;
+          }
 
           label {
             margin: 0 10px 0 0px;
+            // border: 1px solid blue;
+            display: inline-flex;
+            align-items: center;
+
+            .gender {
+              width: auto;
+              margin: auto 0;
+
+            }
           }
+
         }
       }
+
+
+
 
       // 地址
-      .PostalCode {
-        display: flex;
-        width: 50%;
-
-        &::placeholder {
-          color: #B4B4B4;
-        }
-      }
-
       // 縣市鄉證市區
-      .drop-down_menu_block {
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        // border: 1px solid blue;
-        margin: 10px 0;
+      .address_block {
+        // border: 1px solid red;
+        margin: 40px 40px 40px 40px;
 
-        @media(max-width:374px) {
-          flex-direction: column;
-          gap: 10px;
+        p {
+          margin: 0 0 6px 0;
         }
 
-        .list_block {
-          display: inline-flex;
-          justify-content: space-evenly;
-          width: 49%;
+
+
+        .drop-down_menu_block {
+          display: grid;
+          grid-template-columns: 1fr 2fr 2fr;
+          margin: 10px 0;
+          gap: 10px;
+          // border: 1px solid red;
+
+          @media(max-width:620px) {
+            grid-template-columns: 1fr;
+          }
+
+          // 郵遞區號
+          .PostalCode {
+            width: 100%;
+            height: 40px;
+            background-color: #EFEFEF;
+            border-radius: 4px;
+            border: 1px solid black;
+            margin: 0;
+            padding: 0 0px 0 10px;
+
+            &::placeholder {
+              color: #B4B4B4;
+            }
+          }
+
+          .list_block {
+            height: 40px;
+            background-color: #EFEFEF;
+            color: #B4B4B4;
+            border-radius: 4px;
+            border: 1px solid black;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('/src/assets/images/donate/donate_button.svg');
+            background-repeat: no-repeat;
+            background-position: right center;
+            cursor: pointer;
+            outline: none; // 取消默认的外部轮廓
+            box-shadow: none; // 取消默认的阴影边框
+            font-size: 16px;
+            color: #B4B4B4;
+            padding: 0px 0 0 10px;
+
+            @media(max-width:374px) {
+              width: 100%;
+            }
+
+            &:hover {
+              box-shadow: 0px 0px 15px #5D92CD;
+              border-radius: 4px;
+            }
+          }
+        }
+
+        // 通訊地址
+        .address {
+          width: 100%;
           height: 40px;
           background-color: #EFEFEF;
-          color: #B4B4B4;
           border-radius: 4px;
           border: 1px solid black;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          background-image: url('/src/assets/images/donate/donate_button.svg');
-          background-repeat: no-repeat;
-          background-position: right center;
-          cursor: pointer;
-          outline: none; // 取消默认的外部轮廓
-          box-shadow: none; // 取消默认的阴影边框
-          font-size: 14px;
+          margin: 0;
+          padding: 0 0px 0 10px;
 
 
-          @media(max-width:374px) {
-            width: 100%;
-          }
-
-          &:hover {
-            box-shadow: 0px 0px 15px #5D92CD;
-            border-radius: 4px;
-          }
-
-          p {
+          &::placeholder {
             color: #B4B4B4;
           }
         }
       }
+
+
     }
 
     // ------收據寄發方式
     .Receipt-options {
-      margin: 0 0 6px 30px;
+      margin: 0px 40px 0px 40px;
+      padding: 40px 0 40px 0;
+      line-height: 1.5;
+      border-top: 3px solid black;
 
-      .Receipt-inner {
-        margin: 0;
+      p {
+        margin: 0 0 6px 0;
+        font-size: 24px;
+      }
+
+      label {
+        margin: 0 0 6px 0;
+      }
+    }
+
+    .your_support_block {
+      border-top: 3px solid black;
+      margin: 0px 40px 40px 40px;
+      padding: 40px 0 0 0;
+
+      p {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+      }
+
+      label {
+        margin: 0 0 6px 0;
       }
     }
 

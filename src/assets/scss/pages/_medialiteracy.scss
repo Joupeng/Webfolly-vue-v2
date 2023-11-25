@@ -59,36 +59,30 @@
     border: 4px solid #F3CA1E;
     border-radius: 32px;
     width: 80%;
-    height: 788px;
+    height: 600px;
     margin: 60px auto;
     background-color: #FEFCF0;
 
     @include m() {
-      width: 100%;
+      width: 90%;
     }
 
     // ---------頁籤標題匡
     #myTab {
 
       border-radius: 28px 28px 0 0;
-      // border-bottom: 4px solid #F3CA1E;
-      // height: 100%;
       display: flex;
       margin: 0 auto;
       background-color: #F5DE75;
       margin: 0px 0px 0 0px;
       border: none;
 
-
-      // FEFCF0
       // 相關連結相關課程按鈕
       .nav-item {
         // color: grey;
         // border: 1px solid red;
         margin: 20px 0 0 0;
         border: none;
-
-
 
         .nav-link {
           margin: 0 0px 0 20px;
@@ -106,6 +100,10 @@
           &:hover {
             font-size: 20px;
           }
+
+          @include m() {
+            width: 110px;
+          }
         }
 
         .nav-link.active {
@@ -122,7 +120,7 @@
     .for_overflow {
       overflow: auto;
       width: 97%;
-      height: 640px;
+      height: 478px;
       margin: 10px auto;
 
       ul {
@@ -132,8 +130,18 @@
           display: flex;
           padding: 20px 0 20px 0;
           border-bottom: 1px solid lightgray;
+
           // flex-direction: column;
           // border: 1px solid red;
+          @include m() {
+            flex-direction: column;
+            align-items: center;
+
+          }
+
+          @include m() {
+            min-width: 150px;
+          }
 
           .link_01_img {
             width: 150px;
@@ -142,16 +150,28 @@
             background-color: #fff;
             background-image: url(/src/assets/images/medialiteracy/B1_N.png);
             background-size: cover;
-            margin-right: 20px;
+            // background-position: 0 0;
+            border: 1px solid red;
+            margin: 0 20px 0 0;
+
+            @include m() {
+              width: 80%;
+              height: 200px;
+              margin: 0 20px 20px 0px;
+            }
           }
 
-          @include m() {
-            min-width: 150px;
-          }
+
 
           .text_block {
             margin: auto 20px auto 0px;
             // border: 1px solid green;
+
+            @include m() {
+              margin: auto 20px auto 0px;
+              width: 90%;
+
+            }
 
             p:first-child {
               font-style: 20px;
@@ -193,10 +213,4 @@
 
   }
 
-
-
-  // 不知道為啥沒用
-  // .nav-tabs .nav-link.active {
-  //   background-color: black;
-  // }
 }
