@@ -4,7 +4,7 @@
 // z-index是要跟同一層進行比較，每一層外層要看得到
 
 // index
-// 答題訊息(100)=> 電腦版關主(99) +分數 => 文字含按鈕電腦版(77) => 電腦版黑幕(55) => 手機板關主+文字(44) => 手機黑幕(30) => 柱子(15) => 角色(10) => 橋(5) => 背景(1)
+// 答題訊息(100)=> 電腦版關主(99) +分數 => 文字含按鈕電腦版(77) => 電腦版黑幕(55) => 手機板關主+文字(44) => 手機黑幕(30) => => 角色(15) 柱子(10) => 橋(5) => 背景(1)
 
 .game_fakenews {
   margin: 0;
@@ -187,7 +187,7 @@
     background-color: #989898;
     /* border: 1px solid red; */
     border-radius: 32px 32px 0 0;
-    z-index: 15;
+    z-index: 10;
   }
 
 
@@ -253,8 +253,32 @@
     // 15%是柱子定位點，68.5是柱子的寬，然後是腳色的一半寬
     left: calc(15% + 68.5px - 51px);
     bottom: 230px;
-    z-index: 10;
+    z-index: 15;
     cursor: pointer;
+    // opacity: 1;
+
+    // 為了等下進行過渡，需要先添加
+    transition: transform 0.3s ease, filter 0.3s ease; // 添加 filter 的过渡效果
+
+    &:hover {
+      // 調整大小
+      transform: scale(1.2);
+      // filter: brightness(1.2) contrast(0.9) saturate(0.7);
+      // opacity: 1;
+    }
+
+
+    #text_for_click {
+      color: black;
+      // border: 1px solid rebeccapurple;
+      position: absolute;
+      left: 0;
+      top: -40%;
+
+      &.-on {
+        display: none;
+      }
+    }
   }
 
   // 腳色走路動畫============================================
