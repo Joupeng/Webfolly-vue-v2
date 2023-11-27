@@ -1,8 +1,9 @@
 <template>
   <div class="game_fakenews">
     <!-- 監聽腳色走到橋中間之後才觸發題目出現-->
-    <div class="yellow" :class="{ '-on': isCharacterWalking }" @click="createGrowRectangle"><img
+    <div class="yellow" :class="{ '-on': click_text }" @click="createGrowRectangle"><img
         src="../assets/images/game_fakenews/game_fakenews_yellow.svg" class="yellow_img" alt="">
+      <div id="text_for_click" :class="{ '-on': click_text }">請點選吉祥物</div>
     </div>
     <!-- 包覆兩層一層控制長高一層控制往下倒 -->
     <div class="bridge" :class="bridgeSizeClass">
@@ -64,11 +65,12 @@
               </div>
             </div>
             <!-- <button type="button" @click="nextQs" >下一題</button> -->
-            <button type="button" @click="nextQs" v-if="isCorrectFail && questionNumber < 4">下一題</button>
+            <button type="button" @click="nextQs" v-if="isCorrectFail && questionNumber < totalQuestions">下一題</button>
             <button type="button" @click="addScore(index, '1', '1')"
               v-if="this.choosed == null && !isCorrectFail && !isCorrectOk">正確</button>
 
-            <button type="button" @click="showScore" v-if="isCorrectFail && questionNumber === 4">看分數</button>
+            <button type="button" @click="showScore"
+              v-if="isCorrectFail && questionNumber === totalQuestions">看分數</button>
           </div>
           <div class="right_QA">
             <p class="title_qs">選項二</p>
@@ -90,8 +92,8 @@
     </div>
     <!-- 可以搭配v-if跟else -->
     <!-- 故意讓相同的true判斷加上的class相同比較好確認 -->
-    <div v-if="questionText1[(questionNumber - 1)].choosed || questionText2[(questionNumber - 1)].choosed != null"
-      class="correct_box" :class="{ 'appear': isCorrect }">
+    <!-- v-if="questionText1[(questionNumber - 1)].choosed || questionText2[(questionNumber - 1)].choosed != null" -->
+    <div class="correct_box" :class="{ 'appear': isCorrect }">
       <div v-if="isCorrectOk" class="img_character"><img src="../assets/images/game_fakenews/correct.svg" alt=""></div>
       <div v-else="isCorrectOk" class="img_character"><img src="../assets/images/game_fakenews/fail.svg" alt=""></div>
       <div class="correct_text">
@@ -100,9 +102,9 @@
           <p v-else="isCorrectOk">答錯囉!!</p>
         </div>
         <!-- 按鈕吉祥物旁 -->
-        <button type="button" @click="nextQs" v-if="questionNumber < 4">下一題</button>
+        <button type="button" @click="nextQs" v-if="questionNumber < totalQuestions">下一題</button>
         <button type="button" @click="showAnswer">看解答</button>
-        <button type="button" @click="showScore" v-if="questionNumber == 4">看分數</button>
+        <button type="button" @click="showScore" v-if="questionNumber == totalQuestions">看分數</button>
       </div>
     </div>
     <div class="score_result" v-if="isEnd">
@@ -130,6 +132,7 @@
 <script>
 
 import { gsap } from 'gsap';
+import { useSSRContext } from 'vue';
 export default {
   data() {
     return {
@@ -142,84 +145,91 @@ export default {
       isVisible: false,
       isVisibleBlack: false,
       isQsappear: false,   //手機黑幕跟qs出現
+      click_text: false,
+
+
+
+      // 可以寫成一兩題為一個的寫法
+      // quections: [
+      //   {
+      //     choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
+      //     answers: [
+      //       {
+      //         text: '馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？',
+      //         answer: '"解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。'
+      //       },
+      //       {
+      //         text: '"澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?"',
+      //         answer: '"解答:s。'
+      //       }
+      //     ],
+      // 直接定義答案內容
+      //     ans: 1
+      //   }
+
+      // ],
 
       // 左側的題庫
-      quections: [
-        {
-          choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
-          answers: [
-            {
-              text: '馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？',
-              answer: '"解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。'
-            },
-            {
-              text: '"澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?"',
-              answer: '"解答:s。'
-            }
-
-          ],
-          ans: 1
-        }
-
-      ],
       questionText1: [
-        {
-          text: "馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？",
-          ans: "2",
-          // 是否有選擇，到時候判斷式要確認不能選第二個
-          choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
-          answer: "解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。"
+        // {
+        //   text: "馬鈴薯發芽時會產生毒素，聽說只要把發芽的芽眼切除，其他部位還是可以吃，這是真的嗎？",
+        //   ans: "2",
+        //   // 是否有選擇，到時候判斷式要確認不能選第二個
+        //   choosed: null,//尚未被選擇的初始值，選了會放入值，我是給左右各代表true跟false
+        //   answer: "解答:當馬鈴薯發芽時，整顆馬鈴薯產生大量的茄鹼，此種毒性，即使高溫加熱也無法去除。"
 
-        },
-        {
-          text: "日本排放核廢水引起恐慌，食用碘鹽抗輻射可以抗輻射?",
-          ans: "2",
-          // 是否有選擇，到時候判斷式要確認不能選第二個
-          choosed: null,
-          answer: "解答:因為碘鹽中的碘元素含量遠低於需要達到防輻射效果的劑量。 且若是要達到防輻射的量，可能會過量，造成高血壓等併發症。"
-        },
-        {
-          text: "包裝飲用水也會過期? ",
-          ans: "1",
-          // 是否有選擇，到時候判斷式要確認不能選第二個
-          choosed: null,
-        },
-        {
-          text: "植物肉組成很多元，但幾乎都是植物性蛋白，包含豌豆蛋白、大豆蛋白等 ",
-          ans: "1",
-          // 是否有選擇，到時候判斷式要確認不能選第二個
-          choosed: null,
-          answer: ""
-        }
+        // },
+        // {
+        //   text: "日本排放核廢水引起恐慌，食用碘鹽抗輻射可以抗輻射?",
+        //   ans: "2",
+        //   // 是否有選擇，到時候判斷式要確認不能選第二個
+        //   choosed: null,
+        //   answer: "解答:因為碘鹽中的碘元素含量遠低於需要達到防輻射效果的劑量。 且若是要達到防輻射的量，可能會過量，造成高血壓等併發症。"
+        // },
+        // {
+        //   text: "包裝飲用水也會過期? ",
+        //   ans: "1",
+        //   // 是否有選擇，到時候判斷式要確認不能選第二個
+        //   choosed: null,
+        // },
+        // {
+        //   text: "植物肉組成很多元，但幾乎都是植物性蛋白，包含豌豆蛋白、大豆蛋白等 ",
+        //   ans: "1",
+        //   // 是否有選擇，到時候判斷式要確認不能選第二個
+        //   choosed: null,
+        //   answer: ""
+        // }
       ],
       // 右側的題庫
       questionText2: [
-        {
-          text: "澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?",
-          ans: "2",
-          choosed: null,
-          answer: ""
-        },
-        {
-          text: "碘如果攝取不足，成年人的話會使甲狀腺腫大，出現疲倦、代謝下降等問題?",
-          ans: "2",
-          choosed: null,
-          answer: ""
-        },
-        {
-          text: "純蜂蜜放冰箱會結晶，是一種變質現象?",
-          ans: "1",
-          choosed: null,
-          answer: "解答:市售蜂蜜含水量較低，放冰箱會結晶，但這不是「變質」"
-        },
-        {
-          text: "美國新上市培育雞肉來自人體細胞?",
-          ans: "1",
-          choosed: null,
-          answer: "解答:據查證，其產品是由雞細胞培育而成，完全沒有人體細胞。"
-        }
+        // {
+        //   text: "澱粉類食物，例如馬鈴薯，經過攝氏120度以上高溫炒炸，容易產生致癌物?",
+        //   ans: "2",
+        //   choosed: null,
+        //   answer: ""
+        // },
+        // {
+        //   text: "碘如果攝取不足，成年人的話會使甲狀腺腫大，出現疲倦、代謝下降等問題?",
+        //   ans: "2",
+        //   choosed: null,
+        //   answer: ""
+        // },
+        // {
+        //   text: "純蜂蜜放冰箱會結晶，是一種變質現象?",
+        //   ans: "1",
+        //   choosed: null,
+        //   answer: "解答:市售蜂蜜含水量較低，放冰箱會結晶，但這不是「變質」"
+        // },
+        // {
+        //   text: "美國新上市培育雞肉來自人體細胞?",
+        //   ans: "1",
+        //   choosed: null,
+        //   answer: "解答:據查證，其產品是由雞細胞培育而成，完全沒有人體細胞。"
+        // }
       ],
       // 關於題目整體的預設值
+
+      totalQuestions: 4,  //總題數設定
       questionNumber: 1,   //題號
       current_question: 0,//每動一題要加一
       score: 0,    //分數初始
@@ -233,6 +243,7 @@ export default {
 
 
 
+
     }
   },
   methods: {
@@ -241,6 +252,8 @@ export default {
       // alert(123);
       this.isVisible = true;
       this.isVisibleBlack = true;
+
+      gsap.to('#text_for_click', { x: 15, duration: 1, repeat: -1, yoyo: true })
     },
 
     // 造橋
@@ -249,6 +262,7 @@ export default {
       this.bridgeSizeClass = '-on';
       this.isCharacterWalking = true;
       this.start_animation = false;
+      this.click_text = true;
       // console.log(this.bridgeSizeClass);
       // console.log(this.character_walkClass);
       // 計時讓黑幕在造橋完成然後腳色到位黑幕跟題目一起出現
@@ -376,6 +390,7 @@ export default {
         alert("請將螢幕轉向橫向以顯示內容！");
       }
     },
+
   },
   mounted() {
     // 頁面加載後立即檢查螢幕方向
@@ -402,6 +417,62 @@ export default {
     //   y: 50,
     //   ease: "power1.out"
     // });
+
+    // 資料庫串接
+    //上server要改成相對路徑
+    fetch('http://localhost/API/game_fakenews.php', {
+      method: 'GET',
+      // 非同源
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
+      .then(resp => resp.json())
+      // 處理從伺服器接收到的數據（questions 是解析後的 JSON 數據）
+      // 要想一下迭代的方式
+      .then(qs_items => {
+        // console.log(qs_items);
+        // console.log(this.questionText1);
+        this.questionText1 = qs_items.map(item_qs => {
+
+          return {
+            text: item_qs.LTEXT,
+            ans: item_qs.ANSWER_LEFT,
+            // choosed: null,
+            answer: item_qs.DESCRIPTION_LEFT
+          }
+        }),
+          this.questionText2 = qs_items.map(item_qs => {
+
+            return {
+              text: item_qs.RTEXT,
+              ans: item_qs.ANSWER_RIGHT,
+              // choosed: null,
+              answer: item_qs.DESCRIPTION_RIGHT
+            }
+          })
+        // 分兩側可能的寫法
+        // this.qs_items = qs_items.map(showItem => {
+        //   if (showItem.SIDE === 1) {
+        //     this.questionText1.push({
+        //       text: showItem.LTEXT,
+        //       ans: showItem.ANSWER,
+        //       // choosed: null,
+        //       answer: showItem.DESCRIPTION
+        //     });
+        //   } else if (showItem.SIDE === 2) {
+        //     this.questionText2.push({
+        //       text: showItem.RTEXT,
+        //       // ans: showItem.ANSWER,
+        //       choosed: null,
+        //       // answer: showItem.DESCRIPTION
+        //     });
+        //   }
+        // });
+      })
+
   },
   // 摧毀，這樣其他頁不會因為寬大於長而跳視窗
   beforeUnmount() {
