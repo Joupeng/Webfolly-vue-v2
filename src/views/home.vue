@@ -1,12 +1,35 @@
 <template>
-    <frontnav></frontnav>
-
     <section class="home">
-
+        <frontnav></frontnav>
         <!-- banner -->
-        <section class="banner">
+        <!-- <section class="banner">
             <img src="/src/assets/images/home/home_Banner.png" alt="">
-        </section>
+        </section> -->
+
+        <!-- grid_test -->
+        <div class="grid_container">
+            <div class="wrapper">
+                <div class="banner_card" id="banner_card1">
+                    ＯＯＯ被讚逆生長「露肚裝」大秀性感螞蟻腰！
+                </div>
+
+                <div class="banner_card" id="banner_card2">
+                    【快報】網傳「水梨7月中旬前上市，代表有用生長激素，會影響生育」？
+                </div>
+
+                <div class="banner_card" id="banner_card3">
+                    竟然從這個地方找翻倍股？億級大戶ＯＯＯ不看盤選股秘訣大公開！
+                </div>
+
+                <div class="banner_card" id="banner_card4">
+                    【快報】網傳「千萬別打美國研發新型的新冠疫苗， 美國人自己都沒有人打，台灣居然領先全球」？
+                </div>
+
+                <div class="banner_card" id="banner_card5">
+                    【震驚】網傳「最近千萬不要去全家、7-11買茶葉蛋，昨晚電視名嘴他們說了，現在超商的茶葉蛋是進口的巴西毒蛋」？
+                </div>
+            </div>
+        </div>
 
 
 
@@ -81,15 +104,14 @@
 
             <!-- 你也可以加入這場改變 -->
 
-            <div class="base_BG">
+            <div class="base_BG" :class="{ '-clicked': isClicked }" ref="backgroundImage">
                 <div class="lamp">
                     <div class="line"></div>
-                    <div class="half_circle">
+                    <div class="half_circle" @click="changeBackground">
                         <p>click me!</p>
                     </div>
-                    <!-- <img src="/src/assets/images/home/home_lamp.svg" alt=""> -->
                 </div>
-                <div class="text_area_change">
+                <div class="text_area_change" :class="{ '-clicked': isClicked }">
                     <p>你也可以加入這場改變</p>
                     <p>改變的路上，網中愚努力的從零走到一，
                         現在需要你一起推動我們持續前進。
@@ -97,12 +119,17 @@
                         推動團隊繼續行動，實踐改變。</p>
                 </div>
                 <!-- 按鈕 -->
-                <router-link :to="{ name: 'donate' }" @click="closeNav" class="donate_btn"><span
+                <router-link :to="{ name: 'donate' }" @click="closeNav" class="donate_btn"
+                    :class="{ '-clicked': isClicked }"><span
                         :class="{ 'frontheader_menu-on': $route.name == 'donate' }">捐款支持</span>
                 </router-link>
 
                 <div class="lamp_man_block">
-                    <img src="/src/assets/images/home/home_lamp_man.svg" alt="">
+                    <img v-if="isSad" src="/src/assets/images/home/home_lamp_man_sad.svg" alt="">
+                    <img v-else src="/src/assets/images/home/home_lamp_man.svg" alt="">
+                    <!-- <img src="/src/assets/images/home/home_lamp_man_sad.svg" alt=""> -->
+                    <!-- <img src="/src/assets/images/home/home_lamp_man.svg" alt=""> -->
+
                 </div>
             </div>
 
@@ -124,11 +151,33 @@ import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 
 export default {
+    data() {
+        return {
+            isClicked: false,
+            isSad: true
+        };
+    },
     methods: {
         toDonate() {
             let donate = document.getElementById("donate");
             alert("fff")
             donate.checked = false;
+        },
+        // changeBackground() {
+        //     this.isClicked = !this.isClicked;
+        //     this.isClicked = true;
+        // }
+        changeBackground() {
+            this.isClicked = !this.isClicked;
+            // 根據 isClicked 狀態來切換背景圖片
+            this.isSad = !this.isSad;
+            if (this.isClicked) {
+                // 如果 isClicked 為 true，使用第一張背景圖片
+                this.$refs.backgroundImage.style.backgroundImage = "url(/src/assets/images/home/home_lamp_bg1.png)";
+            } else {
+                // 如果 isClicked 為 false，使用第二張背景圖片
+                this.$refs.backgroundImage.style.backgroundImage = "url(/src/assets/images/home/home_lamp_bg2.png)";
+            }
         }
     },
     components: {
