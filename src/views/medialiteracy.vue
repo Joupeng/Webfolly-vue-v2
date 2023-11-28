@@ -36,63 +36,16 @@
           <!-- 內層捲軸區 -->
           <div class="for_overflow">
             <ul>
-              <li>
+              <!-- 會有多個li在裡面 -->
+              <li v-for="(news, index) in newlist" :key="index">
                 <div class="li_block">
-                  <div class="link_01_img"></div>
+                  <div class="link_01_img"><img :src="news.image" alt=""></div>
                   <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="li_block">
-                  <div class="link_01_img"></div>
-                  <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="li_block">
-                  <div class="link_01_img"></div>
-                  <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="li_block">
-                  <div class="link_01_img"></div>
-                  <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="li_block">
-                  <div class="link_01_img"></div>
-                  <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="li_block">
-                  <div class="link_01_img"></div>
-                  <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
+                    <!-- 標籤包起來使資料庫來的連結有效 -->
+                    <a :href="news.link">
+                      {{ news.name }}
+                    </a>
+                    <p>{{ news.description }}</p>
                   </div>
                 </div>
               </li>
@@ -103,13 +56,13 @@
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
           <div class="for_overflow">
             <ul>
-              <li>
+              <li v-for="(course, index) in courses" :key="index">
                 <div class="li_block">
-                  <div class="link_01_img"></div>
+                  <div class="link_01_img"><img :src="course.photo" alt=""></div>
                   <div class="text_block">
-                    <p>假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4</p>
-                    <p> 來源:Youtube</p>
-                    <p>想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?</p>
+                    <a :href="course.from">{{ course.title }}</a>
+                    <p>{{ course.direction }}</p>
+                    <p>{{ course.source }}</p>
                   </div>
                 </div>
               </li>
@@ -132,14 +85,110 @@
 import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 
-
-
-
 export default {
   components: {
     frontnav,
     frontfooter,
+  },
+  data() {
+    return {
+      newlist: [
+        // {
+        //   image: new URL('../assets/images/medialiteracy/A1_N.png', import.meta.url).href,
+        //   name: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   link: "來源:Youtube",
+        //   description: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   image: new URL('../assets/images/medialiteracy/A2_N.png', import.meta.url).href,
+        //   name: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   link: "來源:Youtube",
+        //   description: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   image: new URL('../assets/images/medialiteracy/A3_N.png', import.meta.url).href,
+        //   name: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   link: "來源:Youtube",
+        //   description: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   image: new URL('../assets/images/medialiteracy/A4_N.png', import.meta.url).href,
+        //   name: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   link: "來源:Youtube",
+        //   description: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   image: new URL('../assets/images/medialiteracy/A5_N.png', import.meta.url).href,
+        //   name: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   link: "來源:Youtube",
+        //   description: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // }
+      ],
+      courses: [
+        // {
+        //   photo: new URL('../assets/images/medialiteracy/B1_N.png', import.meta.url).href,
+        //   title: "1假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   from: "來源:Youtube",
+        //   direction: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   photo: new URL('../assets/images/medialiteracy/B2_N.png', import.meta.url).href,
+        //   title: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   from: "來源:Youtube",
+        //   direction: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   photo: new URL('../assets/images/medialiteracy/B3_N.png', import.meta.url).href,
+        //   title: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   from: "來源:Youtube",
+        //   direction: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // },
+        // {
+        //   photo: new URL('../assets/images/medialiteracy/B4_N.png', import.meta.url).href,
+        //   title: "假新聞出沒！ 破解 #媒體與牠們的產地 ft.劣質媒體黑名單【記者真心話】Vol.4",
+        //   from: "來源:Youtube",
+        //   direction: "想要分享新聞給好朋友，但你知道嗎?嗎?散播「網路假新聞」要被關3天?",
+        // }
+
+      ]
+
+
+    }
+  },
+  mounted() {
+    fetch('http://localhost/API/medialiteracy.php', {
+      method: 'POST',
+      //非同源
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(resp => resp.json())
+      // 處理從伺服器接收到的數據（questions 是解析後的 JSON 數據）
+      .then(media_links => {
+        this.newlist = media_links.map(item => {
+          return {
+            name: item.NAME,
+            link: item.LINK,
+            description: item.DESCRIPTION,
+            image: item.IMAGE
+          }
+        }),
+          this.courses = media_links.map(item => {
+            return {
+              title: item.TITLE,
+              from: item.LINKS,
+              direction: item.DIRECTION,
+              source: item.SOURCE,
+              photo: item.PHOTO
+            }
+
+          })
+      })
+
   }
+
 }
 
 </script>
