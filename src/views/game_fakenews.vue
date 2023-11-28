@@ -66,8 +66,7 @@
             </div>
             <!-- <button type="button" @click="nextQs" >下一題</button> -->
             <button type="button" @click="nextQs" v-if="isCorrectFail && questionNumber < totalQuestions">下一題</button>
-            <button type="button" @click="addScore(index, '1', '1')"
-              v-if="this.choosed == null && !isCorrectFail && !isCorrectOk">正確</button>
+            <button type="button" @click="addScore(index, '1', '1')" v-if="!isCorrectFail && !isCorrectOk">正確</button>
 
             <button type="button" @click="showScore"
               v-if="isCorrectFail && questionNumber === totalQuestions">看分數</button>
@@ -297,6 +296,9 @@ export default {
           // alert("答錯囉");
           // alert('123');
           //this.questionText1[this.questionNumber -1].an
+          //觸發動畫
+
+          //時間差後答錯
           this.questionText1[this.questionNumber - 1].choosed = ans
           this.isCorrect = true;
           this.isResult = false;
@@ -440,7 +442,7 @@ export default {
           return {
             text: item_qs.LTEXT,
             ans: item_qs.ANSWER_LEFT,
-            // choosed: null,
+            choosed: null,
             answer: item_qs.DESCRIPTION_LEFT
           }
         }),
@@ -449,7 +451,7 @@ export default {
             return {
               text: item_qs.RTEXT,
               ans: item_qs.ANSWER_RIGHT,
-              // choosed: null,
+              choosed: null,
               answer: item_qs.DESCRIPTION_RIGHT
             }
           })

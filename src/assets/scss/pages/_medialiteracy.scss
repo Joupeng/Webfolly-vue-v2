@@ -118,6 +118,8 @@
 
     // ------------內層捲軸區
     .for_overflow {
+
+
       overflow: auto;
       width: 97%;
       height: 478px;
@@ -143,21 +145,32 @@
             min-width: 150px;
           }
 
+          // .link_01_img {
+          //   width: 150px;
+          //   height: 112px;
+          //   min-width: 150px;
+          //   // background-color: #fff;
+          //   // background-image: url(/src/assets/images/medialiteracy/B1_N.png);
+          //   // background-size: cover;
+          //   // // background-position: 0 0;
+          //   border: 1px solid red;
+          //   margin: 0 20px 0 0;
+
+          //   @include m() {
+          //     width: 80%;
+          //     height: 200px;
+          //     margin: 0 20px 20px 0px;
+          //   }
+          // }
+          // 新作的圖
           .link_01_img {
             width: 150px;
             height: 112px;
-            min-width: 150px;
-            background-color: #fff;
-            background-image: url(/src/assets/images/medialiteracy/B1_N.png);
-            background-size: cover;
-            // background-position: 0 0;
-            border: 1px solid red;
-            margin: 0 20px 0 0;
+            // border: 1px solid red;
 
-            @include m() {
-              width: 80%;
-              height: 200px;
-              margin: 0 20px 20px 0px;
+            // position: absolute;
+            img {
+              width: 100%;
             }
           }
 
