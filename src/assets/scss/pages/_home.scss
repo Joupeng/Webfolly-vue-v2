@@ -43,96 +43,270 @@
 
 
   // --------------banner-----------------
-  // .banner {
-  //   height: 100vh;
-  //   background-color: #FEFCF0;
-  //   display: flex;
-  //   justify-content: center;
-  //   margin: 0;
-  //   background-image: url(/src/assets/images/home/home_Banner.png);
-  //   background-position: center;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-
-  //   p {
-  //     margin: auto 0;
-  //     font-size: $title-24;
-  //   }
-  // }
-
-
-  // .banner {
-  //   width: 100%;
-
-  //   img {
-  //     width: 100%;
-  //   }
-  // }
-
-  // .outerBlock {
-  //   margin: 0 0 260px 0;
-  //   margin: 0;
-  // }
 
 
   //  gridtest
   .grid_container {
-    background-color: gray;
-    display: flex;
+    // background-color: gray;
+    display: block;
     justify-content: center;
-    height: 550px;
+    // position: absolute;
+
+    // height: 550px;
+
 
     .wrapper {
       display: grid;
-      background-color: lightblue;
-      // background-image: url(/src/assets/images/home/home_Banner.png);
+      // background-color: #6D7BA3;
+      grid-template-columns: repeat(3, 1fr);
+      background-image: url(/src/assets/images/home/home_banner.svg);
       background-position: 0 0;
       background-size: contain;
-      background-repeat: no-repeat;
-      grid-template-columns: repeat(3, 1fr);
-      // gap: 10px;
-      // grid-auto-rows: minmax(100px, auto);
-      border: 1px solid blue;
-      // height: auto;
-      padding: 30px 60px;
+      // border: 1px solid blue;
+      padding: 0px 60px;
+      font-size: 16px;
+      font-weight: bolder;
+
+
+
+      @media(max-width:950px) {
+        grid-template-columns: repeat(2, 1fr);
+
+      }
+
+      @media(max-width:641px) {
+        grid-template-columns: repeat(1, 1fr);
+
+      }
 
       .banner_card {
-        border: 1px solid red;
+        // border: 1px solid red;
         border-radius: 32px;
-        background-color: #fff;
+        background-color: #FEFCF0;
         padding: 30px;
         text-align: center;
         display: flex;
         align-self: center;
+        position: relative;
+        color: #50589D
+      }
+
+
+      @keyframes blink {
+        0% {
+          scale: 1;
+        }
+
+        50% {
+          scale: 1.2;
+        }
+
+        100% {
+          scale: 1;
+        }
+      }
+
+      .close_button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border: 1px solid black;
+        background-color: black;
+        color: white;
+        border-radius: 50px;
+        animation: blink 1s infinite;
+
+        &.-clicked1,
+        &.-clicked2,
+        &.-clicked3,
+        &.-clicked4,
+        &.-clicked5 {
+          cursor: default;
+        }
+
       }
 
       #banner_card1 {
-        margin: 0 20px 70px 0;
+        margin: 60px 20px 70px 0;
         width: 84%;
         text-align: center;
         display: flex;
         align-self: center;
+        opacity: 1;
+        transition: opacity 0.5s;
+
+        &.-clicked1 {
+          opacity: 0;
+
+        }
+
+        @media(max-width:950px) {
+          margin: 60px 20px 0px 0;
+
+        }
+
+        @media(max-width:768px) {
+          margin: 30px 10px 10px 0;
+          font-size: 14px;
+        }
+
+        @media(max-width:641px) {
+          margin: 60px auto 30px auto;
+          width: 100%;
+        }
       }
 
+
+
       #banner_card2 {
-        margin: 0px 00px 20px 0;
+        margin: 120px 00px 20px 0;
         width: 76%;
+        opacity: 1;
+        transition: opacity 0.5s;
+
+        &.-clicked2 {
+          opacity: 0;
+        }
+
+        @media(max-width:950px) {
+          margin: 30px 00px 0px 0;
+
+        }
+
+        @media(max-width:768px) {
+          margin: 30px 00px 0px 0;
+          font-size: 14px;
+        }
+
+        @media(max-width:641px) {
+          margin: 30px auto;
+          width: 100%;
+        }
       }
 
       #banner_card3 {
-        margin: 0px 20px 60px 0;
+        margin: 80px 20px 60px 0;
         width: 76%;
+        opacity: 1;
+        transition: opacity 0.5s;
+
+        &.-clicked3 {
+          opacity: 0;
+        }
+
+        @media(max-width:950px) {
+          margin: 0px 0px 0px 60px;
+
+        }
+
+        @media(max-width:768px) {
+          margin: 20px 10px 15px 0;
+          font-size: 14px;
+        }
+
+        @media(max-width:641px) {
+          margin: 30px auto;
+          width: 100%;
+        }
       }
 
       #banner_card4 {
-        margin: 0px 0px 20px 60px;
+        margin: 0px 0px 0px 60px;
         width: 86%;
+        opacity: 1;
+        transition: opacity 0.5s;
+
+        &.-clicked4 {
+          opacity: 0;
+        }
+
+        @media(max-width:950px) {
+          margin: 40px 0px 20px 60px;
+
+        }
+
+        @media(max-width:768px) {
+          margin: 20px 0px 30px 0px;
+          font-size: 14px;
+
+        }
+
+        @media(max-width:641px) {
+          margin: 30px auto;
+          width: 100%;
+        }
       }
 
       #banner_card5 {
-        margin: 0px 0px 40px 50px;
+        margin: 0px 0px 80px 80px;
         width: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
+
+        &.-clicked5 {
+          opacity: 0;
+
+        }
+
+        @media(max-width:950px) {
+          margin: -140px 0px 0px 20px;
+
+        }
+
+        @media(max-width:768px) {
+          margin: 0px 0px 20px 20px;
+          font-size: 14px;
+
+        }
+
+        @media(max-width:641px) {
+          margin: 30px auto;
+          width: 100%;
+        }
       }
+
+
+      // 手手.
+      .img_block {
+        // border: 1px solid red;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        margin: 0 auto;
+
+
+
+        .the_hand {
+          // border: 1px solid blue;
+          margin: 0;
+          margin: 0px 0px 0 120px;
+          position: relative;
+          width: 60%;
+
+
+
+          @media(max-width:768px) {
+            width: 50%;
+          }
+
+          @media(max-width:641px) {
+            width: 50%;
+            margin: 30px auto 0px auto;
+
+          }
+        }
+
+        // 你很棒
+        .good_job {
+          width: 100%;
+          margin: -131px 00px 0px 0px;
+          // border: 1px solid red;
+
+        }
+      }
+
     }
   }
 
@@ -176,6 +350,7 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        gap: 30px;
         // border: 1px solid black;
 
         @include m() {
@@ -185,16 +360,24 @@
 
 
         div {
+          display: flex;
+          flex-direction: column;
           margin: 0;
+          width: 100%;
+          // border: 1px solid green;
 
           // 角色框框
           .image_block {
-            width: 60%;
+            width: 100%;
             display: flex;
             // border: 1px solid red;
             justify-content: center;
             margin: 0px auto -70px auto;
 
+            @media(max-width:1100px) {
+              margin: 0px auto -30px auto;
+
+            }
 
 
             img {
@@ -212,7 +395,7 @@
 
             display: flex;
             justify-content: center;
-            margin: 20px;
+            // margin: 20px;
             align-items: center;
             position: relative;
             z-index: 2;
@@ -243,34 +426,87 @@
     justify-content: center;
     gap: 60px;
 
+
     @media(max-width:768px) {
       flex-direction: column;
     }
 
-    .three_block_inner {
+
+
+    .three_block_inner1 {
+      display: flex;
+      flex-direction: column;
       // border: 1px solid red;
       text-align: center;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
 
-    .three_block_yellow {
+    .three_block_inner2 {
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid red;
+      text-align: center;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .three_block_inner3 {
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid red;
+      text-align: center;
+      align-items: center;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .router_btn {
       font-size: 20px;
       border: 4px solid $primary-y;
       background-color: #FEFCF0;
       border-radius: 16px;
       margin: 0px auto 20px auto;
+      padding: 20px 0px;
       width: 190px;
       min-width: 190px;
+      text-decoration: none;
+      color: inherit;
+      color: #4961AB;
+      transition: transform 0.3s;
 
-      p {
+
+
+      span {
         margin: 10px 30px 10px 30px;
-        color: #4961AB;
+        width: 190px;
+        min-width: 190px;
+        white-space: nowrap;
       }
+
+
     }
+
+
+
+    img {
+      margin: 0px 0 0 0;
+    }
+
   }
 
 
 
-  // 你也可以加入這場改變
+
+  // ----------你也可以加入這場改變
   .yellow_block_outer {
     display: flex;
     flex-direction: column;
@@ -280,20 +516,11 @@
     margin: 200px 0px 0px 0px;
     // border: 1px solid blue;
 
-
-
-
-
-
     .yellow_block {
       border: 4px solid $primary-y;
       border-radius: 32px;
       background-color: #FEFCF0;
       width: 100%;
-
-
-
-
 
       .yellow_block_inner {
         margin: 80px 80px;
@@ -360,6 +587,7 @@
           height: 240px;
         }
 
+
         img {
           width: 100%;
         }
@@ -377,10 +605,7 @@
   }
 
   .fade-enter,
-  .fade-leave-to
-
-  /* .fade-leave-active in <2.1.8 */
-    {
+  .fade-leave-to {
     opacity: 0;
   }
 
@@ -388,9 +613,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: auto;
+    // height: 600px;
     background-color: #484848;
-
     background-image: url(/src/assets/images/home/home_lamp_bg2.png);
     background-size: auto;
     background-position: center 30px;
@@ -530,18 +754,20 @@
 
     .lamp_man_block {
       // border: 1px solid pink;
-      margin: -170px 0px 0px 0;
+      margin: -260px 0px 0px 0;
       position: relative;
       z-index: 1;
 
-      @media (max-width:940px) {
-        margin: 0px auto 0px auto;
+      @media (max-width:1060px) {
+        margin: -50px auto 0px auto;
 
       }
 
       @media (max-width:576px) {
         display: flex;
         justify-content: center;
+        margin: 0px auto 0px auto;
+
 
       }
 
@@ -550,7 +776,7 @@
         // border: 1px solid red;
         margin: 0 0px 0 60px;
 
-        @media (max-width:940px) {
+        @media (max-width:1060px) {
           margin: 0px auto 0px auto;
 
 
