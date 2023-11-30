@@ -14,6 +14,7 @@ $db_select = "webfolly";
 $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
 // 建立PDO物件
 $pdo = new PDO($dsn, $db_user, $db_pass);
+//以上要關閉
  //建立SQL語法
  //用natural join共同內容做串聯
  $sql = "SELECT * FROM website_link natural join lecture_link";
