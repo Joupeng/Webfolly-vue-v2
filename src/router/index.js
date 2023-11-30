@@ -16,12 +16,7 @@ const routes = [
         name: 'fakenews',
         component: () => import('../views/fakenews.vue')
     },
-    {
-        // 前台 關於誘餌式標題
-        path: '/clickbait',
-        name: 'clickbait',
-        component: () => import('../views/clickbait.vue')
-    },
+
     {
         // 前台 趣味小測驗
         path: '/game',
@@ -34,12 +29,7 @@ const routes = [
         name: 'game_fakenews',
         component: () => import('../views/game_fakenews.vue')
     },
-    {
-        // 前台 標題猜一猜
-        path: '/game_clickbait',
-        name: 'game_clickbait',
-        component: () => import('../views/game_clickbait.vue')
-    },
+
     {
         // 前台 媒體識讀資源
         path: '/medialiteracy',

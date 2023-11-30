@@ -3,65 +3,74 @@
 @import "../components/modalheader";
 
 //  ===分類彈窗===
-.category {
 
-  display: flex;
-  justify-content: center;
-
-  &_frame {
-    max-width: 1030px;
-    background-color: $secondary-y2;
-
-    form {
-      display: flex;
-      justify-content: space-evenly;
-
-      input {
-        margin: 20px 30px;
-        height: 43px;
-
-      }
-
-
-      .inputcategory {
-        width: 730px;
-        border: 2px solid $primary-b;
-        border-radius: 32px;
-        padding: 0 16px;
-      }
-
-      .inputsave {
-        color: $white;
-        @extend .btn;
-        width: 160px;
-        height: 44px;
-        align-items: center;
-        justify-content: center;
-
-        &:hover {
-          color: $black;
-        }
-      }
-
-    }
-
-    .wrap {
-      padding: 30px;
-    }
-  }
-
-
-
-
-}
 
 .modaloutside {
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
-  // position: fixed;
-  // top: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
 
+  .category {
+
+    display: flex;
+    justify-content: center;
+
+    &_frame {
+      max-width: 1030px;
+      background-color: $secondary-y2;
+
+      span {
+        cursor: pointer;
+      }
+
+      form {
+        display: flex;
+        justify-content: space-evenly;
+
+        input {
+          margin: 20px 30px;
+          height: 43px;
+
+        }
+
+
+        .inputcategory {
+          width: 730px;
+          border: 2px solid $primary-b;
+          border-radius: 32px;
+          padding: 0 16px;
+        }
+
+        .inputsave {
+          color: $white;
+          @extend .btn;
+          width: 160px;
+          height: 44px;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            color: $black;
+          }
+        }
+
+      }
+
+      .wrap {
+        padding: 30px;
+      }
+    }
+
+
+
+
+  }
 
 }

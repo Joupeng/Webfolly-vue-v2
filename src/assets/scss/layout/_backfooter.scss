@@ -2,7 +2,7 @@
 @import "../base/font";
 
 .backfooter {
-  min-width: 1200px;
+  min-width: 1440px;
   height: 144px;
   background-color: $neutral-dark;
   padding: 15px 100px 15px 100px;
@@ -13,6 +13,7 @@
     border: green;
     display: flex;
     align-items: center;
+    width: 1440px;
     /* 垂直居中，根據需要調整 */
     justify-content: space-between;
     /* 在容器中平均分配元素，根據需要調整 */
