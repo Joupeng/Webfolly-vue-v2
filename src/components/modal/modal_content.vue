@@ -42,7 +42,7 @@
             <!-- 顯示選擇的檔案名稱 -->
           <!-- <div v-if="selectedFile">
               <p>選擇的檔案：{{ selectedFile.name }}</p>
-                                    </div> -->
+                                      </div> -->
           </span>
 
         </div>
@@ -57,7 +57,7 @@
           <!-- <div v-if="videoLink">
               <p>您輸入的影音連結：{{ videoLink }}</p>
               <video :src="videoLink" controls autoplay></video>
-                                  </div> -->
+                                    </div> -->
           </span>
 
         </div>
@@ -106,7 +106,7 @@ export default {
     handleFileUpload(event) {
       const file = event.target.files[0]; // 獲取上傳的檔案
       this.selectedFile = file; // 將選擇的檔案存儲在 data 中
-      // 在這裡您可以執行上傳檔案的相關邏輯，比如使用 Axios 發送 POST 請求等
+      // 在這裡可以執行上傳檔案的相關邏輯，比如使用 Axios 發送 POST 請求等
     }
   }
 };

@@ -4,9 +4,11 @@
 .back_container {
   display: flex;
   position: relative;
+  max-width: 1200px;
 
   main {
     margin: 46px 87px;
+    max-width: 1180px;
 
     .modalWarning {
       display: none;
@@ -28,7 +30,6 @@
     }
 
     .title {
-      // max-width: 1028px;
       height: 55px;
       background-color: $black;
       color: $white;
@@ -37,6 +38,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 30px;
+      max-width: 1028px;
     }
 
     .button {

@@ -3,9 +3,10 @@
 
 
 
+
   table {
     border-collapse: collapse;
-    min-width: 1028px;
+
 
 
     th {
@@ -50,7 +51,6 @@
       border-bottom: 1px solid $gray-700;
 
 
-
       &:nth-of-type(odd) td {
         background-color: $gray-300;
       }
@@ -62,4 +62,85 @@
 
     }
   }
+}
+
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  max-width: 1028px;
+
+
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    max-width: 1028px;
+
+
+    /* 奇數行的背景色和鼠標懸停效果 */
+    &:nth-of-type(odd) {
+      background-color: $gray-300;
+    }
+
+    &:nth-of-type(even) {
+      background-color: $white;
+    }
+
+    &:hover {
+      background-color: $secondary-y1;
+    }
+
+    &.thead {
+      background-color: $black;
+      color: $white;
+    }
+
+    >div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      border-bottom: 1px solid $neutral-light;
+
+
+      /* 設置每個欄位的寬度 */
+      &.thNumber {
+        width: 50px;
+      }
+
+      &.thEdit,
+      &.thDelet {
+        width: 50px;
+        cursor: pointer;
+      }
+
+      &.thDate {
+        width: 120px;
+      }
+
+      &.thTitle {
+        width: 200px;
+      }
+
+      &.thContent {
+        width: 528px;
+
+      }
+
+      .tableP {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+      }
+
+    }
+
+
+  }
+
 }

@@ -18,116 +18,48 @@
 
 
       <div class="button">
+        <!-- 當點擊按鈕時調用 addSort 方法 -->
+        <div class="btn" @click="addSort" :class="{ '-on': addSortOpen }">+ 新增分類</div>
 
-        <div class="btn" v-on:click="addSort" :class="{ '-on': addSortOpen }">+ 新增分類</div>
-
-
-        <div class="btn" v-on:click="addDetail" :class="{ '-on': addDetailOpen }">+ 新增內容</div>
+        <div class="btn" @click="addDetail" :class="{ '-on': addDetailOpen }">+ 新增內容</div>
 
       </div>
 
-      <div class="wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>編號</th>
-              <th>標題</th>
-              <th>內容</th>
-              <th>日期</th>
-              <th>編輯</th>
-              <th>刪除<i class="fa-solid fa-trash"></i></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div class="block">台灣媒體養成計畫</div>
-              </td>
-              <td>
-                <div class="block">
-                  台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。
-                </div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="delete" @click="deletePicture"><img src="../assets/images/common/back_iconTrashcan.svg"
-                    alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                <div class="block">關鍵評論</div>
-              </td>
-              <td>
-                <div class="block">關鍵評論網以「獨立評論媒體」作為其定位，主要針對的受眾為關注亞洲訊息的海外華僑、在台外籍人士等。</div>
-              </td>
-              <td>2022.10.1</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>
-                <div class="block">全民查假會社</div>
-              </td>
-              <td>
-                <div class="block">全民查假會社，基於多元社會特性，力求呈現真實內容，不受政治立場與偏見影響，以供社會大眾對重大公共利益事項判斷之參考。</div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>
-                <div class="block">台灣事實查核中心</div>
-              </td>
-              <td>
-                <div class="block">台灣事實查核中心，簡稱TFC，是台灣的事實查核非營利組織，推動事實查核業務與活動。</div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>td</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="delete"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-          </tbody>
+      <ul class="table">
+        <!-- thead 部分 -->
+        <li class="thead">
+          <!-- 欄位標題 -->
+          <div class="thNumber">編號</div>
+          <div class="thTitle">標題</div>
+          <div class="thContent">內容</div>
+          <div class="thDate">時間</div>
+          <div class="thEdit"></div>
+          <div class="thDelet"></div>
+        </li>
+
+        <!-- tbody 部分 -->
+        <!-- <li v-for="(task, index) in tasks" :key="index" class="tbody">
+          <div class="lists">{{ task.id }}</div>
+          <div class="lists">{{ task.title_left }}</div>
+          <div class="lists">{{ task.result_left }}</div>
+          <div class="lists">{{ task.answer_left }}</div>
+          <div class="lists">{{ task.title_right }}</div>
+          <div class="lists">{{ task.result_right }}</div>
+          <div class="lists">{{ task.answer_right }}</div>
+          <div class="lists">{{ task.date }}</div>
+          <div class="lists"><button type="button" @click="taskEdit">編輯</button></div>
+          <div class="lists"><button type="button">刪除</button></div>
+        </li> -->
 
 
+        <li class="tbody" v-for="(item, index) in items" :key="index">
+          <!-- 顯示每個欄位的資料 -->
+          <div v-for="key in Object.keys(item)" :key="key" :class="key">
+            <p class="tableP">{{ item[key] }}</p>
+          </div>
+        </li>
+      </ul>
 
-        </table>
-      </div>
 
       <!-- 刪除彈跳視窗 -->
       <div class="modalWarning" :class="{ '-on': deletePic }">
@@ -149,11 +81,154 @@
         </ul>
       </div>
 
+      <!-- 新增分類視窗 -->
+
+      <div class="modaloutside" v-if="addSortOpen">
+        <div class="category">
+
+          <div class="category_frame">
+
+            <header class="modalheader">
+              <span>新增分類</span>
+              <span id="closeModal" class="close" @click="closeModal"><img
+                  src="../assets/images/common/back_iconClose.svg" alt="close"></span>
+            </header>
+
+            <form action="">
+              <input class="inputcategory" type="text" id="category" name="category" placeholder="請輸入新的分類">
+              <input class="inputsave" type="submit" value="儲存變更">
+            </form>
+
+            <div class="wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>編號</th>
+                    <th>分類</th>
+                    <th>刪除<i class="fa-solid fa-trash"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <div class="block">政治國際<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                    </td>
+                    <td>
+                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <div class="block">生活健康<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                    </td>
+                    <td>
+                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <div class="block">科技財金<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                    </td>
+
+                    <td>
+                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                    </td>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===新增文章彈窗=== -->
+      <!-- <div class="content" v-if="addDetailOpen">
+        <div class=" content_frame">
+          <header class="modalheader">
+            <span>新增編輯 / 題目</span>
+            <span id="closeModal" class="close" @click="closeModal"><img src="../assets/images/common/back_iconClose.svg"
+                alt="close"></span>
+          </header>
+
+          <div class="wrap"> -->
+      <!-- 分類 -->
+      <!-- <div>
+
+              <span class="selectTitle">
+                <label for="category">分類選擇</label>
+              </span>
+              <span>
+                <select class="selectText" v-model="selectedCategory" id="categorys" name="categorys">
+                  <option disabled value="">分類</option>
+                  <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}
+                  </option>
+                </select>
+              </span>
+            </div> -->
+
+      <!-- 題目選項 1  -->
+      <!-- <div>
+              <span class="selectTitle">
+
+                <label for="title">題目選項</label></span>
+              <span>
+                <span class="selectCorrect">正確</span>
+                <textarea v-model="title" class="selectText" placeholder="請輸入題目"></textarea>
+                <p>{{ title }}</p>
+              </span>
+            </div> -->
+
+      <!-- 題目選項 2 -->
+      <!-- <div>
+              <span class="selectTitle">
+
+                <label for="title"></label></span>
+              <span>
+                <span class="selectWrong">錯誤</span>
+                <textarea v-model="title" class="selectText" placeholder="請輸入題目"></textarea>
+                <p>{{ title }}</p>
+              </span>
+            </div> -->
+
+
+      <!-- 詳細解答 -->
+      <!-- <div>
+              <span class="selectTitle"> <label for="message">詳細解答</label></span>
+
+              <span> <textarea class="selectContent" v-model="title" placeholder="請輸入內容"></textarea>
+                <p>{{ title }}</p>
+              </span>
+
+
+            </div>
+
+          </div>
+
+          <div class="button">
+            <a href="">
+              <div class="btn">儲存變更</div>
+            </a>
+          </div>
+
+        </div>
+
+      </div> -->
+
+
 
       <!-- <modal_warning></modal_warning> -->
-      <!-- <modal_category></modal_category>
-    <modal_content></modal_content>
-    <modal_quiz></modal_quiz> -->
+      <!-- <modal_category>
+      </modal_category> -->
+      <!-- <modal_content></modal_content>
+    <modal_quiz></modal_quiz>  -->
 
       <pagination></pagination>
 
@@ -191,9 +266,33 @@ export default {
       addSortOpen: false,
       addDetailOpen: false,
       deletePic: false,
+
+
+      items: [
+        {
+          thNumber: '1',
+          thTitle: '標題',
+          thContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+          thDate: '2022.03.12',
+          thEdit: '編輯',
+          thDelet: '刪除'
+        },
+        {
+          thNumber: '2',
+          thTitle: '標題',
+          thContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+          thDate: '2022.03.12',
+          thEdit: '編輯',
+          thDelet: '刪除'
+        },
+      ]
+      // 在這裡加入更多項目...
     };
+
+
   },
   methods: {
+    // 新增分類視窗
     addSort() {
       this.addSortOpen = !this.addSortOpen;
     },
@@ -214,6 +313,8 @@ export default {
     closeModal() {
       // 關閉彈窗
       this.deletePic = false;
+      this.addSortOpen = false;
+      this.addDetailOpen = false;
     }
   }
 }

@@ -1,13 +1,14 @@
 <template>
   <!-- ===分類彈窗=== -->
-  <div class="modaloutside">
+  <div class="modaloutside" v-if="deletePic">
     <div class="category">
 
       <div class="category_frame">
 
         <header class="modalheader">
           <span>新增分類</span>
-          <span id="closeModal" class="close"><img src="../../assets/images/common/back_iconClose.svg" alt="close"></span>
+          <span id="closeModal" class="close" @click="closeModal"><img src="../../assets/images/common/back_iconClose.svg"
+              alt="close"></span>
         </header>
 
         <form action="">
@@ -65,3 +66,19 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      deletePic: false
+    };
+  },
+  methods: {
+    closeModal() {
+      // 關閉彈窗
+      this.addSortOpen = false;
+    }
+  }
+}
+
+</script>
