@@ -296,9 +296,8 @@ export default {
           // alert("答錯囉");
           // alert('123');
           //this.questionText1[this.questionNumber -1].an
-          //觸發動畫
-
-          //時間差後答錯
+          //觸發動畫可以透過加上某個class，觸發原因是判定為錯誤
+          //然後透過時間差先動畫5秒後才是吉祥物(setTimeout)，
           this.questionText1[this.questionNumber - 1].choosed = ans
           this.isCorrect = true;
           this.isResult = false;

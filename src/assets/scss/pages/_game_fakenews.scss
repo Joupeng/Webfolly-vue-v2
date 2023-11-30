@@ -458,10 +458,18 @@
     text-align: center;
     font-size: 24px;
     position: fixed;
-    right: 6%;
+    right: 3%;
     top: 10%;
     transform: translate(-50%, -50%);
     z-index: 99;
+
+    @media(min-width:767.98px) and (max-width:992px) {
+      font-size: 20px;
+    }
+
+    @media(max-width:768px) {
+      font-size: 16px;
+    }
 
   }
 
@@ -515,7 +523,7 @@
 
         }
 
-        @media(min-width:992px) and (max-width:1200px) {
+        @media(max-width:992px) {
           width: 284px;
           height: 320px;
 
@@ -527,23 +535,23 @@
           }
         }
 
-        @media(min-width:768px) and (max-width:992px) {
-          // width: 252px;
-          // height: 284px;
+        //要改成換頁的方式，手機板
+        @media(max-width:768px) {
+          width: 252px;
+          height: 284px;
           font-size: 14px;
 
           &:hover {
-            // width: 284px;
-            // height: 320px;
+            // width: 265px;
+            // height: 298px;
             border: 7px solid $primary-y;
 
           }
         }
 
-        //要改成換頁的方式，手機板
-        @media(max-width:768px) {
-          width: 252px;
-          height: 284px;
+        @media(max-width:575px) {
+          width: 236px;
+          height: 266px;
           font-size: 14px;
 
           &:hover {
