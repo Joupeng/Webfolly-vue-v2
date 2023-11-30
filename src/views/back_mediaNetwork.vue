@@ -38,31 +38,35 @@
         </li>
 
         <!-- tbody 部分 -->
-        <!-- <li v-for="(task, index) in tasks" :key="index" class="tbody">
-          <div class="lists">{{ task.id }}</div>
-          <div class="lists">{{ task.title_left }}</div>
-          <div class="lists">{{ task.result_left }}</div>
-          <div class="lists">{{ task.answer_left }}</div>
-          <div class="lists">{{ task.title_right }}</div>
-          <div class="lists">{{ task.result_right }}</div>
-          <div class="lists">{{ task.answer_right }}</div>
-          <div class="lists">{{ task.date }}</div>
-          <div class="lists"><button type="button" @click="taskEdit">編輯</button></div>
-          <div class="lists"><button type="button">刪除</button></div>
-        </li> -->
 
-
-        <li class="tbody" v-for="(item, index) in items" :key="index">
-          <!-- 顯示每個欄位的資料 -->
-          <div v-for="key in Object.keys(item)" :key="key" :class="key">
-            <p class="tableP">{{ item[key] }}</p>
+        <!-- 顯示每個欄位的資料 -->
+        <li v-for="(item, index) in items" :key="index" class="tbody">
+          <div class="thNumber">
+            <p class="tableP">{{ item.thNumber }}</p>
           </div>
+          <div class="thTitle">
+            <p class="tableP">{{ item.thTitle }}</p>
+          </div>
+          <div class="thContent">
+            <p class="tableP">{{ item.thContent }}</p>
+          </div>
+          <div class="thDate">
+            <p class="tableP">{{ item.thDate }}</p>
+          </div>
+          <div class="thEdit">
+            <p class="tableP">{{ item.thEdit }}</p>
+          </div>
+          <div class="thDelet" @click="warning">
+            <p class="tableP">{{ item.thDelet }}</p>
+          </div>
+
         </li>
+
       </ul>
 
 
       <!-- 刪除彈跳視窗 -->
-      <div class="modalWarning" :class="{ '-on': deletePic }">
+      <div class="modalWarning" v-if="warningOpen">
         <ul>
           <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
           </li>
@@ -196,8 +200,8 @@
                 <textarea v-model="title" class="selectText" placeholder="請輸入題目"></textarea>
                 <p>{{ title }}</p>
               </span>
-            </div> -->
-
+            </div>
+ -->
 
       <!-- 詳細解答 -->
       <!-- <div>
@@ -265,7 +269,7 @@ export default {
     return {
       addSortOpen: false,
       addDetailOpen: false,
-      deletePic: false,
+      warningOpen: false,
 
 
       items: [
@@ -292,18 +296,17 @@ export default {
 
   },
   methods: {
-    // 新增分類視窗
+    // 彈跳視窗打開
     addSort() {
       this.addSortOpen = !this.addSortOpen;
     },
     addDetail() {
       this.addDetailOpen = !this.addDetailOpen
     },
-    // ====刪除警告===
-    deletePicture() {
-      this.deletePic = true;
-      // alert('fjosa');
+    warning() {
+      this.warningOpen = !this.warningOpen;
     },
+    // ====刪除警告===
     deleteRow() {
       // 在此加入程式碼以刪除該行的表格項目（<tr>）
       // 例如，可以使用您的 deletePicture 方法來處理
@@ -312,9 +315,9 @@ export default {
     },
     closeModal() {
       // 關閉彈窗
-      this.deletePic = false;
       this.addSortOpen = false;
       this.addDetailOpen = false;
+      this.deleteModalOpen = false;
     }
   }
 }
