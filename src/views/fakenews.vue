@@ -3,9 +3,31 @@
     <section class="fakenews">
 
         <!-- banner -->
-        <section class="banner">
-            <img src="/src/assets/images/fakenews/fakenews_banner.png" alt="">
-        </section>
+        <div class="banner_block">
+            <!-- 手機 -->
+            <img class="img_phone" src="/src/assets/images/fakenews/fakenews_phone.svg" alt="">
+
+            <div class="ch_block">
+
+                <div class="ch_01">
+                    <img src="/src/assets/images/fakenews/fakenews_banner_ch01.svg" alt="">
+                    <img class="ch_face1" src="/src/assets/images/fakenews/fakenews_banner_ch01_face.svg" alt="">
+
+                </div>
+
+                <div class="ch_02">
+                    <img src="/src/assets/images/fakenews/fakenews_banner_ch02.svg" alt="">
+                    <img class="ch_face2" src="/src/assets/images/fakenews/fakenews_banner_ch02_face.svg" alt="">
+                </div>
+
+                <div class="ch_03">
+                    <img src="/src/assets/images/fakenews/fakenews_banner_ch03.svg" alt="">
+                    <img class="ch_face3" src="/src/assets/images/fakenews/fakenews_banner_ch03_face.svg" alt="">
+                </div>
+
+            </div>
+
+        </div>
 
 
 
@@ -60,7 +82,7 @@
                     <swiper-slide class="swiper-slide">
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style01.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style01_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_1">諷刺惡搞</p>
@@ -74,7 +96,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style02.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style02_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_2">題文不符</p>
@@ -87,7 +109,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style03.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style03_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_3">誤導性內容</p>
@@ -100,7 +122,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style04.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style04_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_4">脈絡錯置</p>
@@ -112,7 +134,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style05.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style05_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_5">假冒性內容</p>
@@ -124,7 +146,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style06.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style06_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_6">操弄性內容</p>
@@ -136,7 +158,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style07.png" alt="">
+                                <img src="/src/assets/images/fakenews/fakenews_style07_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_7">虛構性內容</p>

@@ -8,27 +8,47 @@
 
         <!-- grid_test -->
         <div class="grid_container">
+
             <div class="wrapper">
-                <div class="banner_card" id="banner_card1">
+
+                <div class="banner_card" id="banner_card1" :class="{ '-clicked1': isClicked1 }">
                     ＯＯＯ被讚逆生長「露肚裝」大秀性感螞蟻腰！
+                    <button class="close_button" @click="toggleOpacity1()" :class="{ '-clicked1': isClicked1 }">X</button>
                 </div>
 
-                <div class="banner_card" id="banner_card2">
+                <div class="banner_card" id="banner_card2" :class="{ '-clicked2': isClicked2 }">
                     【快報】網傳「水梨7月中旬前上市，代表有用生長激素，會影響生育」？
+                    <button class="close_button" @click="toggleOpacity2()" :class="{ '-clicked2': isClicked2 }">X</button>
+
                 </div>
 
-                <div class="banner_card" id="banner_card3">
+                <div class="banner_card" id="banner_card3" :class="{ '-clicked3': isClicked3 }">
                     竟然從這個地方找翻倍股？億級大戶ＯＯＯ不看盤選股秘訣大公開！
+                    <button class="close_button" @click="toggleOpacity3()" :class="{ '-clicked3': isClicked3 }">X</button>
+
                 </div>
 
-                <div class="banner_card" id="banner_card4">
+                <div class="banner_card" id="banner_card4" :class="{ '-clicked4': isClicked4 }">
                     【快報】網傳「千萬別打美國研發新型的新冠疫苗， 美國人自己都沒有人打，台灣居然領先全球」？
+                    <button class="close_button" @click="toggleOpacity4()" :class="{ '-clicked4': isClicked4 }">X</button>
+
                 </div>
 
-                <div class="banner_card" id="banner_card5">
+                <div class="banner_card" id="banner_card5" :class="{ '-clicked5': isClicked5 }">
                     【震驚】網傳「最近千萬不要去全家、7-11買茶葉蛋，昨晚電視名嘴他們說了，現在超商的茶葉蛋是進口的巴西毒蛋」？
+                    <button class="close_button" @click="toggleOpacity5()" :class="{ '-clicked5': isClicked5 }">X</button>
+
                 </div>
+                <!-- <br> -->
+                <div class="img_block">
+                    <img v-if="showHand" src="/src/assets/images/home/home_banner_hand.svg" alt="" class="the_hand">
+                    <img v-else src="/src/assets/images/home/Yellowy_Gif01.gif" alt="" class="good_job">
+
+                </div>
+
+
             </div>
+
         </div>
 
 
@@ -47,7 +67,8 @@
 
                     <div class="block_column">
                         <div>
-                            <div class="image_block"><img src="/src/assets/images/home/home_blacky.svg" alt=""></div>
+                            <div class="image_block"><img src="/src/assets/images/home/Black_Gif_bugKiller.gif" alt="">
+                            </div>
                             <div class="titleBlockB_inner">
                                 <p class="titleText2">網傳:登山時隨身帶一瓶殺蟲劑，遇到虎頭蜂群可以噴殺救命?</p>
                             </div>
@@ -55,9 +76,9 @@
                         </div>
 
                         <div>
-                            <div class="image_block"><img src="/src/assets/images/home/home_bluey.svg" alt=""></div>
+                            <div class="image_block"><img src="/src/assets/images/home/Blue_Gif_guilty.gif" alt=""></div>
                             <div class="titleBlockB_inner">
-                                <p class="titleText2">XXX勝訴！圈因女方一個舉動？匿名陪審團揭全案四個關鍵！</p>
+                                <p class="titleText2">XXX勝訴！全因女方一個舉動？匿名陪審團揭全案四個關鍵！</p>
                             </div>
                         </div>
                     </div>
@@ -78,23 +99,28 @@
                 </div>
 
                 <div class="three_block">
-                    <div class="three_block_inner">
-                        <div class="three_block_yellow">
-                            <p>認識假訊息</p>
-                        </div>
+                    <div class="three_block_inner1">
+
+                        <router-link :to="{ name: 'fakenews' }" @click="closeNav" :class="{ '-clicked': isClicked }"
+                            class="router_btn "><span
+                                :class="{ 'frontheader_menu-on': $route.name == 'fakenews' }">關於假訊息</span>
+                        </router-link>
+
                         <div><img src="/src/assets/images/home/home_bluey_small.svg" alt=""></div>
                     </div>
-                    <div class="three_block_inner">
-                        <div class="three_block_yellow">
-                            <p>趣味小測驗</p>
-                        </div>
+                    <div class="three_block_inner2">
+                        <router-link :to="{ name: 'game' }" @click="closeNav" :class="{ '-clicked': isClicked }"
+                            class="router_btn "><span :class="{ 'frontheader_menu-on': $route.name == 'game' }">趣味小測驗</span>
+                        </router-link>
                         <div><img src="/src/assets/images/home/home_yellow_small.svg" alt=""></div>
 
                     </div>
-                    <div class="three_block_inner">
-                        <div class="three_block_yellow">
-                            <p>媒體識讀資源</p>
-                        </div>
+                    <div class="three_block_inner3">
+                        <router-link :to="{ name: 'medialiteracy' }" @click="closeNav" :class="{ '-clicked': isClicked }"
+                            class="router_btn "><span
+                                :class="{ 'frontheader_menu-on': $route.name == 'medialiteracy' }">媒體釋讀資源</span>
+                        </router-link>
+
 
                         <div><img src="/src/assets/images/home/home_ligBlue_small.svg" alt=""></div>
 
@@ -154,19 +180,24 @@ export default {
     data() {
         return {
             isClicked: false,
-            isSad: true
+            isClicked1: false,
+            isClicked2: false,
+            isClicked3: false,
+            isClicked4: false,
+            isClicked5: false,
+            showHand: true,
+            isSad: true,
+
+
         };
     },
     methods: {
+
         toDonate() {
             let donate = document.getElementById("donate");
-            alert("fff")
             donate.checked = false;
         },
-        // changeBackground() {
-        //     this.isClicked = !this.isClicked;
-        //     this.isClicked = true;
-        // }
+
         changeBackground() {
             this.isClicked = !this.isClicked;
             // 根據 isClicked 狀態來切換背景圖片
@@ -178,8 +209,35 @@ export default {
                 // 如果 isClicked 為 false，使用第二張背景圖片
                 this.$refs.backgroundImage.style.backgroundImage = "url(/src/assets/images/home/home_lamp_bg2.png)";
             }
+        },
+
+        toggleOpacity1() {
+            this.isClicked1 = !this.isClicked1;
+            this.checkShowHand();
+        },
+        toggleOpacity2() {
+            this.isClicked2 = !this.isClicked2;
+            this.checkShowHand();
+        },
+        toggleOpacity3() {
+            this.isClicked3 = !this.isClicked3;
+            this.checkShowHand();
+        },
+        toggleOpacity4() {
+            this.isClicked4 = !this.isClicked4;
+            this.checkShowHand();
+        },
+        toggleOpacity5() {
+            this.isClicked5 = !this.isClicked5;
+            this.checkShowHand();
+        },
+        checkShowHand() {
+            this.showHand = !(this.isClicked1 && this.isClicked2 && this.isClicked3 && this.isClicked4 && this.isClicked5);
         }
+
     },
+
+
     components: {
         frontnav,
         frontfooter,
