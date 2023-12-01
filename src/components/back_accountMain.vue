@@ -51,12 +51,12 @@
             <img src="@/assets/images/donate/donate_rightarrow.svg" alt="rightarrow">
           </div>
           <div class="input_block">
-            <input class="unified_input" type="text" name="oldPWD" :value="changePWD.oldPWD" placeholder="請輸入舊密碼"
-              :class="{ '-on': isOpen === true }">
-            <input class="unified_input" type="text" name="newPWD" :value="changePWD.newPWD" placeholder="請輸入新密碼"
-              :class="{ '-on': isOpen === true }">
-            <input class="unified_input" type="text" name="confirmPWD" :value="changePWD.confirmPWD" placeholder="請確認新密碼"
-              :class="{ '-on': isOpen === true }">
+            <input class="unified_input" type="text" name="oldPWD" placeholder="請輸入舊密碼"
+              :class="{ '-on': isOpen === true }" v-model.trim="changePWD.oldPWD">
+            <input class="unified_input" type="text" name="newPWD" placeholder="請輸入新密碼"
+              :class="{ '-on': isOpen === true }" v-model.trim="changePWD.newPWD">
+            <input class="unified_input" type="text" name="confirmPWD" placeholder="請確認新密碼"
+              :class="{ '-on': isOpen === true }" v-model.trim="changePWD.confirmPWD">
 
 
             <div class="final_block">
@@ -80,34 +80,31 @@
       <div class="left_block edit" :class="{ '-on': isOpen2 === true }">
         <div>
           <label class="label grid11" for="addUserID">使用者編號</label>
-          <input class="unified_input grid12" type="text" name="addUserID" placeholder="請輸入編號" v-model.trim="addUserID"
-            v-on:blur="handleAddUserID()">
+          <input class="unified_input grid12" type="text" name="addUserID" placeholder="請輸入編號" v-model.trim="addUserID">
         </div>
 
         <div>
           <label class="label grid21" for="addUserName">使用者名稱</label>
           <input class="unified_input grid22" type="text" name="addUserName" placeholder="請輸入名稱"
-            v-model.trim="addUserName" v-on:blur="handleAddUserName()">
+            v-model.trim="addUserName">
         </div>
         <div>
           <label class="label grid31" for="addPermission">使用者權限</label>
           <input class="unified_input grid32" type="text" name="addPermission" placeholder="請輸入權限(管理員/編輯)"
-            v-model.trim="addPermission" v-on:blur="handleAddPermission()">
+            v-model.trim="addPermission">
         </div>
         <div>
           <label class="label grid41" for="addMail">電子信箱</label>
-          <input class="unified_input grid42" type="text" name="addMail" placeholder="請輸入電子信箱" v-model.trim="addMail"
-            v-on:blur="handleAddMail()">
+          <input class="unified_input grid42" type="text" name="addMail" placeholder="請輸入電子信箱" v-model.trim="addMail">
         </div>
         <div>
           <label class="label grid51" for="addPhone">電話</label>
-          <input class="unified_input grid52" type="text" name="addPhone" placeholder="請輸入電話" v-model.trim="addPhone"
-            v-on:blur="handleAddPhone()">
+          <input class="unified_input grid52" type="text" name="addPhone" placeholder="請輸入電話" v-model.trim="addPhone">
         </div>
         <div>
           <label class="label grid51" for="addPassword">密碼</label>
           <input class="unified_input grid52" type="text" name="addPassword" placeholder="請輸入密碼"
-            v-model.trim="addPassword" v-on:blur="handleAddPassword()">
+            v-model.trim="addPassword">
         </div>
 
       </div>
@@ -171,9 +168,11 @@ export default {
         admPERMISSION: "",
         admEMAIL: "",
         admPHONE: "",
+        admPASSWORD: "",
       },
       // adminINF2: { // },
       changePWD: {
+        refPWD: "",
         oldPWD: "",
         newPWD: "",
         confirmPWD: "",
@@ -222,23 +221,28 @@ export default {
 
       return null;
     },
-
     // 右控制新增按鈕出現消失
     isOpenBTN() {
       this.isOpen2 = !this.isOpen2;
     },
     // 右控制新增按鈕事件
     handleNewAdmin() {
-      this.isOpenBTN();
-      // alert("handleNewAdmin")
+      // 清空上次的新增值
+      this.addUserID = "",
+        this.addUserName = "",
+        this.addPermission = "",
+        this.addMail = "",
+        this.addPhone = "",
+        this.addPassword = "",
+        this.isOpenBTN();
     },
-    // 新增資料的BLUR事件
+    // 每個新增資料的alert
     handleAddUserID() {
       // 1.設定id 8碼數字
       let addUserID = this.addUserID;
       if (/^\d{8}$/.test(addUserID)) {
         console.log(this.addUserID);
-        this.newAdmin.push(this.addUserID);
+        // this.newAdmin.push(this.addUserID);
       } else {
         alert('請輸入八碼數字作為使用者編號');
       }
@@ -302,19 +306,53 @@ export default {
       };
     },
     // 右控制儲存按鈕事件-將資料存到資料庫
+
+    // 差串到資料庫
     async saveNewAdmin() {
-      // 1.
       try {
-        const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php");
-        const data = await saveNewAdmin.json();
-        // console.log(data);
-        this.saveNewAdmin = data;
-        console.log(this.adminList);
+
+
+        //1.執行所有的欄位驗證
+        this.handleAddUserID();
+        this.handleAddUserName();
+        this.handleAddPermission();
+        this.handleAddMail();
+        this.handleAddPhone();
+        this.handleAddPassword();
+        this.isOpenBTN();
+        // 2.進行儲存 
+
+        const data = {
+          id: this.addUserID,
+          NAME: this.addUserName,
+          PERMISSION: this.addPermission,
+          MAIL: this.addMail,
+          PHONE: this.addPhone,
+          PASSWORD: this.addPassword,
+        };
+        console.log(data);
+
+        // 3.回傳json檔到php
+        const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            // "Content-Type": "text/plain",
+
+          },
+          body: JSON.stringify(data), // data can be string or {object}!
+        });
+        if (!response.ok) {
+          throw new Error(`網路回應錯誤: ${response.status}`);
+        };
+        const resData = await response.json();
+        console.log('PHP response:', response);
+
       } catch (message) {
         console.log(`Error : ${message}`);
       }
     },
-
     // 抓取管理員清單
     async showAdminList() {
       try {
@@ -345,32 +383,85 @@ export default {
       this.adminINF.admEMAIL = this.adminFilter[0].MAIL;
       this.adminINF.admPHONE = this.adminFilter[0].PHONE;
     },
-    // 忘記密碼功能
-    // async handleUpdatePWD() {
-    //   try {
-    //     document.write(this.changePWD.oldPWD)
-    //     console.log(this.changePWD.oldPWD)
+    // 找到登入者的密碼
+    getRefPWD() {
+      // 取得資料表
+      console.log(this.adminList);
+      this.cookie = this.getCookie('adminName');
+      let refAdmin = this.adminList.filter(item => item.NAME === this.cookie);
+      const refPWD = refAdmin[0].PASSWORD;
+      return refPWD;
+    },
 
-    //   } catch (message) {
-    //     console.log(`Error : ${message}`);
-    //   }
-    //   // 將得到的值變成陣列
 
-    //   const arrChangePWD = [
-    //     this.changePWD.oldPWD,
-    //     this.changePWD.newPWD,
-    //     this.changePWD.confirmPWD,
-    //   ].filter(value => value !== "");
-    //   console.log(arrChangePWD)
-    //   localStorage.setItem('adminValues', JSON.stringify(arrChangePWD))
+    // 更新密碼比對功能
+    confirmPWD() {
+      let refPWD = this.getRefPWD();
+      // console.log(refPWD);
+      let oldPWD = this.changePWD.oldPWD;
+      let newPWD = this.changePWD.newPWD;
+      let confirmPWD = this.changePWD.confirmPWD;
+      //1.比對原本的密碼與輸入的舊密碼是否相同 
+      if (refPWD != oldPWD) {
+        alert('請輸入正確的舊密碼')
+      }
+      if (newPWD.length < 6) {
+        alert("密碼長度需大於六位數")
+      }
+      //2.比對新舊密碼是否重複
+      if (oldPWD === newPWD) {
+        alert('密碼重複');
+      }
+      //3.新密碼確認密碼是否不同
+      if (newPWD != confirmPWD) {
+        alert('請在新密碼與確認的密碼輸入相同值');
+      }
+      if (refPWD === oldPWD && newPWD.length >= 6 && oldPWD != newPWD && newPWD === confirmPWD) {
+        alert("更新成功");
+      };
+      return true;
+    },
+    // 更新密碼執行回傳的函式
+    async handleUpdatePWD() {
+      try {
+        // 1.進行密碼比對
+        this.confirmPWD();
+        // 不成功執行的函式
+        // if (!this.confirmPWD()) { };
+        // 2.const陣列[oldPWD, newPWD]
+        const PWD = {
+          oldPWD: this.changePWD.oldPWD,
+          newPWD: this.changePWD.newPWD,
+        };
+        console.log(PWD);
+        // 3.回傳值
+        const response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(PWD),
+        });
 
-    //   // if (this.changePWD.length > 0) {
-    //   //   // 取得舊密碼
-    //   //   console.log(this.changePWD[0])
+        if (!response.ok) {
+          throw new Error(`網路回應錯誤: ${response.status}`);
+        };
+        const resData = await response.json();
+        console.log('PHP response:', resData);
+        // 5.清空輸入的數值
+        this.changePWD.refPWD = "";
+        this.changePWD.oldPWD = "";
+        this.changePWD.newPWD = "";
+        this.changePWD.confirmPWD = "";
+      }
+      catch (message) {
+        console.log(`Error : ${message}`);
+      }
 
-    //   // };
-    //   alert('updatePWD')
-    // }
+    },
+
+
   },
   mounted() {
     this.showAdminList();

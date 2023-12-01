@@ -97,7 +97,7 @@ export default {
       try {
         let getAdmin = await fetch("http://localhost/AJAX/APITEST/b_login.php");
         const data = await getAdmin.json();
-        // console.log(data);
+        console.log(data);
         // 取得name跟PWD放入陣列adminInfo
         let adminInfo = [];
         data.forEach(item => {
