@@ -1,23 +1,23 @@
 <?php
-// include("DBconnect.php");
+include("DBconnect.php");
 // 允許不同源
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+// header("Access-Control-Allow-Headers: Content-Type");
 // 連自己的資料庫
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "password";
-// 資料庫的名稱
-$db_select = "webfolly";
-//建立資料庫連線物件
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-// 建立PDO物件
-$pdo = new PDO($dsn, $db_user, $db_pass);
-//以上要關閉
+// $db_host = "127.0.0.1";
+// $db_user = "root";
+// $db_pass = "password";
+// // 資料庫的名稱
+// $db_select = "webfolly";
+// //建立資料庫連線物件
+// $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+// // 建立PDO物件
+// $pdo = new PDO($dsn, $db_user, $db_pass);
+// //以上要關閉
  //建立SQL語法
  //用natural join共同內容做串聯
- $sql = "SELECT * FROM website_link natural join lecture_link";
+ $sql = "SELECT * FROM website_link t1 join lecture_link t2 on t1.ID = t2.ID";
 
  //執行並查詢，會回傳查詢結果的物件，必須使用fetch、fetchAll...等方式取得資料
 $statement = $pdo->prepare($sql);

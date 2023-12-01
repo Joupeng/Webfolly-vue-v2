@@ -1,18 +1,18 @@
 <?php
 //到時候要換成一起的DB
-// include("DBconnect.php");
+include("DBconnect.php");
 // // 允許不同源
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-// 連自己的資料庫
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "password";
-// 資料庫的名稱
-$db_select = "webfolly";
-//建立資料庫連線物件
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+// header("Access-Control-Allow-Headers: Content-Type");
+// // 連自己的資料庫
+// $db_host = "127.0.0.1";
+// $db_user = "root";
+// $db_pass = "password";
+// // 資料庫的名稱
+// $db_select = "webfolly";
+// //建立資料庫連線物件
+// $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
 // 建立PDO物件
 $pdo = new PDO($dsn, $db_user, $db_pass);
 
