@@ -26,6 +26,20 @@
     margin: 0 70px;
     // border: 1px solid green;
 
+
+    // -on隱藏左邊預設欄位
+    .left_block.-on {
+      display: none;
+    }
+
+    .left_block.edit {
+      display: none;
+    }
+
+    .left_block.edit.-on {
+      display: block;
+    }
+
     // 左邊欄位
     .left_block {
       display: flex;
@@ -57,7 +71,6 @@
         }
       }
 
-
       // 更改密碼區域
       .passWord_block {
         // border: 1px solid red;
@@ -71,6 +84,16 @@
           // border: 1px solid green;
           margin: 0 0px 0 0;
 
+          &:hover {
+            cursor: pointer;
+            color: $indigo;
+            font-weight: bold;
+          }
+
+          &.-on img {
+            transform: rotate(270deg);
+          }
+
           p {
             display: inline-flex;
             // border: 1px solid red;
@@ -82,8 +105,11 @@
             width: 14px;
             transform: rotate(90deg);
             margin: 0;
+
           }
         }
+
+
 
         .input_block {
           width: 400px;
@@ -92,6 +118,11 @@
 
           input {
             margin: 0 0 30px 0;
+            display: none;
+
+            &.-on {
+              display: block;
+            }
           }
 
           // 忘記密碼儲存變更
@@ -118,6 +149,15 @@
                 width: 160px;
                 display: block;
               }
+
+              .btn {
+                display: none;
+
+              }
+
+              .btn.-on {
+                display: block;
+              }
             }
           }
         }
@@ -139,14 +179,13 @@
         margin: 0 0 24px 0;
 
         thead {
-
-
           tr {
             th {
               color: white;
               background-color: #343137;
               padding: 20px 0;
               min-width: 100px;
+              text-align: center;
 
               p {
                 margin: 0px 10px;
@@ -157,14 +196,26 @@
         }
 
         tbody {
+          .tr {
+            &:nth-child(n):hover {
+              background-color: yellow;
+
+            }
+          }
+
           .td {
-            padding: 20px 0;
+            padding: 20px 4px;
             text-align: center;
+          }
+
+          .w200 {
+            width: 200px;
+            word-break: bresak-all;
           }
 
           .td_gray {
             background-color: #F2F2F2;
-            padding: 20px 0;
+            padding: 20px 4px;
             text-align: center;
 
 
@@ -175,15 +226,30 @@
       // 新增儲存變更
       .btnBox {
         display: flex;
-        // border: 1px solid red;
         justify-content: flex-end;
+        margin-bottom: 12px;
 
         .btn {
 
           &:first-child {
             margin-right: 8px;
           }
+
+          &:first-child.-on {
+            display: none;
+          }
+
+          &:nth-child(2) {
+            display: none;
+          }
+
+          &:nth-child(2).-on {
+            display: block;
+            background-color: $indigo;
+            color: white;
+          }
         }
+
 
         button {
           width: 160px;
