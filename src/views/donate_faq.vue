@@ -165,10 +165,11 @@ export default {
     // 一開始資料就抓好了
     mounted() {
         // this.fetchQaData();
-        fetch('http://localhost/API/donate_faq.php', {
+        // fetch('http://localhost/API/donate_faq.php'
+        fetch('API/donate_faq.php', {
             method: 'POST',
             // 非同源
-            mode: 'cors',
+            // mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
