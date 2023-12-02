@@ -353,7 +353,8 @@ export default {
     // 抓取管理員清單
     async showAdminList() {
       try {
-        let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
+        // let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
+        let getAdminList = await fetch("API/b_account.php");
         const data = await getAdminList.json();
         // console.log(data);
         this.adminList = data;
