@@ -18,12 +18,13 @@
         <!-- 相關連結 -->
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
-            role="tab" aria-controls="home-tab-pane" aria-selected="true">相關連結</button>
+            role="tab" aria-controls="home-tab-pane" aria-selected="true" :value="webLink">相關連結</button>
         </li>
         <!-- 相關課程 -->
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
-            role="tab" aria-controls="profile-tab-pane" aria-selected="false">相關課程</button>
+            role="tab" aria-controls="profile-tab-pane" aria-selected="false" :value="webClass"
+            @click="getLink">相關課程</button>
         </li>
 
       </ul>
@@ -92,6 +93,9 @@ export default {
   },
   data() {
     return {
+      webLink: '相關連結',
+      webClass: '相關課程',
+
       newlist: [
         // {
         //   image: new URL('../assets/images/medialiteracy/A1_N.png', import.meta.url).href,
@@ -155,15 +159,45 @@ export default {
 
     }
   },
+  methods: {
+    getLink() {
+      // alert("123");
+      fetch('http://localhost/API/medialiteracy.php', {
+        method: 'POST',
+        //非同源
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 送出去的時候是字串格式
+        body: JSON.stringify({ webClass: this.webClass })
+      })
+        .then(resp => resp.json())
+        // 處理從伺服器接收到的數據（questions 是解析後的 JSON 數據）
+        .then(media_links => {
+          this.courses = media_links.map(item => {
+            return {
+              title: item.TITLE,
+              from: item.LINKS,
+              direction: item.DIRECTION,
+              source: item.SOURCE,
+              photo: item.PHOTO
+            }
+
+          })
+        })
+    }
+  },
   mounted() {
-    // fetch('http://localhost/API/medialiteracy.php'
-    fetch('API/medialiteracy.php', {
+    fetch('http://localhost/API/medialiteracy.php', {
       method: 'POST',
       //非同源
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
+      // 送出去的值
+      body: JSON.stringify({ webLink: this.webLink })
     })
       .then(resp => resp.json())
       // 處理從伺服器接收到的數據（questions 是解析後的 JSON 數據）
@@ -175,18 +209,12 @@ export default {
             description: item.DESCRIPTION,
             image: item.IMAGE
           }
-        }),
-          this.courses = media_links.map(item => {
-            return {
-              title: item.TITLE,
-              from: item.LINKS,
-              direction: item.DIRECTION,
-              source: item.SOURCE,
-              photo: item.PHOTO
-            }
-
-          })
+        })
       })
+
+
+
+
 
   }
 

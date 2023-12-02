@@ -10,7 +10,7 @@
     <!-- 側邊欄 -->
     <backaside></backaside>
     <!-- 主要欄目 -->
-    <main>
+    <main class="fakeNews">
       <div class="title">
         <h2>假訊息追擊-題庫</h2>
       </div>
@@ -72,44 +72,46 @@
           <div class="content_window">
             <div class="input_number all_style">
               <p>編號</p>
-              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填">
-              <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" v-if="addWindow"> -->
-              <!-- <input type="text" name="" id="" class="input_box" v-model.trim="tasks.id[i]" v-if="editWindow"> -->
-
+              <!-- 根據編輯跟輸入頁面呈現不同的輸入框 -->
+              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
+                v-if="addWindow">
+              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[0].id" v-if="editWindow">
             </div>
             <div class="input_title_left all_style">
               <p>左側題目</p>
-              <textarea class="input_box_textarea" v-model.trim="taskText[0].title_left"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="taskText[0].title_left" v-if="addWindow"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="tasks[0].title_left" v-if="editWindow"></textarea>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].title_left"> -->
             </div>
             <div class="input_result_left all_style">
               <p>左側答案</p>
               <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].result_left"
-                placeholder="正確填寫1，錯誤填寫2">
+                placeholder="正確填寫1，錯誤填寫2" v-if="addWindow">
             </div>
             <div class="input_answer_left all_style">
               <p>左側詳解</p>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].answer_left"> -->
-              <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_left"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_left" v-if="addWindow"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="tasks[0].answer_left" v-if="editWindow"></textarea>
             </div>
             <div class="input_title_left all_style">
               <p>右側題目</p>
-              <textarea class="input_box_textarea" v-model.trim="taskText[0].title_right"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="taskText[0].title_right" v-if="addWindow"></textarea>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].title_right"> -->
             </div>
             <div class="input_result_left all_style">
               <p>右側答案</p>
               <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].result_right"
-                placeholder="正確填寫1，錯誤填寫2">
+                placeholder="正確填寫1，錯誤填寫2" v-if="addWindow">
             </div>
             <div class="input_answer_left all_style">
               <p>右側詳解</p>
-              <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_right"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_right" v-if="addWindow"></textarea>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].answer_right"> -->
             </div>
             <div class="input_date all_style">
               <p>日期</p>
-              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].date">
+              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].date" v-if="addWindow">
             </div>
             <div class="button_add_window"><button type="button" @click="taskAdd" v-if="addWindow">新增</button></div>
             <div class="button_add_window"><button type="button" @click="taskEditOk" v-if="editWindow">修改完成</button></div>
