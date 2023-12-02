@@ -1,17 +1,9 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Origin: *");
 // header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 // header("Access-Control-Allow-Headers: Content-Type");
-
-// include("./DBconnect.php");
-// 連接資料庫
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "LEXI0630";
-$db_select = "webfolly";
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-$pdo = new PDO($dsn, $db_user, $db_pass);
-
+// =============取消非同源 連接資料庫
+include("./DBconnect.php");
 
 $sql = "SELECT * FROM admin";
 

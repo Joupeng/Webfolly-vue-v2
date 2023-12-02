@@ -310,8 +310,6 @@ export default {
     // 差串到資料庫
     async saveNewAdmin() {
       try {
-
-
         //1.執行所有的欄位驗證
         this.handleAddUserID();
         this.handleAddUserName();
@@ -321,7 +319,6 @@ export default {
         this.handleAddPassword();
         this.isOpenBTN();
         // 2.進行儲存 
-
         const data = {
           id: this.addUserID,
           NAME: this.addUserName,
@@ -333,21 +330,21 @@ export default {
         console.log(data);
 
         // 3.回傳json檔到php
-        const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+        //const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+        const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
             // "Content-Type": "text/plain",
-
           },
           body: JSON.stringify(data), // data can be string or {object}!
         });
-        if (!response.ok) {
-          throw new Error(`網路回應錯誤: ${response.status}`);
-        };
-        const resData = await response.json();
-        console.log('PHP response:', response);
+        // if (!response.ok) {
+        //   throw new Error(`網路回應錯誤: ${response.status}`);
+        // };
+        // const resData = await response.json();
+        // console.log('PHP response:', response);
 
       } catch (message) {
         console.log(`Error : ${message}`);
@@ -435,7 +432,8 @@ export default {
         };
         console.log(PWD);
         // 3.回傳值
-        const response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
+        //  const response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
+        const response = await fetch("API/b_changepassword.php", {
           method: "POST",
           headers: {
             "Accept": "application/json",
@@ -444,11 +442,12 @@ export default {
           body: JSON.stringify(PWD),
         });
 
-        if (!response.ok) {
-          throw new Error(`網路回應錯誤: ${response.status}`);
-        };
-        const resData = await response.json();
-        console.log('PHP response:', resData);
+        // if (!response.ok) {
+        //   throw new Error(`網路回應錯誤: ${response.status}`);
+        // };
+        // 沒有回傳值
+        // const resData = await response.json();
+        // console.log('PHP response:', resData);
         // 5.清空輸入的數值
         this.changePWD.refPWD = "";
         this.changePWD.oldPWD = "";
