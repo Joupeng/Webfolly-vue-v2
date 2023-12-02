@@ -154,17 +154,17 @@
       </div>
 
       <!-- ===新增文章彈窗=== -->
-      <!-- <div class="content" v-if="addDetailOpen">
-        <div class=" content_frame">
+      <div class="content" v-if="addDetailOpen">
+        <div class="content_frame">
           <header class="modalheader">
-            <span>新增編輯 / 題目</span>
-            <span id="closeModal" class="close" @click="closeModal"><img src="../assets/images/common/back_iconClose.svg"
-                alt="close"></span>
+            <span>新增編輯 / 文章</span>
+            <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
+                @click="closeModal"> </span>
           </header>
 
-          <div class="wrap"> -->
-      <!-- 分類 -->
-      <!-- <div>
+          <div class="wrap">
+            <!-- 分類 -->
+            <div>
 
               <span class="selectTitle">
                 <label for="category">分類選擇</label>
@@ -176,36 +176,50 @@
                   </option>
                 </select>
               </span>
-            </div> -->
+            </div>
 
-      <!-- 題目選項 1  -->
-      <!-- <div>
-              <span class="selectTitle">
-
-                <label for="title">題目選項</label></span>
+            <!-- 文章標題 -->
+            <div>
+              <span class="selectTitle"><label for="title">文章標題</label></span>
               <span>
-                <span class="selectCorrect">正確</span>
-                <textarea v-model="title" class="selectText" placeholder="請輸入題目"></textarea>
-                <p>{{ title }}</p>
-              </span>
-            </div> -->
-
-      <!-- 題目選項 2 -->
-      <!-- <div>
-              <span class="selectTitle">
-
-                <label for="title"></label></span>
-              <span>
-                <span class="selectWrong">錯誤</span>
-                <textarea v-model="title" class="selectText" placeholder="請輸入題目"></textarea>
+                <textarea v-model="title" class="selectText" placeholder="請輸入標題"></textarea>
                 <p>{{ title }}</p>
               </span>
             </div>
- -->
 
-      <!-- 詳細解答 -->
-      <!-- <div>
-              <span class="selectTitle"> <label for="message">詳細解答</label></span>
+            <!-- 檔案上傳 -->
+            <div>
+              <span class="selectTitle">
+                <label for="file">文章縮圖</label>
+              </span>
+
+              <span> <input class="selectText" type="file" ref="fileInput" @change="handleFileUpload">
+                <!-- 顯示選擇的檔案名稱 -->
+                <!-- <div v-if="selectedFile">
+              <p>選擇的檔案：{{ selectedFile.name }}</p>
+                                      </div> -->
+              </span>
+
+            </div>
+
+            <!-- 影音連結輸入 -->
+            <div>
+              <span class="selectTitle"> <label for="video">影音連結</label></span>
+
+              <span><input class="selectText" type="text" v-model="videoLink" placeholder="輸入影音連結">
+
+                <!-- 顯示影音連結 -->
+                <!-- <div v-if="videoLink">
+              <p>您輸入的影音連結：{{ videoLink }}</p>
+              <video :src="videoLink" controls autoplay></video>
+                                    </div> -->
+              </span>
+
+            </div>
+
+            <!-- 文章內容 -->
+            <div>
+              <span class="selectTitle"> <label for="message">文章內容</label></span>
 
               <span> <textarea class="selectContent" v-model="title" placeholder="請輸入內容"></textarea>
                 <p>{{ title }}</p>
@@ -224,7 +238,7 @@
 
         </div>
 
-      </div> -->
+      </div>
 
 
 
@@ -271,6 +285,18 @@ export default {
       addDetailOpen: false,
       warningOpen: false,
 
+      // 新增文章彈窗
+      selectedCategory: '', // 使用者選擇的分類將存儲在這個變數中
+      categorys: [ // 車輛清單
+        { id: 1, name: '政治國際' },
+        { id: 2, name: '生活健康' },
+        { id: 3, name: '科技財金' },
+        { id: 4, name: 'Audi' }
+      ],
+      title: '',// 用來存儲textarea的值
+      selectedFile: null,
+      videoLink: '',
+      message: '',
 
       items: [
         {
@@ -290,12 +316,19 @@ export default {
           thDelet: '刪除'
         },
       ]
-      // 在這裡加入更多項目...
+
     };
 
 
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0]; // 獲取上傳的檔案
+      this.selectedFile = file; // 將選擇的檔案存儲在 data 中
+      // 在這裡可以執行上傳檔案的相關邏輯，比如使用 Axios 發送 POST 請求等
+    },
+
+
     // 彈跳視窗打開
     addSort() {
       this.addSortOpen = !this.addSortOpen;
@@ -308,16 +341,20 @@ export default {
     },
     // ====刪除警告===
     deleteRow() {
-      // 在此加入程式碼以刪除該行的表格項目（<tr>）
-      // 例如，可以使用您的 deletePicture 方法來處理
-      this.deletePicture();
-      // 接著可以在此加入刪除表格項目的邏輯
+
+      // 在這個方法裡處理刪除資料的邏輯
+      // 這裡只示範關閉彈跳視窗的邏輯
+
+      // 關閉彈窗
+
+
     },
     closeModal() {
       // 關閉彈窗
       this.addSortOpen = false;
       this.addDetailOpen = false;
-      this.deleteModalOpen = false;
+      // this.deleteModalOpen = false;
+      this.warningOpen = false;
     }
   }
 }
