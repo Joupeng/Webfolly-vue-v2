@@ -1,7 +1,7 @@
 
 <template>
   <!-- ===文章彈窗=== -->
-  <div class="content">
+  <div class="content" v-if="addDetailOpen">
     <div class="content_frame">
       <header class="modalheader">
         <span>新增編輯 / 文章</span>
@@ -40,7 +40,7 @@
 
           <span> <input class="selectText" type="file" ref="fileInput" @change="handleFileUpload">
             <!-- 顯示選擇的檔案名稱 -->
-          <!-- <div v-if="selectedFile">
+            <!-- <div v-if="selectedFile">
               <p>選擇的檔案：{{ selectedFile.name }}</p>
                                       </div> -->
           </span>
@@ -54,7 +54,7 @@
           <span><input class="selectText" type="text" v-model="videoLink" placeholder="輸入影音連結">
 
             <!-- 顯示影音連結 -->
-          <!-- <div v-if="videoLink">
+            <!-- <div v-if="videoLink">
               <p>您輸入的影音連結：{{ videoLink }}</p>
               <video :src="videoLink" controls autoplay></video>
                                     </div> -->
