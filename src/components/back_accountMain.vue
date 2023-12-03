@@ -301,7 +301,7 @@ export default {
       if (addPassword.length < 6) {
         alert('密碼長度至少六碼')
       } else {
-        alert('您的預設密碼為' + this.addPassword)
+        // alert('您的預設密碼為' + this.addPassword)
         console.log(this.addPassword);
       };
     },
@@ -310,6 +310,7 @@ export default {
     // 差串到資料庫
     async saveNewAdmin() {
       try {
+
         //1.執行所有的欄位驗證
         this.handleAddUserID();
         this.handleAddUserName();
@@ -327,10 +328,19 @@ export default {
           PHONE: this.addPhone,
           PASSWORD: this.addPassword,
         };
-        console.log(data);
+        // 確認都沒有空值
+        const fail = Object.values(data).some(value => value === undefined || value === null || value === '');
+        if (fail) {
+          alert('新增失敗  請確認是否都有填寫')
+        } else {
+          console.log(data);
+          alert(`新增成功\n使用者名稱: ${this.addUserName}\n密碼: ${this.addPassword}`)
+
+        }
+
 
         // 3.回傳json檔到php
-        //const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+        // const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
         const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {

@@ -10,6 +10,13 @@ $postData = file_get_contents("php://input");
 //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
 $data = json_decode($postData, true);
 
+// 設定變數
+
+
+// =============取消非同源 連接資料庫
+include("./DBconnect.php");
+// =============取消非同源 連接資料庫
+
 if ($data === null) {
  // 處理JSON解碼錯誤
  echo "JSON解碼錯誤";
@@ -23,9 +30,14 @@ $PASSWORD=$data['PASSWORD'];
 $MAIL=$data['MAIL'];
 $PHONE=$data['PHONE'];
 
-// =============取消非同源 連接資料庫
-include("./DBconnect.php");
-// =============取消非同源 連接資料庫
+// // include("./DBconnect.php");
+// // 連接資料庫
+$db_host = "127.0.0.1";
+$db_user = "root";
+$db_pass = "LEXI0630";
+$db_select = "webfolly";
+$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+$pdo = new PDO($dsn, $db_user, $db_pass);
 
 $sql="INSERT INTO `admin`(`id`, `NAME`, `PERMISSION`, `PASSWORD`, `MAIL`, `PHONE`) VALUES
 (:adminID, :adminNAME, :PERMISSION, :PWD, :MAIL, :PHONE)";
