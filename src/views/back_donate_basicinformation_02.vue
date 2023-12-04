@@ -12,7 +12,7 @@
 
     <!-- bannerNew -->
     <div class="banner">
-      <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
+      <img src="../assets/images/donate/donate_finish_banner.svg" alt="">
     </div>
     <!-- bannerNew -->
     <front_donate_flow></front_donate_flow>

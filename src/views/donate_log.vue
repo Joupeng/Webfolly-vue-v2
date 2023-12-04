@@ -11,7 +11,7 @@
 
         <div class="two_block">
             <div class="img_block">
-                <img src="/src/assets/images/donate/donate_record_01.png" alt="">
+                <img src="../assets/images/donate/donate_record_01.png" alt="">
             </div>
             <div class="content_block">
                 <p>捐款日期(年/月)</p>
@@ -67,16 +67,124 @@
                 </div>
                 <!-- 查詢捐款按鈕 -->
                 <div class="donate_btn_outer">
+
+                    <button class="donate_btn" type="button">
+                        查詢捐款 &#128269
+                    </button>
+
+                </div>
+
+                <!-- 舊版 -->
+                <!-- <div class="donate_btn_outer">
                     <router-link :to="{ name: 'donate_record_result' }" @click="closeNav" class="donate_btn"><span
                             :class="{ 'frontheader_menu-on': $route.name == 'donate' }">查詢捐款 &#128269</span>
                     </router-link>
-                </div>
+                </div> -->
 
 
             </div>
 
 
         </div>
+
+
+    </section>
+
+
+    <section class="donate_record_result">
+
+        <ul>
+            <li class="first_li">
+                <div>
+                    <p>姓名</p>
+                    <p>捐款金額</p>
+                    <p>捐款時間</p>
+                </div>
+            </li>
+
+
+            <li v-for="(donation, index) in donations" :class="{ 'white_li': index % 2 === 0, 'gray_li': index % 2 !== 0 }">
+                <div>
+                    <p>{{ donation.FNAME }} {{ donation.LNAME }}</p>
+                    <p>{{ donation.MONEY }}</p>
+                    <p>{{ donation.DYEAR }}/{{ donation.DMONTH }}</p>
+                </div>
+            </li>
+
+            <!-- <li class="white_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="gray_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="white_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="gray_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="white_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="gray_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="white_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="gray_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="white_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li>
+            <li class="gray_li">
+                <div>
+                    <p>XXX</p>
+                    <p>NT$200</p>
+                    <p>2023/02</p>
+                </div>
+            </li> -->
+        </ul>
+
+
+
 
 
     </section>
@@ -95,6 +203,56 @@ export default {
         frontnav,
         frontfooter,
         front_donate_subfooter
+    },
+    data() {
+        return {
+            donations: []
+        };
+    },
+    mounted() {
+        // 模拟异步获取数据库数据
+        setTimeout(() => {
+            const serverData = [
+                { FNAME: 'John', LNAME: 'Doe', MONEY: 'NT$200', donation_time: '2023-02-15' },
+                // 其他数据...
+            ];
+
+            this.donations = serverData.map(donation => ({
+                FNAME: donation.FNAME,
+                LNAME: donation.LNAME,
+                MONEY: donation.MONEY,
+                DYEAR: new Date(donation.donation_time).getFullYear(),
+                DMONTH: new Date(donation.donation_time).getMonth() + 1,
+            }));
+        }, 500); // 模拟延迟
+    },
+    methods: {
+        queryDonations() {
+            // 在这里编写查询捐款信息的逻辑
+            // 你可以使用 selectedYear、selectedMonth、verificationCode 的值进行查询
+            // 示例：在控制台打印查询条件
+            console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
+
+            // 使用 fetch 发送请求
+            fetch('http://localhost/path/to/donate_log.php')
+                .then(response => {
+                    // 确保请求成功
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    // 将响应的 JSON 数据解析成对象
+                    return response.json();
+                })
+                .then(data => {
+                    // 请求成功，将数据更新到 donations
+                    this.donations = data;
+                })
+                .catch(error => {
+                    // 请求失败，处理错误
+                    console.error('请求失败:', error);
+                });
+        }
     }
 }
+
 </script>

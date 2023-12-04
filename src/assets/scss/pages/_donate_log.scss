@@ -150,7 +150,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        background-image: url('/src/assets/images/donate/donate_button.svg');
+        background-image: url('@/assets/images/donate/donate_button.svg');
         background-repeat: no-repeat;
         background-position: right center;
         padding-left: 20px;
@@ -251,9 +251,209 @@
       &:hover {
         box-shadow: 0px 0px 15px #5D92CD;
         border-radius: 32px;
+        scale: 1.1;
       }
     }
   }
+
+
+}
+
+
+// ---------結果表單
+.donate_record_result {
+  margin: 0 0 60px 0;
+
+  // ---------RWD----------
+  // --------平板斷點---------
+  $tablet_BP : 768px;
+
+  @mixin t() {
+    @media all and (max-width : $tablet_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+
+  // --------手機版斷點-------
+  $mobile_BP : 576px;
+
+  @mixin m() {
+    @media all and (max-width : $mobile_BP) {
+      @content
+    }
+  }
+
+  ;
+
+
+
+
+
+
+  h1 {
+    color: $primary-y
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+
+
+
+
+
+  // ---------------表單
+  ul {
+    list-style: none;
+    width: 660px;
+    margin: 0 auto;
+    padding: 0;
+    // border: 1px solid red;
+
+    @include t() {
+      width: 80%;
+    }
+
+    @include m() {
+      width: 90%;
+
+    }
+
+    .first_li {
+      background-color: #F5DE75;
+      display: flex;
+
+
+      div {
+        width: 660px;
+        display: flex;
+        // border: 1px solid green;
+        margin: 0 0px 0 30px;
+
+        @include t() {
+          width: 100%;
+        }
+
+        @include m() {
+          margin: 0 10px 0 10px;
+          font-size: 20px;
+
+        }
+
+        p {
+          margin: 10px 0 10px 0;
+          font-size: 24px;
+          width: 24%;
+          // border: 1px solid blue;
+
+          @include m() {
+            font-size: 20px;
+          }
+        }
+
+        p:nth-child(2) {
+          width: 38%;
+
+        }
+
+        p:last-child {
+          width: 38%;
+        }
+      }
+    }
+
+    .white_li {
+      display: flex;
+      background-color: #fff;
+
+      div {
+        width: 660px;
+        display: flex;
+        // border: 1px solid green;
+        margin: 0 0px 0 30px;
+
+        @include t() {
+          width: 100%;
+        }
+
+        @include m() {
+          margin: 0 10px 0 10px;
+
+        }
+
+        p {
+          margin: 10px 0 10px 0;
+          font-size: 24px;
+          width: 24%;
+          // border: 1px solid blue;
+
+          @include m() {
+            font-size: 20px;
+          }
+        }
+
+        p:nth-child(2) {
+          width: 38%;
+
+        }
+
+        p:last-child {
+          width: 38%;
+        }
+      }
+    }
+
+    .gray_li {
+      display: flex;
+      background-color: #F2F2F2;
+
+      div {
+        width: 660px;
+        display: flex;
+        // border: 1px solid green;
+        margin: 0 0px 0 30px;
+
+        @include t() {
+          width: 100%;
+        }
+
+        @include m() {
+          margin: 0 10px 0 10px;
+
+        }
+
+        p {
+          margin: 10px 0 10px 0;
+          font-size: 24px;
+          width: 24%;
+          // border: 1px solid blue;
+
+          @include m() {
+            font-size: 20px;
+          }
+        }
+
+        p:nth-child(2) {
+          width: 38%;
+
+        }
+
+        p:last-child {
+          width: 38%;
+        }
+
+      }
+    }
+  }
+
+
+
+
 
 
 }

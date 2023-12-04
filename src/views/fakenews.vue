@@ -5,24 +5,24 @@
         <!-- banner -->
         <div class="banner_block">
             <!-- 手機 -->
-            <img class="img_phone" src="/src/assets/images/fakenews/fakenews_phone.svg" alt="">
+            <img class="img_phone" src="../assets/images/fakenews/fakenews_phone.svg" alt="">
 
             <div class="ch_block">
 
                 <div class="ch_01">
-                    <img src="/src/assets/images/fakenews/fakenews_banner_ch01.svg" alt="">
-                    <img class="ch_face1" src="/src/assets/images/fakenews/fakenews_banner_ch01_face.svg" alt="">
+                    <img src="../assets/images/fakenews/fakenews_banner_ch01.svg" alt="">
+                    <img class="ch_face1" src="../assets/images/fakenews/fakenews_banner_ch01_face.svg" alt="">
 
                 </div>
 
                 <div class="ch_02">
-                    <img src="/src/assets/images/fakenews/fakenews_banner_ch02.svg" alt="">
-                    <img class="ch_face2" src="/src/assets/images/fakenews/fakenews_banner_ch02_face.svg" alt="">
+                    <img src="../assets/images/fakenews/fakenews_banner_ch02.svg" alt="">
+                    <img class="ch_face2" src="../assets/images/fakenews/fakenews_banner_ch02_face.svg" alt="">
                 </div>
 
                 <div class="ch_03">
-                    <img src="/src/assets/images/fakenews/fakenews_banner_ch03.svg" alt="">
-                    <img class="ch_face3" src="/src/assets/images/fakenews/fakenews_banner_ch03_face.svg" alt="">
+                    <img src="../assets/images/fakenews/fakenews_banner_ch03.svg" alt="">
+                    <img class="ch_face3" src="../assets/images/fakenews/fakenews_banner_ch03_face.svg" alt="">
                 </div>
 
             </div>
@@ -82,7 +82,7 @@
                     <swiper-slide class="swiper-slide">
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style01_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style01_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_1">諷刺惡搞</p>
@@ -96,7 +96,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style02_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style02_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_2">題文不符</p>
@@ -109,7 +109,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style03_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style03_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_3">誤導性內容</p>
@@ -122,7 +122,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style04_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style04_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_4">脈絡錯置</p>
@@ -134,7 +134,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style05_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style05_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_5">假冒性內容</p>
@@ -146,7 +146,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style06_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style06_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_6">操弄性內容</p>
@@ -158,7 +158,7 @@
                     <swiper-slide>
                         <div class="swiper_block">
                             <div class="swiper_img_block">
-                                <img src="/src/assets/images/fakenews/fakenews_style07_GifB.gif" alt="">
+                                <img src="../assets/images/fakenews/fakenews_style07_GifB.gif" alt="">
                             </div>
                             <div class="swiper_p_block">
                                 <p class="swiper_p_7">虛構性內容</p>
@@ -282,7 +282,8 @@
 
                     <div v-for="card in displayedCards" :key="card.id" class="newsCardA">
                         <!-- 卡片内容 -->
-                        <div class="imgBlock" :style="{ backgroundImage: 'url(' + card.imageUrl + ')' }"></div>
+                        <div class="imgBlock" :style="{ backgroundImage: `url('${card.imageUrl}')` }">
+                        </div>
                         <div class="textBlock">
                             <div class="textBlockA">{{ card.title }}</div>
 
@@ -398,8 +399,7 @@
                     </div>
                     <div id="Blacky_block">
                         <div class="Blacky_block_overflow">
-                            <img src="/src/assets/images/fakenews/Black_Gif01.gif" alt="" id="Blacky">
-
+                            <img src="../assets/images/fakenews/Black_Gif01.gif" alt="" id="Blacky">
                         </div>
                     </div>
 
@@ -430,6 +430,10 @@ import '/node_modules/jquery/dist/jquery.min'
 import 'swiper/swiper-bundle.css';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import fakenews_img01 from "../assets/images/fakenews/fakenews_img01.jpg";
+import fakenews_img02 from "../assets/images/fakenews/fakenews_img02.jpg";
+import fakenews_img03 from "../assets/images/fakenews/fakenews_img03.jpeg";
+
 
 export default {
 
@@ -444,7 +448,7 @@ export default {
                     title: "聯合國「該吃素了」，世衛組織：40年內全球吃素！必須吃素​！刻不容緩",
                     content: "假如你得知,全人類在22年後大限將至你會作何反應？也許你會無動於衷覺得事不關己,但是朋友們,這個絕不是危言聳聽。就在前幾天,聯合國向全人類發出了，「只剩22年，地球將陷入危機」的警告，卻被無數人忽視了…",
                     source: "來源：小編",
-                    imageUrl: "/src/assets/images/fakenews/fakenews_img01.jpg", // 添加图片地址
+                    imageUrl: fakenews_img01,
 
                 },
                 {
@@ -452,7 +456,7 @@ export default {
                     title: "仔細看看圖片！是否能在其中找到駱駝？這不僅是一個視覺的考驗，更能測試您有無失智！",
                     content: "德國阿爾茨海默症協會宣稱：這個挑戰只要成功找到駱駝，就能免疫老年痴呆。這是人類重大抉擇，為了預防22年後的老年痴呆，你的選擇或成最後防線。別輕忽，這是未來的保障！找到駱駝，就能讓你的頭腦保持聰慧，直到遲遲老矣仍然思緒清晰！",
                     source: "來源：網路謠傳",
-                    imageUrl: "/src/assets/images/fakenews/fakenews_img02.jpg", // 添加图片地址
+                    imageUrl: fakenews_img02,
 
                 },
 
@@ -461,7 +465,7 @@ export default {
                     title: "空氣炸鍋，不僅致癌，更是你營養的大敵！使用它，就像是用生命在交換方便。現在就抛棄空氣炸鍋吧！",
                     content: "空氣炸鍋，看似方便，實則是一場騙局！食物在空氣炸鍋的摧殘下，除了會製造致癌的丙烯醯胺，還會將營養素如：維生素A、D、E、K等，溶於空氣中。別再被酷炫的外表所迷惑，珍惜健康的話就遠離空氣炸鍋吧！空氣炸鍋是健康的毀滅者！",
                     source: "小編3",
-                    imageUrl: "/src/assets/images/fakenews/fakenews_img03.jpeg", // 添加图片地址
+                    imageUrl: fakenews_img03,
 
                 },
 

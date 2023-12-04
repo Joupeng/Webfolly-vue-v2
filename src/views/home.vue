@@ -3,7 +3,7 @@
         <frontnav></frontnav>
         <!-- banner -->
         <!-- <section class="banner">
-            <img src="/src/assets/images/home/home_Banner.png" alt="">
+            <img src="../assets/images/home/home_Banner.png" alt="">
         </section> -->
 
         <!-- grid_test -->
@@ -41,8 +41,8 @@
                 </div>
                 <!-- <br> -->
                 <div class="img_block">
-                    <img v-if="showHand" src="/src/assets/images/home/home_banner_hand.svg" alt="" class="the_hand">
-                    <img v-else src="/src/assets/images/home/Yellowy_Gif01.gif" alt="" class="good_job">
+                    <img v-if="showHand" src="../assets/images/home/home_banner_hand.svg" alt="" class="the_hand">
+                    <img v-else src="../assets/images/home/Yellowy_Gif01.gif" alt="" class="good_job">
 
                 </div>
 
@@ -67,7 +67,7 @@
 
                     <div class="block_column">
                         <div>
-                            <div class="image_block"><img src="/src/assets/images/home/Black_Gif_bugKiller.gif" alt="">
+                            <div class="image_block"><img src="../assets/images/home/Black_Gif_bugKiller.gif" alt="">
                             </div>
                             <div class="titleBlockB_inner">
                                 <p class="titleText2">網傳:登山時隨身帶一瓶殺蟲劑，遇到虎頭蜂群可以噴殺救命?</p>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div>
-                            <div class="image_block"><img src="/src/assets/images/home/Blue_Gif_guilty.gif" alt=""></div>
+                            <div class="image_block"><img src="../assets/images/home/Blue_Gif_guilty.gif" alt=""></div>
                             <div class="titleBlockB_inner">
                                 <p class="titleText2">XXX勝訴！全因女方一個舉動？匿名陪審團揭全案四個關鍵！</p>
                             </div>
@@ -106,13 +106,13 @@
                                 :class="{ 'frontheader_menu-on': $route.name == 'fakenews' }">關於假訊息</span>
                         </router-link>
 
-                        <div><img src="/src/assets/images/home/home_bluey_small.svg" alt=""></div>
+                        <div><img src="../assets/images/home/home_bluey_small.svg" alt=""></div>
                     </div>
                     <div class="three_block_inner2">
                         <router-link :to="{ name: 'game' }" @click="closeNav" :class="{ '-clicked': isClicked }"
                             class="router_btn "><span :class="{ 'frontheader_menu-on': $route.name == 'game' }">趣味小測驗</span>
                         </router-link>
-                        <div><img src="/src/assets/images/home/home_yellow_small.svg" alt=""></div>
+                        <div><img src="../assets/images/home/home_yellow_small.svg" alt=""></div>
 
                     </div>
                     <div class="three_block_inner3">
@@ -122,7 +122,7 @@
                         </router-link>
 
 
-                        <div><img src="/src/assets/images/home/home_ligBlue_small.svg" alt=""></div>
+                        <div><img src="../assets/images/home/home_ligBlue_small.svg" alt=""></div>
 
                     </div>
                 </div>
@@ -151,10 +151,10 @@
                 </router-link>
 
                 <div class="lamp_man_block">
-                    <img v-if="isSad" src="/src/assets/images/home/home_lamp_man_sad.svg" alt="">
-                    <img v-else src="/src/assets/images/home/home_lamp_man.svg" alt="">
-                    <!-- <img src="/src/assets/images/home/home_lamp_man_sad.svg" alt=""> -->
-                    <!-- <img src="/src/assets/images/home/home_lamp_man.svg" alt=""> -->
+                    <img v-if="isSad" src="../assets/images/home/home_lamp_man_sad.svg" alt="">
+                    <img v-else src="../assets/images/home/home_lamp_man.svg" alt="">
+                    <!-- <img src="../assets/images/home/home_lamp_man_sad.svg" alt=""> -->
+                    <!-- <img src="../assets/images/home/home_lamp_man.svg" alt=""> -->
 
                 </div>
             </div>
@@ -204,10 +204,10 @@ export default {
             this.isSad = !this.isSad;
             if (this.isClicked) {
                 // 如果 isClicked 為 true，使用第一張背景圖片
-                this.$refs.backgroundImage.style.backgroundImage = "url(/src/assets/images/home/home_lamp_bg1.png)";
+                this.$refs.backgroundImage.style.backgroundImage = url("../assets/images/home/home_lamp_bg1.png");
             } else {
                 // 如果 isClicked 為 false，使用第二張背景圖片
-                this.$refs.backgroundImage.style.backgroundImage = "url(/src/assets/images/home/home_lamp_bg2.png)";
+                this.$refs.backgroundImage.style.backgroundImage = url("../assets/images/home/home_lamp_bg2.png");
             }
         },
 
