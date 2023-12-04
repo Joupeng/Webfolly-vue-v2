@@ -165,7 +165,7 @@ export default {
       fetch('http://localhost/API/medialiteracy.php', {
         method: 'POST',
         //非同源
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
