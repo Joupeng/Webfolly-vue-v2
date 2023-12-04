@@ -13,7 +13,7 @@
 
     <!-- bannerNew -->
     <div class="banner">
-      <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
+      <img src="../assets/images/donate/donate_finish_banner.svg" alt="">
     </div>
     <!-- bannerNew -->
 
@@ -71,7 +71,7 @@
             </div>
 
             <div class="RightArrow">
-              <img src="/src/assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
+              <img src="../assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
             </div>
 
             <div class="item">
@@ -80,7 +80,7 @@
             </div>
 
             <div class="RightArrow">
-              <img src="/src/assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
+              <img src="../assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
             </div>
 
             <div class="item">
@@ -89,7 +89,7 @@
             </div>
 
             <div class="RightArrow">
-              <img src="/src/assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
+              <img src="../assets/images/donate/donate_rightarrow.svg" alt="右邊指示">
             </div>
 
             <div class="item">

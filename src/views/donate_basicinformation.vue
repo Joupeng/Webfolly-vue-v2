@@ -4,7 +4,7 @@
 
 
         <div class="banner">
-            <img src="/src/assets/images/donate/donate_finish_banner.svg" alt="">
+            <img src="../assets/images/donate/donate_finish_banner.svg" alt="">
         </div>
         <!-- bannerNew -->
 
