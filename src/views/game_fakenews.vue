@@ -423,7 +423,7 @@ export default {
     //上server要改成相對路徑
     // fetch('http://localhost/API/game_fakenews.php'
     fetch('API/game_fakenews.php', {
-      method: 'GET',
+      method: 'POST',
       // 非同源
       // mode: 'cors',
       headers: {

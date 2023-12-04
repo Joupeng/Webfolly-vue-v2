@@ -65,55 +65,72 @@
       <div class="add_window" :class="{ '-on': windowShow }">
         <div class="inside_box">
           <div class="header_window">
-            <span class="close_text">新增編輯 / 題目</span>
+            <span class="close_text" v-if="addWindow">新增題目</span>
+            <span class="close_text" v-if="editWindow">編輯題目</span>
             <span class="close_button" @click="directCloseAdd"><img src="../assets/images/common/back_iconClose.svg"
                 alt="close"></span>
           </div>
           <div class="content_window">
-            <div class="input_number all_style">
-              <p>編號</p>
-              <!-- 根據編輯跟輸入頁面呈現不同的輸入框 -->
-              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
+            <!-- <div class="input_number all_style">
+              <p>編號</p> -->
+            <!-- 根據編輯跟輸入頁面呈現不同的輸入框 -->
+            <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
                 v-if="addWindow">
               <input type="text" name="" id="" class="input_box" v-model.trim="tasks[0].id" v-if="editWindow">
-            </div>
+            </div> -->
             <div class="input_title_left all_style">
               <p>左側題目</p>
               <textarea class="input_box_textarea" v-model.trim="taskText[0].title_left" v-if="addWindow"></textarea>
-              <textarea class="input_box_textarea" v-model.trim="tasks[0].title_left" v-if="editWindow"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="tasks[item_index].title_left"
+                v-if="editWindow"></textarea>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].title_left"> -->
             </div>
             <div class="input_result_left all_style">
               <p>左側答案</p>
               <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].result_left"
                 placeholder="正確填寫1，錯誤填寫2" v-if="addWindow">
+              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].result_left"
+                placeholder="正確填寫1，錯誤填寫2" v-if="editWindow">
             </div>
             <div class="input_answer_left all_style">
               <p>左側詳解</p>
               <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].answer_left"> -->
               <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_left" v-if="addWindow"></textarea>
-              <textarea class="input_box_textarea" v-model.trim="tasks[0].answer_left" v-if="editWindow"></textarea>
+              <textarea class="input_box_textarea" v-model.trim="tasks[item_index].answer_left"
+                v-if="editWindow"></textarea>
             </div>
             <div class="input_title_left all_style">
               <p>右側題目</p>
               <textarea class="input_box_textarea" v-model.trim="taskText[0].title_right" v-if="addWindow"></textarea>
-              <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].title_right"> -->
+              <textarea class="input_box_textarea" v-model.trim="tasks[item_index].title_right"
+                v-if="editWindow"></textarea>
             </div>
             <div class="input_result_left all_style">
               <p>右側答案</p>
               <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].result_right"
                 placeholder="正確填寫1，錯誤填寫2" v-if="addWindow">
+              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].result_right"
+                placeholder="正確填寫1，錯誤填寫2" v-if="editWindow">
             </div>
             <div class="input_answer_left all_style">
               <p>右側詳解</p>
               <textarea class="input_box_textarea" v-model.trim="taskText[0].answer_right" v-if="addWindow"></textarea>
-              <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].answer_right"> -->
+              <textarea class="input_box_textarea" v-model.trim="tasks[item_index].answer_right"
+                v-if="editWindow"></textarea>
             </div>
             <div class="input_date all_style">
               <p>日期</p>
-              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].date" v-if="addWindow">
+              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].date" v-if="addWindow"
+                placeholder="日期格式:2023/10/01">
+              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].date" v-if="editWindow"
+                placeholder="日期格式:2023/10/01">
             </div>
-            <div class="button_add_window"><button type="button" @click="taskAdd" v-if="addWindow">新增</button></div>
+            <!-- <div>
+              <datepicker v-model="selectedDate"></datepicker>
+              <p>選擇的日期: {{ selectedDate }}</p>
+            </div> -->
+            <div class="button_add_window" id="btm_add"><button type="button" @click="taskAdd"
+                v-if="addWindow">新增</button></div>
             <div class="button_add_window"><button type="button" @click="taskEditOk" v-if="editWindow">修改完成</button></div>
           </div>
         </div>
@@ -149,6 +166,7 @@
 import backfooter from '@/components/back_footer.vue'
 import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
+// import Datepicker from 'vue-datepicker';
 
 
 
@@ -157,13 +175,15 @@ export default {
     backfooter,
     pagination,
     backaside,
-
+    // Datepicker
   },
   data() {
     return {
+      item_index: 0,
       windowShow: false,
       addWindow: false,
       editWindow: false,
+      // selectedDate: null,
       // input輸入的內容
       taskText: [
         {
@@ -215,24 +235,63 @@ export default {
     taskAddWindow() {
       // alert('123');
       this.windowShow = true;
-      this.addWindow = true,
-        // 初始化 taskText[0] 為空白狀態
-        this.taskText[0] = {
-          id: "",
-          title_left: "",
-          result_left: "",
-          answer_left: "",
-          title_right: "",
-          result_right: "",
-          answer_right: "",
-          date: ""
-        };
+      this.addWindow = true;
+      // 初始化 taskText[0] 為空白狀態
+      this.taskText[0] = {
+        // id: "",
+        title_left: "",
+        result_left: "",
+        answer_left: "",
+        title_right: "",
+        result_right: "",
+        answer_right: "",
+        date: ""
+      };
+
     },
-    //   // 新增內容進去，該放入的欄位要放進去
+    // 新增內容進去，該放入的欄位要放進去
     taskAdd() {
-      if (this.taskText[0].id != "") {
+      // 檢查 tasks 數组是否存在，如果一開始都不存在，則初始化为一个空數组
+      //問為何，因為一開始有資料在嗎?
+      if (!this.tasks) {
+        this.tasks = [];
+      }
+      // 先要求有值再判斷每個欄位的需求
+      if (this.taskText[0] != "") {
+        // if (!this.taskText[0].id) {
+        //   alert("請填寫編號");
+        //   return;
+        // }
+        // textarea空的時候不代表空字串所以用反轉去想
+        if (!this.taskText[0].title_left) {
+          alert("請填寫左側題目");
+          return;
+        }
+        // 必須是1或2
+        if (this.taskText[0].result_left != 1 && this.taskText[0].result_left != 2) {
+          alert("請填寫左側答案，請填寫1或2");
+          return;
+        }
+        // textarea空的時候不代表空字串所以用反轉去想
+        if (!this.taskText[0].title_right) {
+          alert("請填寫右側題目");
+          return;
+        }
+        // 必須是1或2s
+        if (this.taskText[0].result_right != 1 && this.taskText[0].result_right != 2) {
+          alert("請填寫右側答案，請填寫1或2");
+          return;
+        }
+        if (!this.taskText[0].date) {
+          alert("請填寫日期");
+          return;
+        }
+
+
+
+
         this.tasks.unshift({
-          id: this.taskText[0].id,
+          // id: this.taskText[0].id,
           title_left: this.taskText[0].title_left,
           result_left: this.taskText[0].result_left,
           answer_left: this.taskText[0].answer_left,
@@ -240,11 +299,11 @@ export default {
           result_right: this.taskText[0].result_right,
           answer_right: this.taskText[0].answer_right,
           date: this.taskText[0].date
-
         });
-        // 新增完後會清空
+
+        // 新增完后会清空
         this.taskText[0] = {
-          id: "",
+          // id: "",
           title_left: "",
           result_left: "",
           answer_left: "",
@@ -253,12 +312,49 @@ export default {
           answer_right: "",
           date: ""
         };
-        // 把新增的資料存到localhost裡
+
+        // 将新增的数据存储到 localStorage 中
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
+
       }
       this.windowShow = false;
       this.addWindow = false;
+      // 跟fetch有關的
+      // const id = document.querySelector("#id");
+      // const titleLeft = document.querySelector("#title_left");
+      // const resultLeft = document.querySelector("#result_left");
+      // const answerLeft = document.querySelector("#answer_left");
+      // const titleRight = document.querySelector("#title_right");
+      // const resultRight = document.querySelector("#result_right");
+      // const answerRight = document.querySelector("#answer_right");
+      // const date = document.querySelector("#date");
 
+      fetch('http://localhost/API/back_fakeNews_add.php', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 建立了一個 JSON 物件，其中有一個屬性名稱為id
+        //id.value是指輸入框元素 (<input id="id">) 的當前值
+        //多行文字框我改成.innerText
+        body: JSON.stringify({
+          // id: this.tasks[0].id,
+          titleLeft: this.tasks[0].title_left,
+          resultLeft: this.tasks[0].result_left,
+          answerLeft: this.tasks[0].answer_left,
+          titleRight: this.tasks[0].title_right,
+          resultRight: this.tasks[0].result_right,
+          answerRight: this.tasks[0].answer_right,
+          date: this.tasks[0].date,
+
+        })
+      })
+      then(resp => resp.json())
+        // 找到父層
+        .then(taskList => {
+          console.log(taskList)
+        })
     },
     directCloseAdd() {
       confirm('確認不新增直接關閉');
@@ -268,9 +364,10 @@ export default {
     },
     // 剛剛寫的事件物件跟索引值的參數
     taskEdit(e, i) {
-
+      this.item_index = i;
+      // console.log(i);
       this.taskText[0] = {
-        id: this.tasks[i].id,
+        // id: this.tasks[i].id,
         title_left: this.tasks[i].title_left,
         result_left: this.tasks[i].result_left,
         answer_left: this.tasks[i].answer_left,
@@ -286,44 +383,40 @@ export default {
       this.editWindow = true;
     },
     taskEditOk() {
-      this.windowShow = false;
-      this.editWindow = false;
-      // if (this.editWindow) {
-      //   if (this.tasks[i].id,
-      //     this.tasks[i].title_left,
-      //     this.tasks[i].result_left,
-      //     this.tasks[i].answer_left,
-      //     this.tasks[i].title_right,
-      //     this.tasks[i].result_right,
-      //     this.tasks[i].answer_right,
-      //     this.tasks[i].date === "") {
-      //     alert("請輸入資料");
+      // if (this.tasks[i] != "") {
+      //   if (this.taskText[i].id != "") {
+      //     alert("請填寫編號");
+      //     return;
       //   }
-      // }
-      // if (this.editWindow) {
-      //   this.taskText[0] = {
-      //     id: this.tasks[i].id,
-      //     title_left: this.tasks[i].title_left,
-      //     result_left: this.tasks[i].result_left,
-      //     answer_left: this.tasks[i].answer_left,
-      //     title_right: this.tasks[i].title_right,
-      //     result_right: this.tasks[i].result_right,
-      //     answer_right: this.tasks[i].answer_right,
-      //     date: this.tasks[i].date
+      //   // textarea空的時候不代表空字串所以用反轉去想
+      //   if (!this.taskText[i].title_left) {
+      //     alert("請填寫左側題目");
+      //     return;
       //   }
+      //   // 必須是1或2
+      //   if (this.taskText[i].result_left != 1 && this.taskText[0].result_left != 2) {
+      //     alert("請填寫左側答案，請填寫1或2");
+      //     return;
+      //   }
+      //   // textarea空的時候不代表空字串所以用反轉去想
+      //   if (!this.taskText[i].title_right) {
+      //     alert("請填寫右側題目");
+      //     return;
+      //   }
+      //   // 必須是1或2s
+      //   if (this.taskText[i].result_right != 1 && this.taskText[0].result_right != 2) {
+      //     alert("請填寫右側答案，請填寫1或2");
+      //     return;
+      //   }
+      //   if (!this.taskText[0].date) {
+      //     alert("請填寫日期");
+      //     return;
+      //   }
+      // } else {
       //   localStorage.setItem("tasks", JSON.stringify(this.tasks));
       // }
-      if (this.editWindow) {
-        // 编辑操作
-        const editedTaskIndex = this.tasks.findIndex(task => task.id === this.taskText[0].id);
-        if (editedTaskIndex !== -1) {
-          this.tasks[editedTaskIndex] = { ...this.taskText[0] };
-          localStorage.setItem("tasks", JSON.stringify(this.tasks));
-        } else {
-          // 处理编辑时找不到对应任务的情况
-          console.error("Task not found for editing");
-        }
-      }
+      this.windowShow = false;
+      this.editWindow = false;
 
 
     },
@@ -341,8 +434,38 @@ export default {
         }, 50);
 
       }
-    }
+    },
 
+
+
+  },
+  mounted() {
+    // 資料庫串接
+    fetch('http://localhost/API/back_fakeNews.php', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
+      .then(resp => resp.json())
+      .then(items => {
+        // console.log(items);
+        // 放進對應的項目
+        this.tasks = items.map(item_list => {
+          return {
+            id: item_list.ID,
+            title_left: item_list.LTEXT,
+            result_left: item_list.ANSWER_LEFT,
+            answer_left: item_list.DESCRIPTION_LEFT,
+            title_right: item_list.RTEXT,
+            result_right: item_list.ANSWER_RIGHT,
+            answer_right: item_list.DESCRIPTION_RIGHT,
+            date: item_list.CREATE_DATE
+          }
+        })
+      })
   }
 }
 </script>
