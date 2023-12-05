@@ -29,8 +29,9 @@
         </div>
         <div class="container_fake">
           <ul class="taskList">
-            <li v-for="(task, index) in tasks" :key="index" class="box_list">
-              <div class="lists">{{ task.id }}</div>
+            <!-- <li v-for="(task, index) in tasks" :key="task.id" class="box_list" :class="{ remove: task.is_fade }"></li> -->
+            <li v-for="(task, index) in tasks" :key="task.id" class="box_list">
+              <div class="lists">{{ index + 1 }}</div>
               <div class="lists">{{ task.title_left }}</div>
               <div class="lists">{{ task.result_left }}</div>
               <div class="lists">{{ task.answer_left }}</div>
@@ -41,7 +42,8 @@
               <!-- $event事件物件vue特殊寫法，這裡不一定用，$emit則適用於元件帶入時候的自訂事件 -->
               <div class="lists"><button type="button" @click="taskEdit($event, index)"
                   :class="{ '-on': windowShow }">編輯</button></div>
-              <div class="lists"><button type="button" @click="taskRemove">刪除</button></div>
+              <div class="lists"><button type="button" @click="taskdeleteWindow">刪除</button></div>
+              <!-- <div class="lists"><button type="button" @click="taskRemove($event, index)">刪除</button></div> -->
             </li>
             <!-- <li class="box_list">
             <div class="lists">1</div>
@@ -71,12 +73,12 @@
                 alt="close"></span>
           </div>
           <div class="content_window">
-            <!-- <div class="input_number all_style">
-              <p>編號</p> -->
             <!-- 根據編輯跟輸入頁面呈現不同的輸入框 -->
-            <!-- <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
+            <!-- <div class="input_number all_style">
+              <p>編號</p>
+              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
                 v-if="addWindow">
-              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[0].id" v-if="editWindow">
+              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].id" v-if="editWindow">
             </div> -->
             <div class="input_title_left all_style">
               <p>左側題目</p>
@@ -136,26 +138,24 @@
         </div>
       </div>
       <!-- 刪除彈跳視窗 -->
-      <!-- <div class="modalWarning" v-if="warningOpen">
-        <ul>
-          <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
-          </li>
-          <li>您確定要刪除這筆資料嗎？</li>
-          <li>
-            <div class="button"> -->
-
-      <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
-      <!-- <div class="btn" @click="deleteRow">確認刪除</div> -->
-
-      <!-- 點選取消刪除，只關閉彈窗 -->
-      <!-- <div class="btn" @click="closeModal">取消刪除</div>
-
-            </div>
-          </li>
-        </ul>
-      </div> -->
+      <div class="delete_box_outside" v-if="deleteWindow">
+        <div class="delete_box">
+          <ul>
+            <li><img src="../../src/assets/images/common/back_warning.svg" alt="">
+            </li>
+            <li>您確定要刪除這筆資料嗎？</li>
+            <li>
+              <div class="button">
+                <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
+                <div class="btn" @click="taskRemove($event, index)">確認刪除</div>
+                <!-- 點選取消刪除，只關閉彈窗 -->
+                <div class="btn" @click="cancelButton">取消刪除</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
       <pagination></pagination>
-
     </main>
   </div>
   <backfooter></backfooter>
@@ -183,6 +183,7 @@ export default {
       windowShow: false,
       addWindow: false,
       editWindow: false,
+      deleteWindow: false,
       // selectedDate: null,
       // input輸入的內容
       taskText: [
@@ -298,7 +299,8 @@ export default {
           title_right: this.taskText[0].title_right,
           result_right: this.taskText[0].result_right,
           answer_right: this.taskText[0].answer_right,
-          date: this.taskText[0].date
+          date: this.taskText[0].date,
+          // is_fade: false
         });
 
         // 新增完后会清空
@@ -313,48 +315,39 @@ export default {
           date: ""
         };
 
-        // 将新增的数据存储到 localStorage 中
+        // 將新增的數據存到 localStorage 中
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
       }
       this.windowShow = false;
       this.addWindow = false;
-      // 跟fetch有關的
-      // const id = document.querySelector("#id");
-      // const titleLeft = document.querySelector("#title_left");
-      // const resultLeft = document.querySelector("#result_left");
-      // const answerLeft = document.querySelector("#answer_left");
-      // const titleRight = document.querySelector("#title_right");
-      // const resultRight = document.querySelector("#result_right");
-      // const answerRight = document.querySelector("#answer_right");
-      // const date = document.querySelector("#date");
 
-      fetch('http://localhost/API/back_fakeNews_add.php', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // 建立了一個 JSON 物件，其中有一個屬性名稱為id
-        //id.value是指輸入框元素 (<input id="id">) 的當前值
-        //多行文字框我改成.innerText
-        body: JSON.stringify({
-          // id: this.tasks[0].id,
-          titleLeft: this.tasks[0].title_left,
-          resultLeft: this.tasks[0].result_left,
-          answerLeft: this.tasks[0].answer_left,
-          titleRight: this.tasks[0].title_right,
-          resultRight: this.tasks[0].result_right,
-          answerRight: this.tasks[0].answer_right,
-          date: this.tasks[0].date,
+      // fetch('http://localhost/API/back_fakeNews_add.php', {
+      //   method: 'POST',
+      //   mode: 'cors',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   // 建立了一個 JSON 物件，其中有一個屬性名稱為id
+      //   //id.value是指輸入框元素 (<input id="id">) 的當前值
+      //   //多行文字框我改成.innerText
+      //   body: JSON.stringify({
+      //     id: this.tasks[0].id,
+      //     titleLeft: this.tasks[0].title_left,
+      //     resultLeft: this.tasks[0].result_left,
+      //     answerLeft: this.tasks[0].answer_left,
+      //     titleRight: this.tasks[0].title_right,
+      //     resultRight: this.tasks[0].result_right,
+      //     answerRight: this.tasks[0].answer_right,
+      //     date: this.tasks[0].date,
 
-        })
-      })
-      then(resp => resp.json())
-        // 找到父層
-        .then(taskList => {
-          console.log(taskList)
-        })
+      //   })
+      // })
+      //   .then(resp => resp.json())
+      //   // 找到父層
+      //   .then(taskList => {
+      //     console.log(taskList)
+      //   })
     },
     directCloseAdd() {
       confirm('確認不新增直接關閉');
@@ -380,93 +373,111 @@ export default {
       };
 
 
+
       this.windowShow = true;
       this.editWindow = true;
     },
     taskEditOk() {
-      // if (this.tasks[i] != "") {
-      //   if (this.taskText[i].id != "") {
-      //     alert("請填寫編號");
-      //     return;
-      //   }
-      //   // textarea空的時候不代表空字串所以用反轉去想
-      //   if (!this.taskText[i].title_left) {
-      //     alert("請填寫左側題目");
-      //     return;
-      //   }
-      //   // 必須是1或2
-      //   if (this.taskText[i].result_left != 1 && this.taskText[0].result_left != 2) {
-      //     alert("請填寫左側答案，請填寫1或2");
-      //     return;
-      //   }
-      //   // textarea空的時候不代表空字串所以用反轉去想
-      //   if (!this.taskText[i].title_right) {
-      //     alert("請填寫右側題目");
-      //     return;
-      //   }
-      //   // 必須是1或2s
-      //   if (this.taskText[i].result_right != 1 && this.taskText[0].result_right != 2) {
-      //     alert("請填寫右側答案，請填寫1或2");
-      //     return;
-      //   }
-      //   if (!this.taskText[0].date) {
-      //     alert("請填寫日期");
-      //     return;
-      //   }
-      // } else {
-      //   localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      // }
+      // 將新增的數據存到 localStorage 中
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      // fetch('http://localhost/API/back_fakeNews_edit.php', {
+      //   method: 'POST',
+      //   mode: 'cors',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   // 怎麼送都只能送出id:2
+      //   body: JSON.stringify({
+      //     id: this.tasks[this.item_index].id,
+      //   })
+
+
+      // })
+      //   .then(resp => resp.json())
+      //   .then(items => {
+      //     console.log(items);
+      //   })
       this.windowShow = false;
       this.editWindow = false;
 
 
     },
-    taskRemove(e, i) {
-      let r = confirm("要移除嗎");
-      // 真的要刪除進入判斷式
-      if (r) {
-        // 確認是否是刪除的按鈕，來判斷有找到那行li，事件觸發的元素e.target
-        // console.log(e.target.closest("li"));
-        e.target.closest("li").classList.add("remove");
-        // 1秒後刪掉
-        setTimeout(() => {
-          this.tasks.splice(i, 1);
-          localStorage.setItem("tasks", JSON.stringify(this.tasks));
-        }, 50);
-
-      }
+    taskdeleteWindow() {
+      this.deleteWindow = true;
     },
+    cancelButton() {
+      this.deleteWindow = false;
+    },
+    // 要帶入參數
+    taskRemove(e, i) {
+      // console.log(this.tasks[i]);
+      // 1秒後刪掉
+      // this.tasks[i].is_fade = true;
+
+      setTimeout(() => {
+        this.tasks.splice(i, 1);
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+
+        // fetch('http://localhost/API/back_fakeNews_delete.php', {
+        //   method: 'POST',
+        //   mode: 'cors',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   // 怎麼送都只能送出id:2
+        //   body: JSON.stringify({
+        //     id: this.tasks[this.item_index].id,
+        //     // titleLeft: this.tasks[i].title_left,
+        //     // resultLeft: this.tasks[i].result_left,
+        //     // answerLeft: this.tasks[i].answer_left,
+        //     // titleRight: this.tasks[i].title_right,
+        //     // resultRight: this.tasks[i].result_right,
+        //     // answerRight: this.tasks[i].answer_right,
+        //     // date: this.tasks[i].date,
+        //   })
+
+
+        // })
+        //   .then(resp => resp.json())
+        //   .then(items => {
+        //     console.log(items);
+        //   })
+      }, 50);
+      this.deleteWindow = false;
+      // }
+    },
+
 
 
 
   },
   mounted() {
     // 資料庫串接
-    fetch('http://localhost/API/back_fakeNews.php', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
-      .then(resp => resp.json())
-      .then(items => {
-        // console.log(items);
-        // 放進對應的項目
-        this.tasks = items.map(item_list => {
-          return {
-            id: item_list.ID,
-            title_left: item_list.LTEXT,
-            result_left: item_list.ANSWER_LEFT,
-            answer_left: item_list.DESCRIPTION_LEFT,
-            title_right: item_list.RTEXT,
-            result_right: item_list.ANSWER_RIGHT,
-            answer_right: item_list.DESCRIPTION_RIGHT,
-            date: item_list.CREATE_DATE
-          }
-        })
-      })
+    // fetch('http://localhost/API/back_fakeNews.php', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    // })
+    //   // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
+    //   .then(resp => resp.json())
+    //   .then(items => {
+    //     // console.log(items);
+    //     // 放進對應的項目
+    //     this.tasks = items.map(item_list => {
+    //       return {
+    //         id: item_list.ID,
+    //         title_left: item_list.LTEXT,
+    //         result_left: item_list.ANSWER_LEFT,
+    //         answer_left: item_list.DESCRIPTION_LEFT,
+    //         title_right: item_list.RTEXT,
+    //         result_right: item_list.ANSWER_RIGHT,
+    //         answer_right: item_list.DESCRIPTION_RIGHT,
+    //         date: item_list.CREATE_DATE
+    //       }
+    //     })
+    //   })
   }
 }
 </script>
