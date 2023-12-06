@@ -17,47 +17,48 @@ include("DBconnect.php");
 // $pdo = new PDO($dsn, $db_user, $db_pass);
 
 // 收前端的東西
-$data = json_decode(file_get_contents("php://input"),true);
+$data = json_decode(file_get_contents("php://input"), true);
 // 印不出來
 // print_r($data);
-if(isset($data)){
-$id = $data["id"];
-$titleLeft = $data["titleLeft"];
-$resultLeft =$data["resultLeft"];
-$answerLeft =$data["answerLeft"];
-$titleRight= $data["titleRight"];
-$resultRight =$data["resultRight"];
-$answerRight =$data["answerRight"];
-$date =$data["date"];
+if (isset($data)) {
+  $titleLeft = $data["titleLeft"];
+  $resultLeft = $data["resultLeft"];
+  $answerLeft = $data["answerLeft"];
+  $titleRight = $data["titleRight"];
+  $resultRight = $data["resultRight"];
+  $answerRight = $data["answerRight"];
+  $date = $data["date"];
 
 
-// 加上新增內容sql語法
-$sql = "INSERT INTO fake_message_game(ID,LTEXT,RTEXT,ANSWER_LEFT,DESCRIPTION_LEFT,ANSWER_RIGHT,DESCRIPTION_RIGHT,CREATE_DATE)
-value(:id,:titleLeft,:resultLeft,:answerLeft,:titleRight,:resultRight,:answerRight,:date)";
+  // 加上新增內容sql語法
+  $sql = "INSERT INTO fake_message_game(LTEXT,RTEXT,ANSWER_LEFT,DESCRIPTION_LEFT,ANSWER_RIGHT,DESCRIPTION_RIGHT,CREATE_DATE)
+value(:titleLeft,:resultLeft,:answerLeft,:titleRight,:resultRight,:answerRight,:date)";
 
-//要加入資料庫相對應的欄位
-$pstmt = $pdo->prepare($sql);
-$pstmt->bindValue(":id",$id);
-$pstmt->bindValue(":titleLeft",$titleLeft);
-$pstmt->bindValue(":resultLeft",$resultLeft);
-$pstmt->bindValue(":answerLeft",$answerLeft);
-$pstmt->bindValue(":titleRight",$titleRight);
-$pstmt->bindValue(":resultRight",$resultRight);
-$pstmt->bindValue(":answerRight",$answerRight);
-$pstmt->bindValue(":date",$date);
-$pstmt->execute();
-
-$respBody["success"] = true;
-$respBody["message"] ="新增成功";
+  //要加入資料庫相對應的欄位
+  $pstmt = $pdo->prepare($sql);
+  $pstmt->bindValue(":titleLeft", $titleLeft);
+  $pstmt->bindValue(":resultLeft", $resultLeft);
+  $pstmt->bindValue(":answerLeft", $answerLeft);
+  $pstmt->bindValue(":titleRight", $titleRight);
+  $pstmt->bindValue(":resultRight", $resultRight);
+  $pstmt->bindValue(":answerRight", $answerRight);
+  $pstmt->bindValue(":date", $date);
+  $pstmt->execute();
+  // 這是錯誤的嗎？
+  $id = $pdo->lastInsertId();
 
 
-echo json_encode($respBody);
-}else{
+  $respBody["success"] = true;
+  $respBody["message"] = "新增成功";
+  $respBody["id"] = "$id";
+
+
+
+  echo json_encode($respBody);
+} else {
 
   $respBody["success"] = false;
   $respBody["message"] = "缺少必要的參數";
 
   echo json_encode($respBody);
-
 }
-?>

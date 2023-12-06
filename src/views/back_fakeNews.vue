@@ -40,9 +40,9 @@
               <div class="lists">{{ task.answer_right }}</div>
               <div class="lists">{{ task.date }}</div>
               <!-- $event事件物件vue特殊寫法，這裡不一定用，$emit則適用於元件帶入時候的自訂事件 -->
-              <div class="lists"><button type="button" @click="taskEdit($event, index)"
-                  :class="{ '-on': windowShow }">編輯</button></div>
-              <div class="lists"><button type="button" @click="taskdeleteWindow">刪除</button></div>
+              <div class="lists"><button type="button" @click="taskEdit(index)" :class="{ '-on': windowShow }">編輯</button>
+              </div>
+              <div class="lists"><button type="button" @click="taskdeleteWindow(index)">刪除</button></div>
               <!-- <div class="lists"><button type="button" @click="taskRemove($event, index)">刪除</button></div> -->
             </li>
             <!-- <li class="box_list">
@@ -138,23 +138,26 @@
         </div>
       </div>
       <!-- 刪除彈跳視窗 -->
-      <div class="delete_box_outside" v-if="deleteWindow">
-        <div class="delete_box">
-          <ul>
-            <li><img src="../../src/assets/images/common/back_warning.svg" alt="">
-            </li>
-            <li>您確定要刪除這筆資料嗎？</li>
-            <li>
-              <div class="button">
-                <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
-                <div class="btn" @click="taskRemove($event, index)">確認刪除</div>
-                <!-- 點選取消刪除，只關閉彈窗 -->
-                <div class="btn" @click="cancelButton">取消刪除</div>
-              </div>
-            </li>
-          </ul>
+      <transition name="fade">
+        <div class="delete_box_outside" v-if="deleteWindow !== null">
+          <div class="delete_box">
+            <ul>
+              <li><img src="../../src/assets/images/common/back_warning.svg" alt="">
+              </li>
+              <li>您確定要刪除這筆資料嗎？</li>
+              <li>
+                <div class="button">
+                  <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
+                  <div class="btn" @click="taskRemove(index)">確認刪除</div>
+                  <!-- 點選取消刪除，只關閉彈窗 -->
+                  <div class="btn" @click="cancelButton">取消刪除</div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </transition>
+
       <pagination></pagination>
     </main>
   </div>
@@ -183,7 +186,8 @@ export default {
       windowShow: false,
       addWindow: false,
       editWindow: false,
-      deleteWindow: false,
+      // 如果有刪除會帶入值不然就是null
+      deleteWindow: null,
       // selectedDate: null,
       // input輸入的內容
       taskText: [
@@ -223,13 +227,14 @@ export default {
       ]
     }
   },
+  // 前端驗證才使用，有資料庫就不用
   beforeMount() {
     // console.log("beforeMount");
     // 要在網站打開時資料取出來
-    let all_tasks = JSON.parse(localStorage.getItem("tasks"));
+    // let all_tasks = JSON.parse(localStorage.getItem("tasks"));
     // console.log(all_tasks);
     // 把資料放回去
-    this.tasks = all_tasks;
+    // this.tasks = all_tasks;
 
   },
   methods: {
@@ -292,7 +297,6 @@ export default {
 
 
         this.tasks.unshift({
-          // id: this.taskText[0].id,
           title_left: this.taskText[0].title_left,
           result_left: this.taskText[0].result_left,
           answer_left: this.taskText[0].answer_left,
@@ -305,7 +309,6 @@ export default {
 
         // 新增完后会清空
         this.taskText[0] = {
-          // id: "",
           title_left: "",
           result_left: "",
           answer_left: "",
@@ -316,38 +319,43 @@ export default {
         };
 
         // 將新增的數據存到 localStorage 中
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+        // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
       }
       this.windowShow = false;
       this.addWindow = false;
 
-      // fetch('http://localhost/API/back_fakeNews_add.php', {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   // 建立了一個 JSON 物件，其中有一個屬性名稱為id
-      //   //id.value是指輸入框元素 (<input id="id">) 的當前值
-      //   //多行文字框我改成.innerText
-      //   body: JSON.stringify({
-      //     id: this.tasks[0].id,
-      //     titleLeft: this.tasks[0].title_left,
-      //     resultLeft: this.tasks[0].result_left,
-      //     answerLeft: this.tasks[0].answer_left,
-      //     titleRight: this.tasks[0].title_right,
-      //     resultRight: this.tasks[0].result_right,
-      //     answerRight: this.tasks[0].answer_right,
-      //     date: this.tasks[0].date,
+      console.log(this.tasks[0]);
 
-      //   })
-      // })
-      //   .then(resp => resp.json())
-      //   // 找到父層
-      //   .then(taskList => {
-      //     console.log(taskList)
-      //   })
+      fetch('http://localhost/API/back_fakeNews_add.php', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 建立了一個 JSON 物件，其中有一個屬性名稱為id
+        //id.value是指輸入框元素 (<input id="id">) 的當前值
+        //多行文字框我改成.innerText
+        body: JSON.stringify({
+          //  是沒有id值的因為是從資料庫來
+          id: this.tasks[0].id,
+          titleLeft: this.tasks[0].title_left,
+          resultLeft: this.tasks[0].result_left,
+          answerLeft: this.tasks[0].answer_left,
+          titleRight: this.tasks[0].title_right,
+          resultRight: this.tasks[0].result_right,
+          answerRight: this.tasks[0].answer_right,
+          date: this.tasks[0].date,
+
+        })
+      })
+        .then(resp => resp.json())
+        // 找到父層
+        .then(taskList => {
+          // 要回傳id回來由資料庫定義的
+          this.tasks[0].id = id;
+          // console.log(taskList)
+        })
     },
     directCloseAdd() {
       confirm('確認不新增直接關閉');
@@ -356,18 +364,18 @@ export default {
       this.editWindow = false;
     },
     // 剛剛寫的事件物件跟索引值的參數
-    taskEdit(e, i) {
+    taskEdit(i) {
       //要讓tasks有能定義的index，return也寫進去
       this.item_index = i;
       // console.log(i);
       this.taskText[0] = {
         // id: this.tasks[i].id,
-        title_left: this.tasks[i].title_left,
-        result_left: this.tasks[i].result_left,
-        answer_left: this.tasks[i].answer_left,
-        title_right: this.tasks[i].title_right,
-        result_right: this.tasks[i].result_right,
-        answer_right: this.tasks[i].answer_right,
+        titleLeft: this.tasks[i].title_left,
+        resultLeft: this.tasks[i].result_left,
+        answerLeft: this.tasks[i].answer_left,
+        titleRight: this.tasks[i].title_right,
+        resultRight: this.tasks[i].result_right,
+        answerRight: this.tasks[i].answer_right,
         date: this.tasks[i].date
 
       };
@@ -378,72 +386,84 @@ export default {
       this.editWindow = true;
     },
     taskEditOk() {
-      // 將新增的數據存到 localStorage 中
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      // fetch('http://localhost/API/back_fakeNews_edit.php', {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   // 怎麼送都只能送出id:2
-      //   body: JSON.stringify({
-      //     id: this.tasks[this.item_index].id,
-      //   })
+      // 將新增的數據存到 localStorage 中，有資料庫可以不寫
+      // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
+      // console.log(this.tasks[this.item_index].id);
+      fetch('http://localhost/API/back_fakeNews_edit.php', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 編輯要把修改的內容傳回去
+        //一行行印出來是什麼東西
+        body: JSON.stringify({
+          id: this.tasks[this.item_index].id,
+          title_left: this.tasks[this.item_index].title_left,
+          result_left: this.tasks[this.item_index].result_left,
+          answer_left: this.tasks[this.item_index].answer_left,
+          title_right: this.tasks[this.item_index].title_right,
+          result_right: this.tasks[this.item_index].result_right,
+          answer_right: this.tasks[this.item_index].answer_right,
+          date: this.tasks[this.item_index].date
 
-      // })
-      //   .then(resp => resp.json())
-      //   .then(items => {
-      //     console.log(items);
-      //   })
+        })
+      })
+        .then(resp => resp.json())
+        .then(items => {
+          console.log(items);
+        })
       this.windowShow = false;
       this.editWindow = false;
 
 
     },
-    taskdeleteWindow() {
-      this.deleteWindow = true;
+    taskdeleteWindow(index) {
+      this.deleteWindow = index;
     },
     cancelButton() {
-      this.deleteWindow = false;
+      this.deleteWindow = null;
     },
     // 要帶入參數
-    taskRemove(e, i) {
-      // console.log(this.tasks[i]);
+    taskRemove() {
+      // console.log(this.tasks);
       // 1秒後刪掉
       // this.tasks[i].is_fade = true;
 
-      setTimeout(() => {
-        this.tasks.splice(i, 1);
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
-
-        // fetch('http://localhost/API/back_fakeNews_delete.php', {
-        //   method: 'POST',
-        //   mode: 'cors',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   },
-        //   // 怎麼送都只能送出id:2
-        //   body: JSON.stringify({
-        //     id: this.tasks[this.item_index].id,
-        //     // titleLeft: this.tasks[i].title_left,
-        //     // resultLeft: this.tasks[i].result_left,
-        //     // answerLeft: this.tasks[i].answer_left,
-        //     // titleRight: this.tasks[i].title_right,
-        //     // resultRight: this.tasks[i].result_right,
-        //     // answerRight: this.tasks[i].answer_right,
-        //     // date: this.tasks[i].date,
-        //   })
+      // setTimeout(() => {
+      // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
 
-        // })
-        //   .then(resp => resp.json())
-        //   .then(items => {
-        //     console.log(items);
-        //   })
-      }, 50);
-      this.deleteWindow = false;
+      console.log(this.tasks[this.deleteWindow]);
+      fetch('http://localhost/API/back_fakeNews_delete.php', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 怎麼送都只能送出id:2
+        body: JSON.stringify({
+          id: this.tasks[this.deleteWindow].id,
+          // titleLeft: this.tasks[i].title_left,
+          // resultLeft: this.tasks[i].result_left,
+          // answerLeft: this.tasks[i].answer_left,
+          // titleRight: this.tasks[i].title_right,
+          // resultRight: this.tasks[i].result_right,
+          // answerRight: this.tasks[i].answer_right,
+          // date: this.tasks[i].date,
+        })
+
+
+      })
+        .then(resp => resp.json())
+        .then(items => {
+          console.log(items);
+          this.tasks.splice(this.deleteWindow, 1);
+
+        })
+      // }, 50);
+      this.deleteWindow = null;
       // }
     },
 
@@ -453,31 +473,31 @@ export default {
   },
   mounted() {
     // 資料庫串接
-    // fetch('http://localhost/API/back_fakeNews.php', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    // })
-    //   // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
-    //   .then(resp => resp.json())
-    //   .then(items => {
-    //     // console.log(items);
-    //     // 放進對應的項目
-    //     this.tasks = items.map(item_list => {
-    //       return {
-    //         id: item_list.ID,
-    //         title_left: item_list.LTEXT,
-    //         result_left: item_list.ANSWER_LEFT,
-    //         answer_left: item_list.DESCRIPTION_LEFT,
-    //         title_right: item_list.RTEXT,
-    //         result_right: item_list.ANSWER_RIGHT,
-    //         answer_right: item_list.DESCRIPTION_RIGHT,
-    //         date: item_list.CREATE_DATE
-    //       }
-    //     })
-    //   })
+    fetch('http://localhost/API/back_fakeNews.php', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
+      .then(resp => resp.json())
+      .then(items => {
+        //console.log(items);
+        // 放進對應的項目
+        this.tasks = items.map(item_list => {
+          return {
+            id: item_list.ID,
+            title_left: item_list.LTEXT,
+            result_left: item_list.ANSWER_LEFT,
+            answer_left: item_list.DESCRIPTION_LEFT,
+            title_right: item_list.RTEXT,
+            result_right: item_list.ANSWER_RIGHT,
+            answer_right: item_list.DESCRIPTION_RIGHT,
+            date: item_list.CREATE_DATE
+          }
+        })
+      })
   }
 }
 </script>
