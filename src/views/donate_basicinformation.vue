@@ -243,7 +243,8 @@ export default {
             // });
             // const ecPayUrl = await response.text();
             // this.$router.push('/redirected');
-            window.location.href = 'http://localhost/AJAX/APITEST/d_createOrder.php';
+            // window.location.href = 'http://localhost/AJAX/APITEST/d_createOrder.php';
+            window.location.href = 'API/d_createOrder.php';
         }
         // 自己寫加密
         // async getSHA256Hash(input) {
