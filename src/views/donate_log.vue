@@ -18,39 +18,13 @@
                 <div class="drop-down_menu_block">
                     <!-- 年份 -->
                     <select class="list_block">
-                        <div class="list_inside_block">
-                            <option class="choose_year">請選擇年份</option>
-                            <option class="li_year">2012</option>
-                            <option class="li_year">2014</option>
-                            <option class="li_year">2014</option>
-                            <option class="li_year">2015</option>
-                            <option class="li_year">2016</option>
-                            <option class="li_year">2017</option>
-                            <option class="li_year">2018</option>
-                            <option class="li_year">2019</option>
-                            <option class="li_year">2020</option>
-                            <option class="li_year">2021</option>
-                            <option class="li_year">2022</option>
-                            <option class="li_year">2023</option>
-                        </div>
+                        <option class="choose_year" placeholder="請選擇年份">請選擇年份</option>
+                        <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
                     </select>
                     <!-- 月份 -->
                     <select class="list_block">
-                        <div class="list_inside_block">
-                            <option class="choose_month">請選擇月份</option>
-                            <option class="li_month">一月</option>
-                            <option class="li_month">二月</option>
-                            <option class="li_month">三月</option>
-                            <option class="li_month">四月</option>
-                            <option class="li_month">五月</option>
-                            <option class="li_month">六月</option>
-                            <option class="li_month">七月</option>
-                            <option class="li_month">八月</option>
-                            <option class="li_month">九月</option>
-                            <option class="li_month">十月</option>
-                            <option class="li_month">十一月</option>
-                            <option class="li_month">十二月</option>
-                        </div>
+                        <option class="choose_month">請選擇月份</option>
+                        <option class="li_month" v-for="(month, index) in months" :key="index + 1">{{ month }}</option>
                     </select>
 
 
@@ -59,20 +33,25 @@
 
                 <div class="verification_code_block">
 
-                    <input type="text" placeholder="請輸入驗證碼" class="text_here">
-                    <div class="text_here2 underline">STEX</div>
-                    <!-- 按鈕 -->
-
-
+                    <input type="text" placeholder="請輸入驗證碼(不分大小寫)" class="text_here unified_input input"
+                        v-model.trim="inputValidCode">
+                    <!-- 驗證碼匡 -->
+                    <div class="text_here2 underline validcode" id="validcode" @click="updateNumber()">
+                        {{ validCode }}
+                    </div>
                 </div>
+
+
+
+
                 <!-- 查詢捐款按鈕 -->
-                <div class="donate_btn_outer">
+                <!-- <div class="donate_btn_outer"> -->
 
-                    <button class="donate_btn" type="button">
-                        查詢捐款 &#128269
-                    </button>
+                <button class="donate_btn" type="button" @click="queryDonations">
+                    查詢捐款 &#128269
+                </button>
 
-                </div>
+                <!-- </div> -->
 
                 <!-- 舊版 -->
                 <!-- <div class="donate_btn_outer">
@@ -206,10 +185,22 @@ export default {
     },
     data() {
         return {
-            donations: []
+            donations: [],
+            validCode: "",
+
+            // 輸入年月的選單欄位
+            selectedYear: null,
+            selectedMonth: null,
+            inputValidCode: "", // 使用者輸入的驗證碼
+            validCode: "點擊此處獲得驗證碼", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
+            years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+
         };
     },
     mounted() {
+
+
         // 模拟异步获取数据库数据
         setTimeout(() => {
             const serverData = [
@@ -227,6 +218,29 @@ export default {
         }, 500); // 模拟延迟
     },
     methods: {
+
+        // ==== 生成驗證碼
+        generateNumber() {
+            // 改成英文字母
+            let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let validCode = "";
+            for (let i = 1; i <= 4; i++) {
+
+                let randomIndex = Math.floor(Math.random() * letters.length);
+                validCode += letters.charAt(randomIndex);
+            }
+            this.validCode = validCode;
+            this.verifyCode = true;
+        },
+        // ==== 更新驗證碼
+        updateNumber() {
+            this.generateNumber()
+        },
+
+
+
+
+
         queryDonations() {
             // 在这里编写查询捐款信息的逻辑
             // 你可以使用 selectedYear、selectedMonth、verificationCode 的值进行查询
@@ -234,24 +248,26 @@ export default {
             console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
 
             // 使用 fetch 发送请求
-            fetch('http://localhost/path/to/donate_log.php')
-                .then(response => {
-                    // 确保请求成功
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    // 将响应的 JSON 数据解析成对象
-                    return response.json();
-                })
+            fetch('http://localhost/API/donate_log.php', {
+                method: 'GET', // 或 'POST'，視你的 API 設計
+                headers: {
+                    'Content-Type': 'application/json', // 請根據實際需求調整
+                    // 可添加其他 headers
+                },
+                // 如果使用 POST 方法，需要提供 body
+                // body: JSON.stringify({ key: 'value' }) // 根據你的需求，將數據轉換為 JSON 字符串
+            })
+                .then(response => response.json())
                 .then(data => {
-                    // 请求成功，将数据更新到 donations
-                    this.donations = data;
+                    console.log(data);
+
                 })
                 .catch(error => {
-                    // 请求失败，处理错误
-                    console.error('请求失败:', error);
+                    console.error("Error fetching data:", error);
+                    console.log("Response status:", error.status); // 输出 HTTP 响应状态
                 });
         }
+
     }
 }
 
