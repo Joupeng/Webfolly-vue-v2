@@ -111,19 +111,19 @@
                     <p>收據寄發方式</p>
 
                     <label class="Receipt-option">
-                        <input type="radio" name="Receipt" value="male"> 直接上傳至國稅局，免寄紙本收據(為節省資源建議選此項，需填身分證字號)
-                    </label>
+                        <input type="radio" name="Receipt" value="male" checked> 直接上傳至國稅局，免寄紙本收據(為節省資源建議選此項，需填身分證字號)
+                    </label><br>
 
                     <label class="Receipt-option">
                         <input type="radio" name="Receipt" value="female"> 寄送紙本收據(地址為必填;單筆捐款每次寄發，定期捐款年度寄發)
-                    </label>
+                    </label><br>
 
                     <label class="Receipt-option">
                         <input type="radio" name="Receipt" value="other"> 不需收據(無抵稅需求/不用寄給我收據)
                     </label>
                     <br>
                     <label class="Receipt-option">
-                        <input type="radio" name="Receipt" value="other"> 我同意隱私權條款
+                        <input type="radio" name="Receipt" value="other" checked> 我同意隱私權條款
                     </label>
 
                 </div>
@@ -135,7 +135,7 @@
                         您的支持對我們至關重要，為了讓您掌握更多網中愚的訊息，我們將不定期提供更多媒體視讀報告、活動通知、捐款呼籲等相關資料。
                     </p>
                     <label class="gender-option">
-                        <input type="radio" name="gender" value="male"> 是，我願意接收相關訊息
+                        <input type="radio" name="gender" value="male" checked> 是，我願意接收相關訊息
                     </label>
                     <br>
                     <label class="gender-option">
@@ -152,9 +152,12 @@
 
         <!-- 查詢捐款按鈕 -->
         <div class="donate_btn_outer">
-            <router-link :to="{ name: 'back_donate_basicinformation_02' }" class="donate_btn"><span
+            <!-- <router-link :to="{ name: 'back_donate_basicinformation_02' }" class="donate_btn"><span
                     :class="{ 'frontheader_menu-on': $route.name == 'donate' }">確認送出</span>
-            </router-link>
+            </router-link> -->
+
+            <button class="donate_btn" style="color: white; font-weight: bold;" @click="handleECpay">確認送出</button>
+            <hr>
         </div>
 
 
@@ -173,6 +176,8 @@ import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 import front_donate_flow from '@/components/front_donate_flow.vue'
 import front_donate_subfooter from '@/components/front_donate_subfooter.vue'
+import axios from 'axios'
+// import { getSHA256Hash } from "boring-webcrypto-sha256";
 
 
 export default {
@@ -181,6 +186,159 @@ export default {
         frontfooter,
         front_donate_flow,
         front_donate_subfooter
-    }
+    },
+    data() {
+        return {
+            // ecpay:
+            // {
+            //     CustomField1: "1",
+            //     CustomField2: "2",
+            //     CustomField3: "3",
+            //     CustomField4: "4",
+            //     MerchantID: "2000132",
+            //     // MerchantTradeNo: "test1684501999793",
+            //     PaymentDate: "2023/05/19 21:13:40",
+            //     PaymentType: "aio",
+            //     PaymentTypeChargeFee: "10",
+            //     RtnCode: "1",
+            //     RtnMsg: "交易成功",
+            //     SimulatePaid: "0",
+            //     StoreID: "",
+            //     TradeAmt: "100",
+            //     TradeDate: "",
+            //     TradeNo: "2305192113200629",
+            //     CheckMacValue: "46300C00739FCBBAEF33EE1CF7EF26212ED94C6DE82E8B6769E163AA2571D2D8",
+            //     ItemName: "Appleiphone",
+            //     MerchantTradeDate: new Date().toLocaleString('zh-TW', {
+            //         year: 'numeric',
+            //         month: '2-digit',
+            //         day: '2-digit',
+            //         hour: '2-digit',
+            //         minute: '2-digit',
+            //         second: '2-digit',
+            //         hour12: false,
+            //         timeZone: 'UTC',
+            //     }),
+            //     MerchantTradeNo: 'test' + new Date().getTime(),
+            //     ReturnURL: "https://www.google.com/",
+            // },
+
+        }
+    },
+    methods: {
+        // fetch到php===============
+        async handleECpay() {
+            // 參數
+            // const ECpara = {
+            //     TotalAmount: '300',
+            //     ItemName: '範例商品一批',
+            // }
+            // const response = fetch('http://localhost/AJAX/APITEST/d_createOrder.php', {
+            //     method: "POST",
+            //     headers: {
+            //         "Accept": "application/json",
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(ECpara),
+            // });
+            // const ecPayUrl = await response.text();
+            // this.$router.push('/redirected');
+            window.location.href = 'http://localhost/AJAX/APITEST/d_createOrder.php';
+        }
+        // 自己寫加密
+        // async getSHA256Hash(input) {
+        //     // const getSHA256Hash = (input) => {
+        //     const textAsBuffer = new TextEncoder().encode(input);
+        //     const hashBuffer = await window.crypto.subtle.digest("SHA-256", textAsBuffer);
+        //     // const hashBuffer = window.crypto.subtle.digest("SHA-256", textAsBuffer);
+        //     const hashArray = Array.from(new Uint8Array(hashBuffer));
+        //     const hash = hashArray
+        //         .map((item) => item.toString(16).padStart(2, "0"))
+        //         .join("");
+        //     return hash;
+        // },
+        // 套件
+        //    使用套件
+        // async handleECpay() {
+
+        //     alert("suceess")
+
+        //     const ecHashKey =
+        //         "HashKey=pwFHCqoQZGmho4w6&" + "ChoosePayment=ALL & EncryptType=1& ItemName=" + this.ecpay.ItemName + "& MerchantID=" + this.ecpay.MerchantID + "&MerchantTradeDate=" + this.ecpay.MerchantTradeDate + "&MerchantTradeNo=" + this.ecpay.MerchantTradeNo + "& PaymentType=aio & ReturnURL=" + this.ecpay.ReturnURL + "&TotalAmount=30000&TradeDesc=促銷方案&" + "HashIV=EkRm7iFT261dpevs";
+
+        //     // url encode
+        //     const encoded = encodeURI(ecHashKey).toLowerCase();
+
+        //     // console.log('Form submitted');
+        //     // 加密套件
+        //     // const getSHA256Hash = async (input) => {
+        //     //     // const getSHA256Hash = (input) => {
+        //     //     const textAsBuffer = new TextEncoder().encode(input);
+        //     //     const hashBuffer = await window.crypto.subtle.digest("SHA-256", textAsBuffer);
+        //     //     // const hashBuffer = window.crypto.subtle.digest("SHA-256", textAsBuffer);
+        //     //     const hashArray = Array.from(new Uint8Array(hashBuffer));
+        //     //     const hash = hashArray
+        //     //         .map((item) => item.toString(16).padStart(2, "0"))
+        //     //         .join("");
+        //     //     return hash;
+        //     // };
+
+        //     const hash = await this.getSHA256Hash(encoded);
+        //     console.log(hash)
+        //     const hashcode = hash.toUpperCase();
+        //     console.log(hashcode)
+
+        //     axios.post('https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5')
+
+
+        //     //                 const {data} = await axios.post('https://httpbin.org/post', {
+        //     //     firstName: 'Fred',
+        //     //     lastName: 'Flintstone',
+        //     //     orders: [1, 2, 3]
+        //     //   }, {
+        //     //     headers: {
+        //     //       'Content-Type': 'application/x-www-form-urlencoded'
+        //     //     }
+        //     // })
+        //     //         body: {
+        //     //             const ecPara: {
+        //     //                 CustomField1: "1",
+        //     //                 CustomField2: "2",
+        //     //                 CustomField3: "3",
+        //     //                 CustomField4: "4",
+        //     //                 // MerchantID: "3002607",
+        //     //                 HashKey: "pwFHCqoQZGmho4w6",
+        //     //                 HashIV: "EkRm7iFT261dpevs",
+        //     //                 // 
+        //     //                 MerchantTradeDate: new Date().toLocaleString('zh-TW', {
+        //     //                     year: 'numeric',
+        //     //                     month: '2-digit',
+        //     //                     day: '2-digit',
+        //     //                     hour: '2-digit',
+        //     //                     minute: '2-digit',
+        //     //                     second: '2-digit',
+        //     //                     hour12: false,
+        //     //                     timeZone: 'UTC',
+        //     //                 }),
+        //     //     MerchantTradeNo: 'test' + new Date().getTime(),
+        //     //     PaymentType: "aio",
+        //     //     TotalAmount: "100",
+        //     //     TradeDesc: "交易測試",
+        //     //     ItemName: "123",
+        //     //     ReturnURL: "http://localhost:5173/#/donate_basicinformation",
+        //     //     ChoosePayment: "Credit",
+        //     //     CheckMacValue: hashCode,
+        //     //     EncryptType: "1",
+        //     // }
+        // }
+    },
+
 }
+// },
+// mounted() {
+
+// }
+
+
+// }
 </script>

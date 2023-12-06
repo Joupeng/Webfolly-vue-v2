@@ -95,10 +95,10 @@ export default {
     async login() {
       // 取得資料庫資訊
       try {
-        let getAdmin = await fetch("http://localhost/AJAX/APITEST/b_login.php");
-        // let getAdmin = await fetch("API/b_login.php");
+        //let getAdmin = await fetch("http://localhost/AJAX/APITEST/b_login.php");
+        let getAdmin = await fetch("API/b_login.php");
         const data = await getAdmin.json();
-        console.log(data);
+        // console.log(data);
         // 取得name跟PWD放入陣列adminInfo
         let adminInfo = [];
         data.forEach(item => {

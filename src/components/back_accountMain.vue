@@ -115,39 +115,41 @@
           <button class="btn" :class="{ '-on': isOpen2 === true }" @click="handleNewAdmin()">+新增</button>
           <button class="btn" :class="{ '-on': isOpen2 === true }" @click="saveNewAdmin()">儲存新增</button>
         </div>
-        <table class="table">
-          <thead class="thead">
-            <tr class="tr">
-              <th class="th w100">
-                <p>使用者編號</p>
-              </th>
-              <th class="th w100">
-                <p>使用者名稱</p>
-              </th>
-              <th class="th w100">
-                <p>使用者權限</p>
-              </th>
-              <th class="th w200">
-                <p>電子信箱</p>
-              </th>
-              <th class="th w100">
-                <p>電話</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody class="tbody">
-            <tr class="tr" id="admin" v-for="item in adminList" :key="item">
-              <td class="td w100">{{ item.id }}</td>
-              <td class="td w100">{{ item.NAME }}</td>
-              <td class="td w100">{{ item.PERMISSION }}</td>
-              <td class="td w200">{{ item.MAIL }}</td>
-              <td class="td w100">{{ item.PHONE }}</td>
-            </tr>
+        <div class="table">
+          <table class="table">
+            <thead class="thead">
+              <tr class="tr">
+                <th class="th w100">
+                  <p>使用者編號</p>
+                </th>
+                <th class="th w100">
+                  <p>使用者名稱</p>
+                </th>
+                <th class="th w100">
+                  <p>使用者權限</p>
+                </th>
+                <th class="th w200">
+                  <p>電子信箱</p>
+                </th>
+                <th class="th w100">
+                  <p>電話</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+              <tr class="tr" id="admin" v-for="item in adminList" :key="item">
+                <td class="td w100">{{ item.id }}</td>
+                <td class="td w100">{{ item.NAME }}</td>
+                <td class="td w100">{{ item.PERMISSION }}</td>
+                <td class="td w200">{{ item.MAIL }}</td>
+                <td class="td w100">{{ item.PHONE }}</td>
+              </tr>
 
 
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -201,10 +203,8 @@ export default {
       },
 
     }
-
   },
   methods: {
-
     // 預設直接取得cookie值
     getCookie(cookieName) {
       const name = cookieName + "=";
@@ -340,7 +340,7 @@ export default {
 
 
         // 3.回傳json檔到php
-        // const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+        //const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
         const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {
@@ -363,7 +363,7 @@ export default {
     // 抓取管理員清單
     async showAdminList() {
       try {
-        // let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
+        //let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
         let getAdminList = await fetch("API/b_account.php");
         const data = await getAdminList.json();
         // console.log(data);
@@ -443,7 +443,7 @@ export default {
         };
         console.log(PWD);
         // 3.回傳值
-        //  const response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
+        // response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
         const response = await fetch("API/b_changepassword.php", {
           method: "POST",
           headers: {
