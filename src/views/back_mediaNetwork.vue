@@ -19,50 +19,60 @@
 
       <div class="button">
         <!-- 當點擊按鈕時調用 addSort 方法 -->
-        <div class="btn" @click="addSort" :class="{ '-on': addSortOpen }">+ 新增分類</div>
 
-        <div class="btn" @click="addDetail" :class="{ '-on': addDetailOpen }">+ 新增內容</div>
+        <div class="btn" @click="itemAddWindow">+ 新增</div>
 
       </div>
 
-      <ul class="table">
+      <div class="backTable">
         <!-- thead 部分 -->
-        <li class="thead">
+        <div class="thead">
           <!-- 欄位標題 -->
-          <div class="thNumber">編號</div>
-          <div class="thTitle">標題</div>
-          <div class="thContent">內容</div>
-          <div class="thDate">時間</div>
-          <div class="thEdit"></div>
-          <div class="thDelet"></div>
-        </li>
+          <div class="thItem">編號</div>
+          <div class="thItem">標題</div>
+          <div class="thItem">內容</div>
+          <div class="thItem">連結</div>
+          <div class="thItem">縮圖</div>
+          <div class="thItem">時間</div>
+        </div>
 
         <!-- tbody 部分 -->
+        <div class="tobdyContainer">
+          <ul class="itemList">
+            <!-- 顯示每個欄位的資料 -->
+            <li v-for="(item, index) in items" :key="index" class="itemRow">
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbNumber }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbTitle }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbContent }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbLink }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbPic }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.tbDate }}</p>
+              </div>
+              <div class="tbItem" @click="itemEdit($event, index)" :class="{ 'edit-on': windowShow }"
+                style="cursor: pointer;">
+                <p class="tableP">編輯</p>
+              </div>
+              <div class="tbItem" @click="warning">
+                <p class="tableP" style="cursor: pointer;">刪除</p>
+              </div>
 
-        <!-- 顯示每個欄位的資料 -->
-        <li v-for="(item, index) in items" :key="index" class="tbody">
-          <div class="thNumber">
-            <p class="tableP">{{ item.thNumber }}</p>
-          </div>
-          <div class="thTitle">
-            <p class="tableP">{{ item.thTitle }}</p>
-          </div>
-          <div class="thContent">
-            <p class="tableP">{{ item.thContent }}</p>
-          </div>
-          <div class="thDate">
-            <p class="tableP">{{ item.thDate }}</p>
-          </div>
-          <div class="thEdit">
-            <p class="tableP">{{ item.thEdit }}</p>
-          </div>
-          <div class="thDelet" @click="warning">
-            <p class="tableP">{{ item.thDelet }}</p>
-          </div>
+            </li>
+          </ul>
+        </div>
 
-        </li>
 
-      </ul>
+      </div>
 
 
       <!-- 刪除彈跳視窗 -->
@@ -85,76 +95,12 @@
         </ul>
       </div>
 
-      <!-- 新增分類視窗 -->
 
-      <div class="modaloutside" v-if="addSortOpen">
-        <div class="category">
 
-          <div class="category_frame">
 
-            <header class="modalheader">
-              <span>新增分類</span>
-              <span id="closeModal" class="close" @click="closeModal"><img
-                  src="../assets/images/common/back_iconClose.svg" alt="close"></span>
-            </header>
-
-            <form action="">
-              <input class="inputcategory" type="text" id="category" name="category" placeholder="請輸入新的分類">
-              <input class="inputsave" type="submit" value="儲存變更">
-            </form>
-
-            <div class="wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>編號</th>
-                    <th>分類</th>
-                    <th>刪除<i class="fa-solid fa-trash"></i></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <div class="block">政治國際<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
-                    </td>
-                    <td>
-                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>2</td>
-                    <td>
-                      <div class="block">生活健康<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
-                    </td>
-                    <td>
-                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>3</td>
-                    <td>
-                      <div class="block">科技財金<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
-                    </td>
-
-                    <td>
-                      <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
-                    </td>
-
-                  </tr>
-
-                </tbody>
-
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- ===新增文章彈窗=== -->
-      <div class="content" v-if="addDetailOpen">
+      <div class="content" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
             <span>新增編輯 / 文章</span>
@@ -163,82 +109,75 @@
           </header>
 
           <div class="wrap">
-            <!-- 分類 -->
-            <div>
 
-              <span class="selectTitle">
-                <label for="category">分類選擇</label>
-              </span>
-              <span>
-                <select class="selectText" v-model="selectedCategory" id="categorys" name="categorys">
-                  <option disabled value="">分類</option>
-                  <option v-for="category in categorys" :key="category.id" :value="category.id">{{ category.name }}
-                  </option>
-                </select>
-              </span>
-            </div>
-
-            <!-- 文章標題 -->
-            <div>
-              <span class="selectTitle"><label for="title">文章標題</label></span>
-              <span>
-                <textarea v-model="title" class="selectText" placeholder="請輸入標題"></textarea>
-                <p>{{ title }}</p>
-              </span>
-            </div>
-
-            <!-- 檔案上傳 -->
-            <div>
-              <span class="selectTitle">
-                <label for="file">文章縮圖</label>
-              </span>
-
-              <span> <input class="selectText" type="file" ref="fileInput" @change="handleFileUpload">
-                <!-- 顯示選擇的檔案名稱 -->
-                <!-- <div v-if="selectedFile">
-              <p>選擇的檔案：{{ selectedFile.name }}</p>
-                                      </div> -->
-              </span>
-
-            </div>
-
-            <!-- 影音連結輸入 -->
-            <div>
-              <span class="selectTitle"> <label for="video">影音連結</label></span>
-
-              <span><input class="selectText" type="text" v-model="videoLink" placeholder="輸入影音連結">
-
-                <!-- 顯示影音連結 -->
-                <!-- <div v-if="videoLink">
-              <p>您輸入的影音連結：{{ videoLink }}</p>
-              <video :src="videoLink" controls autoplay></video>
-                                    </div> -->
-              </span>
-
-            </div>
-
-            <!-- 文章內容 -->
-            <div>
-              <span class="selectTitle"> <label for="message">文章內容</label></span>
-
-              <span> <textarea class="selectContent" v-model="title" placeholder="請輸入內容"></textarea>
-                <p>{{ title }}</p>
-              </span>
+            <div class="wrap_fram">
+              <!-- 編號 -->
+              <div class="input_number">
+                <p>編號</p>
+                <!-- 新增輸入框 -->
+                <input type="text" name="" id="" class="input_box" v-model.trim="itemText[0].id" placeholder="必填"
+                  v-if="addWindow">
+                <!-- 編輯輸入框 -->
+                <input type="text" name="" id="" class="input_box" v-model.trim="items[0].id" v-if="editWindow">
+              </div>
+              <!-- 標題 -->
+              <div class="input_title">
+                <p>標題</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].title" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[0].title" v-if="editWindow"></textarea>
+              </div>
+              <!-- 內容 -->
+              <div class="input_content">
+                <p>內容</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].content" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[0].content" v-if="editWindow"></textarea>
+              </div>
+              <!-- 連結 -->
+              <div class="input_link">
+                <p>連結</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].link" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[0].link" v-if="editWindow"></textarea>
+              </div>
+              <!-- 縮圖 -->
+              <div class="input_picture">
+                <p>縮圖</p>
+                <!-- 新增輸入框 -->
+                <input class="input_box_textarea" type="file" ref="fileInput" @change="handleFileUpload" v-if="addWindow">
+                <!-- 編輯輸入框 -->
+                <input class="input_box_textarea" type="file" ref="fileInput" @change="handleFileUpload"
+                  v-if="editWindow">
+              </div>
+              <!-- 日期 -->
+              <div class="input_date">
+                <p>日期</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].date" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[0].date" v-if="editWindow"></textarea>
+              </div>
 
 
             </div>
+
 
           </div>
 
           <div class="button">
-            <a href="">
-              <div class="btn">儲存變更</div>
-            </a>
-          </div>
 
+
+            <div class="button_add_window"><button type="button" @click="itemAdd" v-if="addWindow">儲存新增</button></div>
+            <div class="button_add_window"><button type="button" @click="itemEditOk" v-if="editWindow">儲存變更</button></div>
+          </div>
         </div>
 
       </div>
+
 
 
 
@@ -256,106 +195,160 @@
 </template>
 
 <script>
-
 import backfooter from '@/components/back_footer.vue'
 import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
-
-// =彈跳視窗=
-import modal_warning from '@/components/modal/modal_warning.vue'
-import modal_category from '@/components/modal/modal_category.vue'
-import modal_content from '@/components/modal/modal_content.vue'
-import modal_quiz from '@/components/modal/modal_quiz.vue'
-
 
 export default {
   components: {
     backfooter,
     pagination,
     backaside,
-
-    modal_warning,
-    modal_category,
-    modal_content,
-    modal_quiz,
   },
   data() {
     return {
-      addSortOpen: false,
-      addDetailOpen: false,
+      itemAddWindowOpen: false,
       warningOpen: false,
-
-      // 新增文章彈窗
-      selectedCategory: '', // 使用者選擇的分類將存儲在這個變數中
-      categorys: [ // 車輛清單
-        { id: 1, name: '政治國際' },
-        { id: 2, name: '生活健康' },
-        { id: 3, name: '科技財金' },
-        { id: 4, name: 'Audi' }
+      windowShow: false,
+      addWindow: false,
+      editWindow: false,
+      // input輸入的內容
+      itemText: [
+        {
+          id: '',
+          title: '',
+          content: '',
+          link: '',
+          picture: '',
+          date: '',
+        }
       ],
-      title: '',// 用來存儲textarea的值
-      selectedFile: null,
-      videoLink: '',
-      message: '',
-
+      // li上有的內容及狀態
       items: [
         {
-          thNumber: '1',
-          thTitle: '標題',
-          thContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-          thDate: '2022.03.12',
-          thEdit: '編輯',
-          thDelet: '刪除'
+          tbNumber: '1',
+          tbTitle: '標題',
+          tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+          tbLink: '',
+          tbPic: '',
+          tbDate: '2022.03.12',
         },
         {
-          thNumber: '2',
-          thTitle: '標題',
-          thContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-          thDate: '2022.03.12',
-          thEdit: '編輯',
-          thDelet: '刪除'
+          tbNumber: '2',
+          tbTitle: '標題',
+          tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+          tbLink: '',
+          tbPic: '',
+          tbDate: '2022.03.12',
         },
-      ]
+      ],
 
     };
-
-
+  },
+  beforeMount() {
+    let all_items = JSON.parse(localStorage.getItem("items"));
+    if (all_items) {
+      this.items = all_items;
+    }
   },
   methods: {
-    handleFileUpload(event) {
-      const file = event.target.files[0]; // 獲取上傳的檔案
-      this.selectedFile = file; // 將選擇的檔案存儲在 data 中
-      // 在這裡可以執行上傳檔案的相關邏輯，比如使用 Axios 發送 POST 請求等
+    // 新增內容視窗打開
+    itemAddWindow() {
+      this.itemAddWindowOpen = !this.itemAddWindowOpen;
+      this.windowShow = true;
+      this.addWindow = true;
+      // 初始化 itemText[0] 為空白狀態
+      this.itemText[0] = {
+        id: '',
+        title: '',
+        content: '',
+        link: '',
+        picture: '',
+        date: '',
+      };
+    },
+    // 新增內容進去
+    itemAdd() {
+      if (this.itemText[0].id != "") {
+        this.items.unshift({
+          id: this.itemText[0].id,
+          title: this.itemText[0].title,
+          content: this.itemText[0].content,
+          link: this.itemText[0].link,
+          picture: this.itemText[0].picture,
+          date: this.itemText[0].date,
+        });
+        // 新增完後會清空
+        this.itemText[0] = {
+          id: '',
+          title: '',
+          content: '',
+          link: '',
+          picture: '',
+          date: '',
+        };
+        // 把新增的資料存到 localStorage 裡
+        localStorage.setItem("items", JSON.stringify(this.items));
+      }
+      this.windowShow = false;
+      this.addWindow = false;
+      this.itemAddWindowOpen = false;
+    },
+    // 編輯舊有內容
+    itemEdit(e, i) {
+      this.itemAddWindowOpen = true;
+      this.itemText[0] = {
+        id: this.items[i].id,
+        title: this.items[i].title,
+        content: this.items[i].content,
+        link: this.items[i].link,
+        picture: this.items[i].picture,
+        date: this.items[i].date,
+
+      };
+      this.windowShow = true;
+      this.editWindow = true;
+      // this.itemAddWindowOpen = !this.itemAddWindowOpen;
     },
 
+    itemEditOk() {
+      this.windowShow = false;
+      this.editWindow = false;
+      this.itemAddWindowOpen = false;
+      if (this.editWindow) {
+        // 編輯操作
+        const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
+        if (editedItemIndex !== -1) {
+          this.items[editedItemIndex] = { ...this.itemText[0] };
+          localStorage.setItem("items", JSON.stringify(this.items));
+        } else {
+          // 找不到相對應的內容時
+          console.error("Item not found for editing");
+        }
+      }
 
-    // 彈跳視窗打開
-    addSort() {
-      this.addSortOpen = !this.addSortOpen;
+
     },
-    addDetail() {
-      this.addDetailOpen = !this.addDetailOpen
-    },
+    // 刪除警告
     warning() {
       this.warningOpen = !this.warningOpen;
     },
-    // ====刪除警告===
-    deleteRow() {
+    deleteRow(e, i) {
+      e.target.closest("li").classList.add("remove");
+      // 1秒後刪掉
+      setTimeout(() => {
+        this.items.splice(i, 1);
+        localStorage.setItem("items", JSON.stringify(this.items));
+        this.warningOpen = false;
+      }, 50);
+    },
 
-      // 在這個方法裡處理刪除資料的邏輯
-      // 這裡只示範關閉彈跳視窗的邏輯
-
-      // 關閉彈窗
-
+    // 彈跳視窗關閉
+    closeModal() {
+      this.itemAddWindowOpen = false;
+      this.warningOpen = false;
 
     },
-    closeModal() {
-      // 關閉彈窗
-      this.addSortOpen = false;
-      this.addDetailOpen = false;
-      // this.deleteModalOpen = false;
-      this.warningOpen = false;
-    }
-  }
-}
+  },
+};
 </script>

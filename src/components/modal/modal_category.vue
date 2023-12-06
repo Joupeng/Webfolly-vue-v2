@@ -1,13 +1,13 @@
+   <!-- 新增分類視窗 -->
 <template>
-  <!-- ===分類彈窗=== -->
-  <div class="modaloutside" v-if="deletePic">
+  <div class="modaloutside" v-if="addSortOpen">
     <div class="category">
 
       <div class="category_frame">
 
         <header class="modalheader">
           <span>新增分類</span>
-          <span id="closeModal" class="close" @click="closeModal"><img src="../../assets/images/common/back_iconClose.svg"
+          <span id="closeModal" class="close" @click="closeModal"><img src="../assets/images/common/back_iconClose.svg"
               alt="close"></span>
         </header>
 
@@ -29,31 +29,31 @@
               <tr>
                 <td>1</td>
                 <td>
-                  <div class="block">政治國際<img src="../../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                  <div class="block">政治國際<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
                 </td>
                 <td>
-                  <div class="edit"><img src="../../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                  <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
                 </td>
               </tr>
 
               <tr>
                 <td>2</td>
                 <td>
-                  <div class="block">生活健康<img src="../../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                  <div class="block">生活健康<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
                 </td>
                 <td>
-                  <div class="edit"><img src="../../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                  <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
                 </td>
               </tr>
 
               <tr>
                 <td>3</td>
                 <td>
-                  <div class="block">科技財金<img src="../../assets/images/common/back_iconEditor.svg" alt="editor"></div>
+                  <div class="block">科技財金<img src="../assets/images/common/back_iconEditor.svg" alt="editor"></div>
                 </td>
 
                 <td>
-                  <div class="edit"><img src="../../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
+                  <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="trashcan"></div>
                 </td>
 
               </tr>
@@ -70,10 +70,14 @@
 export default {
   data() {
     return {
-      deletePic: false
+      addSortOpen: false,
     };
   },
   methods: {
+    // 彈跳視窗打開
+    addSort() {
+      this.addSortOpen = !this.addSortOpen;
+    },
     closeModal() {
       // 關閉彈窗
       this.addSortOpen = false;
