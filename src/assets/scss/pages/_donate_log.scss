@@ -232,28 +232,27 @@
     }
   }
 
-  .donate_btn_outer {
+
+
+
+  .donate_btn {
     display: flex;
-    // border: 1px solid red;
     justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+    border: 4px solid #50589D;
+    border-radius: 32px;
+    background-color: #50589D;
+    color: white;
+    margin: 0 auto;
 
-    .donate_btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 180px;
-      height: 50px;
-      border: 4px solid #50589D;
+    &:hover {
+      box-shadow: 0px 0px 15px #5D92CD;
       border-radius: 32px;
-      background-color: #50589D;
-      color: white;
-
-      &:hover {
-        box-shadow: 0px 0px 15px #5D92CD;
-        border-radius: 32px;
-        scale: 1.1;
-      }
+      scale: 1.1;
     }
+
   }
 
 
