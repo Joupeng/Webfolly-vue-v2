@@ -1,2 +1,79 @@
 @import "../base/color";
 @import "../base/font";
+
+.ClassTable {
+
+
+  .thead {
+    width: 1028px;
+    height: 64px;
+    background-color: $black;
+    color: $white;
+
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+    /* 列數和寬度 */
+    grid-gap: 8px;
+    /* 網格間距 */
+
+    .thItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .tobdyContainer {
+    width: 1028px;
+
+
+    .itemList {
+
+      margin: 0;
+      list-style: none;
+      padding: 0;
+
+      .itemRow {
+
+        display: grid;
+        grid-template-columns: 0.5fr 0.5fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+        /* 列數和寬度 */
+        grid-gap: 8px;
+
+        &:nth-of-type(odd) {
+          background-color: $gray-300;
+        }
+
+        &:nth-of-type(even) {
+          background-color: $white;
+        }
+
+        &:hover {
+          background-color: $secondary-y1;
+        }
+
+        /* 網格間距 */
+        .tbItem {
+
+          overflow: hidden;
+          white-space: nowrap;
+          display: flex;
+          justify-content: center;
+
+
+          .tableP {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+          }
+        }
+      }
+
+
+    }
+  }
+
+
+}
