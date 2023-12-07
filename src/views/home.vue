@@ -42,7 +42,7 @@
                 <!-- <br> -->
                 <div class="img_block">
                     <img v-if="showHand" src="../assets/images/home/home_banner_hand.svg" alt="" class="the_hand">
-                    <img v-else src="../assets/images/home/Yellowy_Gif01.gif" alt="" class="good_job">
+                    <img v-else src="../assets/images/home/Yellowy_Gif02.gif" alt="" class="good_job">
 
                 </div>
 
@@ -67,7 +67,7 @@
 
                     <div class="block_column">
                         <div>
-                            <div class="image_block"><img src="../assets/images/home/Black_Gif_bugKiller.gif" alt="">
+                            <div class="image_block"><img src="../assets/images/home/Black_Gif_bugKiller02.gif" alt="">
                             </div>
                             <div class="titleBlockB_inner">
                                 <p class="titleText2">網傳:登山時隨身帶一瓶殺蟲劑，遇到虎頭蜂群可以噴殺救命?</p>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div>
-                            <div class="image_block"><img src="../assets/images/home/Blue_Gif_guilty.gif" alt=""></div>
+                            <div class="image_block"><img src="../assets/images/home/Blue_Gif_guilty02.gif" alt=""></div>
                             <div class="titleBlockB_inner">
                                 <p class="titleText2">XXX勝訴！全因女方一個舉動？匿名陪審團揭全案四個關鍵！</p>
                             </div>
@@ -101,30 +101,27 @@
                 <div class="three_block">
                     <div class="three_block_inner1">
 
-                        <router-link :to="{ name: 'fakenews' }" @click="closeNav" :class="{ '-clicked': isClicked }"
-                            class="router_btn "><span
+                        <router-link :to="{ name: 'fakenews' }" :class="{ '-clicked': isClicked }" class="router_btn "><span
                                 :class="{ 'frontheader_menu-on': $route.name == 'fakenews' }">關於假訊息</span>
+                            <div class="img_Dblue"></div>
                         </router-link>
 
-                        <div><img src="../assets/images/home/home_bluey_small.svg" alt=""></div>
                     </div>
                     <div class="three_block_inner2">
-                        <router-link :to="{ name: 'game' }" @click="closeNav" :class="{ '-clicked': isClicked }"
-                            class="router_btn "><span :class="{ 'frontheader_menu-on': $route.name == 'game' }">趣味小測驗</span>
+                        <router-link :to="{ name: 'game' }" :class="{ '-clicked': isClicked }" class="router_btn "><span
+                                :class="{ 'frontheader_menu-on': $route.name == 'game' }">趣味小測驗</span>
+                            <div class="img_Yellow"></div>
                         </router-link>
-                        <div><img src="../assets/images/home/home_yellow_small.svg" alt=""></div>
-
                     </div>
+
                     <div class="three_block_inner3">
-                        <router-link :to="{ name: 'medialiteracy' }" @click="closeNav" :class="{ '-clicked': isClicked }"
+                        <router-link :to="{ name: 'medialiteracy' }" :class="{ '-clicked': isClicked }"
                             class="router_btn "><span
-                                :class="{ 'frontheader_menu-on': $route.name == 'medialiteracy' }">媒體釋讀資源</span>
+                                :class="{ 'frontheader_menu-on': $route.name == 'medialiteracy' }">媒體識讀資源</span>
+                            <div class="img_Lblue"></div>
                         </router-link>
-
-
-                        <div><img src="../assets/images/home/home_ligBlue_small.svg" alt=""></div>
-
                     </div>
+
                 </div>
             </div>
 
@@ -139,14 +136,10 @@
                 </div>
                 <div class="text_area_change" :class="{ '-clicked': isClicked }">
                     <p>你也可以加入這場改變</p>
-                    <p>改變的路上，網中愚努力的從零走到一，
-                        現在需要你一起推動我們持續前進。
-                        邀請你成為網中愚的捐款人，
-                        推動團隊繼續行動，實踐改變。</p>
+                    <p>改變的路上，網中愚努力的從零開始，現在需要你推動我們一起前進。邀請你成為網中愚的捐款人！支持鼓勵團隊，實踐改變。</p>
                 </div>
                 <!-- 按鈕 -->
-                <router-link :to="{ name: 'donate' }" @click="closeNav" class="donate_btn"
-                    :class="{ '-clicked': isClicked }"><span
+                <router-link :to="{ name: 'donate' }" class="donate_btn" :class="{ '-clicked': isClicked }"><span
                         :class="{ 'frontheader_menu-on': $route.name == 'donate' }">捐款支持</span>
                 </router-link>
 
@@ -234,6 +227,10 @@ export default {
         checkShowHand() {
             this.showHand = !(this.isClicked1 && this.isClicked2 && this.isClicked3 && this.isClicked4 && this.isClicked5);
         }
+
+
+
+
 
     },
 

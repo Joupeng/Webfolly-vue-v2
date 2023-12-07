@@ -17,14 +17,15 @@
                 <p>捐款日期(年/月)</p>
                 <div class="drop-down_menu_block">
                     <!-- 年份 -->
-                    <select class="list_block">
+                    <select class="list_block" v-model="Dyear">
                         <option class="choose_year" placeholder="請選擇年份">請選擇年份</option>
                         <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
                     </select>
                     <!-- 月份 -->
-                    <select class="list_block">
+                    <select class="list_block" v-model="Dmonth">
                         <option class="choose_month">請選擇月份</option>
-                        <option class="li_month" v-for="(month, index) in months" :key="index + 1">{{ month }}</option>
+                        <option class="li_month" v-for="(month, index) in months" :key="index + 1" :value="index + 1">{{
+                            month }}</option>
                     </select>
 
 
@@ -32,6 +33,7 @@
                 </div>
 
                 <div class="verification_code_block">
+
 
                     <input type="text" placeholder="請輸入驗證碼(不分大小寫)" class="text_here unified_input input"
                         v-model.trim="inputValidCode">
@@ -45,20 +47,12 @@
 
 
                 <!-- 查詢捐款按鈕 -->
-                <!-- <div class="donate_btn_outer"> -->
+                <!-- queryDonations -->
 
-                <button class="donate_btn" type="button" @click="queryDonations">
+                <button class="donate_btn" type="button" @click="handleDonation">
                     查詢捐款 &#128269
                 </button>
 
-                <!-- </div> -->
-
-                <!-- 舊版 -->
-                <!-- <div class="donate_btn_outer">
-                    <router-link :to="{ name: 'donate_record_result' }" @click="closeNav" class="donate_btn"><span
-                            :class="{ 'frontheader_menu-on': $route.name == 'donate' }">查詢捐款 &#128269</span>
-                    </router-link>
-                </div> -->
 
 
             </div>
@@ -84,7 +78,7 @@
 
             <li v-for="(donation, index) in donations" :class="{ 'white_li': index % 2 === 0, 'gray_li': index % 2 !== 0 }">
                 <div>
-                    <p>{{ donation.FNAME }} {{ donation.LNAME }}</p>
+                    <p>{{ donation.LNAME }}{{ donation.FNAME }} </p>
                     <p>{{ donation.MONEY }}</p>
                     <p>{{ donation.DYEAR }}/{{ donation.DMONTH }}</p>
                 </div>
@@ -187,37 +181,32 @@ export default {
         return {
             donations: [],
             validCode: "",
+            serverData: [],  // 添加 serverData 属性
 
             // 輸入年月的選單欄位
             selectedYear: null,
             selectedMonth: null,
             inputValidCode: "", // 使用者輸入的驗證碼
-            validCode: "點擊此處獲得驗證碼", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
+            validCode: "", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
             years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
-            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
-
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            Dyear: null,
+            Dmonth: null,
         };
     },
     mounted() {
 
-
-        // 模拟异步获取数据库数据
-        setTimeout(() => {
-            const serverData = [
-                { FNAME: 'John', LNAME: 'Doe', MONEY: 'NT$200', donation_time: '2023-02-15' },
-                // 其他数据...
-            ];
-
-            this.donations = serverData.map(donation => ({
-                FNAME: donation.FNAME,
-                LNAME: donation.LNAME,
-                MONEY: donation.MONEY,
-                DYEAR: new Date(donation.donation_time).getFullYear(),
-                DMONTH: new Date(donation.donation_time).getMonth() + 1,
-            }));
-        }, 500); // 模拟延迟
     },
+
+    // 進入畫面就生成驗證碼
+    created() {
+        // 在 Vue 實例被創建時生成驗證碼
+        this.generateNumber();
+    },
+
     methods: {
+
+
 
         // ==== 生成驗證碼
         generateNumber() {
@@ -238,33 +227,70 @@ export default {
         },
 
 
+        handleDonation() {
+            // 驗證碼比對
+            if (this.inputValidCode.toUpperCase() === this.validCode) {
+                // 驗證碼正確，執行查詢捐款的邏輯
+                // console.log("查詢捐款");
+
+                // 使用 fetch 發送請求
+                // http://localhost/API/donate_log.php
+
+
+                // 'http://localhost/API/donate_log.php?DYEAR='+ this.Dyear
+                // `http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`
+
+                fetch(`API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // 將取得的資料映射为前端需要的格式
+                        this.donations = data.map(donation => ({
+                            FNAME: donation.FNAME,
+                            LNAME: donation.LNAME,
+                            MONEY: donation.MONEY,
+                            DYEAR: donation.DYEAR,
+                            DMONTH: donation.DMONTH,
+                        }));
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                        console.log("Response status:", error.status);
+                    });
+            } else {
+                // 驗證碼錯誤，顯示錯誤訊息
+                alert("輸入驗證碼錯誤");
+            }
+        },
 
 
 
         queryDonations() {
-            // 在这里编写查询捐款信息的逻辑
-            // 你可以使用 selectedYear、selectedMonth、verificationCode 的值进行查询
-            // 示例：在控制台打印查询条件
             console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
 
             // 使用 fetch 发送请求
-            fetch('http://localhost/API/donate_log.php', {
-                method: 'GET', // 或 'POST'，視你的 API 設計
+            // http://localhost/API/donate_log.php
+            // http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12
+
+            fetch('API/donate_log.php?DYEAR=2023&DMONTH=12', {
+                method: 'GET',
+                mode: 'cors',
                 headers: {
-                    'Content-Type': 'application/json', // 請根據實際需求調整
-                    // 可添加其他 headers
+                    'Content-Type': 'application/json',
                 },
-                // 如果使用 POST 方法，需要提供 body
-                // body: JSON.stringify({ key: 'value' }) // 根據你的需求，將數據轉換為 JSON 字符串
             })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
-                    console.log("Response status:", error.status); // 输出 HTTP 响应状态
+                    console.log("Response status:", error.status);
                 });
         }
 
