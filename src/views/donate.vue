@@ -39,7 +39,7 @@
             我們將協助您提升媒體識讀能力:
             <br>［媒體識讀資源］: 提供好媒體資源，讓閱聽者有更多好的閱聽平台。
             <br>［關於假訊息］: 讓閱聽者認識假訊息及防範對策。
-            <br>［關於誘餌式標題］: 閱聽者從中了解誘餌式標題內容。
+            <!-- <br>［關於誘餌式標題］: 閱聽者從中了解誘餌式標題內容。 -->
           </p>
 
           <p>
@@ -67,7 +67,7 @@
 
             <div class="item">
               <h2 class="h2_yellow">1</h2>
-              <p>捐款內容</p>
+              <p class="p_bold">捐款內容</p>
             </div>
 
             <div class="RightArrow">
@@ -112,25 +112,33 @@
           <div class="DonationAmount">
             <h3>捐款金額</h3>
 
-            <div id="app">
+            <!-- <div id="app">
               <button type="button" :class="{ bg: active }" @click="handleButtonClick_100">100</button>
               <button type="button" :class="{ bg: active1 }" @click="handleButtonClick_500">500</button>
               <button type="button" :class="{ bg: active2 }" @click="handleButtonClick_1000">1000</button>
               <button type="button" :class="{ bg: active3 }" @click="handleButtonClick_2000">2000</button>
+            </div> -->
+            <div class="donateOption">
+              <input class="number" type="number" value="100" readonly :class="{ '-on': isChoose === 100 }"
+                @click="handleIsChoose(100)">
+              <input class="number" type="number" value="500" readonly :class="{ '-on': isChoose === 500 }"
+                @click="handleIsChoose(500)">
+              <input class="number" type="number" value="1000" readonly :class="{ '-on': isChoose === 1000 }"
+                @click="handleIsChoose(1000)">
+              <input class="number" type="number" value="2000" readonly :class="{ '-on': isChoose === 2000 }"
+                @click="handleIsChoose(2000)">
             </div>
-
 
           </div>
           <!-- 查詢捐款按鈕 -->
-          <div class="donate_btn_outer">
+          <!-- <div class="donate_btn_outer">
             <router-link :to="{ name: 'donate_basicinformation' }" class="donate_btn"><span
                 :class="{ 'frontheader_menu-on': $route.name == 'donate' }">確認送出</span>
             </router-link>
-          </div>
-
+          </div> -->
+          <button class="donate_btn" @click="handleDonation()">確認送出</button>
         </div>
       </div>
-
     </div>
 
 
@@ -160,49 +168,21 @@ export default {
 
   data() {
     return {
-      active: false,
-      active1: false,
-      active2: false,
-      active3: false
+      isChoose: 100,
     }
   },
 
   methods: {
-    handleButtonClick_100(a) {
-      // alert('按鈕100被點擊了！');
-      this.active = !this.active;
-      this.active1 = false
-      this.active2 = false
-      this.active3 = false
-      // a.target.classList.toggle("bg");
-
+    // 設定選取金額的style加上-on
+    handleIsChoose(value) {
+      this.isChoose = this.isChoose === value ? null : value;
     },
-    handleButtonClick_500(b) {
-      this.active1 = !this.active1
-      this.active = false
-      this.active2 = false
-      this.active3 = false
-      // alert('按鈕500被點擊了！');
-      // b.target.classList.toggle("bg");
-
-    },
-    handleButtonClick_1000(c) {
-      this.active2 = !this.active2
-      this.active = false
-      this.active1 = false
-      this.active3 = false
-      // alert('按鈕1000被點擊了！');
-      // c.target.classList.toggle("bg");
-
-    },
-    handleButtonClick_2000(d) {
-      this.active3 = !this.active3
-      this.active1 = false
-      this.active = false
-      this.active2 = false
-      //alert('按鈕2000被點擊了！');
-      //console.log(e.target);
-      // d.target.classList.toggle("bg");
+    handleDonation() {
+      // alert('hello')
+      document.cookie = '';
+      document.cookie = `donationAmt=${this.isChoose}`;
+      console.log(this.isChoose)
+      this.$router.push(`/donate_basicinformation`)
     }
   }
 }

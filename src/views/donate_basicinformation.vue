@@ -17,42 +17,41 @@
                 <div class="grid_container">
                     <div>
                         <p>姓氏</p>
-                        <input type="text">
+                        <input type="text" v-model.trim="donorInf.addLastName">
                     </div>
 
                     <div>
                         <p>名字</p>
-                        <input type="text">
+                        <input type="text" v-model.trim="donorInf.addFirstName">
                     </div>
 
                     <div>
                         <p>電子信箱</p>
-                        <input type="text">
+                        <input type="text" v-model.trim="donorInf.addMail">
                     </div>
 
                     <div>
                         <p>手機電話</p>
-                        <input type="text">
+                        <input type="text" v-model.trim="donorInf.addPhone">
                     </div>
 
                     <div class="gender-options">
                         <p>性別</p>
 
-                        <label class="gender-option">
-                            <input type="radio" name="gender" value="male" class="gender"> 男
+                        <label class="gender-option" for="male">
+                            <input type="radio" name="gender" v-model="selectGender" class="gender" value="male"> 男
                         </label>
-                        <label class="gender-option">
-                            <input type="radio" name="gender" value="female" class="gender"> 女
+                        <label class="gender-option" for="female">
+                            <input type="radio" name="gender" v-model="selectGender" class="gender" value="female"> 女
                         </label>
-                        <label class="gender-option">
-                            <input type="radio" name="gender" value="other" class="gender"> 其他
+                        <label class="gender-option" for="other">
+                            <input type="radio" name="gender" v-model="selectGender" class="gender" value="other"> 其他
                         </label>
-
                     </div>
 
                     <div>
                         <p>生日</p>
-                        <input type="text">
+                        <input type="text" v-model.trim="donorInf.addBirDate">
                     </div>
                 </div>
                 <!-- 地址 -->
@@ -123,7 +122,7 @@
                     </label>
                     <br>
                     <label class="Receipt-option">
-                        <input type="radio" name="Receipt" value="other" checked> 我同意隱私權條款
+                        <input type="radio" name="private" value="other" checked> 我同意隱私權條款
                     </label>
 
                 </div>
@@ -135,11 +134,11 @@
                         您的支持對我們至關重要，為了讓您掌握更多網中愚的訊息，我們將不定期提供更多媒體視讀報告、活動通知、捐款呼籲等相關資料。
                     </p>
                     <label class="gender-option">
-                        <input type="radio" name="gender" value="male" checked> 是，我願意接收相關訊息
+                        <input type="radio" name="receiveMsg" value="male" checked> 是，我願意接收相關訊息
                     </label>
                     <br>
                     <label class="gender-option">
-                        <input type="radio" name="gender" value="female"> 不，我不願意接收相關訊息
+                        <input type="radio" name="receiveMsg" value="female"> 不，我不願意接收相關訊息
                     </label>
 
                 </div>
@@ -156,7 +155,7 @@
                     :class="{ 'frontheader_menu-on': $route.name == 'donate' }">確認送出</span>
             </router-link> -->
 
-            <button class="donate_btn" style="color: white; font-weight: bold;" @click="handleECpay">確認送出</button>
+            <button class="donate_btn" style="color: white; " @click="handleECpay">確認送出</button>
             <hr>
         </div>
 
@@ -172,6 +171,7 @@
 </template>
 
 <script>
+
 import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 import front_donate_flow from '@/components/front_donate_flow.vue'
@@ -189,6 +189,18 @@ export default {
     },
     data() {
         return {
+            selectGender: "male",
+            donorInf: {
+                addLastName: "1",
+                addFirstName: "2",
+                addMail: "3",
+                addPhone: "4",
+                addBirDate: "5",
+            },
+            // ECpara: {
+            //     TotalAmount: '1000',
+            //     ItemName: '範例商品一批',
+            // },
             // ecpay:
             // {
             //     CustomField1: "1",
@@ -226,25 +238,75 @@ export default {
         }
     },
     methods: {
+        // 
+        // addLastName: "1",
+        //                 addFirstName: "2",
+        //                 addMail: "3",
+        //                 addPhone: "4",
+        //                 addBirDate: "5",
+
+        // 取得cookie
+        getCookie(cookieName) {
+            const name = cookieName + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i].trim();
+
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return null;
+        },
+
         // fetch到php===============
         async handleECpay() {
+            this.cookie = this.getCookie('donationAmt');
+            // console.log(this.cookie)
+
+            const cookieValue = this.cookie;
+
+            if (cookieValue == 100) {
+                // window.location.href = 'http://localhost/AJAX/APITEST/d100_createOrder.php';
+                window.location.href = 'API/d100_createOrder.php';
+            };
+            if (cookieValue == 500) {
+                // window.location.href = 'http://localhost/AJAX/APITEST/d500_createOrder.php';
+                window.location.href = 'API/d500_createOrder.php';
+            };
+            if (cookieValue == 1000) {
+                // window.location.href = 'http://localhost/AJAX/APITEST/d1000_createOrder.php';
+                window.location.href = 'API/d1000_createOrder.php';
+            };
+            if (cookieValue == 2000) {
+                // window.location.href = 'http://localhost/AJAX/APITEST/d2000_createOrder.php';
+                window.location.href = 'API/d2000_createOrder.php';
+            };
             // 參數
-            // const ECpara = {
-            //     TotalAmount: '300',
-            //     ItemName: '範例商品一批',
-            // }
-            // const response = fetch('http://localhost/AJAX/APITEST/d_createOrder.php', {
+            // const data = '300';
+            // console.log(data);
+            // // const response = await fetch('API/d_createOrder.php', {
+            // const response = await fetch('http://localhost/AJAX/APITEST/d_createOrder.php', {
             //     method: "POST",
             //     headers: {
             //         "Accept": "application/json",
-            //         "Content-Type": "application/json",
+            //         // "Content-Type": "application/json",
+            //         "Content-Type": "text/plain",
             //     },
-            //     body: JSON.stringify(ECpara),
+            //     body: String(data),
+            //     //  {
+            //     //     TotalAmount: '300',
+            //     //     // ItemName: '範例商品一批',
+            //     // },
             // });
             // const ecPayUrl = await response.text();
             // this.$router.push('/redirected');
-            // window.location.href = 'http://localhost/AJAX/APITEST/d_createOrder.php';
-            window.location.href = 'API/d_createOrder.php';
+            // window.location.href = 'http://localhost/AJAX/APITEST/d2000_createOrder.php';
+            // window.location.href = 'API/d100_createOrder.php';
+
         }
         // 自己寫加密
         // async getSHA256Hash(input) {

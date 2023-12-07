@@ -256,7 +256,7 @@ export default {
 
       // const checkName2 = console.log(checkName);
       // console.log(checkName[0]);
-      // this.showAdminList();
+      this.showAdminList();
       if (addUserName === "") {
         alert('請輸入使用者名稱');
 
@@ -307,7 +307,6 @@ export default {
     },
     // 右控制儲存按鈕事件-將資料存到資料庫
 
-    // 差串到資料庫
     async saveNewAdmin() {
       try {
 
@@ -383,7 +382,7 @@ export default {
       this.adminFilter = this.adminList.filter(item => item.NAME === this.cookie);
       // console.log(this.adminINF2);
       // console.log(this.adminINF2[0].NAME);
-      // this.adminINF[0] = this.adminINF2[0];
+      //this.adminINF[0] = this.adminINF2[0];
       // 取值後放到admin
       this.adminINF.admID = this.adminFilter[0].id;
       this.adminINF.admNAME = this.adminFilter[0].NAME;
@@ -484,7 +483,5 @@ export default {
 }
 
 </script>
-
-
 
 
