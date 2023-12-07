@@ -27,40 +27,29 @@
           <div class="answer_left">右側詳解</div>
           <div class="date">日期</div>
         </div>
+        <!-- 多個題目進行迴圈 -->
         <div class="container_fake">
           <ul class="taskList">
-            <!-- <li v-for="(task, index) in tasks" :key="task.id" class="box_list" :class="{ remove: task.is_fade }"></li> -->
-            <li v-for="(task, index) in tasks" :key="task.id" class="box_list">
-              <div class="lists">{{ index + 1 }}</div>
-              <div class="lists">{{ task.title_left }}</div>
-              <div class="lists">{{ task.result_left }}</div>
-              <div class="lists">{{ task.answer_left }}</div>
-              <div class="lists">{{ task.title_right }}</div>
-              <div class="lists">{{ task.result_right }}</div>
-              <div class="lists">{{ task.answer_right }}</div>
-              <div class="lists">{{ task.date }}</div>
-              <!-- $event事件物件vue特殊寫法，這裡不一定用，$emit則適用於元件帶入時候的自訂事件 -->
-              <div class="lists"><button type="button" @click="taskEdit(index)" :class="{ '-on': windowShow }">編輯</button>
-              </div>
-              <div class="lists"><button type="button" @click="taskdeleteWindow(index)">刪除</button></div>
-              <!-- <div class="lists"><button type="button" @click="taskRemove($event, index)">刪除</button></div> -->
-            </li>
-            <!-- <li class="box_list">
-            <div class="lists">1</div>
-            <div class="lists">台灣媒體養成計畫</div>
-            <div class="lists">台灣媒體養成計畫，透過各教育階段共同推...</div>
-            <div class="lists">2023/11/12</div>
-            <div class="lists"><button type="button">編輯</button></div>
-            <div class="lists"><button type="button">刪除</button></div>
-          </li>
-          <li class="box_list">
-            <div class="lists">1</div>
-            <div class="lists">台灣媒體養成計畫</div>
-            <div class="lists">台灣媒體養成計畫，透過各教育階段共同推...</div>
-            <div class="lists">2023/11/12</div>
-            <div class="lists"><button type="button">編輯</button></div>
-            <div class="lists"><button type="button">刪除</button></div>
-          </li> -->
+            <!-- 是V-for所以transition用transition-group，然後tag是要進行的項目 -->
+            <transition-group name="fade" tag="li">
+              <li v-for="(task, index) in tasks" :key="task.id" class="box_list">
+                <!-- <li v-for="(task, index) in tasks" :key="task.id" class="box_list" v-show="deleteWindow != null"> -->
+                <div class="lists">{{ index + 1 }}</div>
+                <div class="lists">{{ task.title_left }}</div>
+                <div class="lists">{{ task.result_left }}</div>
+                <div class="lists">{{ task.answer_left }}</div>
+                <div class="lists">{{ task.title_right }}</div>
+                <div class="lists">{{ task.result_right }}</div>
+                <div class="lists">{{ task.answer_right }}</div>
+                <div class="lists">{{ task.date }}</div>
+                <!-- $event事件物件vue特殊寫法，這裡不一定用，$emit則適用於元件帶入時候的自訂事件 -->
+                <div class="lists"><button type="button" @click="taskEdit(index)"
+                    :class="{ '-on': windowShow }">編輯</button>
+                </div>
+                <div class="lists"><button type="button" @click="taskdeleteWindow(index)">刪除</button></div>
+                <!-- <div class="lists"><button type="button" @click="taskRemove($event, index)">刪除</button></div> -->
+              </li>
+            </transition-group>
           </ul>
         </div>
       </div>
@@ -74,12 +63,7 @@
           </div>
           <div class="content_window">
             <!-- 根據編輯跟輸入頁面呈現不同的輸入框 -->
-            <!-- <div class="input_number all_style">
-              <p>編號</p>
-              <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].id" placeholder="必填"
-                v-if="addWindow">
-              <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].id" v-if="editWindow">
-            </div> -->
+            <!-- id來自資料庫自動編號 -->
             <div class="input_title_left all_style">
               <p>左側題目</p>
               <textarea class="input_box_textarea" v-model.trim="taskText[0].title_left" v-if="addWindow"></textarea>
@@ -124,13 +108,11 @@
               <p>日期</p>
               <input type="text" name="" id="" class="input_box" v-model.trim="taskText[0].date" v-if="addWindow"
                 placeholder="日期格式:2023/10/01">
+              <!-- <p v-if="addWindow">{{ task.date }}</p> -->
               <input type="text" name="" id="" class="input_box" v-model.trim="tasks[item_index].date" v-if="editWindow"
                 placeholder="日期格式:2023/10/01">
             </div>
-            <!-- <div>
-              <datepicker v-model="selectedDate"></datepicker>
-              <p>選擇的日期: {{ selectedDate }}</p>
-            </div> -->
+            <!-- 按鈕選項 -->
             <div class="button_add_window" id="btm_add"><button type="button" @click="taskAdd"
                 v-if="addWindow">新增</button></div>
             <div class="button_add_window"><button type="button" @click="taskEditOk" v-if="editWindow">修改完成</button></div>
@@ -138,26 +120,24 @@
         </div>
       </div>
       <!-- 刪除彈跳視窗 -->
-      <transition name="fade">
-        <div class="delete_box_outside" v-if="deleteWindow !== null">
-          <div class="delete_box">
-            <ul>
-              <li><img src="../../src/assets/images/common/back_warning.svg" alt="">
-              </li>
-              <li>您確定要刪除這筆資料嗎？</li>
-              <li>
-                <div class="button">
-                  <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
-                  <div class="btn" @click="taskRemove(index)">確認刪除</div>
-                  <!-- 點選取消刪除，只關閉彈窗 -->
-                  <div class="btn" @click="cancelButton">取消刪除</div>
-                </div>
-              </li>
-            </ul>
-          </div>
+      <!-- deleteWindow !== null有要刪除的內容 -->
+      <div class="delete_box_outside" v-if="deleteWindow !== null">
+        <div class="delete_box">
+          <ul>
+            <li><img src="../../src/assets/images/common/back_warning.svg" alt="">
+            </li>
+            <li>您確定要刪除這筆資料嗎？</li>
+            <li>
+              <div class="button">
+                <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
+                <div class="btn" @click="taskRemove(index)">確認刪除</div>
+                <!-- 點選取消刪除，只關閉彈窗 -->
+                <div class="btn" @click="cancelButton">取消刪除</div>
+              </div>
+            </li>
+          </ul>
         </div>
-      </transition>
-
+      </div>
       <pagination></pagination>
     </main>
   </div>
@@ -169,16 +149,12 @@
 import backfooter from '@/components/back_footer.vue'
 import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
-// import Datepicker from 'vue-datepicker';
-
-
 
 export default {
   components: {
     backfooter,
     pagination,
     backaside,
-    // Datepicker
   },
   data() {
     return {
@@ -188,7 +164,10 @@ export default {
       editWindow: false,
       // 如果有刪除會帶入值不然就是null
       deleteWindow: null,
-      // selectedDate: null,
+      // 分頁器
+      currentPage: 1,
+      totalItems: 30, // 替換為實際的項目總數
+      itemsPerPage: 10,// 替換為每頁顯示的項目數
       // input輸入的內容
       taskText: [
         {
@@ -243,15 +222,19 @@ export default {
       this.windowShow = true;
       this.addWindow = true;
       // 初始化 taskText[0] 為空白狀態
+
+      // 使用 Date 物件獲取當前日期
+      const now = new Date();
+      // 將日期轉換為 "YYYY/MM/DD" 格式
+      const formattedDate = `${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')}`;
       this.taskText[0] = {
-        // id: "",
         title_left: "",
         result_left: "",
         answer_left: "",
         title_right: "",
         result_right: "",
         answer_right: "",
-        date: ""
+        date: formattedDate,
       };
 
     },
@@ -264,10 +247,6 @@ export default {
       }
       // 先要求有值再判斷每個欄位的需求
       if (this.taskText[0] != "") {
-        // if (!this.taskText[0].id) {
-        //   alert("請填寫編號");
-        //   return;
-        // }
         // textarea空的時候不代表空字串所以用反轉去想
         if (!this.taskText[0].title_left) {
           alert("請填寫左側題目");
@@ -355,39 +334,52 @@ export default {
           // 要回傳id回來由資料庫定義的
           this.tasks[0].id = id;
           // console.log(taskList)
+          alert("新增成功");
         })
     },
+    // xx按鈕，新增跟編輯有
     directCloseAdd() {
       confirm('確認不新增直接關閉');
       this.windowShow = false;
       this.addWindow = false;
       this.editWindow = false;
     },
-    // 剛剛寫的事件物件跟索引值的參數
+    // 點選某一個index要做編輯
     taskEdit(i) {
       //要讓tasks有能定義的index，return也寫進去
       this.item_index = i;
       // console.log(i);
-      this.taskText[0] = {
-        // id: this.tasks[i].id,
-        titleLeft: this.tasks[i].title_left,
-        resultLeft: this.tasks[i].result_left,
-        answerLeft: this.tasks[i].answer_left,
-        titleRight: this.tasks[i].title_right,
-        resultRight: this.tasks[i].result_right,
-        answerRight: this.tasks[i].answer_right,
-        date: this.tasks[i].date
-
-      };
-
-
 
       this.windowShow = true;
       this.editWindow = true;
     },
+    // 點選確認編輯鍵才送去後端要求修改資料庫
     taskEditOk() {
       // 將新增的數據存到 localStorage 中，有資料庫可以不寫
       // localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      // console.log(this.tasks[this.item_index].title_left);
+      if (this.tasks[this.item_index].title_left == "") {
+        alert("請填寫左側題目");
+        return;
+      }
+      if (this.tasks[this.item_index].result_left != 1 && this.tasks[this.item_index].result_left != 2) {
+        alert("請填寫左側答案，請填寫1或2");
+        return;
+      }
+      // textarea空的時候不代表空字串所以用反轉去想
+      if (this.tasks[this.item_index].title_right == "") {
+        alert("請填寫右側題目");
+        return;
+      }
+      // 必須是1或2s
+      if (this.tasks[this.item_index].result_right != 1 && this.tasks[this.item_index].result_right != 2) {
+        alert("請填寫右側答案，請填寫1或2");
+        return;
+      }
+      if (this.tasks[this.item_index].date == "") {
+        alert("請填寫日期");
+        return;
+      }
 
       // console.log(this.tasks[this.item_index].id);
       fetch('http://localhost/API/back_fakeNews_edit.php', {
@@ -397,52 +389,50 @@ export default {
           'Content-Type': 'application/json'
         },
         // 編輯要把修改的內容傳回去
-        //一行行印出來是什麼東西
         body: JSON.stringify({
+          // 左側就是去到php裡的對應名稱
           id: this.tasks[this.item_index].id,
-          title_left: this.tasks[this.item_index].title_left,
-          result_left: this.tasks[this.item_index].result_left,
-          answer_left: this.tasks[this.item_index].answer_left,
-          title_right: this.tasks[this.item_index].title_right,
-          result_right: this.tasks[this.item_index].result_right,
-          answer_right: this.tasks[this.item_index].answer_right,
+          titleLeft: this.tasks[this.item_index].title_left,
+          resultLeft: this.tasks[this.item_index].result_left,
+          answerLeft: this.tasks[this.item_index].answer_left,
+          titleRight: this.tasks[this.item_index].title_right,
+          resultRight: this.tasks[this.item_index].result_right,
+          answerRight: this.tasks[this.item_index].answer_right,
           date: this.tasks[this.item_index].date
 
         })
       })
         .then(resp => resp.json())
         .then(items => {
-          console.log(items);
+          // console.log(items);
+          alert("編輯成功");
         })
       this.windowShow = false;
       this.editWindow = false;
 
 
     },
+    // ，li的進入刪除視窗，第幾個放入索引值
     taskdeleteWindow(index) {
       this.deleteWindow = index;
     },
     cancelButton() {
       this.deleteWindow = null;
     },
-    // 要帶入參數
+    // 確定刪除鍵
     taskRemove() {
       // console.log(this.tasks);
-      // 1秒後刪掉
-      // this.tasks[i].is_fade = true;
-
-      // setTimeout(() => {
+      // 沒有資料庫的時候要加local host
       // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
-
-      console.log(this.tasks[this.deleteWindow]);
+      // 資料連接
       fetch('http://localhost/API/back_fakeNews_delete.php', {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
-        // 怎麼送都只能送出id:2
+        // 送資料給php
         body: JSON.stringify({
           id: this.tasks[this.deleteWindow].id,
           // titleLeft: this.tasks[i].title_left,
@@ -458,19 +448,19 @@ export default {
       })
         .then(resp => resp.json())
         .then(items => {
-          console.log(items);
+          // console.log(items);
           this.tasks.splice(this.deleteWindow, 1);
-
+          // alert("刪除成功");
         })
-      // }, 50);
+      // 把值刪除
       this.deleteWindow = null;
-      // }
     },
 
 
 
 
   },
+  // 一開始從資料庫拿出資料已有id由資料庫自動編號
   mounted() {
     // 資料庫串接
     fetch('http://localhost/API/back_fakeNews.php', {
