@@ -29,3 +29,58 @@ export default {
   }
 };
 </script>
+
+<!-- <template>
+  其他 HTML 元素
+  <div>
+    顯示資料的區域
+    <ul>
+      <li v-for="(item, index) in paginatedItems" :key="index">
+        顯示資料的內容
+        ...
+      </li>
+    </ul>
+
+    分頁控制元件
+    <paginate
+      :page-count="pageCount"
+      :click-handler="changePage"
+      :prev-text="'上一頁'"
+      :next-text="'下一頁'"
+    >
+    </paginate>
+  </div>
+</template>
+
+<script>
+import Paginate from 'vuejs-paginate';
+
+export default {
+  components: {
+    Paginate,
+  },
+  data() {
+    return {
+      items: [],  你的資料
+      currentPage: 1,  當前頁碼
+      perPage: 10,  每頁顯示的資料量
+    };
+  },
+  computed: {
+    paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.perPage;
+      const endIndex = startIndex + this.perPage;
+      return this.items.slice(startIndex, endIndex);
+    },
+    pageCount() {
+      return Math.ceil(this.items.length / this.perPage);
+    },
+  },
+  methods: {
+    changePage(pageNumber) {
+      this.currentPage = pageNumber;
+    },
+  },
+};
+</script> -->
+

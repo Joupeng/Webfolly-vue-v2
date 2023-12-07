@@ -15,12 +15,12 @@ include("DBconnect.php");
 // // 建立PDO物件
 // $pdo = new PDO($dsn, $db_user, $db_pass);
 
-// 題目
-$sql = "SELECT * FROM fake_message_game";
+// 設定再資料庫新增的題目根據後新增進行排序ORDER BY id DESC
+$sql = "SELECT * FROM fake_message_game ORDER BY id DESC";
 //執行並查詢，會回傳查詢結果的物件，必須使用fetch、fetchAll...等方式取得資料
 $statement = $pdo->prepare($sql);
 // 執行實際查詢，才會有資料回來
-$statement ->execute();
+$statement->execute();
 $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 //對查詢結果進行隨機排序(洗牌)
@@ -30,4 +30,3 @@ $data = $statement->fetchAll(PDO::FETCH_ASSOC);
 // 將資料以 JSON 格式返回
 header('Content-Type: application/json');
 echo json_encode($data, JSON_UNESCAPED_UNICODE);
-?>

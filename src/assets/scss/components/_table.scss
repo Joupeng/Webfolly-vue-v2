@@ -1,156 +1,76 @@
-ul.table {
-  list-style: none;
-  padding-left: 0;
-  max-width: 1028px;
+// .backTable {
 
 
+//   .thead {
+//     width: 1028px;
+//     height: 64px;
+//     background-color: $black;
+//     color: $white;
 
-  li {
-    display: flex;
-    justify-content: space-between;
-    height: 64px;
-    max-width: 1028px;
+//     display: grid;
+//     grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+//     /* 列數和寬度 */
+//     grid-gap: 8px;
+//     /* 網格間距 */
 
+//     .thItem {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//     }
+//   }
 
-    /* 奇數行的背景色和鼠標懸停效果 */
-    &:nth-of-type(odd) {
-      background-color: $gray-300;
-    }
-
-    &:nth-of-type(even) {
-      background-color: $white;
-    }
-
-    &:hover {
-      background-color: $secondary-y1;
-    }
-
-    &.thead {
-      background-color: $black;
-      color: $white;
-    }
-
-    >div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-      border-bottom: 1px solid $neutral-light;
+//   .tobdyContainer {
+//     width: 1028px;
 
 
-      /* 設置每個欄位的寬度 */
-      &.thNumber {
-        width: 50px;
-      }
+//     .itemList {
 
-      &.thEdit,
-      &.thDelet {
-        width: 50px;
-        cursor: pointer;
-      }
+//       margin: 0;
+//       list-style: none;
+//       padding: 0;
 
-      &.thDate {
-        width: 120px;
-      }
+//       .itemRow {
 
-      &.thTitle {
-        width: 200px;
-      }
+//         display: grid;
+//         grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+//         /* 列數和寬度 */
+//         grid-gap: 8px;
 
-      &.thContent {
-        width: 528px;
+//         &:nth-of-type(odd) {
+//           background-color: $gray-300;
+//         }
 
-      }
+//         &:nth-of-type(even) {
+//           background-color: $white;
+//         }
 
-      .tableP {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin: 0;
-        padding: 0;
-        background-color: transparent;
-      }
+//         &:hover {
+//           background-color: $secondary-y1;
+//         }
 
-    }
+//         /* 網格間距 */
+//         .tbItem {
+
+//           overflow: hidden;
+//           white-space: nowrap;
+//           display: flex;
+//           justify-content: center;
 
 
-  }
-
-}
-
-.backTable {
-  border: 1px solid red;
-
-  .thead {
-    width: 1028px;
-    height: 64px;
-    background-color: $black;
-    color: $white;
-
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
-    /* 列數和寬度 */
-    grid-gap: 8px;
-    /* 網格間距 */
-
-    .thItem {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .tobdyContainer {
-    width: 1028px;
+//           .tableP {
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             margin: 0;
+//             padding: 0;
+//             background-color: transparent;
+//           }
+//         }
+//       }
 
 
-    .itemList {
-
-      margin: 0;
-      list-style: none;
-      padding: 0;
-
-      .itemRow {
-
-        display: grid;
-        grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
-        /* 列數和寬度 */
-        grid-gap: 8px;
-
-        &:nth-of-type(odd) {
-          background-color: $gray-300;
-        }
-
-        &:nth-of-type(even) {
-          background-color: $white;
-        }
-
-        &:hover {
-          background-color: $secondary-y1;
-        }
-
-        /* 網格間距 */
-        .tbItem {
-          border: 1px solid purple;
-          overflow: hidden;
-          white-space: nowrap;
-          display: flex;
-          justify-content: center;
+//     }
+//   }
 
 
-          .tableP {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0;
-            padding: 0;
-            background-color: transparent;
-          }
-        }
-      }
-
-
-    }
-  }
-
-
-}
+// }

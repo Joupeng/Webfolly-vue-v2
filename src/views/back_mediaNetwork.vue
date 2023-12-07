@@ -18,13 +18,10 @@
 
 
       <div class="button">
-        <!-- 當點擊按鈕時調用 addSort 方法 -->
-
         <div class="btn" @click="itemAddWindow">+ 新增</div>
-
       </div>
 
-      <div class="backTable">
+      <div class="NetworkTable">
         <!-- thead 部分 -->
         <div class="thead">
           <!-- 欄位標題 -->
@@ -33,7 +30,7 @@
           <div class="thItem">內容</div>
           <div class="thItem">連結</div>
           <div class="thItem">縮圖</div>
-          <div class="thItem">時間</div>
+
         </div>
 
         <!-- tbody 部分 -->
@@ -42,28 +39,25 @@
             <!-- 顯示每個欄位的資料 -->
             <li v-for="(item, index) in items" :key="index" class="itemRow">
               <div class="tbItem">
-                <p class="tableP">{{ item.tbNumber }}</p>
+                <p class="tableP">{{ index + 1 }}</p>
               </div>
               <div class="tbItem">
-                <p class="tableP">{{ item.tbTitle }}</p>
+                <p class="tableP">{{ item.title }}</p>
               </div>
               <div class="tbItem">
-                <p class="tableP">{{ item.tbContent }}</p>
+                <p class="tableP">{{ item.content }}</p>
               </div>
               <div class="tbItem">
-                <p class="tableP">{{ item.tbLink }}</p>
+                <p class="tableP">{{ item.link }}</p>
               </div>
               <div class="tbItem">
-                <p class="tableP">{{ item.tbPic }}</p>
+                <p class="tableP">{{ item.picture }}</p>
               </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.tbDate }}</p>
-              </div>
-              <div class="tbItem" @click="itemEdit($event, index)" :class="{ 'edit-on': windowShow }"
-                style="cursor: pointer;">
+
+              <div class="tbItem" @click="itemEdit($event, index)" style="cursor: pointer;">
                 <p class="tableP">編輯</p>
               </div>
-              <div class="tbItem" @click="warning">
+              <div class="tbItem" @click="warning_open(index)">
                 <p class="tableP" style="cursor: pointer;">刪除</p>
               </div>
 
@@ -76,7 +70,7 @@
 
 
       <!-- 刪除彈跳視窗 -->
-      <div class="modalWarning" v-if="warningOpen">
+      <div class="modalWarning" v-if="warningOpen !== null">
         <ul>
           <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
           </li>
@@ -112,21 +106,13 @@
 
             <div class="wrap_fram">
               <!-- 編號 -->
-              <div class="input_number">
-                <p>編號</p>
-                <!-- 新增輸入框 -->
-                <input type="text" name="" id="" class="input_box" v-model.trim="itemText[0].id" placeholder="必填"
-                  v-if="addWindow">
-                <!-- 編輯輸入框 -->
-                <input type="text" name="" id="" class="input_box" v-model.trim="items[0].id" v-if="editWindow">
-              </div>
               <!-- 標題 -->
               <div class="input_title">
                 <p>標題</p>
                 <!-- 新增輸入框 -->
                 <textarea class="input_box_textarea" v-model.trim="itemText[0].title" v-if="addWindow"></textarea>
                 <!-- 編輯輸入框 -->
-                <textarea class="input_box_textarea" v-model.trim="items[0].title" v-if="editWindow"></textarea>
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].title" v-if="editWindow"></textarea>
               </div>
               <!-- 內容 -->
               <div class="input_content">
@@ -134,7 +120,8 @@
                 <!-- 新增輸入框 -->
                 <textarea class="input_box_textarea" v-model.trim="itemText[0].content" v-if="addWindow"></textarea>
                 <!-- 編輯輸入框 -->
-                <textarea class="input_box_textarea" v-model.trim="items[0].content" v-if="editWindow"></textarea>
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].content"
+                  v-if="editWindow"></textarea>
               </div>
               <!-- 連結 -->
               <div class="input_link">
@@ -142,7 +129,7 @@
                 <!-- 新增輸入框 -->
                 <textarea class="input_box_textarea" v-model.trim="itemText[0].link" v-if="addWindow"></textarea>
                 <!-- 編輯輸入框 -->
-                <textarea class="input_box_textarea" v-model.trim="items[0].link" v-if="editWindow"></textarea>
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].link" v-if="editWindow"></textarea>
               </div>
               <!-- 縮圖 -->
               <div class="input_picture">
@@ -153,14 +140,7 @@
                 <input class="input_box_textarea" type="file" ref="fileInput" @change="handleFileUpload"
                   v-if="editWindow">
               </div>
-              <!-- 日期 -->
-              <div class="input_date">
-                <p>日期</p>
-                <!-- 新增輸入框 -->
-                <textarea class="input_box_textarea" v-model.trim="itemText[0].date" v-if="addWindow"></textarea>
-                <!-- 編輯輸入框 -->
-                <textarea class="input_box_textarea" v-model.trim="items[0].date" v-if="editWindow"></textarea>
-              </div>
+
 
 
             </div>
@@ -171,8 +151,12 @@
           <div class="button">
 
 
-            <div class="button_add_window"><button type="button" @click="itemAdd" v-if="addWindow">儲存新增</button></div>
-            <div class="button_add_window"><button type="button" @click="itemEditOk" v-if="editWindow">儲存變更</button></div>
+            <div class="button_add_window">
+              <div class="btn" type="button" @click="itemAdd" v-if="addWindow">儲存新增</div>
+            </div>
+            <div class="button_add_window">
+              <div class="btn" type="button" @click="itemEditOk" v-if="editWindow">儲存變更</div>
+            </div>
           </div>
         </div>
 
@@ -187,7 +171,7 @@
       <!-- <modal_content></modal_content>
     <modal_quiz></modal_quiz>  -->
 
-      <pagination></pagination>
+      <!-- <pagination></pagination> -->
 
     </main>
   </div>
@@ -207,49 +191,50 @@ export default {
   },
   data() {
     return {
+      item_index: 0,
       itemAddWindowOpen: false,
-      warningOpen: false,
-      windowShow: false,
+      warningOpen: null,
       addWindow: false,
       editWindow: false,
       // input輸入的內容
       itemText: [
         {
-          id: '',
+          // id: '',
           title: '',
           content: '',
           link: '',
           picture: '',
-          date: '',
+
         }
       ],
       // li上有的內容及狀態
       items: [
-        {
-          tbNumber: '1',
-          tbTitle: '標題',
-          tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-          tbLink: '',
-          tbPic: '',
-          tbDate: '2022.03.12',
-        },
-        {
-          tbNumber: '2',
-          tbTitle: '標題',
-          tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-          tbLink: '',
-          tbPic: '',
-          tbDate: '2022.03.12',
-        },
+        // {
+        //   tbNumber: '1',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
+        // {
+        //   tbNumber: '2',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
       ],
 
     };
   },
   beforeMount() {
-    let all_items = JSON.parse(localStorage.getItem("items"));
-    if (all_items) {
-      this.items = all_items;
+    if (localStorage.getItem("items")) {
+      this.items = JSON.parse(localStorage.getItem("items"));
     }
+
+
   },
   methods: {
     // 新增內容視窗打開
@@ -259,12 +244,12 @@ export default {
       this.addWindow = true;
       // 初始化 itemText[0] 為空白狀態
       this.itemText[0] = {
-        id: '',
+        // id: '',
         title: '',
         content: '',
         link: '',
         picture: '',
-        date: '',
+
       };
     },
     // 新增內容進去
@@ -278,41 +263,42 @@ export default {
           picture: this.itemText[0].picture,
           date: this.itemText[0].date,
         });
-        // 新增完後會清空
+        // // 新增完後彈跳視窗內容清空
         this.itemText[0] = {
           id: '',
           title: '',
           content: '',
           link: '',
           picture: '',
-          date: '',
+
         };
         // 把新增的資料存到 localStorage 裡
         localStorage.setItem("items", JSON.stringify(this.items));
       }
-      this.windowShow = false;
+
       this.addWindow = false;
       this.itemAddWindowOpen = false;
     },
     // 編輯舊有內容
     itemEdit(e, i) {
       this.itemAddWindowOpen = true;
+      this.item_index = i;
       this.itemText[0] = {
         id: this.items[i].id,
         title: this.items[i].title,
         content: this.items[i].content,
         link: this.items[i].link,
         picture: this.items[i].picture,
-        date: this.items[i].date,
+
 
       };
-      this.windowShow = true;
+
       this.editWindow = true;
       // this.itemAddWindowOpen = !this.itemAddWindowOpen;
     },
 
     itemEditOk() {
-      this.windowShow = false;
+
       this.editWindow = false;
       this.itemAddWindowOpen = false;
       if (this.editWindow) {
@@ -326,27 +312,51 @@ export default {
           console.error("Item not found for editing");
         }
       }
-
-
     },
+    // 圖片上傳
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      axios.post('your_backend_endpoint.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(response => {
+          // 上傳成功後的處理
+          console.log('圖片上傳成功:', response.data);
+        })
+        .catch(error => {
+          // 上傳失敗後的處理
+          console.error('圖片上傳失敗:', error);
+        });
+    },
+
     // 刪除警告
-    warning() {
-      this.warningOpen = !this.warningOpen;
+
+    warning_open(index) {
+      this.warningOpen = index;
     },
-    deleteRow(e, i) {
-      e.target.closest("li").classList.add("remove");
-      // 1秒後刪掉
+    warning_close() {
+      this.warningOpen = null
+    },
+    deleteRow() {
+
+      console.log(this.items);
       setTimeout(() => {
-        this.items.splice(i, 1);
+        this.items.splice(this.warningOpen, 1);
+
         localStorage.setItem("items", JSON.stringify(this.items));
-        this.warningOpen = false;
+        this.warningOpen = null;
       }, 50);
     },
 
     // 彈跳視窗關閉
     closeModal() {
       this.itemAddWindowOpen = false;
-      this.warningOpen = false;
+      this.warningOpen = null;
 
     },
   },

@@ -17,38 +17,32 @@ include("DBconnect.php");
 // $pdo = new PDO($dsn, $db_user, $db_pass);
 
 // 要補寫一下收前端的訊號id值傳進來要刪的內容才刪掉，應該要取的正確的id值進行刪除
-$data = json_decode(file_get_contents("php://input"),true);
-if(isset($data)){
-// print_r($data);
-// 傳id來進行刪除欄位
-$id = $data["id"];
+$data = json_decode(file_get_contents("php://input"), true);
+if (isset($data)) {
+  // print_r($data);
+  // 傳id來進行刪除欄位
+  $id = $data["id"];
 
 
-// 加上新增內容sql語法
-// 冒號是綁定的標誌，這樣 PDO 才知道這是一個綁定的變數
-$sql = "DELETE FROM fake_message_game WHERE ID=:id ";
+  // 加上新增內容sql語法
+  // 冒號是綁定的標誌，這樣 PDO 才知道這是一個綁定的變數
+  $sql = "DELETE FROM fake_message_game WHERE ID=:id ";
 
-//要資料庫相對應的欄位
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(":id",$id);
-// 執行刪除
-$stmt->execute();
+  //要資料庫相對應的欄位
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(":id", $id);
+  // 執行刪除
+  $stmt->execute();
 
-// 刪除一筆資料一定大於0
-if($stmt->rowCount() > 0){
-  // 刪除成功
-$respBody["success"] = true;
-$respBody["message"] =" 刪除成功";
+  // 刪除一筆資料一定大於0
+  if ($stmt->rowCount() > 0) {
+    // 刪除成功
+    $respBody["success"] = true;
+    $respBody["message"] = " 刪除成功";
+  } else {
 
-}else{
-
-  $respBody["success"] = false;
-  $respBody["message"] = "刪除失敗";
-
-  
-
+    $respBody["success"] = false;
+    $respBody["message"] = "刪除失敗";
+  }
+  echo json_encode($respBody);
 }
-echo json_encode($respBody);
-}
-
-?>
