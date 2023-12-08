@@ -41,7 +41,8 @@
         <div class="tobdyContainer">
           <ul class="itemList">
             <!-- 顯示每個欄位的資料 -->
-            <li v-for="(item, index) in items" :key="index" class="itemRow">
+            <!-- key改item.id -->
+            <li v-for="(item, index) in items" :key="item.id" class="itemRow">
               <div class="tbItem">
                 <p class="tableP">{{ index + 1 }}</p>
               </div>
@@ -216,7 +217,8 @@ export default {
       // input輸入的內容
       itemText: [
         {
-          // id: '',
+          // 打開id的位置，資料庫內容要存回來
+          id: '',
           source: '',
           title: '',
           content: '',
@@ -294,8 +296,31 @@ export default {
 
         };
         // 把新增的資料存到 localStorage 裡
-        localStorage.setItem("items", JSON.stringify(this.items));
+        // localStorage.setItem("items", JSON.stringify(this.items));
+
       }
+      fetch('http://localhost/API/back_mediaClass_add.php', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          //  是沒有id值的因為是從資料庫來
+          source: this.items[0].source,
+          link: this.items[0].link,
+          title: this.items[0].title,
+          picture: this.items[0].picture,
+        })
+      })
+        .then(resp => resp.json())
+        // 找到父層
+        .then(taskList => {
+          // 要回傳id回來由資料庫定義的
+          this.tasks[0].id = id;
+          // console.log(taskList)
+          alert("新增成功");
+        })
 
       this.addWindow = false;
       this.itemAddWindowOpen = false;
@@ -362,5 +387,30 @@ export default {
 
     },
   },
+  mounted() {
+    // 資料庫串接
+    fetch('http://localhost/API/back_mediaClass.php', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(resp => resp.json())
+      .then(lists => {
+        //console.log(items);
+        // 這是回傳
+        // 放進對應的項目this.items
+        this.items = lists.map(item_list => {
+          return {
+            id: item_list.ID,
+            title: item_list.TITLE,
+            source: item_list.SOURCE,
+            link: item_list.LINKS,
+            picture: item_list.PHOTO,
+          }
+        })
+      })
+  }
 };
 </script>
