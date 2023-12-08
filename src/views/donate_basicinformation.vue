@@ -191,11 +191,11 @@ export default {
         return {
             selectGender: "male",
             donorInf: {
-                addLastName: "1",
-                addFirstName: "2",
-                addMail: "3",
-                addPhone: "4",
-                addBirDate: "5",
+                addLastName: "",
+                addFirstName: "",
+                addMail: "",
+                addPhone: "",
+                addBirDate: "",
             },
             // ECpara: {
             //     TotalAmount: '1000',

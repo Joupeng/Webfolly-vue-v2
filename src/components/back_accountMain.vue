@@ -317,7 +317,7 @@ export default {
         this.handleAddMail();
         this.handleAddPhone();
         this.handleAddPassword();
-        this.isOpenBTN();
+
         // 2.進行儲存 
         const data = {
           id: this.addUserID,
@@ -334,7 +334,7 @@ export default {
         } else {
           console.log(data);
           alert(`新增成功\n使用者名稱: ${this.addUserName}\n密碼: ${this.addPassword}`)
-
+          this.isOpenBTN();
         }
 
 
