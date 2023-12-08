@@ -392,7 +392,7 @@ export default {
         },
         // 編輯要把修改的內容傳回去
         body: JSON.stringify({
-          // 左側就是去到php裡的對應名稱
+          // 左側就是去到php裡的對應名稱，大駝峰
           id: this.tasks[this.item_index].id,
           titleLeft: this.tasks[this.item_index].title_left,
           resultLeft: this.tasks[this.item_index].result_left,
@@ -487,7 +487,7 @@ export default {
       .then(resp => resp.json())
       .then(items => {
         //console.log(items);
-        // 放進對應的項目
+        // 放進對應的項目 this.tasks的對應
         this.tasks = items.map(item_list => {
           return {
             id: item_list.ID,
