@@ -51,7 +51,8 @@
 
                     <div>
                         <p>生日</p>
-                        <input type="text" v-model.trim="donorInf.addBirDate">
+                        <!-- <input type="text" v-model.trim="donorInf.addBirDate"> -->
+                        <Datepicker v-model="picked" class="datepicker" />
                     </div>
                 </div>
                 <!-- 地址 -->
@@ -176,16 +177,17 @@ import frontnav from '@/components/front_header.vue'
 import frontfooter from '@/components/front_footer.vue'
 import front_donate_flow from '@/components/front_donate_flow.vue'
 import front_donate_subfooter from '@/components/front_donate_subfooter.vue'
-import axios from 'axios'
+// import axios from 'axios'
 // import { getSHA256Hash } from "boring-webcrypto-sha256";
-
+import Datepicker from 'vue3-datepicker'
 
 export default {
     components: {
         frontnav,
         frontfooter,
         front_donate_flow,
-        front_donate_subfooter
+        front_donate_subfooter,
+        Datepicker,
     },
     data() {
         return {
@@ -197,6 +199,7 @@ export default {
                 addPhone: "",
                 addBirDate: "",
             },
+            picked: new Date(),
             // ECpara: {
             //     TotalAmount: '1000',
             //     ItemName: '範例商品一批',
