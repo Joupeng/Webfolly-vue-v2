@@ -138,7 +138,7 @@
           </ul>
         </div>
       </div>
-      <pagination></pagination>
+      <!-- <pagination total-items="30" items-per-page="5" current-page="1"></pagination> -->
     </main>
   </div>
   <backfooter></backfooter>
@@ -164,10 +164,6 @@ export default {
       editWindow: false,
       // 如果有刪除會帶入值不然就是null
       deleteWindow: null,
-      // 分頁器
-      currentPage: 1,
-      totalItems: 30, // 替換為實際的項目總數
-      itemsPerPage: 10,// 替換為每頁顯示的項目數
       // input輸入的內容
       taskText: [
         {
@@ -217,6 +213,11 @@ export default {
 
   },
   methods: {
+    // 分頁器
+    // changePage(step) {
+    //   this.currentPage += step;
+    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    // },
     taskAddWindow() {
       // alert('123');
       this.windowShow = true;
@@ -305,10 +306,10 @@ export default {
       this.addWindow = false;
 
       console.log(this.tasks[0]);
-
-      fetch('http://localhost/API/back_fakeNews_add.php', {
+      // fetch('http://localhost/API/back_fakeNews_add.php'
+      fetch('API/back_fakeNews_add.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -317,7 +318,7 @@ export default {
         //多行文字框我改成.innerText
         body: JSON.stringify({
           //  是沒有id值的因為是從資料庫來
-          id: this.tasks[0].id,
+          // id: this.tasks[0].id,
           titleLeft: this.tasks[0].title_left,
           resultLeft: this.tasks[0].result_left,
           answerLeft: this.tasks[0].answer_left,
@@ -382,9 +383,10 @@ export default {
       }
 
       // console.log(this.tasks[this.item_index].id);
-      fetch('http://localhost/API/back_fakeNews_edit.php', {
+      // fetch('http://localhost/API/back_fakeNews_edit.php'
+      fetch('API/back_fakeNews_delete.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -426,9 +428,10 @@ export default {
       // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
       // 資料連接
-      fetch('http://localhost/API/back_fakeNews_delete.php', {
+      // fetch('http://localhost/API/back_fakeNews_delete.php'
+      fetch('API/back_fakeNews_delete.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -450,22 +453,32 @@ export default {
         .then(items => {
           // console.log(items);
           this.tasks.splice(this.deleteWindow, 1);
-          // alert("刪除成功");
+          alert("刪除成功");
         })
       // 把值刪除
       this.deleteWindow = null;
     },
-
-
+    // 分頁器
+    // changePage(step) {
+    //   this.currentPage += step;
+    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    // }
 
 
   },
+  // 分頁器
+  // computed: {
+  //   totalPages() {
+  //     return Math.ceil(this.totalItems / this.itemsPerPage);
+  //   }
+  // },
   // 一開始從資料庫拿出資料已有id由資料庫自動編號
   mounted() {
     // 資料庫串接
-    fetch('http://localhost/API/back_fakeNews.php', {
+    // fetch('http://localhost/API/back_fakeNews.php'
+    fetch('API/back_fakeNews.php', {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
