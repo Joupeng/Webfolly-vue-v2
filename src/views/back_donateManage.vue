@@ -1,5 +1,4 @@
 <template>
-  <!-- 捐款管理 -->
   <header class="backheader">
     <div class="right">
       <router-link to="/back_account">帳號設定</router-link>
@@ -7,139 +6,144 @@
     </div>
 
   </header>
-
   <div class="back_container">
-
     <!-- 側邊欄 -->
     <backaside></backaside>
-    <main class="backDonate">
+
+    <!-- 主要欄目 -->
+    <main>
       <div class="title">
         <h2>捐款管理</h2>
       </div>
 
+
       <div class="bar">
-        <div class="search">
-          <div>捐款紀錄查詢</div>
-          <form action=""><img src="../assets/images/donate/iconCalendar.svg" alt="Calendar"><input class="inputserch"
-              type="text" name="" id="search" placeholder="2023-11-22">
-          </form>
-          <form action=""><img src="../assets/images/donate/iconCalendar.svg" alt="Calendar"><input class="inputserch"
-              type="text" name="" id="search" placeholder="2023-11-22"></form>
-          <div class="searchbtn">查詢</div>
+        <div class="search"></div>
+        <div class="btn" @click="fileDownload">匯出 Excel 檔</div>
+      </div>
+
+      <div class="donateManageTable">
+        <!-- thead 部分 -->
+        <div class="thead">
+          <!-- 欄位標題 -->
+          <div class="thItem">編號</div>
+          <div class="thItem">姓名</div>
+          <div class="thItem">綠界訂單編號</div>
+          <div class="thItem">捐款金額</div>
+          <div class="thItem">捐款日期</div>
 
         </div>
-        <div class="btn">匯出Excel檔案</div>
+
+        <!-- tbody 部分 -->
+        <div class="tobdyContainer">
+          <ul class="itemList">
+            <!-- 顯示每個欄位的資料 -->
+            <li v-for="(item, index) in items" :key="index" class="itemRow">
+              <div class="tbItem">
+                <p class="tableP">{{ index + 1 }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.source }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.title }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.content }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.link }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.picture }}</p>
+              </div>
+
+              <div class="tbItem" @click="itemEdit($event, index)" style="cursor: pointer;">
+                <p class="tableP">編輯</p>
+              </div>
+              <div class="tbItem" @click="warning_open(index)">
+                <p class="tableP" style="cursor: pointer;">刪除</p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+
+
       </div>
 
 
-      <div class="wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>編號</th>
-              <th>姓名</th>
-              <th>綠界訂單編號</th>
-              <th>捐款金額</th>
-              <th>捐款日期</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div class="block">王安石</div>
-              </td>
-              <td>
-                <div class="block"> 200731161405
-                </div>
-              </td>
-              <td>500</td>
-              <td>
-                <div class="edit">2023-11-16</div>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                <div class="block">李小白</div>
-              </td>
-              <td>
-                <div class="block">200731161407</div>
-              </td>
-              <td>500</td>
-              <td>
-                <div class="edit">2023-11-18</div>
-              </td>
-
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>
-                <div class="block">杜大甫</div>
-              </td>
-              <td>
-                <div class="block">200731161409</div>
-              </td>
-              <td>500</td>
-              <td>
-                <div class="edit">2023-11-20</div>
-              </td>
-
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>
-                <div class="block">歐陽修</div>
-              </td>
-              <td>
-                <div class="block">200731161411</div>
-              </td>
-              <td>500</td>
-              <td>
-                <div class="edit">2023-11-22</div>
-              </td>
-
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>td</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-
-            </tr>
-          </tbody>
 
 
 
-        </table>
-      </div>
+      <!-- <modal_warning></modal_warning> -->
+      <!-- <modal_category>
+      </modal_category> -->
+      <!-- <modal_content></modal_content>
+    <modal_quiz></modal_quiz>  -->
 
-      <pagination></pagination>
+      <!-- <pagination></pagination> -->
 
     </main>
-
   </div>
-
   <backfooter></backfooter>
 </template>
 
 <script>
-import pagination from '@/components/pagination.vue'
 import backfooter from '@/components/back_footer.vue'
+import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
 
 export default {
   components: {
-    pagination,
     backfooter,
+    pagination,
     backaside,
-  }
-}
+  },
+  data() {
+    return {
+      item_index: 0,
+      itemAddWindowOpen: false,
+      warningOpen: null,
+      addWindow: false,
+      editWindow: false,
+      // input輸入的內容
+      itemText: [
+        {
+          // id: '',
+          source: '',
+          title: '',
+          content: '',
+          link: '',
+          picture: '',
+
+        }
+      ],
+      // li上有的內容及狀態
+      items: [
+        // {
+        //   tbNumber: '1',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
+        // {
+        //   tbNumber: '2',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
+      ],
+
+    };
+  },
+
+  methods: {
+
+  },
+};
 </script>

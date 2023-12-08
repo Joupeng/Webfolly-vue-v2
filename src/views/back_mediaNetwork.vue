@@ -97,7 +97,8 @@
       <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
-            <span>新增編輯 / 文章</span>
+            <span class="close_text" v-if="addWindow">新增文章</span>
+            <span class="close_text" v-if="editWindow">編輯文章</span>
             <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
                 @click="closeModal"> </span>
           </header>
@@ -208,40 +209,17 @@ export default {
         }
       ],
       // li上有的內容及狀態
-      items: [
-        // {
-        //   tbNumber: '1',
-        //   tbTitle: '標題',
-        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-        //   tbLink: '',
-        //   tbPic: '',
-        //   tbDate: '2022.03.12',
-        // },
-        // {
-        //   tbNumber: '2',
-        //   tbTitle: '標題',
-        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-        //   tbLink: '',
-        //   tbPic: '',
-        //   tbDate: '2022.03.12',
-        // },
-      ],
+      items: [],
 
     };
   },
-  beforeMount() {
-    if (localStorage.getItem("items")) {
-      this.items = JSON.parse(localStorage.getItem("items"));
-    }
 
-
-  },
   methods: {
     // 新增內容視窗打開
     itemAddWindow() {
       this.itemAddWindowOpen = !this.itemAddWindowOpen;
-      this.windowShow = true;
       this.addWindow = true;
+      this.editWindow = false;
       // 初始化 itemText[0] 為空白狀態
       this.itemText[0] = {
         // id: '',
@@ -254,7 +232,12 @@ export default {
     },
     // 新增內容進去
     itemAdd() {
-      if (this.itemText[0].id != "") {
+      if (
+        this.itemText[0].title !== '' &&
+        this.itemText[0].content !== '' &&
+        this.itemText[0].link !== '' &&
+        this.itemText[0].picture == ''
+      ) {
         this.items.unshift({
           id: this.itemText[0].id,
           title: this.itemText[0].title,
@@ -262,25 +245,29 @@ export default {
           link: this.itemText[0].link,
           picture: this.itemText[0].picture,
         });
-        // // 新增完後彈跳視窗內容清空
+        // 新增完後彈跳視窗內容清空
         this.itemText[0] = {
           id: '',
           title: '',
           content: '',
           link: '',
           picture: '',
-
         };
         // 把新增的資料存到 localStorage 裡
         localStorage.setItem("items", JSON.stringify(this.items));
+        this.addWindow = false;
+        this.itemAddWindowOpen = false;
+      } else {
+        // 如果有任何一個欄位為空，顯示警示框
+        alert('所有欄位都是必填欄位，請填寫完整資訊');
       }
 
-      this.addWindow = false;
-      this.itemAddWindowOpen = false;
+
     },
     // 編輯舊有內容
     itemEdit(e, i) {
       this.itemAddWindowOpen = true;
+      this.addWindow = false;
       this.item_index = i;
       this.itemText[0] = {
         id: this.items[i].id,
@@ -293,14 +280,17 @@ export default {
       };
 
       this.editWindow = true;
-      // this.itemAddWindowOpen = !this.itemAddWindowOpen;
     },
 
     itemEditOk() {
 
-      this.editWindow = false;
-      this.itemAddWindowOpen = false;
-      if (this.editWindow) {
+
+      if (
+        this.itemText[0].title !== '' &&
+        this.itemText[0].content !== '' &&
+        this.itemText[0].link !== '' &&
+        this.itemText[0].picture !== ''
+      ) {
         // 編輯操作
         const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
         if (editedItemIndex !== -1) {
@@ -310,28 +300,33 @@ export default {
           // 找不到相對應的內容時
           console.error("Item not found for editing");
         }
+        this.editWindow = false;
+        this.itemAddWindowOpen = false;
+      } else {
+        // 如果有任何一個欄位為空，顯示警示框
+        alert('所有欄位都是必填欄位，請填寫完整資訊');
       }
     },
     // 圖片上傳
-    handleFileUpload(event) {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
+    // handleFileUpload(event) {
+    //   const file = event.target.files[0];
+    //   const formData = new FormData();
+    //   formData.append('file', file);
 
-      axios.post('your_backend_endpoint.php', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then(response => {
-          // 上傳成功後的處理
-          console.log('圖片上傳成功:', response.data);
-        })
-        .catch(error => {
-          // 上傳失敗後的處理
-          console.error('圖片上傳失敗:', error);
-        });
-    },
+    //   axios.post('your_backend_endpoint.php', formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data'
+    //     }
+    //   })
+    //     .then(response => {
+    //       // 上傳成功後的處理
+    //       console.log('圖片上傳成功:', response.data);
+    //     })
+    //     .catch(error => {
+    //       // 上傳失敗後的處理
+    //       console.error('圖片上傳失敗:', error);
+    //     });
+    // },
 
     // 刪除警告
     warning_open(index) {
@@ -358,5 +353,34 @@ export default {
 
     },
   },
+  mounted() {
+    // 資料庫串接
+    fetch('http://localhost/API/back_mediaNetwork.php')
+      // fetch('API/back_mediaNetwork.php', {
+      //   method: 'POST',
+      //   // mode: 'cors',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      // })
+      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
+      .then(resp => resp.json())
+      .then(items => {
+        //console.log(items);
+        // 放進對應的項目
+        this.tasks = items.map(item_list => {
+          return {
+            id: item_list.ID,
+            title_left: item_list.LTEXT,
+            result_left: item_list.ANSWER_LEFT,
+            answer_left: item_list.DESCRIPTION_LEFT,
+            title_right: item_list.RTEXT,
+            result_right: item_list.ANSWER_RIGHT,
+            answer_right: item_list.DESCRIPTION_RIGHT,
+            date: item_list.CREATE_DATE
+          }
+        })
+      })
+  }
 };
 </script>

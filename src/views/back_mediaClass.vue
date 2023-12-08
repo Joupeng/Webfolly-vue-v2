@@ -114,14 +114,12 @@
             <div class="wrap_fram">
               <!-- 編號 -->
               <!-- 來源 -->
-              <div class="input_source">
+              <div class="input_title">
                 <p>來源</p>
                 <!-- 新增輸入框 -->
-                <input type="text" name="" class="input_box" v-model.trim="itemText[0].source" placeholder="必填"
-                  v-if="addWindow">
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].source" v-if="addWindow"></textarea>
                 <!-- 編輯輸入框 -->
-                <input type="text" name="" id="" class="input_box" v-model.trim="items[item_index].source"
-                  v-if="editWindow">
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].source" v-if="editWindow"></textarea>
               </div>
               <!-- 標題 -->
               <div class="input_title">
