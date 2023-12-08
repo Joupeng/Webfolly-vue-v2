@@ -101,7 +101,7 @@
 
 
       <!-- ===新增文章彈窗=== -->
-      <div class="content" v-if="itemAddWindowOpen">
+      <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
             <span>新增編輯 / 文章</span>
@@ -358,7 +358,7 @@ export default {
     // 彈跳視窗關閉
     closeModal() {
       this.itemAddWindowOpen = false;
-      this.warningOpen = false;
+      this.warningOpen = null;
 
     },
   },

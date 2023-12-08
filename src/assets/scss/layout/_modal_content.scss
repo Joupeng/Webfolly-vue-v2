@@ -2,26 +2,43 @@
 @import "../base/font";
 @import "../components/modalheader";
 
-.content {
-  background: #0000004d;
+.modalContent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   display: flex;
   justify-content: center;
-  z-index: 5;
-
+  align-items: center;
 
   &_frame {
+
     max-width: 1030px;
     background-color: $secondary-y2;
+
+
+
 
 
   }
 
   .wrap {
-    border: 1px solid red;
-
 
     .wrap_fram {
       display: block;
+
+      textarea {
+        border: 2px solid $primary-b;
+        border-radius: 32px;
+      }
+
+      .input_box {
+        border: 2px solid $primary-b;
+        border-radius: 32px;
+      }
 
       p {
         margin-right: 80px;
