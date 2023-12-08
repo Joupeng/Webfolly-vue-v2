@@ -229,6 +229,12 @@ export default {
       ],
       // li上有的內容及狀態
       items: [
+        // id: '',
+        // source: '',
+        // title: '',
+        // content: '',
+        // link: '',
+        // picture: '',
         // {
         //   tbNumber: '1',
         //   tbTitle: '標題',
@@ -310,6 +316,7 @@ export default {
           source: this.items[0].source,
           link: this.items[0].link,
           title: this.items[0].title,
+          content: this.items[0].content,
           picture: this.items[0].picture,
         })
       })
@@ -406,6 +413,7 @@ export default {
             id: item_list.ID,
             title: item_list.TITLE,
             source: item_list.SOURCE,
+            content: item_list.DIRECTION,
             link: item_list.LINKS,
             picture: item_list.PHOTO,
           }
