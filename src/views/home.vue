@@ -197,10 +197,10 @@ export default {
             this.isSad = !this.isSad;
             if (this.isClicked) {
                 // 如果 isClicked 為 true，使用第一張背景圖片
-                this.$refs.backgroundImage.style.backgroundImage = url("../assets/images/home/home_lamp_bg1.png");
+                this.$refs.backgroundImage.style.backgroundImage = ("../assets/images/home/home_lamp_bg1.png");
             } else {
                 // 如果 isClicked 為 false，使用第二張背景圖片
-                this.$refs.backgroundImage.style.backgroundImage = url("../assets/images/home/home_lamp_bg2.png");
+                this.$refs.backgroundImage.style.backgroundImage = ("../assets/images/home/home_lamp_bg2.png");
             }
         },
 

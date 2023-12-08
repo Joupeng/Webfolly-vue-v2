@@ -43,7 +43,7 @@
                   <div class="link_01_img"><img :src="news.image" alt=""></div>
                   <div class="text_block">
                     <!-- 標籤包起來使資料庫來的連結有效 -->
-                    <a :href="news.link">
+                    <a :href="news.link" class="link_title">
                       {{ news.name }}
                     </a>
                     <p>{{ news.description }}</p>

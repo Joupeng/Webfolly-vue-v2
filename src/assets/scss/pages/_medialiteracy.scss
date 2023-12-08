@@ -138,53 +138,46 @@
           @include m() {
             flex-direction: column;
             align-items: center;
-
           }
 
           @include m() {
             min-width: 150px;
           }
 
-          // .link_01_img {
-          //   width: 150px;
-          //   height: 112px;
-          //   min-width: 150px;
-          //   // background-color: #fff;
-          //   // background-image: url(/src/assets/images/medialiteracy/B1_N.png);
-          //   // background-size: cover;
-          //   // // background-position: 0 0;
-          //   border: 1px solid red;
-          //   margin: 0 20px 0 0;
-
-          //   @include m() {
-          //     width: 80%;
-          //     height: 200px;
-          //     margin: 0 20px 20px 0px;
-          //   }
-          // }
-          // 新作的圖
+          // 圖片
           .link_01_img {
             width: 150px;
             height: 112px;
-            // border: 1px solid red;
+            min-width: 150px;
+            border: 1px solid red;
+            margin: 0 20px 0 0;
 
-            // position: absolute;
-            img {
-              width: 100%;
+            @include m() {
+              width: 80%;
+              height: 200px;
+              margin: 0 20px 20px 0px;
             }
           }
 
 
 
+
+          // 文字
           .text_block {
             margin: auto 20px auto 0px;
             // border: 1px solid green;
 
             @include m() {
-              margin: auto 20px auto 0px;
+              margin: 20px 20px auto 0px;
               width: 90%;
-
             }
+
+            // 相關連結標題致中
+            .link_title {
+              display: flex;
+              justify-content: center;
+            }
+
 
             p:first-child {
               font-style: 20px;
