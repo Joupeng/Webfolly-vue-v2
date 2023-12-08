@@ -6,147 +6,310 @@
     </div>
 
   </header>
-
   <div class="back_container">
-
     <!-- 側邊欄 -->
     <backaside></backaside>
-    <main class="backDonateFQA">
+
+    <!-- 主要欄目 -->
+    <main>
       <div class="title">
-        <h2>捐款FQA</h2>
+        <h2>捐款 FAQ</h2>
       </div>
 
 
       <div class="button">
-        <a href="">
-          <div class="btn">+ 新增分類</div>
-        </a>
-        <a href="">
-          <div class="btn">+ 新增內容</div>
-        </a>
+        <!-- 當點擊按鈕時調用 addSort 方法 -->
+
+        <div class="btn" @click="itemAddWindow">+ 新增</div>
+
       </div>
 
-      <div class="wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>編號</th>
-              <th>標題</th>
-              <th>解答</th>
-              <th>日期</th>
-              <th>編輯</th>
-              <th>刪除<i class="fa-solid fa-trash"></i></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div class="block">台灣媒體養成計畫</div>
-              </td>
-              <td>
-                <div class="block">
-                  台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。
-                </div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                <div class="block">關鍵評論</div>
-              </td>
-              <td>
-                <div class="block">關鍵評論網以「獨立評論媒體」作為其定位，主要針對的受眾為關注亞洲訊息的海外華僑、在台外籍人士等。</div>
-              </td>
-              <td>2022.10.1</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>
-                <div class="block">全民查假會社</div>
-              </td>
-              <td>
-                <div class="block">全民查假會社，基於多元社會特性，力求呈現真實內容，不受政治立場與偏見影響，以供社會大眾對重大公共利益事項判斷之參考。</div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>
-                <div class="block">台灣事實查核中心</div>
-              </td>
-              <td>
-                <div class="block">台灣事實查核中心，簡稱TFC，是台灣的事實查核非營利組織，推動事實查核業務與活動。</div>
-              </td>
-              <td>2022.10.17</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>
-                <div class="block">td</div>
-              </td>
-              <td>td</td>
-              <td>
-                <div class="edit">編輯</div>
-              </td>
-              <td>
-                <div class="edit"><img src="../assets/images/common/back_iconTrashcan.svg" alt="iconTrashcan"></div>
-              </td>
-            </tr>
-          </tbody>
+      <div class="FAQTable">
+        <!-- thead 部分 -->
+        <div class="thead">
+          <!-- 欄位標題 -->
+          <div class="thItem">編號</div>
+          <div class="thItem">標題</div>
+          <div class="thItem">內容</div>
 
 
+        </div>
 
-        </table>
+        <!-- tbody 部分 -->
+        <div class="tobdyContainer">
+          <ul class="itemList">
+            <!-- 顯示每個欄位的資料 -->
+            <li v-for="(item, index) in items" :key="index" class="itemRow">
+              <div class="tbItem">
+                <p class="tableP">{{ index + 1 }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.title }}</p>
+              </div>
+              <div class="tbItem">
+                <p class="tableP">{{ item.content }}</p>
+              </div>
+
+              <div class="tbItem" @click="itemEdit($event, index)" style="cursor: pointer;">
+                <p class="tableP">編輯</p>
+              </div>
+              <div class="tbItem" @click="warning_open(index)">
+                <p class="tableP" style="cursor: pointer;">刪除</p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+
+
       </div>
+
+
+      <!-- 刪除彈跳視窗 -->
+      <div class="modalWarning" v-if="warningOpen !== null">
+        <ul>
+          <li><img src="../../src/assets/images/common/back_warning.svg" alt="Warning">
+          </li>
+          <li>您確定要刪除這筆資料嗎？</li>
+          <li>
+            <div class="button">
+
+              <!-- 點選確認刪除，執行 deleteRow 方法，並關閉彈窗 -->
+              <div class="btn" @click="deleteRow">確認刪除</div>
+
+              <!-- 點選取消刪除，只關閉彈窗 -->
+              <div class="btn" @click="closeModal">取消刪除</div>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+
+
+
+      <!-- ===新增文章彈窗=== -->
+      <div class="modalContent" v-if="itemAddWindowOpen">
+        <div class="content_frame">
+          <header class="modalheader">
+            <span>新增編輯 / 文章</span>
+            <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
+                @click="closeModal"> </span>
+          </header>
+
+          <div class="wrap">
+
+            <div class="wrap_fram">
+              <!-- 編號 -->
+              <!-- 標題 -->
+              <div class="input_title">
+                <p>標題</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].title" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].title" v-if="editWindow"></textarea>
+              </div>
+              <!-- 內容 -->
+              <div class="input_content">
+                <p>內容</p>
+                <!-- 新增輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="itemText[0].content" v-if="addWindow"></textarea>
+                <!-- 編輯輸入框 -->
+                <textarea class="input_box_textarea" v-model.trim="items[item_index].content"
+                  v-if="editWindow"></textarea>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="button">
+
+
+            <div class="button_add_window">
+              <div class="btn" type="button" @click="itemAdd" v-if="addWindow">儲存新增</div>
+            </div>
+            <div class="button_add_window">
+              <div class="btn" type="button" @click="itemEditOk" v-if="editWindow">儲存變更</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <!-- <modal_warning></modal_warning> -->
+      <!-- <modal_category>
+      </modal_category> -->
+      <!-- <modal_content></modal_content>
+    <modal_quiz></modal_quiz>  -->
 
       <pagination></pagination>
 
     </main>
-
   </div>
-
   <backfooter></backfooter>
 </template>
 
 <script>
-import pagination from '@/components/pagination.vue'
 import backfooter from '@/components/back_footer.vue'
+import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
 
 export default {
   components: {
-    pagination,
     backfooter,
+    pagination,
     backaside,
-  }
-}
+  },
+  data() {
+    return {
+      item_index: 0,
+      itemAddWindowOpen: false,
+      warningOpen: null,
+      addWindow: false,
+      editWindow: false,
+      // input輸入的內容
+      itemText: [
+        {
+          // id: '',
+          title: '',
+          content: '',
+
+
+        }
+      ],
+      // li上有的內容及狀態
+      items: [
+        // {
+        //   tbNumber: '1',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
+        // {
+        //   tbNumber: '2',
+        //   tbTitle: '標題',
+        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
+        //   tbLink: '',
+        //   tbPic: '',
+        //   tbDate: '2022.03.12',
+        // },
+      ],
+
+    };
+  },
+  beforeMount() {
+    if (localStorage.getItem("items")) {
+      this.items = JSON.parse(localStorage.getItem("items"));
+    }
+
+
+  },
+  methods: {
+    // 新增內容視窗打開
+    itemAddWindow() {
+      this.itemAddWindowOpen = !this.itemAddWindowOpen;
+      this.windowShow = true;
+      this.addWindow = true;
+      // 初始化 itemText[0] 為空白狀態
+      this.itemText[0] = {
+        // id: '',
+        title: '',
+        content: '',
+
+
+      };
+    },
+    // 新增內容進去
+    itemAdd() {
+      if (this.itemText[0].id != "") {
+        this.items.unshift({
+          id: this.itemText[0].id,
+          title: this.itemText[0].title,
+          content: this.itemText[0].content,
+
+        });
+        // // 新增完後彈跳視窗內容清空
+        this.itemText[0] = {
+          id: '',
+          title: '',
+          content: '',
+
+
+        };
+        // 把新增的資料存到 localStorage 裡
+        localStorage.setItem("items", JSON.stringify(this.items));
+      }
+
+      this.addWindow = false;
+      this.itemAddWindowOpen = false;
+    },
+    // 編輯舊有內容
+    itemEdit(e, i) {
+      this.itemAddWindowOpen = true;
+      this.item_index = i;
+      this.itemText[0] = {
+        id: this.items[i].id,
+        title: this.items[i].title,
+        content: this.items[i].content,
+
+
+
+      };
+
+      this.editWindow = true;
+      // this.itemAddWindowOpen = !this.itemAddWindowOpen;
+    },
+
+    itemEditOk() {
+
+      this.editWindow = false;
+      this.itemAddWindowOpen = false;
+      if (this.editWindow) {
+        // 編輯操作
+        const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
+        if (editedItemIndex !== -1) {
+          this.items[editedItemIndex] = { ...this.itemText[0] };
+          localStorage.setItem("items", JSON.stringify(this.items));
+        } else {
+          // 找不到相對應的內容時
+          console.error("Item not found for editing");
+        }
+      }
+
+
+    },
+    // 刪除警告
+    warning_open(index) {
+      this.warningOpen = index;
+    },
+    warning_close() {
+      this.warningOpen = null
+    },
+    deleteRow() {
+
+      console.log(this.items);
+      setTimeout(() => {
+        this.items.splice(this.warningOpen, 1);
+
+        localStorage.setItem("items", JSON.stringify(this.items));
+        this.warningOpen = null;
+      }, 50);
+    },
+
+    // 彈跳視窗關閉
+    closeModal() {
+      this.itemAddWindowOpen = false;
+      this.warningOpen = null;
+
+    },
+  },
+};
 </script>

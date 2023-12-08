@@ -94,7 +94,7 @@
 
 
       <!-- ===新增文章彈窗=== -->
-      <div class="content" v-if="itemAddWindowOpen">
+      <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
             <span>新增編輯 / 文章</span>
@@ -261,7 +261,6 @@ export default {
           content: this.itemText[0].content,
           link: this.itemText[0].link,
           picture: this.itemText[0].picture,
-          date: this.itemText[0].date,
         });
         // // 新增完後彈跳視窗內容清空
         this.itemText[0] = {
@@ -335,7 +334,6 @@ export default {
     },
 
     // 刪除警告
-
     warning_open(index) {
       this.warningOpen = index;
     },
