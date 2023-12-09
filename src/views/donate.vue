@@ -119,13 +119,13 @@
               <button type="button" :class="{ bg: active3 }" @click="handleButtonClick_2000">2000</button>
             </div> -->
             <div class="donateOption">
-              <input class="number" type="number" value="100" readonly :class="{ '-on': isChoose === 100 }"
+              <input class="number" type="text" value="100" readonly :class="{ '-on': isChoose === 100 }"
                 @click="handleIsChoose(100)">
-              <input class="number" type="number" value="500" readonly :class="{ '-on': isChoose === 500 }"
+              <input class="number" type="text" value="500" readonly :class="{ '-on': isChoose === 500 }"
                 @click="handleIsChoose(500)">
-              <input class="number" type="number" value="1000" readonly :class="{ '-on': isChoose === 1000 }"
+              <input class="number" type="text" value="1000" readonly :class="{ '-on': isChoose === 1000 }"
                 @click="handleIsChoose(1000)">
-              <input class="number" type="number" value="2000" readonly :class="{ '-on': isChoose === 2000 }"
+              <input class="number" type="text" value="2000" readonly :class="{ '-on': isChoose === 2000 }"
                 @click="handleIsChoose(2000)">
             </div>
 

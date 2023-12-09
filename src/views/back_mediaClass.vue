@@ -105,7 +105,8 @@
       <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
-            <span>新增編輯 / 文章</span>
+            <span class="close_text" v-if="addWindow">新增文章</span>
+            <span class="close_text" v-if="editWindow">編輯文章</span>
             <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
                 @click="closeModal"> </span>
           </header>
@@ -198,6 +199,7 @@
 import backfooter from '@/components/back_footer.vue'
 import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -261,11 +263,12 @@ export default {
 
   },
   methods: {
+
     // 新增內容視窗打開
     itemAddWindow() {
       this.itemAddWindowOpen = !this.itemAddWindowOpen;
-      this.windowShow = true;
       this.addWindow = true;
+      this.editWindow = false;
       // 初始化 itemText[0] 為空白狀態
       this.itemText[0] = {
         // id: '',
@@ -279,15 +282,32 @@ export default {
     },
     // 新增內容進去
     itemAdd() {
-      if (this.itemText[0].id != "") {
+      if (
+        this.itemText[0].id !== '' &&
+        this.itemText[0].source !== '' &&
+        this.itemText[0].title !== '' &&
+        this.itemText[0].content !== '' &&
+        this.itemText[0].link !== '' &&
+        // 檢查是否選入圖片
+        this.$refs.fileInput.files.length > 0
+      ) {
+        // console.log(this.$refs.fileInput.files[0]);
+        const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        // 找到圖片的第一個值[0]是name
+        const selectedFile = this.$refs.fileInput.files[0];
+        if (!allowedImageTypes.includes(selectedFile.type)) {
+          alert('請選擇有效的圖片格式JPEG、PNG 或 GIF');
+          return;
+        }
         this.items.unshift({
           id: this.itemText[0].id,
           source: this.itemText[0].source,
           title: this.itemText[0].title,
           content: this.itemText[0].content,
           link: this.itemText[0].link,
-          picture: this.itemText[0].picture,
-          date: this.itemText[0].date,
+          //file格式不能用v-model改用ref
+          picture: this.$refs.fileInput.files[0].name
+          // picture: this.itemText[0].picture,
         });
         // // 新增完後彈跳視窗內容清空
         this.itemText[0] = {
@@ -299,40 +319,48 @@ export default {
           picture: '',
 
         };
-        // 把新增的資料存到 localStorage 裡
-        // localStorage.setItem("items", JSON.stringify(this.items));
+        // 將要做變更的資料用變數先存進去
+        var input = document.querySelector('input[type="file"]')
+        // 直接使用FormData方式
+        var data = new FormData()
+        // input.files[0]等等是變數
+        // file會對應php，其他不需要轉譯所以不用
+        data.append('file', input.files[0])
+        data.append('source', this.items[0].source)
+        data.append('link', this.items[0].link)
+        data.append('title', this.items[0].title)
+        data.append('content', this.items[0].content)
 
+        // http://localhost/API/back_mediaClass_add.php
+        fetch('API/back_mediaClass_add.php', {
+          method: 'POST',
+          // mode: 'cors',
+          headers: {
+            // 'Content-Type': 'application/json'
+          },
+          // 根據上面寫好的data帶入
+          body: data
+        })
+          .then(resp => resp.json())
+          // 找到父層
+          .then(resbody => {
+            // 要回傳id回來由資料庫定義的
+            this.items[0].id = resbody.id;
+            this.items[0].picture = resbody.filePath;
+            // console.log(taskList)
+            alert("新增成功");
+            console.log("新增成功")
+          })
+        this.addWindow = false;
+        this.itemAddWindowOpen = false;
+      } else {
+        alert('所有欄位都是必填欄位，請填寫完整資訊');
       }
-      fetch('http://localhost/API/back_mediaClass_add.php', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          //  是沒有id值的因為是從資料庫來
-          source: this.items[0].source,
-          link: this.items[0].link,
-          title: this.items[0].title,
-          content: this.items[0].content,
-          picture: this.items[0].picture,
-        })
-      })
-        .then(resp => resp.json())
-        // 找到父層
-        .then(taskList => {
-          // 要回傳id回來由資料庫定義的
-          this.tasks[0].id = id;
-          // console.log(taskList)
-          alert("新增成功");
-        })
-
-      this.addWindow = false;
-      this.itemAddWindowOpen = false;
     },
     // 編輯舊有內容
     itemEdit(e, i) {
       this.itemAddWindowOpen = true;
+      this.addWindow = false;
       this.item_index = i;
       this.itemText[0] = {
         id: this.items[i].id,
@@ -346,25 +374,45 @@ export default {
       };
 
       this.editWindow = true;
-      // this.itemAddWindowOpen = !this.itemAddWindowOpen;
     },
-
     itemEditOk() {
 
-      this.editWindow = false;
-      this.itemAddWindowOpen = false;
       if (this.editWindow) {
         // 編輯操作
         const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
         if (editedItemIndex !== -1) {
           this.items[editedItemIndex] = { ...this.itemText[0] };
-          localStorage.setItem("items", JSON.stringify(this.items));
+          // localStorage.setItem("items", JSON.stringify(this.items));
+          // 'http://localhost/API/back_mediaClass_edit.php'
+          fetch('API/back_mediaClass_edit.php', {
+            method: 'POST',
+            // mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            // 要對應php裡的名稱
+            body: JSON.stringify({
+              id: this.items[this.item_index].id,
+              title: this.items[this.item_index].title,
+              source: this.items[this.item_index].source,
+              content: this.items[this.item_index].content,
+              link: this.items[this.item_index].link,
+              picture: this.items[this.item_index].picture,
+            })
+          })
+            .then(resp => resp.json())
+          // alert("編輯成功")
         } else {
-          // 找不到相對應的內容時
-          console.error("Item not found for editing");
+          // 如果有任何一個欄位為空，顯示警示框
+          alert('所有欄位都是必填欄位，請填寫完整資訊');
         }
+      } else {
+        // 找不到相對應的內容時
+        console.error("Item not found for editing");
       }
 
+      this.editWindow = false;
+      this.itemAddWindowOpen = false;
 
     },
     // 刪除警告
@@ -376,13 +424,30 @@ export default {
     },
     deleteRow() {
 
-      console.log(this.items);
+      // console.log(this.items);
       setTimeout(() => {
-        this.items.splice(this.warningOpen, 1);
 
-        localStorage.setItem("items", JSON.stringify(this.items));
+        // console.log(this.items[this.warningOpen].id)
+        // http://localhost/API/back_mediaClass_delete.php
+        fetch('API/back_mediaClass_delete.php', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: this.items[this.warningOpen].id,
+          })
+        })
+          .then(resp => resp.json())
+        this.items.splice(this.warningOpen, 1);
+        // console.log(lists);
+        // localStorage.setItem("items", JSON.stringify(this.items));
         this.warningOpen = null;
+        // alert('刪除成功')
       }, 50);
+
+
     },
 
     // 彈跳視窗關閉
@@ -394,9 +459,10 @@ export default {
   },
   mounted() {
     // 資料庫串接
-    fetch('http://localhost/API/back_mediaClass.php', {
+    // http://localhost/API/back_mediaClass.php
+    fetch('API/back_mediaClass.php', {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

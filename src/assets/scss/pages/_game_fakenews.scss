@@ -8,11 +8,15 @@
 
 .game_fakenews {
   margin: 0;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-image: url("@/assets/images/game_fakenews/game_fakenews_background.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  // 處理掉上下滑動的位置
+  overflow: hidden;
   width: 100%;
   height: 100vh;
   // min-height: 450px;
@@ -183,20 +187,22 @@
   .pillar_left,
   .pillar_right {
     width: 137px;
-    height: 230px;
+    height: 180px;
     background-color: #989898;
     /* border: 1px solid red; */
     border-radius: 32px 32px 0 0;
     z-index: 10;
+    position: absolute;
+    bottom: 0;
   }
 
 
 
   .pillar_left {
     cursor: pointer;
-    position: fixed;
+    // position: fixed;
     left: 15%;
-    bottom: 0;
+    // bottom: 0;
   }
 
   // 橋的動畫做兩層，先做第一層功能再做第二層，下一層delay 1s
@@ -205,7 +211,7 @@
     display: block;
     width: calc(100% - 15%*2 - 137px*2 + 32px + 32px);
     position: absolute;
-    bottom: 210px;
+    bottom: 160px;
     // 橋用算的取長度
     left: calc(15% + 137px - 32px);
     transform: scaleY(0);
@@ -239,9 +245,9 @@
   }
 
   .pillar_right {
-    position: fixed;
+    // position: fixed;
     right: 15%;
-    bottom: 0;
+    // bottom: 0;
   }
 
   // 黃的框角色
@@ -252,7 +258,7 @@
     position: absolute;
     // 15%是柱子定位點，68.5是柱子的寬，然後是腳色的一半寬
     left: calc(15% + 68.5px - 51px);
-    bottom: 230px;
+    bottom: 180px;
     z-index: 15;
     cursor: pointer;
     // opacity: 1;
@@ -260,11 +266,13 @@
     // 為了等下進行過渡，需要先添加
     transition: transform 0.3s ease, filter 0.3s ease; // 添加 filter 的过渡效果
 
-    &:hover {
-      // 調整大小
-      transform: scale(1.2);
-      // filter: brightness(1.2) contrast(0.9) saturate(0.7);
-      // opacity: 1;
+    @media (min-width:992px) {
+      &:hover {
+        // 調整大小
+        transform: scale(1.2);
+        // filter: brightness(1.2) contrast(0.9) saturate(0.7);
+        // opacity: 1;
+      }
     }
 
 
@@ -312,7 +320,7 @@
   .black img {
     position: absolute;
     left: 10%;
-    bottom: 230px;
+    bottom: 180px;
     z-index: 10;
     /* width: 100%; */
   }
@@ -344,7 +352,7 @@
   // 電腦版關主訊息
   .show_text {
     width: 100%;
-    height: 120px;
+    height: 140px;
     background-color: #D6D6D6;
     position: fixed;
     bottom: 0;

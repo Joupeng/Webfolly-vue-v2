@@ -24,7 +24,7 @@ $DYEAR = isset($_GET['DYEAR']) ? $_GET['DYEAR'] : '';
 $DMONTH = isset($_GET['DMONTH']) ? $_GET['DMONTH'] : '';
  //建立SQL語法
 
-$sql = "SELECT * FROM webfolly.donation_record WHERE DYEAR = :DYEAR AND DMONTH = :DMONTH";
+$sql = "SELECT * FROM donation_record WHERE DYEAR = :DYEAR AND DMONTH = :DMONTH";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':DYEAR', $DYEAR);
 $stmt->bindParam(':DMONTH', $DMONTH);
