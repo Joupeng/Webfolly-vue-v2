@@ -138,7 +138,7 @@
           </ul>
         </div>
       </div>
-      <!-- <pagination total-items="30" items-per-page="5" current-page="1"></pagination> -->
+      <pagination total-items="30" items-per-page="5" current-page="1"></pagination>
     </main>
   </div>
   <backfooter></backfooter>
@@ -214,10 +214,10 @@ export default {
   },
   methods: {
     // 分頁器
-    // changePage(step) {
-    //   this.currentPage += step;
-    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
-    // },
+    changePage(step) {
+      this.currentPage += step;
+      // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    },
     taskAddWindow() {
       // alert('123');
       this.windowShow = true;
@@ -307,9 +307,9 @@ export default {
 
       console.log(this.tasks[0]);
       // fetch('http://localhost/API/back_fakeNews_add.php'
-      fetch('API/back_fakeNews_add.php', {
+      fetch('http://localhost/API/back_fakeNews_add.php', {
         method: 'POST',
-        // mode: 'cors',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -331,10 +331,19 @@ export default {
       })
         .then(resp => resp.json())
         // 找到父層
-        .then(taskList => {
+        .then(resbody => {
           // 要回傳id回來由資料庫定義的
-          this.tasks[0].id = id;
-          // console.log(taskList)
+
+          console.log(resbody)
+
+          this.tasks[0].id = resbody.id;
+
+
+          // console.log(res)
+          // console.log(res.id)
+
+          // this.tasks[0].id = res.id;
+          // console.log(res)
           alert("新增成功");
         })
     },
@@ -384,9 +393,9 @@ export default {
 
       // console.log(this.tasks[this.item_index].id);
       // fetch('http://localhost/API/back_fakeNews_edit.php'
-      fetch('API/back_fakeNews_delete.php', {
+      fetch('http://localhost/API/back_fakeNews_edit.php', {
         method: 'POST',
-        // mode: 'cors',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -429,9 +438,9 @@ export default {
 
       // 資料連接
       // fetch('http://localhost/API/back_fakeNews_delete.php'
-      fetch('API/back_fakeNews_delete.php', {
+      fetch('http://localhost/API/back_fakeNews_delete.php', {
         method: 'POST',
-        // mode: 'cors',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -459,26 +468,26 @@ export default {
       this.deleteWindow = null;
     },
     // 分頁器
-    // changePage(step) {
-    //   this.currentPage += step;
-    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
-    // }
+    changePage(step) {
+      this.currentPage += step;
+      // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    }
 
 
   },
   // 分頁器
-  // computed: {
-  //   totalPages() {
-  //     return Math.ceil(this.totalItems / this.itemsPerPage);
-  //   }
-  // },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+  },
   // 一開始從資料庫拿出資料已有id由資料庫自動編號
   mounted() {
     // 資料庫串接
     // fetch('http://localhost/API/back_fakeNews.php'
-    fetch('API/back_fakeNews.php', {
+    fetch('http://localhost/API/back_fakeNews.php', {
       method: 'POST',
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

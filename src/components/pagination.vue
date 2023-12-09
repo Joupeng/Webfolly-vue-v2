@@ -6,7 +6,7 @@
     <a href="#!+1" @click="$emit('changePage', 1)" class="unified_pagination_i">下一頁</a>
   </div>
 </template>
-
+<!-- router寫法不用a連結 -->
 <script>
 export default {
   props: ["totalItems", "itemsPerPage", "currentPage"],
