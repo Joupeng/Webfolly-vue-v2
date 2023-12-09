@@ -1,120 +1,81 @@
 @import "../base/color";
 @import "../base/font";
 
+.back_donateManage {
+  background-color: #fff;
 
-.bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 30px auto;
-
-  .search {
-    display: flex;
-    width: 540px;
-    height: 44px;
-
-    justify-content: center;
-    margin-left: 0px;
-    border-radius: 32px;
-    border: 2px solid $primary-b;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-
-  }
-
-  .btn {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 160px;
-    height: 44px;
-    margin-right: 8px;
-    color: $white;
-
-
-    &:hover {
-      color: $black;
+  .backheader {
+    .backheader {
+      width: 100%;
 
     }
-
   }
-}
 
-.donateManageTable {
+  // ＦＯＯＴＥＲ
+  .backfooter2 {
+    // min-width: 1440px;
+    width: 100%;
+    height: 144px;
+    background-color: $neutral-dark;
+    padding: 15px 100px 15px 100px;
+    // border: 1px solid red;
+    display: flex;
 
-
-  .thead {
-    width: 1028px;
-    height: 64px;
-    background-color: $black;
-    color: $white;
-
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr;
-    /* 列數和寬度 */
-    grid-gap: 8px;
-    /* 網格間距 */
-
-    .thItem {
+    .backfooter_frame2 {
+      border: green;
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-  }
+      width: 1440px;
+      /* 垂直居中，根據需要調整 */
+      justify-content: space-between;
+      /* 在容器中平均分配元素，根據需要調整 */
 
-  // table
-  .tobdyContainer {
-    width: 1028px;
+      img {
+        max-width: 100px;
+        /* 設定最大寬度，根據需要調整 */
+      }
 
+      .backfooter_text2 {
+        // border: 1px solid blue;
 
-    .itemList {
+        display: flex;
+        // flex-direction: column;
+        flex-grow: 1;
+        /* 填滿剩餘空間，讓文字區域擴展 */
+        margin-left: 20px;
+        /* 設定左邊間距，根據需要調整 */
 
-      margin: 0;
-      list-style: none;
-      padding: 0;
-
-      .itemRow {
-
-        display: grid;
-        grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.5fr;
-        /* 列數和寬度 */
-        grid-gap: 8px;
-
-        &:nth-of-type(odd) {
-          background-color: $gray-300;
+        p {
+          margin-bottom: 10px;
+          // border: 1px solid violet;
+          // width: 100%;
+          min-width: 830px;
+          text-align: left;
+          font-size: 12px;
+          color: $primary-y;
+          line-height: 1.5em;
+          // padding: 1.5em;
+          margin: 0;
+          /* 設定段落底邊距，根據需要調整 */
         }
 
-        &:nth-of-type(even) {
-          background-color: $white;
-        }
 
-        &:hover {
-          background-color: $secondary-y1;
-        }
 
-        /* 網格間距 */
-        .tbItem {
-
-          overflow: hidden;
-          white-space: nowrap;
+        span {
+          font-size: $fontbase-14;
+          color: $primary-y;
+          // border: 1px solid violet;
+          min-width: 100px;
           display: flex;
           justify-content: center;
 
-
-          .tableP {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0;
-            padding: 0;
-            background-color: transparent;
+          &:hover {
+            color: $secondary-y1;
           }
         }
+
+
       }
-
-
     }
   }
-
-
 }

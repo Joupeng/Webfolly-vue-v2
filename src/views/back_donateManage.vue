@@ -1,92 +1,110 @@
 <template>
-  <header class="backheader">
-    <div class="right">
-      <router-link to="/back_account">帳號設定</router-link>
-      <router-link to="/back_login">登出</router-link>
-    </div>
+  <section class="back_donateManage">
 
-  </header>
-  <div class="back_container">
-    <!-- 側邊欄 -->
-    <backaside></backaside>
 
-    <!-- 主要欄目 -->
-    <main>
-      <div class="title">
-        <h2>捐款管理</h2>
+    <header class="backheader">
+      <div class="right">
+        <router-link to="/back_account">帳號設定</router-link>
+        <router-link to="/back_login">登出</router-link>
       </div>
+    </header>
 
+    <div class="back_container">
+      <!-- 側邊欄 -->
+      <backaside></backaside>
 
-      <div class="bar">
-        <div class="search"></div>
+      <!-- 主要欄目 -->
+      <main>
+        <div class="title">
+          <h2>捐款管理</h2>
+        </div>
+
+        <!-- 匯出 Excel 檔按鈕 -->
         <div class="btn" @click="fileDownload">匯出 Excel 檔</div>
-      </div>
 
-      <div class="donateManageTable">
-        <!-- thead 部分 -->
-        <div class="thead">
-          <!-- 欄位標題 -->
-          <div class="thItem">編號</div>
-          <div class="thItem">姓名</div>
-          <div class="thItem">綠界訂單編號</div>
-          <div class="thItem">捐款金額</div>
-          <div class="thItem">捐款日期</div>
+
+        <div class="donateManageTable">
+
+
+          <!-- thead 部分 -->
+          <div class="thead">
+            <!-- 欄位標題 -->
+            <div class="thItem">編號</div>
+            <div class="thItem">姓名</div>
+            <div class="thItem">綠界訂單編號</div>
+            <div class="thItem">捐款金額</div>
+            <div class="thItem">捐款日期</div>
+          </div>
+
+
+          <div class="drop-down_menu_block">
+            <!-- 年份 -->
+            <select class="list_block" v-model="Dyear">
+              <option class="choose_year" placeholder="請選擇年份">請選擇年份</option>
+              <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
+            </select>
+            <!-- 月份 -->
+            <select class="list_block" v-model="Dmonth">
+              <option class="choose_month">請選擇月份</option>
+              <option class="li_month" v-for="(month, index) in months" :key="index + 1" :value="index + 1">{{
+                month }}</option>
+            </select>
+          </div>
+
+          <button class="donate_btn" type="button" @click="handleDonation">
+            查詢捐款 &#128269
+          </button>
+
+
 
         </div>
 
-        <!-- tbody 部分 -->
-        <div class="tobdyContainer">
-          <ul class="itemList">
-            <!-- 顯示每個欄位的資料 -->
-            <li v-for="(item, index) in items" :key="index" class="itemRow">
-              <div class="tbItem">
-                <p class="tableP">{{ index + 1 }}</p>
-              </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.source }}</p>
-              </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.title }}</p>
-              </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.content }}</p>
-              </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.link }}</p>
-              </div>
-              <div class="tbItem">
-                <p class="tableP">{{ item.picture }}</p>
-              </div>
+        <section class="donate_record_result">
 
-              <div class="tbItem" @click="itemEdit($event, index)" style="cursor: pointer;">
-                <p class="tableP">編輯</p>
+          <ul>
+            <li class="first_li">
+              <div>
+                <p>姓名</p>
+                <p>捐款金額</p>
+                <p>捐款時間</p>
               </div>
-              <div class="tbItem" @click="warning_open(index)">
-                <p class="tableP" style="cursor: pointer;">刪除</p>
-              </div>
-
             </li>
+
+
+            <li v-for="(donation, index) in donations"
+              :class="{ 'white_li': index % 2 === 0, 'gray_li': index % 2 !== 0 }">
+              <div>
+                <p>{{ donation.LNAME }}{{ donation.FNAME }} </p>
+                <p>{{ donation.MONEY }}</p>
+                <p>{{ donation.DYEAR }}/{{ donation.DMONTH }}</p>
+              </div>
+            </li>
+
+
           </ul>
+
+
+
+
+
+        </section>
+
+
+
+
+      </main>
+    </div>
+    <footer class="backfooter2">
+      <div class="backfooter_frame2">
+        <router-link :to="{ name: 'home' }"><img src="@/assets/images/common/logo.svg" alt="網中愚商標"></router-link>
+        <div class="backfooter_text2">
+          <p class="backfooter_text2"> 本網站為緯育TibaMe【第87期】前端工程師專業技術養成班學員作品,僅供學習、展示之用途。<br>
+            參考資源：回收大百科、Stick Hero、MyGoPen、Médecins Sans Frontières</p>
+          <router-link :to="{ name: 'home' }"><span>返回前台</span></router-link>
         </div>
-
-
       </div>
-
-
-
-
-
-      <!-- <modal_warning></modal_warning> -->
-      <!-- <modal_category>
-      </modal_category> -->
-      <!-- <modal_content></modal_content>
-    <modal_quiz></modal_quiz>  -->
-
-      <!-- <pagination></pagination> -->
-
-    </main>
-  </div>
-  <backfooter></backfooter>
+    </footer>
+  </section>
 </template>
 
 <script>
@@ -107,42 +125,88 @@ export default {
       warningOpen: null,
       addWindow: false,
       editWindow: false,
-      // input輸入的內容
-      itemText: [
-        {
-          // id: '',
-          source: '',
-          title: '',
-          content: '',
-          link: '',
-          picture: '',
+      donations: [],
+      serverData: [],  // 添加 serverData 属性
 
-        }
-      ],
-      // li上有的內容及狀態
-      items: [
-        // {
-        //   tbNumber: '1',
-        //   tbTitle: '標題',
-        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-        //   tbLink: '',
-        //   tbPic: '',
-        //   tbDate: '2022.03.12',
-        // },
-        // {
-        //   tbNumber: '2',
-        //   tbTitle: '標題',
-        //   tbContent: '台灣媒體養成計畫，透過各教育階段共同推動媒體素養教育，提供多樣學習管道及資源，提升學生及國人媒體素養。',
-        //   tbLink: '',
-        //   tbPic: '',
-        //   tbDate: '2022.03.12',
-        // },
-      ],
+      // 輸入年月的選單欄位
+      selectedYear: null,
+      selectedMonth: null,
+      inputValidCode: "", // 使用者輸入的驗證碼
+      validCode: "", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
+      years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+      months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+      Dyear: null,
+      Dmonth: null,
 
     };
   },
 
   methods: {
+    handleDonation() {
+      // 驗證碼比對
+      if (this.inputValidCode.toUpperCase() === this.validCode) {
+        // 驗證碼正確，執行查詢捐款的邏輯
+        // console.log("查詢捐款");
+
+        // 使用 fetch 發送請求
+        // http://localhost/API/donate_log.php
+        // 'http://localhost/API/donate_log.php?DYEAR='+ this.Dyear
+        // `http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`
+
+        fetch(`http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            // 將取得的資料映射为前端需要的格式
+            this.donations = data.map(donation => ({
+              FNAME: donation.FNAME,
+              LNAME: donation.LNAME,
+              MONEY: donation.MONEY,
+              DYEAR: donation.DYEAR,
+              DMONTH: donation.DMONTH,
+            }));
+          })
+          .catch(error => {
+            console.error("Error fetching data:", error);
+            console.log("Response status:", error.status);
+          });
+      } else {
+        // 驗證碼錯誤，顯示錯誤訊息
+        alert("輸入驗證碼錯誤");
+      }
+    },
+
+
+
+    queryDonations() {
+      console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
+
+      // 使用 fetch 发送请求
+      // http://localhost/API/donate_log.php
+      // http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12
+
+      fetch('http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+          console.log("Response status:", error.status);
+        });
+    }
+
 
   },
 };

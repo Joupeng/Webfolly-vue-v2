@@ -18,12 +18,12 @@
                 <div class="drop-down_menu_block">
                     <!-- 年份 -->
                     <select class="list_block" v-model="Dyear">
-                        <option class="choose_year" placeholder="請選擇年份">請選擇年份</option>
+                        <option disabled value="" class="choose_year">請選擇年份</option>
                         <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
                     </select>
                     <!-- 月份 -->
                     <select class="list_block" v-model="Dmonth">
-                        <option class="choose_month">請選擇月份</option>
+                        <option disabled value="" class="choose_month">請選擇月份</option>
                         <option class="li_month" v-for="(month, index) in months" :key="index + 1" :value="index + 1">{{
                             month }}</option>
                     </select>
@@ -35,7 +35,7 @@
                 <div class="verification_code_block">
 
 
-                    <input type="text" placeholder="請輸入驗證碼(不分大小寫)" class="text_here unified_input input"
+                    <input type="text" placeholder="請輸入驗證碼" class="text_here unified_input input"
                         v-model.trim="inputValidCode">
                     <!-- 驗證碼匡 -->
                     <div class="text_here2 underline validcode" id="validcode" @click="updateNumber()">
@@ -190,8 +190,8 @@ export default {
             validCode: "", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
             years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
             months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-            Dyear: null,
-            Dmonth: null,
+            Dyear: 2012,
+            Dmonth: 1,
         };
     },
     mounted() {
@@ -242,7 +242,7 @@ export default {
 
                 fetch(`API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`, {
                     method: 'GET',
-                    mode: 'cors',
+                    // mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -270,29 +270,29 @@ export default {
 
 
 
-        queryDonations() {
-            console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
+        // queryDonations() {
+        //     console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
 
-            // 使用 fetch 发送请求
-            // http://localhost/API/donate_log.php
-            // http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12
+        //     // 使用 fetch 发送请求
+        //     // http://localhost/API/donate_log.php
+        //     // http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12
 
-            fetch('API/donate_log.php?DYEAR=2023&DMONTH=12', {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error("Error fetching data:", error);
-                    console.log("Response status:", error.status);
-                });
-        }
+        //     fetch('API/donate_log.php?DYEAR=2023&DMONTH=12', {
+        //         method: 'GET',
+        //         // mode: 'cors',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log(data);
+        //         })
+        //         .catch(error => {
+        //             console.error("Error fetching data:", error);
+        //             console.log("Response status:", error.status);
+        //         });
+        // }
 
     }
 }

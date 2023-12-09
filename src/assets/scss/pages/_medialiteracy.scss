@@ -149,13 +149,17 @@
             width: 150px;
             height: 112px;
             min-width: 150px;
-            border: 1px solid red;
+            // border: 1px solid red;
             margin: 0 20px 0 0;
 
             @include m() {
               width: 80%;
               height: 200px;
               margin: 0 20px 20px 0px;
+            }
+
+            img {
+              width: 100%;
             }
           }
 

@@ -139,8 +139,11 @@
         }
       }
 
+
+
       // 下拉式選單一
       .list_block {
+        position: relative; // 讓 label 的絕對定位參考這個相對定位的父元素
         width: 100%;
         height: 50px;
         border: 4px solid #50589D;
