@@ -387,7 +387,7 @@
         }
 
         .memberCard {
-          height: 560px;
+          height: 568px;
           margin: 10px 0;
 
           width: 315px;
@@ -428,7 +428,7 @@
               line-height: 24PX;
               margin-top: 40px;
               margin: 0;
-
+              padding-bottom: 12px;
             }
           }
 
@@ -437,8 +437,8 @@
             height: 330px;
 
             .tasks {
-              justify-content: space-evenly;
               padding: 0;
+              justify-content: space-evenly;
             }
 
             .memberImg {

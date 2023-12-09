@@ -172,7 +172,8 @@
             outline: none; // 取消默认的外部轮廓
             box-shadow: none; // 取消默认的阴影边框
             font-size: 16px;
-            color: #B4B4B4;
+            // color: #B4B4B4;
+            color: black;
             padding: 0px 0 0 10px;
 
             @media(max-width:374px) {

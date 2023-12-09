@@ -42,36 +42,7 @@
       <!-- memberIntroduction -->
       <div class="member">
         <div class="title">團隊介紹</div>
-        <div class="memberCard">
-          <div class="leftBox">
-            <div class="person">
-              <div class="name colorOne">范芯瑜
-                <img class="img  colorOne" src="@/assets/images/aboutus/aboutus_mascot1.svg" alt="mascot1">
 
-              </div>
-              <div class="motto">想要每天都能好好吃飯!</div>
-            </div>
-            <div class="task">
-              擔任團體專題副組長<br>
-              管理員帳號管理：功能規劃、介面設計<br>
-              測驗管理：功能規劃、介面設計、前端開發<br>
-              捐款管理：功能規劃、介面設計、前端開發<br>
-              後端：資料庫建置、撰寫API、資料串接與測試<br>
-
-            </div>
-          </div>
-          <div class="rightBox">
-            <div class="tasks colorOne ">
-              <div class="item">前端開發</div>
-              <div class="item">後端開發</div>
-              <div class="item">介面設計</div>
-              <div class="item">後台規劃</div>
-
-            </div>
-            <div class="memberImg"><img class="img" src="@/assets/images/aboutus/member1.png" alt="member1"></div>
-          </div>
-
-        </div>
 
         <div class="memberCard">
           <div class="leftBox">
@@ -83,11 +54,12 @@
               <div class="motto">專注於前方！</div>
             </div>
             <div class="task">
-              擔任團體專題組長<br>
-              趣味小測驗：介面設計<br>
-              假訊息測驗：內容規劃、介面設計、前端開發<br>
-              全站動態特效：特效規劃、前端開發<br>
-              後端：資料庫建置、撰寫API、資料串接與測試<br>
+              擔任團體專題組長<br><br>
+              介面設計: 遊戲母頁、假訊息遊戲測驗、捐款FAQ<br>
+              前端開發:遊戲測驗(前後台)、捐款FAQ<br>
+              資料串接與測試:遊戲測驗、媒體識讀、捐款FAQ<br>
+              資料庫規劃<br>
+
             </div>
           </div>
           <div class="rightBox">
@@ -105,19 +77,47 @@
         <div class="memberCard">
           <div class="leftBox">
             <div class="person">
+              <div class="name colorOne">范芯瑜
+                <img class="img  colorOne" src="@/assets/images/aboutus/aboutus_mascot1.svg" alt="mascot1">
+
+              </div>
+              <div class="motto">想要每天都能好好吃飯!</div>
+            </div>
+            <div class="task">
+
+              介面設計:捐款管理、捐款FAQ、後台-管理者登入/外網連結/相關課程/假訊息追擊-題庫<br>
+              前端開發:後台-媒體識讀/假訊息追擊-題庫/捐款管理/捐款FAQ<br>
+              資料串接與測試:外網連結、相關課程、捐款FAQ<br>
+              資料庫規劃<br>
+
+
+            </div>
+          </div>
+          <div class="rightBox">
+            <div class="tasks colorOne ">
+              <div class="item">前端開發</div>
+              <div class="item">後端開發</div>
+              <div class="item">介面設計</div>
+              <div class="item">後台規劃</div>
+
+            </div>
+            <div class="memberImg"><img class="img" src="@/assets/images/aboutus/member1.png" alt="member1"></div>
+          </div>
+
+        </div>
+        <div class="memberCard">
+          <div class="leftBox">
+            <div class="person">
               <div class="name colorthree">謝佳真
                 <img class="img" src="@/assets/images/aboutus/aboutus_mascot3.svg" alt="mascot3">
 
               </div>
-              <div class="motto">Honest, Passion, Learning, Creative.</div>
+              <div class="motto">寫程式跟人生一樣 是個不斷try and error的過程</div>
             </div>
             <div class="task">
-
-              後台管理員帳號管理：前端開發<br>
-              後端：資料庫建置、撰寫API、資料串接與測試<br>
-              關於我們：前端開發<br>
-              假訊息測驗：內容規劃<br>
-              媒體識讀：內容規劃<br>
+              前端開發:捐款、製作後台-管理者登入/管理者新增/管理者忘記密碼/帳號設定(後台)<br>
+              資料串接與測試:管理者登入/新增/忘記密碼、綠界金流串接<br>
+              資料庫規劃<br>
             </div>
           </div>
           <div class="rightBox">
@@ -142,11 +142,11 @@
               <div class="motto">To be or not to be. That is a question.</div>
             </div>
             <div class="task">
-              關於假訊息：介面設計、前端開發<br>
-              捐款支持：介面設計、前端開發<br>
-              媒體識讀資源：介面設計、前端開發<br>
-              全站動態特效：特效規劃、前端開發<br>
-              後端：資料庫建置、撰寫API、資料串接與測試<br>
+              介面設計: 首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
+              前端開發:首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
+              資料串接與測試:捐款徵信紀錄 <br>
+              資料庫規劃 <br>
+
             </div>
           </div>
           <div class="rightBox">
