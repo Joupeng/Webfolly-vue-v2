@@ -334,7 +334,7 @@ export default {
         .then(resbody => {
           // 要回傳id回來由資料庫定義的
 
-          console.log(resbody)
+          // console.log(resbody)
 
           this.tasks[0].id = resbody.id;
 
