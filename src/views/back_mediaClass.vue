@@ -105,7 +105,8 @@
       <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
           <header class="modalheader">
-            <span>新增編輯 / 文章</span>
+            <span class="close_text" v-if="addWindow">新增文章</span>
+            <span class="close_text" v-if="editWindow">編輯文章</span>
             <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
                 @click="closeModal"> </span>
           </header>
@@ -200,6 +201,7 @@
 import backfooter from '@/components/back_footer.vue'
 import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -266,8 +268,8 @@ export default {
     // 新增內容視窗打開
     itemAddWindow() {
       this.itemAddWindowOpen = !this.itemAddWindowOpen;
-      this.windowShow = true;
       this.addWindow = true;
+      this.editWindow = false;
       // 初始化 itemText[0] 為空白狀態
       this.itemText[0] = {
         // id: '',
@@ -281,7 +283,14 @@ export default {
     },
     // 新增內容進去
     itemAdd() {
-      if (this.itemText[0].id != "") {
+      if (
+        this.itemText[0].id !== '' &&
+        this.itemText[0].source !== '' &&
+        this.itemText[0].title !== '' &&
+        this.itemText[0].content !== '' &&
+        this.itemText[0].link !== '' &&
+        this.itemText[0].picture == ''
+      ) {
         this.items.unshift({
           id: this.itemText[0].id,
           source: this.itemText[0].source,
@@ -289,7 +298,6 @@ export default {
           content: this.itemText[0].content,
           link: this.itemText[0].link,
           picture: this.itemText[0].picture,
-          date: this.itemText[0].date,
         });
         // // 新增完後彈跳視窗內容清空
         this.itemText[0] = {
@@ -303,28 +311,37 @@ export default {
         };
         // 把新增的資料存到 localStorage 裡
         // localStorage.setItem("items", JSON.stringify(this.items));
+        var input = document.querySelector('input[type="file"]')
+        var data = new FormData()
+        data.append('file', input.files[0])
+        data.append('source', this.items[0].source)
+        data.append('link', this.items[0].link)
+        data.append('title', this.items[0].title)
+        data.append('content', this.items[0].content)
+        data.append('picture', this.items[0].picture)
 
       }
       fetch('http://localhost/API/back_mediaClass_add.php', {
         method: 'POST',
         mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          //  是沒有id值的因為是從資料庫來
-          source: this.items[0].source,
-          link: this.items[0].link,
-          title: this.items[0].title,
-          content: this.items[0].content,
-          picture: this.items[0].picture,
-        })
+        // headers: {
+        //   'Content-Type': 'application/json'
+        // },
+        body: data
+        // JSON.stringify({
+        //   //  是沒有id值的因為是從資料庫來
+        //   source: this.items[0].source,
+        //   link: this.items[0].link,
+        //   title: this.items[0].title,
+        //   content: this.items[0].content,
+        //   picture: this.items[0].picture,
+        // })
       })
         .then(resp => resp.json())
         // 找到父層
-        .then(taskList => {
+        .then(respond => {
           // 要回傳id回來由資料庫定義的
-          this.tasks[0].id = id;
+          this.items[0].id = respond.id;
           // console.log(taskList)
           alert("新增成功");
         })
