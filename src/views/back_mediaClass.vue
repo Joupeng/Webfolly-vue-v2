@@ -384,7 +384,7 @@ export default {
           this.items[editedItemIndex] = { ...this.itemText[0] };
           // localStorage.setItem("items", JSON.stringify(this.items));
           // 'http://localhost/API/back_mediaClass_edit.php'
-          fetch('API/back_mediaClass_edit.php', {
+          fetch('API/back_mediaClass_add.php', {
             method: 'POST',
             // mode: 'cors',
             headers: {
@@ -431,7 +431,7 @@ export default {
         // http://localhost/API/back_mediaClass_delete.php
         fetch('API/back_mediaClass_delete.php', {
           method: 'POST',
-          mode: 'cors',
+          // mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
