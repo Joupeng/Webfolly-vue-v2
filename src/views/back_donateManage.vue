@@ -1,70 +1,90 @@
 <template>
   <section class="back_donateManage">
 
-
-    <header class="backheader">
-      <div class="right">
-        <router-link to="/back_account">帳號設定</router-link>
-        <router-link to="/back_login">登出</router-link>
+    <!-- ＨＥＡＤＥＲ -->
+    <header class="backheader2">
+      <div class="right2">
+        <router-link to="/back_account" class="btn_001">帳號設定</router-link>
+        <router-link to="/back_login" class="btn_002">登出</router-link>
       </div>
     </header>
 
-    <div class="back_container">
+    <div class="back_container2">
       <!-- 側邊欄 -->
-      <backaside></backaside>
+      <!-- <backaside></backaside> -->
+
+      <div class="asideNew">
+        <router-link to="/back_medianetwork" class="mediaNetwork2">媒體識讀 - 外網連結</router-link>
+
+        <router-link to="/back_mediaclass" class="mediaClass2">媒體識讀 - 相關課程</router-link>
+
+        <router-link to="/back_fakenews" class="fakeNews2">假訊息追擊 - 題庫</router-link>
+
+        <router-link to="/back_donatemanage" class="donateManage2">捐款管理&nbsp;&nbsp;</router-link>
+
+        <router-link to="/back_donatefaq" class="donateFAQ2">捐款
+          FAQ</router-link>
+      </div>
+
+
 
       <!-- 主要欄目 -->
-      <main>
-        <div class="title">
-          <h2>捐款管理</h2>
-        </div>
+      <div class="main_block">
+
+
+        <div class="D_title">捐款管理</div>
 
         <!-- 匯出 Excel 檔按鈕 -->
-        <div class="btn" @click="fileDownload">匯出 Excel 檔</div>
+        <!-- <div class="btn" @click="fileDownload">匯出 Excel 檔</div>
+ -->
 
 
-        <div class="donateManageTable">
 
 
-          <!-- thead 部分 -->
-          <div class="thead">
-            <!-- 欄位標題 -->
-            <div class="thItem">編號</div>
-            <div class="thItem">姓名</div>
-            <div class="thItem">綠界訂單編號</div>
-            <div class="thItem">捐款金額</div>
-            <div class="thItem">捐款日期</div>
-          </div>
+        <!-- thead 部分 -->
+        <!-- <div class="thead"> -->
+        <!-- 欄位標題 -->
+        <!-- <div class="thItem">編號</div>
+          <div class="thItem">姓名</div>
+          <div class="thItem">綠界訂單編號</div>
+          <div class="thItem">捐款金額</div>
+          <div class="thItem">捐款日期</div>
+        </div> -->
 
 
-          <div class="drop-down_menu_block">
-            <!-- 年份 -->
-            <select class="list_block" v-model="Dyear">
-              <option class="choose_year" placeholder="請選擇年份">請選擇年份</option>
-              <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
-            </select>
-            <!-- 月份 -->
-            <select class="list_block" v-model="Dmonth">
-              <option class="choose_month">請選擇月份</option>
-              <option class="li_month" v-for="(month, index) in months" :key="index + 1" :value="index + 1">{{
-                month }}</option>
-            </select>
-          </div>
+        <div class="drop-down_menu_block2">
+          <!-- 年份 -->
+          <select class="list_block2" v-model="Dyear">
+            <option class="choose_year2" placeholder="請選擇年份">請選擇年份</option>
+            <option class="li_year2" v-for="year in years" :key="year">{{ year }}</option>
+          </select>
+          <!-- 月份 -->
+          <select class="list_block2" v-model="Dmonth">
+            <option class="choose_month2">請選擇月份</option>
+            <option class="li_month2" v-for="(month, index) in months" :key="index + 1" :value="index + 1">{{
+              month }}</option>
+          </select>
 
-          <button class="donate_btn" type="button" @click="handleDonation">
+          <button class="donate_btn2" type="button" @click="handleDonation">
             查詢捐款 &#128269
           </button>
 
-
-
         </div>
 
-        <section class="donate_record_result">
 
-          <ul>
-            <li class="first_li">
+
+
+
+
+
+        <section class="donate_record_result2">
+          <!-- margin: 0 0 60px 0; -->
+
+          <ul class="the_ul">
+            <li class="first_li2">
               <div>
                 <p>姓名</p>
+                <p>綠界訂單編號</p>
                 <p>捐款金額</p>
                 <p>捐款時間</p>
               </div>
@@ -72,28 +92,25 @@
 
 
             <li v-for="(donation, index) in donations"
-              :class="{ 'white_li': index % 2 === 0, 'gray_li': index % 2 !== 0 }">
+              :class="{ 'white_li2': index % 2 === 0, 'gray_li2': index % 2 !== 0 }">
               <div>
                 <p>{{ donation.LNAME }}{{ donation.FNAME }} </p>
+                <p class="p_Dnumber">{{ donation.DNUMBER }}</p>
                 <p>{{ donation.MONEY }}</p>
                 <p>{{ donation.DYEAR }}/{{ donation.DMONTH }}</p>
               </div>
             </li>
-
-
           </ul>
-
-
-
-
 
         </section>
 
 
 
 
-      </main>
+      </div>
     </div>
+
+    <!-- ＦＯＯＴＥＲ -->
     <footer class="backfooter2">
       <div class="backfooter_frame2">
         <router-link :to="{ name: 'home' }"><img src="@/assets/images/common/logo.svg" alt="網中愚商標"></router-link>
@@ -104,19 +121,18 @@
         </div>
       </div>
     </footer>
+
   </section>
 </template>
 
 <script>
-import backfooter from '@/components/back_footer.vue'
-import pagination from '@/components/pagination.vue'
-import backaside from '@/components/back_aside.vue'
+// import backfooter from '@/components/back_footer.vue'
+// import pagination from '@/components/pagination.vue'
+// import backaside from '@/components/back_aside.vue'
 
 export default {
   components: {
-    backfooter,
-    pagination,
-    backaside,
+
   },
   data() {
     return {
@@ -135,79 +151,49 @@ export default {
       validCode: "", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
       years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
       months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-      Dyear: null,
-      Dmonth: null,
+      Dyear: 2012,
+      Dmonth: 1,
 
     };
   },
 
   methods: {
     handleDonation() {
-      // 驗證碼比對
-      if (this.inputValidCode.toUpperCase() === this.validCode) {
-        // 驗證碼正確，執行查詢捐款的邏輯
-        // console.log("查詢捐款");
-
-        // 使用 fetch 發送請求
-        // http://localhost/API/donate_log.php
-        // 'http://localhost/API/donate_log.php?DYEAR='+ this.Dyear
-        // `http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`
-
-        fetch(`http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`, {
-          method: 'GET',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .then(response => response.json())
-          .then(data => {
-            // 將取得的資料映射为前端需要的格式
-            this.donations = data.map(donation => ({
-              FNAME: donation.FNAME,
-              LNAME: donation.LNAME,
-              MONEY: donation.MONEY,
-              DYEAR: donation.DYEAR,
-              DMONTH: donation.DMONTH,
-            }));
-          })
-          .catch(error => {
-            console.error("Error fetching data:", error);
-            console.log("Response status:", error.status);
-          });
-      } else {
-        // 驗證碼錯誤，顯示錯誤訊息
-        alert("輸入驗證碼錯誤");
-      }
-    },
 
 
-
-    queryDonations() {
-      console.log("查询条件:", this.selectedYear, this.selectedMonth, this.verificationCode);
-
-      // 使用 fetch 发送请求
+      // 使用 fetch 發送請求
       // http://localhost/API/donate_log.php
-      // http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12
+      // 'http://localhost/API/donate_log.php?DYEAR='+ this.Dyear
+      // `http://localhost/API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}`
 
-      fetch('http://localhost/API/donate_log.php?DYEAR=2023&DMONTH=12', {
+      fetch(`API/donate_log.php?DYEAR=${this.Dyear}&DMONTH=${this.Dmonth}&DNUMBER=${this.Dnumber}`, {
         method: 'GET',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
+          // 將取得的資料映射为前端需要的格式
+          this.donations = data.map(donation => ({
+            FNAME: donation.FNAME,
+            LNAME: donation.LNAME,
+            DNUMBER: donation.DNUMBER,
+            MONEY: donation.MONEY,
+            DYEAR: donation.DYEAR,
+            DMONTH: donation.DMONTH,
+          }));
         })
         .catch(error => {
           console.error("Error fetching data:", error);
           console.log("Response status:", error.status);
         });
     }
-
-
   },
+
+
+
+
 };
 </script>

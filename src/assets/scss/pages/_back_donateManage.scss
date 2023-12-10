@@ -2,19 +2,307 @@
 @import "../base/font";
 
 .back_donateManage {
-  background-color: #fff;
+  // background-color: #fff;
 
-  .backheader {
-    .backheader {
+  // ＨＥＡＤＥＲ
+  .backheader2 {
+    .right2 {
+      // border: 1px solid red;
+      display: flex;
+      justify-content: flex-end;
+      background-color: #F5DE75;
+      height: 80px;
       width: 100%;
+      min-width: 1200px;
+
+      .btn_001 {
+        // border: 1px solid blue;
+        margin: auto 0;
+      }
+
+      .btn_002 {
+        // border: 1px solid blue;
+        margin: auto 40px auto 20px;
+
+      }
+    }
+
+
+  }
+
+  .back_container2 {
+    display: flex;
+
+    // 側邊欄
+    .asideNew {
+      list-style: none;
+      background-color: $neutral-dark;
+
+      .mediaNetwork2 {
+        margin-top: 40px;
+      }
+
+      a {
+        width: 220px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        margin-bottom: 20px;
+        font-weight: bold;
+        margin: 0 20px 20px 20px;
+
+        &:hover {
+          background-color: $secondary-y1;
+          border-radius: 32px;
+          color: $black;
+        }
+      }
+    }
+
+    .main_block {
+      width: 100%;
+
+      // 黑色標題
+      .D_title {
+        width: auto;
+        min-width: 860px;
+        height: 55px;
+        border-radius: 32px;
+        background-color: #000000;
+        text-align: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 40px;
+      }
+
+      // 下拉式選單區域
+      .drop-down_menu_block2 {
+        display: flex;
+        // border: 1px solid red;
+        height: 50px;
+        gap: 20px;
+        margin: 0 40px 30px 40px;
+        min-width: 860px;
+
+        @media(max-width:500px) {
+          flex-direction: column;
+          height: 100%;
+
+        }
+
+        // 下拉式選單一
+        .list_block2 {
+          position: relative; // 讓 label 的絕對定位參考這個相對定位的父元素
+          width: 100%;
+          height: 50px;
+          border: 4px solid #50589D;
+          background-color: #EFEFEF;
+          color: #B4B4B4;
+          border-radius: 32px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-image: url('@/assets/images/donate/donate_button.svg');
+          background-repeat: no-repeat;
+          background-position: right center;
+          padding-left: 20px;
+          cursor: pointer;
+          outline: none; // 取消默认的外部轮廓
+          box-shadow: none; // 取消默认的阴影边框
+
+          &:hover {
+            box-shadow: 0px 0px 15px #5D92CD;
+            border-radius: 32px;
+          }
+        }
+
+        // 查詢捐款按鈕
+        .donate_btn2 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 160px;
+          min-width: 160px;
+          height: 50px;
+          border: 4px solid #50589D;
+          border-radius: 32px;
+          background-color: #50589D;
+          color: white;
+          margin: 0 auto;
+        }
+      }
+
+
+      .donate_record_result2 {
+        margin: 0 0 60px 0;
+
+
+
+        // ---------------表單
+        .the_ul {
+          list-style: none;
+          width: auto;
+          margin: 0 40px;
+          padding: 0;
+          min-width: 860px;
+          // border: 1px solid red;
+
+
+          .first_li2 {
+            background-color: #F5DE75;
+            display: flex;
+
+
+            div {
+              width: 100%;
+              display: flex;
+              // border: 1px solid green;
+              margin: 0 30px 0 30px;
+
+
+
+
+
+              p {
+                margin: 10px 0 10px 0;
+                font-size: 24px;
+                width: 24%;
+                // border: 1px solid blue;
+                text-align: center;
+
+
+              }
+
+              // p:nth-child(1) {
+              //   width: 25%;
+
+              // }
+
+              // p:nth-child(2) {
+              //   width: 25%;
+              // }
+
+              // p:nth-child(3) {
+              //   width: 25%;
+              // }
+
+              // p:last-child {
+              //   width: 25%;
+              // }
+            }
+          }
+
+          .white_li2 {
+            display: flex;
+            background-color: #fff;
+
+            div {
+              width: 100%;
+              display: flex;
+              // border: 1px solid green;
+              margin: 0 30px 0 30px;
+
+
+
+
+              p {
+                margin: 10px 0 10px 0;
+                font-size: 24px;
+                width: 24%;
+                // border: 1px solid blue;
+                text-align: center;
+
+
+
+              }
+
+              // p:nth-child(1) {
+              //   width: 25%;
+              // }
+
+              // p:nth-child(2) {
+              //   width: 25%;
+              // }
+
+              // p:nth-child(3) {
+              //   width: 25%;
+              // }
+
+              // p:last-child {
+              //   width: 25%;
+              // }
+            }
+          }
+
+          .gray_li2 {
+            display: flex;
+            background-color: #F2F2F2;
+
+            div {
+              width: 100%;
+              display: flex;
+              // border: 1px solid green;
+              margin: 0 30px 0 30px;
+
+
+
+
+              p {
+                margin: 10px 0 10px 0;
+                font-size: 24px;
+                width: 24%;
+                // border: 1px solid blue;
+                text-align: center;
+
+              }
+
+              // p:nth-child(1) {
+              //   width: 25%;
+              // }
+
+              // p:nth-child(2) {
+              //   width: 25%;
+              // }
+
+              // p:nth-child(3) {
+              //   width: 25%;
+              // }
+
+              // p:last-child {
+              //   width: 25%;
+              // }
+
+            }
+          }
+
+          .p_Dnumber {
+            // min-width: 135px;
+            // border: 1px solid red;
+            width: auto;
+            // font-size: 200px;
+          }
+        }
+
+
+
+
+
+
+      }
 
     }
   }
+
 
   // ＦＯＯＴＥＲ
   .backfooter2 {
     // min-width: 1440px;
     width: 100%;
+    min-width: 1200px;
     height: 144px;
     background-color: $neutral-dark;
     padding: 15px 100px 15px 100px;
@@ -22,10 +310,11 @@
     display: flex;
 
     .backfooter_frame2 {
-      border: green;
+      // border: green;
       display: flex;
       align-items: center;
-      width: 1440px;
+      // width: 1440px;
+      width: 100%;
       /* 垂直居中，根據需要調整 */
       justify-content: space-between;
       /* 在容器中平均分配元素，根據需要調整 */
@@ -46,16 +335,12 @@
         /* 設定左邊間距，根據需要調整 */
 
         p {
-          margin-bottom: 10px;
-          // border: 1px solid violet;
-          // width: 100%;
-          min-width: 830px;
+          width: 100%;
           text-align: left;
           font-size: 12px;
           color: $primary-y;
           line-height: 1.5em;
-          // padding: 1.5em;
-          margin: 0;
+          margin: auto 0 auto 0;
           /* 設定段落底邊距，根據需要調整 */
         }
 
@@ -68,6 +353,7 @@
           min-width: 100px;
           display: flex;
           justify-content: center;
+          margin: auto 0;
 
           &:hover {
             color: $secondary-y1;
