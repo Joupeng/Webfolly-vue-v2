@@ -327,9 +327,9 @@ export default {
         data.append('content', this.items[0].content)
 
         // http://localhost/API/back_mediaClass_add.php
-        fetch('http://localhost/API/back_mediaClass_add.php', {
+        fetch('API/back_mediaClass_add.php', {
           method: 'POST',
-          mode: 'cors',
+          // mode: 'cors',
           headers: {
             // 'Content-Type': 'application/json'
           },
@@ -379,9 +379,9 @@ export default {
         //   this.items[editedItemIndex] = { ...this.itemText[0] };
         // localStorage.setItem("items", JSON.stringify(this.items));
         // 'http://localhost/API/back_mediaClass_edit.php'
-        fetch('http://localhost/API/back_mediaClass_edit.php', {
+        fetch('API/back_mediaClass_edit.php', {
           method: 'POST',
-          mode: 'cors',
+          // mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -424,9 +424,9 @@ export default {
 
         // console.log(this.items[this.warningOpen].id)
         // http://localhost/API/back_mediaClass_delete.php
-        fetch('http://localhost/API/back_mediaClass_delete.php', {
+        fetch('API/back_mediaClass_delete.php', {
           method: 'POST',
-          mode: 'cors',
+          // mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -455,9 +455,9 @@ export default {
   mounted() {
     // 資料庫串接
     // http://localhost/API/back_mediaClass.php
-    fetch('http://localhost/API/back_mediaClass.php', {
+    fetch('API/back_mediaClass.php', {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
