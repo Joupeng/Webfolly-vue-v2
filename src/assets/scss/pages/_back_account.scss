@@ -181,9 +181,16 @@
         overflow-y: auto;
       }
 
+      .table.-on {
+        display: none;
+      }
+
+
       table {
 
         margin: 0 0 24px 0;
+
+
 
         thead {
           tr {
@@ -249,10 +256,29 @@
           }
 
           &:nth-child(2) {
+            margin-right: 8px;
             display: none;
           }
 
           &:nth-child(2).-on {
+            display: block;
+            background-color: $indigo;
+            color: white;
+          }
+
+          &:nth-child(3) {
+            display: block;
+          }
+
+          &:nth-child(3).-on {
+            display: none;
+          }
+
+          &:nth-child(4) {
+            display: none;
+          }
+
+          &:nth-child(4).-on {
             display: block;
             background-color: $indigo;
             color: white;

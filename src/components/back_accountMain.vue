@@ -112,10 +112,14 @@
       <!-- 右邊資料區 -->
       <div class="right_block">
         <div class="btnBox">
-          <button class="btn" :class="{ '-on': isOpen2 === true }" @click="handleNewAdmin()">+新增</button>
+          <button class="btn" :class="{ '-on': isOpen2 === true }" @click="handleNewAdmin()">新增帳號</button>
           <button class="btn" :class="{ '-on': isOpen2 === true }" @click="saveNewAdmin()">儲存新增</button>
+
+          <button class="btn" :class="{ '-on': isOpen3 === true }" @click="handleDelAdmin()">刪除帳號</button>
+          <button class="btn" :class="{ '-on': isOpen3 === true }" @click="saveDelAdmin()">退出刪除帳號</button>
         </div>
-        <div class="table">
+        <!-- 預設掛載的表格 -->
+        <div class="table" :class="{ '-on': isOpen3 === true }">
           <table class="table">
             <thead class="thead">
               <tr class="tr">
@@ -144,9 +148,44 @@
                 <td class="td w200">{{ item.MAIL }}</td>
                 <td class="td w100">{{ item.PHONE }}</td>
               </tr>
-
-
-
+            </tbody>
+          </table>
+        </div>
+        <!-- 刪除編輯用的表格 -->
+        <div class="table" :class="{ '-on': isOpen3 === false }">
+          <table class=" table">
+            <thead class="thead">
+              <tr class="tr">
+                <th class="th w100">
+                  <p>刪除</p>
+                </th>
+                <th class="th w100">
+                  <p>使用者編號</p>
+                </th>
+                <th class="th w100">
+                  <p>使用者名稱</p>
+                </th>
+                <th class="th w100">
+                  <p>使用者權限</p>
+                </th>
+                <th class="th w200">
+                  <p>電子信箱</p>
+                </th>
+                <th class="th w100">
+                  <p>電話</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+              <tr class="tr" id="admin" v-for="item in adminList" :key="item">
+                <td class="td w100"><input type="checkbox" v-model="item.checked" @change="handleCheckboxChange(item)">
+                </td>
+                <td class="td w100">{{ item.id }}</td>
+                <td class="td w100">{{ item.NAME }}</td>
+                <td class="td w100">{{ item.PERMISSION }}</td>
+                <td class="td w200">{{ item.MAIL }}</td>
+                <td class="td w100">{{ item.PHONE }}</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -162,7 +201,9 @@ export default {
     return {
       isOpen: false,
       isOpen2: false,
+      isOpen3: false,
       isDisabled: false,
+      isChecked: false,
       // 左 登入的管理者資料表
       adminINF: {
         admID: "",
@@ -201,7 +242,8 @@ export default {
         addPhone: "",
         addPassword: "",
       },
-
+      // 右 
+      delAdminList: [],
     }
   },
   methods: {
@@ -224,6 +266,10 @@ export default {
     // 右控制新增按鈕出現消失
     isOpenBTN() {
       this.isOpen2 = !this.isOpen2;
+    },
+    // 右控制刪除按鈕出現消失
+    isOpenBTN2() {
+      this.isOpen3 = !this.isOpen3;
     },
     // 右控制新增按鈕事件
     handleNewAdmin() {
@@ -313,7 +359,6 @@ export default {
       };
     },
     // 右控制儲存按鈕事件-將資料存到資料庫
-
     async saveNewAdmin() {
       try {
 
@@ -406,8 +451,6 @@ export default {
       const refPWD = refAdmin[0].PASSWORD;
       return refPWD;
     },
-
-
     // 更新密碼比對功能
     confirmPWD() {
       let refPWD = this.getRefPWD();
@@ -476,6 +519,91 @@ export default {
       }
 
     },
+    //按鈕刪除帳號
+    handleDelAdmin() {
+      if (this.adminINF.admPERMISSION === "管理員") {
+        this.isOpenBTN2();
+      } else {
+        alert('您沒有權限新增')
+      }
+
+    },
+    //按鈕儲存刪除
+    saveDelAdmin() {
+      this.isOpenBTN2();
+    },
+
+    // 刪除帳號
+
+    handleCheckboxChange(selectedItem) {
+      // 清空
+      this.delAdminList = [];
+
+      // 將所有項目的 checked 屬性設置為 false，只保留選中的項目為 true
+      this.adminList.forEach(item => {
+        if (item !== selectedItem) {
+          item.checked = false;
+        }
+      });
+
+      // 選取checkbox取值
+      if (selectedItem.checked) {
+        console.log(`Checkbox ${selectedItem.id} is checked`);
+        document.cookie = `del_id=${selectedItem.id}`;
+        const cookiesArray = document.cookie.split('; ');
+        const delIdCookie = cookiesArray.find(cookie => cookie.startsWith('del_id='));
+        const del_id = delIdCookie ? delIdCookie.split('=')[1] : null;
+
+        // 将新的对象添加到数组並不能為99111101
+        if (del_id === '99111101') {
+          selectedItem.checked = false;
+          alert('此帳號不能被刪除')
+        } else {
+          this.delAdminList.push({ del_id: del_id });
+        }
+        // this.delAdminList.push({ del_id: del_id });
+        // console.log(this.delAdminList);
+
+        setTimeout(() => {
+
+          const confirmDelete = window.confirm(`您確定要刪除使用者編號${this.delAdminList[0].del_id}嗎？`);
+          // delete 方法
+          if (confirmDelete) {
+            try {
+              const DELid = this.delAdminList.length > 0 ? this.delAdminList[0].del_id : null;
+
+              const data = {
+                DELid: DELid,
+              };
+
+              const fail = Object.values(data).some(value => value === undefined || value === null || value === '');
+              if (fail) {
+                alert('請勾選帳號');
+              } else {
+                console.log(data);
+                alert(`您所刪除的使用者編號為${DELid}`);
+              }
+              // const response = fetch("http://localhost/AJAX/APITEST/b_deleteaccount.php", {
+              const response = fetch("API/b_deleteaccount.php", {
+                method: "POST",
+                headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              });
+            } catch (message) {
+              console.log(`Error : ${message}`);
+            }
+          } else {
+            alert('取消刪除')
+            selectedItem.checked = false;
+          }
+        }, 50);
+      } else {
+        console.log(`Checkbox ${selectedItem.id} is unchecked`);
+      }
+    },
 
 
   },
@@ -484,7 +612,9 @@ export default {
     // this.getAdminINF();
     // this.getcookie();
     // this.updatePWD()
-
+    this.intervalId = setInterval(() => {
+      this.showAdminList();
+    }, 3000);
   }
 
 }
