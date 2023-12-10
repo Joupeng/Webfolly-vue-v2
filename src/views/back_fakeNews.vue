@@ -147,13 +147,13 @@
 <script>
 
 import backfooter from '@/components/back_footer.vue'
-import pagination from '@/components/pagination.vue'
+// import pagination from '@/components/pagination.vue'
 import backaside from '@/components/back_aside.vue'
 
 export default {
   components: {
     backfooter,
-    pagination,
+    // pagination,
     backaside,
   },
   data() {
@@ -214,10 +214,10 @@ export default {
   },
   methods: {
     // 分頁器
-    changePage(step) {
-      this.currentPage += step;
-      // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
-    },
+    // changePage(step) {
+    //   this.currentPage += step;
+    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    // },
     taskAddWindow() {
       // alert('123');
       this.windowShow = true;
@@ -307,9 +307,9 @@ export default {
 
       console.log(this.tasks[0]);
       // fetch('http://localhost/API/back_fakeNews_add.php'
-      fetch('http://localhost/API/back_fakeNews_add.php', {
+      fetch('API/back_fakeNews_add.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -393,9 +393,9 @@ export default {
 
       // console.log(this.tasks[this.item_index].id);
       // fetch('http://localhost/API/back_fakeNews_edit.php'
-      fetch('http://localhost/API/back_fakeNews_edit.php', {
+      fetch('API/back_fakeNews_edit.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -438,9 +438,9 @@ export default {
 
       // 資料連接
       // fetch('http://localhost/API/back_fakeNews_delete.php'
-      fetch('http://localhost/API/back_fakeNews_delete.php', {
+      fetch('API/back_fakeNews_delete.php', {
         method: 'POST',
-        mode: 'cors',
+        // mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -468,26 +468,26 @@ export default {
       this.deleteWindow = null;
     },
     // 分頁器
-    changePage(step) {
-      this.currentPage += step;
-      // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
-    }
+    // changePage(step) {
+    //   this.currentPage += step;
+    //   // 根據 this.currentPage 更新新頁面的數據，例如：發起 API 請求或更新顯示內容
+    // }
 
 
   },
   // 分頁器
-  computed: {
-    totalPages() {
-      return Math.ceil(this.totalItems / this.itemsPerPage);
-    }
-  },
+  // computed: {
+  //   totalPages() {
+  //     return Math.ceil(this.totalItems / this.itemsPerPage);
+  //   }
+  // },
   // 一開始從資料庫拿出資料已有id由資料庫自動編號
   mounted() {
     // 資料庫串接
     // fetch('http://localhost/API/back_fakeNews.php'
-    fetch('http://localhost/API/back_fakeNews.php', {
+    fetch('API/back_fakeNews.php', {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

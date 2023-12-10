@@ -43,12 +43,14 @@ if ($_FILES["file"]["error"] > 0) {
 
   //Web根目錄真實路徑
   //電腦會自動偵測，因為不同作業系統根目錄不同
-  $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
+  // $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
+  $RelativePath = "medialiteracy/";
 
   //檔案最終存放位置
   //$fileName改名可以使用時間搓記
-  // 可能要從最外層的同層去設定資料夾的開始
-  $filePath = $ServerRoot . "/medialiteracy/" . $fileName;
+  // $filePath = $ServerRoot . "/medialiteracy/" . $fileName;
+  $filePath = $RelativePath . $fileName;
+
 
   //將暫存檔搬移到正確位置
   // 從$filePath_Temp(Server上的暫存檔路徑含檔名)搬到$filePath
