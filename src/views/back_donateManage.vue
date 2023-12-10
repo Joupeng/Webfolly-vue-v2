@@ -104,7 +104,9 @@
 
         </section>
 
-
+        <button class="btn_excell" type="button" @click="exportToExcel">
+          匯出Excel檔
+        </button>
 
 
       </div>
@@ -126,9 +128,18 @@
 </template>
 
 <script>
-// import backfooter from '@/components/back_footer.vue'
-// import pagination from '@/components/pagination.vue'
-// import backaside from '@/components/back_aside.vue'
+
+import * as XLSX from 'xlsx';
+
+
+function s2ab(s) {
+  const buf = new ArrayBuffer(s.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s.length; i++) {
+    view[i] = s.charCodeAt(i) & 0xFF;
+  }
+  return buf;
+}
 
 export default {
   components: {
@@ -184,11 +195,48 @@ export default {
             DYEAR: donation.DYEAR,
             DMONTH: donation.DMONTH,
           }));
+
+          // 检查是否有捐款记录
+          if (this.donations.length === 0) {
+            alert('沒有捐款紀錄');
+          }
+
         })
         .catch(error => {
           console.error("Error fetching data:", error);
           console.log("Response status:", error.status);
         });
+    },
+
+    // 輸出成excell
+    exportToExcel() {
+      if (this.donations.length === 0) {
+        alert('沒有捐款紀錄');
+        return;
+      }
+
+      // 将捐款数据转换为 worksheet 对象
+      const worksheet = XLSX.utils.json_to_sheet(this.donations);
+
+      // 创建 workbook 对象
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, '捐款记录');
+
+      // 将 workbook 对象转换为二进制字符串
+      const binaryString = XLSX.write(workbook, { bookType: 'xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', type: 'binary' });
+
+      // 将二进制字符串转换为 Blob 对象
+      const blob = new Blob([s2ab(binaryString)], { type: 'application/octet-stream' });
+
+      // 创建下载链接并点击
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'donations.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     }
   },
 
