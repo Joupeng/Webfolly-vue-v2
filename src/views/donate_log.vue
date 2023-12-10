@@ -257,6 +257,10 @@ export default {
                             DYEAR: donation.DYEAR,
                             DMONTH: donation.DMONTH,
                         }));
+                        // 检查是否有捐款记录
+                        if (this.donations.length === 0) {
+                            alert('沒有捐款紀錄');
+                        }
                     })
                     .catch(error => {
                         console.error("Error fetching data:", error);
