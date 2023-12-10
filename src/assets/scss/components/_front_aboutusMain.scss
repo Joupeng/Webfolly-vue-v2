@@ -183,7 +183,7 @@
 
 
         .leftBox {
-          width: 398px;
+          width: 420px;
 
           .person {
 
@@ -205,7 +205,7 @@
           }
 
           .task {
-            margin-top: 48px;
+            margin-top: 20px;
             font-size: $font-M-16;
             line-height: 32px;
           }
@@ -387,12 +387,24 @@
         }
 
         .memberCard {
-          height: 568px;
+          height: 612px;
           margin: 10px 0;
 
           width: 315px;
           flex-direction: column;
           margin: 0 auto;
+
+          &:nth-child(3) {
+            height: 640px;
+          }
+
+          &:nth-child(5) {
+            height: 640px;
+          }
+
+          &:nth-child(2) {
+            height: 640px;
+          }
 
           .leftBox {
 

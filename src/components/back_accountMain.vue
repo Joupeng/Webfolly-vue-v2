@@ -238,6 +238,7 @@ export default {
           this.isOpenBTN();
       } else {
         alert('您沒有權限新增')
+
       }
       // 清空上次的新增值
 
@@ -345,8 +346,8 @@ export default {
 
 
         // 3.回傳json檔到php
-        // const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
-        const response = await fetch("API/b_addaccount.php", {
+        const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+          // const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {
             "Accept": "application/json",
@@ -368,8 +369,8 @@ export default {
     // 抓取管理員清單
     async showAdminList() {
       try {
-        // let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
-        let getAdminList = await fetch("API/b_account.php");
+        let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
+        // let getAdminList = await fetch("API/b_account.php");
         const data = await getAdminList.json();
         // console.log(data);
         this.adminList = data;
@@ -448,8 +449,8 @@ export default {
         };
         console.log(PWD);
         // 3.回傳值
-        // response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
-        const response = await fetch("API/b_changepassword.php", {
+        response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
+          // const response = await fetch("API/b_changepassword.php", {
           method: "POST",
           headers: {
             "Accept": "application/json",
