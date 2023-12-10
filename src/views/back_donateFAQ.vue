@@ -148,7 +148,7 @@
       <!-- <modal_content></modal_content>
     <modal_quiz></modal_quiz>  -->
 
-      <pagination></pagination>
+      <!-- <pagination></pagination> -->
 
     </main>
   </div>
