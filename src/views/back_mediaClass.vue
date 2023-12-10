@@ -375,36 +375,36 @@ export default {
       if (this.editWindow) {
         // 編輯操作
         const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
-        if (editedItemIndex !== -1) {
-          this.items[editedItemIndex] = { ...this.itemText[0] };
-          // localStorage.setItem("items", JSON.stringify(this.items));
-          // 'http://localhost/API/back_mediaClass_edit.php'
-          fetch('http://localhost/API/back_mediaClass_edit.php', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            // 要對應php裡的名稱
-            body: JSON.stringify({
-              id: this.items[this.item_index].id,
-              title: this.items[this.item_index].title,
-              source: this.items[this.item_index].source,
-              content: this.items[this.item_index].content,
-              link: this.items[this.item_index].link,
-              picture: this.items[this.item_index].picture,
-            })
+        // if (editedItemIndex !== -1) {
+        //   this.items[editedItemIndex] = { ...this.itemText[0] };
+        // localStorage.setItem("items", JSON.stringify(this.items));
+        // 'http://localhost/API/back_mediaClass_edit.php'
+        fetch('http://localhost/API/back_mediaClass_edit.php', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // 要對應php裡的名稱
+          body: JSON.stringify({
+            id: this.items[this.item_index].id,
+            title: this.items[this.item_index].title,
+            source: this.items[this.item_index].source,
+            content: this.items[this.item_index].content,
+            link: this.items[this.item_index].link,
+            picture: this.items[this.item_index].picture,
           })
-            .then(resp => resp.json())
-          // alert("編輯成功")
-        } else {
-          // 如果有任何一個欄位為空，顯示警示框
-          alert('所有欄位都是必填欄位，請填寫完整資訊');
-        }
+        })
+          .then(resp => resp.json())
+        // alert("編輯成功")
       } else {
-        // 找不到相對應的內容時
-        console.error("Item not found for editing");
+        // 如果有任何一個欄位為空，顯示警示框
+        alert('所有欄位都是必填欄位，請填寫完整資訊');
       }
+      // } else {
+      //   // 找不到相對應的內容時
+      //   console.error("Item not found for editing");
+      // }
 
       this.editWindow = false;
       this.itemAddWindowOpen = false;
