@@ -44,7 +44,7 @@ if ($_FILES["file"]["error"] > 0) {
   //Web根目錄真實路徑
   //電腦會自動偵測，因為不同作業系統根目錄不同
   // $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
-  $RelativePath = "medialiteracy/";
+  $RelativePath = "/assets/medialiteracy/";
 
   //檔案最終存放位置
   //$fileName改名可以使用時間搓記
