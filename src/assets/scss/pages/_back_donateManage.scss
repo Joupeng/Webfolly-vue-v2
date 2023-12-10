@@ -18,12 +18,13 @@
       .btn_001 {
         // border: 1px solid blue;
         margin: auto 0;
+        color: black;
       }
 
       .btn_002 {
         // border: 1px solid blue;
         margin: auto 40px auto 20px;
-
+        color: black;
       }
     }
 
@@ -77,6 +78,7 @@
         justify-content: center;
         align-items: center;
         margin: 20px 40px;
+        font-size: 28px;
       }
 
       // 下拉式選單區域
@@ -88,11 +90,7 @@
         margin: 0 40px 30px 40px;
         min-width: 860px;
 
-        @media(max-width:500px) {
-          flex-direction: column;
-          height: 100%;
 
-        }
 
         // 下拉式選單一
         .list_block2 {
