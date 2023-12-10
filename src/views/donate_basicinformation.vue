@@ -1806,6 +1806,7 @@ export default {
             selectedCity: "",
             selectedDistrict: "",
             selectedZipCode: "",
+            // cityListTest: [],
             // disabledDates: {
             //     dates: [], // 在這裡不列舉具體的日期，表示所有日期都可選擇
             //     predicate: (targetDate) => targetDate > this.picked // 禁用當前日期之後的所有日期
@@ -2020,6 +2021,12 @@ export default {
 
     mounted() {
         this.getdate()
+        // axios
+        //     .get("../assets/json/TwCities.json")
+        //     .then(response => {
+        //         this.cityListTest = response.data.products;
+        //         console.log(this.cityListTest)
+        //     });
     }
 }
 // },

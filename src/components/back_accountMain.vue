@@ -227,14 +227,20 @@ export default {
     },
     // 右控制新增按鈕事件
     handleNewAdmin() {
+      if (this.adminINF.admPERMISSION === "管理員") {
+
+        this.addUserID = "",
+          this.addUserName = "",
+          this.addPermission = "",
+          this.addMail = "",
+          this.addPhone = "",
+          this.addPassword = "",
+          this.isOpenBTN();
+      } else {
+        alert('您沒有權限新增')
+      }
       // 清空上次的新增值
-      this.addUserID = "",
-        this.addUserName = "",
-        this.addPermission = "",
-        this.addMail = "",
-        this.addPhone = "",
-        this.addPassword = "",
-        this.isOpenBTN();
+
     },
     // 每個新增資料的alert
     handleAddUserID() {
@@ -339,13 +345,13 @@ export default {
 
 
         // 3.回傳json檔到php
-        //const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
+        // const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
         const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            // "Content-Type": "text/plain",
+            "Content-Type": "text/plain",
           },
           body: JSON.stringify(data), // data can be string or {object}!
         });
@@ -362,7 +368,7 @@ export default {
     // 抓取管理員清單
     async showAdminList() {
       try {
-        //let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
+        // let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
         let getAdminList = await fetch("API/b_account.php");
         const data = await getAdminList.json();
         // console.log(data);
