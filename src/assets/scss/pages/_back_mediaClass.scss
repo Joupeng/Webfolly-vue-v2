@@ -74,6 +74,36 @@
 
     }
   }
+}
+
+.image_box_file {
+
+  button {
+    border: none;
+    width: 160px;
+    height: 44px;
+    background-color: $primary-b;
+    border-radius: 32px;
+    color: $white;
+    margin-left: -20px;
+    position: relative;
 
 
+    #input_box_textarea {
+      width: 160px;
+      height: 44px;
+      border: 1px solid red;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      border-radius: 32px;
+
+      // span.image_text {
+      //   // align-self: center;
+      //   width: 160px;
+      //   height: 44px;
+      // }
+    }
+  }
 }

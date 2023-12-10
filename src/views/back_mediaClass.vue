@@ -72,11 +72,7 @@
             </li>
           </ul>
         </div>
-
-
       </div>
-
-
       <!-- 刪除彈跳視窗 -->
       <div class="modalWarning" v-if="warningOpen !== null">
         <ul>
@@ -96,11 +92,6 @@
           </li>
         </ul>
       </div>
-
-
-
-
-
       <!-- ===新增文章彈窗=== -->
       <div class="modalContent" v-if="itemAddWindowOpen">
         <div class="content_frame">
@@ -152,22 +143,26 @@
               <div class="input_picture">
                 <p>縮圖</p>
                 <!-- 新增輸入框 -->
-                <input class="input_box_textarea" type="file" ref="fileInput" @change="handleFileUpload" v-if="addWindow">
+                <div class="image_box_file" v-if="addWindow">
+                  <button type="button" class="image_name">選取檔案
+                    <input class="input_box_textarea" type="file" ref="fileInput" id="input_box_textarea"
+                      @change="handleFileChange">
+                  </button>
+                  <span class="image_text">{{ fileInput }}</span>
+                </div>
                 <!-- 編輯輸入框 -->
-                <input class="input_box_textarea" type="file" ref="fileInput" @change="handleFileUpload"
-                  v-if="editWindow">
+                <div class="image_box_file" v-if="editWindow">
+                  <button type="button" class="image_name">選取檔案
+                    <input class="input_box_textarea" type="file" ref="fileInput" id="input_box_textarea"
+                      @change="handleFileChange">
+                  </button>
+                  <span class="image_text">{{ fileInput }}</span>
+                </div>
+
               </div>
-
-
-
             </div>
-
-
           </div>
-
           <div class="button">
-
-
             <div class="button_add_window">
               <div class="btn" type="button" @click="itemAdd" v-if="addWindow">儲存新增</div>
             </div>
@@ -176,17 +171,12 @@
             </div>
           </div>
         </div>
-
       </div>
-
-
-
-
       <!-- <modal_warning></modal_warning> -->
       <!-- <modal_category>
       </modal_category> -->
       <!-- <modal_content></modal_content>
-    <modal_quiz></modal_quiz>  -->
+      <modal_quiz></modal_quiz>  -->
 
       <!-- <pagination></pagination> -->
 
@@ -214,6 +204,7 @@ export default {
       warningOpen: null,
       addWindow: false,
       editWindow: false,
+      fileInput: '',
       // input輸入的內容
       itemText: [
         {
@@ -263,7 +254,10 @@ export default {
 
   },
   methods: {
+    handleFileChange() {
+      this.fileInput = this.$refs.fileInput.files[0].name;
 
+    },
     // 新增內容視窗打開
     itemAddWindow() {
       this.itemAddWindowOpen = !this.itemAddWindowOpen;
@@ -282,6 +276,7 @@ export default {
     },
     // 新增內容進去
     itemAdd() {
+      this.fileInput = ''
       if (
         this.itemText[0].id !== '' &&
         this.itemText[0].source !== '' &&
@@ -332,9 +327,9 @@ export default {
         data.append('content', this.items[0].content)
 
         // http://localhost/API/back_mediaClass_add.php
-        fetch('API/back_mediaClass_add.php', {
+        fetch('http://localhost/API/back_mediaClass_add.php', {
           method: 'POST',
-          // mode: 'cors',
+          mode: 'cors',
           headers: {
             // 'Content-Type': 'application/json'
           },
@@ -362,16 +357,16 @@ export default {
       this.itemAddWindowOpen = true;
       this.addWindow = false;
       this.item_index = i;
-      this.itemText[0] = {
-        id: this.items[i].id,
-        source: this.items[i].source,
-        title: this.items[i].title,
-        content: this.items[i].content,
-        link: this.items[i].link,
-        picture: this.items[i].picture,
+      // this.itemText[0] = {
+      //   id: this.items[i].id,
+      //   source: this.items[i].source,
+      //   title: this.items[i].title,
+      //   content: this.items[i].content,
+      //   link: this.items[i].link,
+      //   picture: this.items[i].picture,
 
 
-      };
+      // };
 
       this.editWindow = true;
     },
@@ -380,36 +375,36 @@ export default {
       if (this.editWindow) {
         // 編輯操作
         const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
-        if (editedItemIndex !== -1) {
-          this.items[editedItemIndex] = { ...this.itemText[0] };
-          // localStorage.setItem("items", JSON.stringify(this.items));
-          // 'http://localhost/API/back_mediaClass_edit.php'
-          fetch('API/back_mediaClass_add.php', {
-            method: 'POST',
-            // mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            // 要對應php裡的名稱
-            body: JSON.stringify({
-              id: this.items[this.item_index].id,
-              title: this.items[this.item_index].title,
-              source: this.items[this.item_index].source,
-              content: this.items[this.item_index].content,
-              link: this.items[this.item_index].link,
-              picture: this.items[this.item_index].picture,
-            })
+        // if (editedItemIndex !== -1) {
+        //   this.items[editedItemIndex] = { ...this.itemText[0] };
+        // localStorage.setItem("items", JSON.stringify(this.items));
+        // 'http://localhost/API/back_mediaClass_edit.php'
+        fetch('http://localhost/API/back_mediaClass_edit.php', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // 要對應php裡的名稱
+          body: JSON.stringify({
+            id: this.items[this.item_index].id,
+            title: this.items[this.item_index].title,
+            source: this.items[this.item_index].source,
+            content: this.items[this.item_index].content,
+            link: this.items[this.item_index].link,
+            picture: this.items[this.item_index].picture,
           })
-            .then(resp => resp.json())
-          // alert("編輯成功")
-        } else {
-          // 如果有任何一個欄位為空，顯示警示框
-          alert('所有欄位都是必填欄位，請填寫完整資訊');
-        }
+        })
+          .then(resp => resp.json())
+        // alert("編輯成功")
       } else {
-        // 找不到相對應的內容時
-        console.error("Item not found for editing");
+        // 如果有任何一個欄位為空，顯示警示框
+        alert('所有欄位都是必填欄位，請填寫完整資訊');
       }
+      // } else {
+      //   // 找不到相對應的內容時
+      //   console.error("Item not found for editing");
+      // }
 
       this.editWindow = false;
       this.itemAddWindowOpen = false;
@@ -429,9 +424,9 @@ export default {
 
         // console.log(this.items[this.warningOpen].id)
         // http://localhost/API/back_mediaClass_delete.php
-        fetch('API/back_mediaClass_delete.php', {
+        fetch('http://localhost/API/back_mediaClass_delete.php', {
           method: 'POST',
-          // mode: 'cors',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -460,9 +455,9 @@ export default {
   mounted() {
     // 資料庫串接
     // http://localhost/API/back_mediaClass.php
-    fetch('API/back_mediaClass.php', {
+    fetch('http://localhost/API/back_mediaClass.php', {
       method: 'POST',
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
