@@ -311,30 +311,5 @@ export default {
 
     },
   },
-
-  mounted() {
-    // 資料庫串接
-    // fetch('http://localhost/API/back_donateFAQ.php')
-    fetch('API/back_donateFAQ.php', {
-      method: 'POST',
-      // mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
-      .then(resp => resp.json())
-      .then(items => {
-        console.log(items);
-        // 放進對應的項目
-        this.items = items.map(item_list => {
-          return {
-            id: item_list.ID,
-            title: item_list.QUESTION,
-            content: item_list.ANSWER,
-          }
-        })
-      })
-  }
 };
 </script>
