@@ -30,14 +30,14 @@ $PASSWORD=$data['PASSWORD'];
 $MAIL=$data['MAIL'];
 $PHONE=$data['PHONE'];
 
-// // include("./DBconnect.php");
+include("./DBconnect.php");
 // // 連接資料庫
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "LEXI0630";
-$db_select = "webfolly";
-$dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
-$pdo = new PDO($dsn, $db_user, $db_pass);
+// $db_host = "127.0.0.1";
+// $db_user = "root";
+// $db_pass = "LEXI0630";
+// $db_select = "webfolly";
+// $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
+// $pdo = new PDO($dsn, $db_user, $db_pass);
 
 $sql="INSERT INTO `admin`(`id`, `NAME`, `PERMISSION`, `PASSWORD`, `MAIL`, `PHONE`) VALUES
 (:adminID, :adminNAME, :PERMISSION, :PWD, :MAIL, :PHONE)";

@@ -57,7 +57,7 @@
                 </div>
                 <!-- 地址 -->
                 <div class="address_block">
-                    <p>地址</p>
+                    <p>地址(請先選擇鄉鎮縣市)</p>
 
 
                     <div class="drop-down_menu_block">
@@ -83,7 +83,8 @@
                             </div>
                         </select> -->
                         <select id="cities" class="list_block" v-model="selectedCity">
-                            <option :value="city" v-for="city in cityList" :key="city.name">{{ city.name }}</option>
+                            <option :value="city" v-for="city in cityList" :key="city.name" placeholder="請選擇縣市">{{ city.name
+                            }} </option>
                         </select>
                         <!-- 鄉鎮市區 -->
                         <!-- <select class="list_block">
@@ -1806,6 +1807,7 @@ export default {
             selectedCity: "",
             selectedDistrict: "",
             selectedZipCode: "",
+            // cityListTest: [],
             // disabledDates: {
             //     dates: [], // 在這裡不列舉具體的日期，表示所有日期都可選擇
             //     predicate: (targetDate) => targetDate > this.picked // 禁用當前日期之後的所有日期
@@ -1883,30 +1885,79 @@ export default {
 
             return null;
         },
-
+        // handleAddMail() {
+        //     // 4.設定信箱格式結尾
+        //     let inpMail = this.donorInf.addMail;
+        //     if (!inpMail.endsWith('.com') && !inpMail.endsWith('.com.tw')) {
+        //         alert('信箱格式錯誤 請確認是否完整');
+        //     }
+        //     else {
+        //         console.log(inpMail);
+        //     };
+        // },
+        // handleAddPhone() {
+        //     // 5.電話設定10碼並且是09開頭
+        //     let inpPHONE = this.donorInf.addPhone;
+        //     if (/^09\d{8}$/.test(this.inpPHONE)) {
+        //         console.log(inpPHONE);
+        //     } else {
+        //         alert('請確認電話號碼是否正確');
+        //     };
+        // },
         // fetch到php===============
         async handleECpay() {
+            // this.handleAddMail();
+            // this.handleAddPhone();
+            // 2.進行儲存 
+            const inpdata = {
+                inpLastName: this.donorInf.addLastName,
+                inpFirstName: this.donorInf.addFirstName,
+                inpMail: this.donorInf.addMail,
+                inpPHONE: this.donorInf.addPhone,
+                inpBirDate: this.pickedDate,
+                selectedCity: this.selectedCity,
+                selectedDistrict: this.selectedDistrict,
+                selectedZipCode: this.selectedZipCode,
+            };
+            // console.log(inpdata)
+            // 確認都沒有空值
+            const fail = Object.values(inpdata).some(value => value === undefined || value === null || value === '');
+            const cookieValue = this.cookie;
             this.cookie = this.getCookie('donationAmt');
+            console.log(this.cookie)
+            if (fail) {
+                alert('捐款失敗  請確認是否填寫資訊是否完全')
+            } else {
+                const confirmBox = confirm(
+                    `您本次的捐款金額為: ${this.cookie}元，請問是否繼續捐款？
+                     (如想修改捐款金額請按"取消")`);
+
+                if (confirmBox) {
+
+                    if (this.cookie == 100) {
+                        // window.location.href = 'http://localhost/AJAX/APITEST/d100_createOrder.php';
+                        window.location.href = 'API/d100_createOrder.php';
+                    };
+                    if (this.cookie == 500) {
+                        // window.location.href = 'http://localhost/AJAX/APITEST/d500_createOrder.php';
+                        window.location.href = 'API/d500_createOrder.php';
+                    };
+                    if (this.cookie == 1000) {
+                        // window.location.href = 'http://localhost/AJAX/APITEST/d1000_createOrder.php';
+                        window.location.href = 'API/d1000_createOrder.php';
+                    };
+                    if (this.cookie == 2000) {
+                        // window.location.href = 'http://localhost/AJAX/APITEST/d2000_createOrder.php';
+                        window.location.href = 'API/d2000_createOrder.php';
+                    };
+                } else {
+                    this.$router.push(`/donate`)
+                }
+            }
+
             // console.log(this.cookie)
 
-            const cookieValue = this.cookie;
 
-            if (cookieValue == 100) {
-                // window.location.href = 'http://localhost/AJAX/APITEST/d100_createOrder.php';
-                window.location.href = 'API/d100_createOrder.php';
-            };
-            if (cookieValue == 500) {
-                // window.location.href = 'http://localhost/AJAX/APITEST/d500_createOrder.php';
-                window.location.href = 'API/d500_createOrder.php';
-            };
-            if (cookieValue == 1000) {
-                // window.location.href = 'http://localhost/AJAX/APITEST/d1000_createOrder.php';
-                window.location.href = 'API/d1000_createOrder.php';
-            };
-            if (cookieValue == 2000) {
-                // window.location.href = 'http://localhost/AJAX/APITEST/d2000_createOrder.php';
-                window.location.href = 'API/d2000_createOrder.php';
-            };
             // 參數
             // const data = '300';
             // console.log(data);
@@ -2020,6 +2071,12 @@ export default {
 
     mounted() {
         this.getdate()
+        // axios
+        //     .get("../assets/json/TwCities.json")
+        //     .then(response => {
+        //         this.cityListTest = response.data.products;
+        //         console.log(this.cityListTest)
+        //     });
     }
 }
 // },

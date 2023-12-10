@@ -51,13 +51,13 @@
                 <img class="img" src="@/assets/images/aboutus/aboutus_mascot2.svg" alt="mascot2">
 
               </div>
-              <div class="motto">專注於前方！</div>
+              <div class="motto colorTwo">專注於前方！</div>
             </div>
             <div class="task">
-              擔任團體專題組長<br><br>
-              介面設計: 遊戲母頁、假訊息遊戲測驗、捐款FAQ<br>
-              前端開發:遊戲測驗(前後台)、捐款FAQ<br>
-              資料串接與測試:遊戲測驗、媒體識讀、捐款FAQ<br>
+              擔任團體專題組長<br>
+              介面設計:<br>遊戲母頁、假訊息遊戲測驗、捐款FAQ<br>
+              前端開發:<br>遊戲測驗(前後台)、捐款FAQ<br>
+              資料串接與測試:<br>遊戲測驗、遊戲測驗題庫、相關課程、捐款FAQ、<br>
               資料庫規劃<br>
 
             </div>
@@ -81,13 +81,13 @@
                 <img class="img  colorOne" src="@/assets/images/aboutus/aboutus_mascot1.svg" alt="mascot1">
 
               </div>
-              <div class="motto">想要每天都能好好吃飯!</div>
+              <div class="motto colorOne">想要每天都能好好吃飯!</div>
             </div>
             <div class="task">
 
-              介面設計:捐款管理、捐款FAQ、後台-管理者登入/外網連結/相關課程/假訊息追擊-題庫<br>
-              前端開發:後台-媒體識讀/假訊息追擊-題庫/捐款管理/捐款FAQ<br>
-              資料串接與測試:外網連結、相關課程、捐款FAQ<br>
+              介面設計:<br>捐款管理、捐款FAQ、後台-管理者登入/外網連結/相關課程/假訊息追擊-題庫<br>
+              前端開發:<br>後台-媒體識讀/假訊息追擊-題庫/捐款管理/捐款FAQ<br>
+              資料串接與測試:<br>外網連結、相關課程、捐款FAQ<br>
               資料庫規劃<br>
 
 
@@ -112,11 +112,11 @@
                 <img class="img" src="@/assets/images/aboutus/aboutus_mascot3.svg" alt="mascot3">
 
               </div>
-              <div class="motto">寫程式跟人生一樣 是個不斷try and error的過程</div>
+              <div class="motto colorthree">寫程式跟人生一樣 是個不斷try and error的過程</div>
             </div>
             <div class="task">
-              前端開發:捐款、製作後台-管理者登入/管理者新增/管理者忘記密碼/帳號設定(後台)<br>
-              資料串接與測試:管理者登入/新增/忘記密碼、綠界金流串接<br>
+              前端開發:<br>捐款、製作後台-管理者登入/管理者新增/管理者忘記密碼/帳號設定(後台)<br>
+              資料串接與測試:<br>管理者登入/新增/忘記密碼、綠界金流串接<br>
               資料庫規劃<br>
             </div>
           </div>
@@ -139,12 +139,12 @@
                 <img class="img" src="@/assets/images/aboutus/aboutus_mascot4.svg" alt="mascot4">
 
               </div>
-              <div class="motto">To be or not to be. That is a question.</div>
+              <div class="motto colorFour">To be or not to be. That is a question.</div>
             </div>
             <div class="task">
-              介面設計: 首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
-              前端開發:首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
-              資料串接與測試:捐款徵信紀錄 <br>
+              介面設計:<br> 首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
+              前端開發:<br>首頁、關於假訊息、媒體識讀、捐款、捐款徵信紀錄 <br>
+              資料串接與測試:<br>捐款徵信紀錄、捐款管理 <br>
               資料庫規劃 <br>
 
             </div>
