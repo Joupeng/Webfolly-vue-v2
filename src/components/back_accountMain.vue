@@ -283,7 +283,7 @@ export default {
           this.addPassword = "",
           this.isOpenBTN();
       } else {
-        alert('您沒有權限新增')
+        alert('您沒有權限新增帳號')
 
       }
       // 清空上次的新增值
@@ -524,7 +524,7 @@ export default {
       if (this.adminINF.admPERMISSION === "管理員") {
         this.isOpenBTN2();
       } else {
-        alert('您沒有權限新增')
+        alert('您沒有權限刪除帳號')
       }
 
     },
