@@ -210,8 +210,12 @@ export default {
       ],
       // li上有的內容及狀態
       items: [],
-
     };
+  },
+  beforeMount() {
+    if (localStorage.getItem("items")) {
+      this.items = JSON.parse(localStorage.getItem("items"));
+    }
   },
 
   methods: {
@@ -326,7 +330,6 @@ export default {
     //       // 上傳失敗後的處理
     //       console.error('圖片上傳失敗:', error);
     //     });
-    // },
 
     // 刪除警告
     warning_open(index) {
@@ -353,34 +356,35 @@ export default {
 
     },
   },
+
+
+
   mounted() {
     // 資料庫串接
-    fetch('http://localhost/API/back_mediaNetwork.php')
-      // fetch('API/back_mediaNetwork.php', {
-      //   method: 'POST',
-      //   // mode: 'cors',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      // })
+    // fetch('http://localhost/API/back_mediaNetwork.php')
+    fetch('API/back_mediaNetwork.php', {
+      method: 'POST',
+      // mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
       // 處理從伺服器返回的響應（resp 是響應對象），轉成json檔格式
       .then(resp => resp.json())
       .then(items => {
-        //console.log(items);
+        console.log(items);
         // 放進對應的項目
-        this.tasks = items.map(item_list => {
+        this.items = items.map(item_list => {
           return {
             id: item_list.ID,
-            title_left: item_list.LTEXT,
-            result_left: item_list.ANSWER_LEFT,
-            answer_left: item_list.DESCRIPTION_LEFT,
-            title_right: item_list.RTEXT,
-            result_right: item_list.ANSWER_RIGHT,
-            answer_right: item_list.DESCRIPTION_RIGHT,
-            date: item_list.CREATE_DATE
+            title: item_list.NAME,
+            content: item_list.DESCRIPTION,
+            link: item_list.LINK,
+            picture: item_list.IMAGE,
           }
         })
       })
   }
 };
 </script>
+
