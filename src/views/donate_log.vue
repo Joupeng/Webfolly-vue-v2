@@ -19,7 +19,7 @@
                     <!-- 年份 -->
                     <select class="list_block" v-model="Dyear">
                         <option disabled value="" class="choose_year">請選擇年份</option>
-                        <option class="li_year" v-for="year in years" :key="year">{{ year }}</option>
+                        <option class="li_year custom-color" v-for="year in years" :key="year">{{ year }}</option>
                     </select>
                     <!-- 月份 -->
                     <select class="list_block" v-model="Dmonth">
@@ -188,7 +188,7 @@ export default {
             selectedMonth: null,
             inputValidCode: "", // 使用者輸入的驗證碼
             validCode: "", // 這裡使用一個固定的驗證碼，你可以根據實際需求修改
-            years: ["2012", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+            years: ["2012", "2013", "2014", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
             months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             Dyear: 2012,
             Dmonth: 1,
