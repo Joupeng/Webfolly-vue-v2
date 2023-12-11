@@ -283,12 +283,12 @@ export default {
         })
           .then(resp => resp.json())
           // 找到父層
-          .then(resbody => {
+          .then(respBody => {
             // 要回傳id回來由資料庫定義的
 
             // console.log(resbody)
 
-            this.items[0].id = resbody.id;
+            this.items[0].id = respBody.id;
           });
       } else {
         // 如果有任何一個欄位為空，顯示警示框
