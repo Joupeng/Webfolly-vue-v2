@@ -34,14 +34,30 @@
             <transition-group name="fade" tag="li">
               <li v-for="(task, index) in tasks" :key="task.id" class="box_list">
                 <!-- <li v-for="(task, index) in tasks" :key="task.id" class="box_list" v-show="deleteWindow != null"> -->
-                <div class="lists">{{ index + 1 }}</div>
-                <div class="lists">{{ task.title_left }}</div>
-                <div class="lists">{{ task.result_left }}</div>
-                <div class="lists">{{ task.answer_left }}</div>
-                <div class="lists">{{ task.title_right }}</div>
-                <div class="lists">{{ task.result_right }}</div>
-                <div class="lists">{{ task.answer_right }}</div>
-                <div class="lists">{{ task.date }}</div>
+                <div class="lists">
+                  <div class="lists_note">{{ index + 1 }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.title_left }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.result_left }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.answer_left }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.title_right }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.result_right }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.answer_right }}</div>
+                </div>
+                <div class="lists">
+                  <div class="lists_note">{{ task.date }}</div>
+                </div>
                 <!-- $event事件物件vue特殊寫法，這裡不一定用，$emit則適用於元件帶入時候的自訂事件 -->
                 <div class="lists"><button type="button" @click="taskEdit(index)"
                     :class="{ '-on': windowShow }">編輯</button>

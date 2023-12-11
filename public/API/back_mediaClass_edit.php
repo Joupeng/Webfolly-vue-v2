@@ -89,7 +89,7 @@ $stmt->bindValue(":source", $source);
 $stmt->bindValue(":content", $content);
 $stmt->bindValue(":link", $link);
 // 這裡需要更改
-$pstmt->bindValue(":picture", "assets/medialiteracy/" . $fileName);
+$stmt->bindValue(":picture", "assets/medialiteracy/" . $fileName);
 // 執行編輯
 $stmt->execute();
 

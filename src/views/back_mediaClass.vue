@@ -396,6 +396,12 @@ export default {
           })
         })
           .then(resp => resp.json())
+          .then(resbody => {
+            // 要回傳id回來由資料庫定義的
+            this.items[0].picture = resbody.filePath;
+            // alert("新增成功");
+            // console.log("新增成功")
+          })
         // alert("編輯成功")
       } else {
         // 如果有任何一個欄位為空，顯示警示框
