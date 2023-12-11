@@ -4,10 +4,7 @@
     <div class="game_content_box">
       <div class="title">趣味小測驗</div>
       <div class="content_text">{{ content }}</div>
-      <div class="game_image">
-        <img src="../assets/images/game_fakenews/world.svg" alt="" class="world">
-        <img src="../assets/images/game_fakenews/world_phone.svg" alt="" class="world_phone">
-      </div>
+
     </div>
     <div class="game_choice_outside">
       <div class="choice_title">選擇遊戲進入挑戰</div>
@@ -31,6 +28,11 @@
         </div>
       </div>
     </div>
+
+  </div>
+  <div class="game_image">
+    <img src="../assets/images/game_fakenews/world.svg" alt="" class="world">
+    <img src="../assets/images/game_fakenews/world_phone.svg" alt="" class="world_phone">
   </div>
   <frontfooter></frontfooter>
 </template>
