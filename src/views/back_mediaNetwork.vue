@@ -258,9 +258,38 @@ export default {
           picture: '',
         };
         // 把新增的資料存到 localStorage 裡
-        localStorage.setItem("items", JSON.stringify(this.items));
+        // localStorage.setItem("items", JSON.stringify(this.items));
         this.addWindow = false;
         this.itemAddWindowOpen = false;
+        console.log(this.items[0]);
+        fetch('API/back_mediaNetwork_add.php', {
+          method: 'POST',
+          // mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // 建立了一個 JSON 物件，其中有一個屬性名稱為id
+          //id.value是指輸入框元素 (<input id="id">) 的當前值
+          //多行文字框我改成.innerText
+          body: JSON.stringify({
+            //  是沒有id值的因為是從資料庫來
+            // id: this.tasks[0].id,
+            title: this.items[0].title,
+            content: this.items[0].content,
+            link: this.items[0].link,
+            picture: this.items[0].picture,
+
+          })
+        })
+          .then(resp => resp.json())
+          // 找到父層
+          .then(resbody => {
+            // 要回傳id回來由資料庫定義的
+
+            // console.log(resbody)
+
+            this.items[0].id = resbody.id;
+          });
       } else {
         // 如果有任何一個欄位為空，顯示警示框
         alert('所有欄位都是必填欄位，請填寫完整資訊');
@@ -288,7 +317,6 @@ export default {
 
     itemEditOk() {
 
-
       if (
         this.itemText[0].title !== '' &&
         this.itemText[0].content !== '' &&
@@ -304,6 +332,29 @@ export default {
           // 找不到相對應的內容時
           console.error("Item not found for editing");
         }
+
+        fetch('API/back_mediaNetwork_edit.php', {
+          method: 'POST',
+          // mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          // 編輯要把修改的內容傳回去
+          body: JSON.stringify({
+            // 左側就是去到php裡的對應名稱，大駝峰
+            id: this.tasks[this.item_index].id,
+            title: this.items[this.item_index].title,
+            content: this.items[this.item_index].content,
+            link: this.items[this.item_index].link,
+            picture: this.items[this.item_index].picture,
+
+          })
+        })
+          .then(resp => resp.json())
+          .then(items => {
+            // console.log(items);
+            alert("編輯成功");
+          })
         this.editWindow = false;
         this.itemAddWindowOpen = false;
       } else {
@@ -340,13 +391,49 @@ export default {
     },
     deleteRow() {
 
-      console.log(this.items);
-      setTimeout(() => {
-        this.items.splice(this.warningOpen, 1);
+      // localStorage
+      // console.log(this.items);
+      // setTimeout(() => {
+      //   this.items.splice(this.warningOpen, 1);
 
-        localStorage.setItem("items", JSON.stringify(this.items));
-        this.warningOpen = null;
-      }, 50);
+      //   localStorage.setItem("items", JSON.stringify(this.items));
+      //   this.warningOpen = null;
+      // }, 50);
+      // console.log(this.tasks);
+      // 沒有資料庫的時候要加local host
+      // localStorage.setItem("tasks", JSON.stringify(this.tasks));
+
+      // 資料連接
+      // fetch('http://localhost/API/back_fakeNews_delete.php'
+      fetch('API/back_mediaClass_delete.php', {
+        method: 'POST',
+        // mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // 送資料給php
+        body: JSON.stringify({
+          id: this.items[this.warningOpen].id,
+          // titleLeft: this.tasks[i].title_left,
+          // resultLeft: this.tasks[i].result_left,
+          // answerLeft: this.tasks[i].answer_left,
+          // titleRight: this.tasks[i].title_right,
+          // resultRight: this.tasks[i].result_right,
+          // answerRight: this.tasks[i].answer_right,
+          // date: this.tasks[i].date,
+        })
+
+
+      })
+        .then(resp => resp.json())
+        .then(items => {
+          // console.log(items);
+          this.tasks.splice(this.warningOpen, 1);
+          alert("刪除成功");
+        })
+      // 把值刪除
+      this.warningOpen = null;
+
     },
 
     // 彈跳視窗關閉
