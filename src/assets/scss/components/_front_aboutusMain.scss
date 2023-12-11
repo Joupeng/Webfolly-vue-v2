@@ -146,6 +146,26 @@
         flex-direction: row;
         justify-content: space-between;
         height: 327px;
+        // margin-bottom: 100px;
+
+        &:nth-child(2) {
+          height: 432px;
+        }
+
+        &:nth-child(3) {
+          height: 368px;
+        }
+
+        &:nth-child(4) {
+          height: 368px;
+        }
+
+        &:nth-child(5) {
+          height: 400px;
+        }
+
+
+
 
         // 個人的顏色區塊
         .colorOne {
@@ -214,6 +234,7 @@
         .rightBox {
           position: relative;
           z-index: 1;
+          height: 327px;
 
 
           .tasks {
@@ -394,17 +415,27 @@
           flex-direction: column;
           margin: 0 auto;
 
+          &:nth-child(2) {
+            height: 680px;
+          }
+
           &:nth-child(3) {
-            height: 640px;
+            height: 632px;
+
+          }
+
+          &:nth-child(4) {
+            height: 636px;
           }
 
           &:nth-child(5) {
-            height: 640px;
+            height: 704px;
           }
 
-          &:nth-child(2) {
-            height: 640px;
-          }
+
+
+
+
 
           .leftBox {
 
