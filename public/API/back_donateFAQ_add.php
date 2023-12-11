@@ -23,25 +23,21 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data)) {
   $id = $data["id"];
   $title = $data["title"];
-  $content = $data["content"];
-  $link = $data["link"];
-  $picture = $data["picture"];
-
+  $answerLeft = $data["content"];
+   
 
 
   // 加上新增內容sql語法
-  $sql = "INSERT INTO website_link
-  (ID,`NAME`,`DESCRIPTION`,LINK,`IMAGE`)
-value(:LINK_ID,:LINK_NAME,:LINK_DESCRIPTION,:LINK_LINK,:LINK_IMAGE)";
+  $sql = "INSERT INTO donation_qa(ID,QUESTION,ANSWER)
+value(:id,:title,:content)";
 
   //要加入資料庫相對應的欄位
   $pstmt = $pdo->prepare($sql);
-  $pstmt->bindValue(":LINK_ID", $id);
-  $pstmt->bindValue(":LINK_NAME", $title);
-  $pstmt->bindValue(":LINK_DESCRIPTION", $content);
-  $pstmt->bindValue(":LINK_LINK", $link);
-  $pstmt->bindValue(":LINK_IMAGE", $picture);
-
+  $pstmt->bindValue(":id", $id);
+  $pstmt->bindValue(":title", $title);
+  $pstmt->bindValue(":content", $content);
+  
+  $pstmt->execute();
   // 這是錯誤的嗎？
   $id = $pdo->lastInsertId();
 
