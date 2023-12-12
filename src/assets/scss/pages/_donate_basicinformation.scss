@@ -235,6 +235,34 @@
       label {
         margin: 0 0 6px 0;
       }
+
+      // 隱私權條款
+      .privacyContainer {
+
+        .privacyGuide {
+          color: $red;
+
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+
+        .privacyText {
+          margin-top: 4px;
+          border: 2px solid $gray-300;
+          margin: 0 auto;
+          font-size: 12px;
+          width: 80%;
+          max-height: 300px;
+          overflow-y: scroll;
+          display: block;
+        }
+
+        .privacyText.-on {
+          display: none;
+        }
+      }
     }
 
     .your_support_block {
@@ -251,7 +279,6 @@
         margin: 0 0 6px 0;
       }
     }
-
 
   }
 
