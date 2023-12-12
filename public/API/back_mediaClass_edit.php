@@ -16,7 +16,7 @@ include("DBconnect.php");
 // // 建立PDO物件
 // $pdo = new PDO($dsn, $db_user, $db_pass);
 
-$data = $_POST;
+// $data = $_POST;
 
 // 要給id
 $id = $_POST["id"];
@@ -50,15 +50,15 @@ if ($_FILES["file"]["error"] > 0) {
   move_uploaded_file($filePath_Temp, $filePath);
 
   //顯示檔案資訊
-  echo "檔案存放位置：" . $filePath;
-  echo "<br/>";
-  echo "類型：" . $fileType;
-  echo "<br/>";
-  echo "大小：" . $fileSize;
-  echo "<br/>";
-  echo "副檔名：" . getExtensionName($filePath);
-  echo "<br/>";
-  echo "<img src='/FileUpload/" . $fileName . "'/>";
+  // echo "檔案存放位置：" . $filePath;
+  // echo "<br/>";
+  // echo "類型：" . $fileType;
+  // echo "<br/>";
+  // echo "大小：" . $fileSize;
+  // echo "<br/>";
+  // echo "副檔名：" . getExtensionName($filePath);
+  // echo "<br/>";
+  // echo "<img src='/FileUpload/" . $fileName . "'/>";
 }
 
 //取得檔案副檔名
@@ -108,4 +108,3 @@ if ($stmt->rowCount() > 0) {
 
 echo json_encode($respbody);
 header('Content-Type: application/json');
-echo json_encode($respbody, JSON_UNESCAPED_UNICODE);
