@@ -395,7 +395,7 @@ export default {
         data.append('link', this.items[this.item_index].link)
         data.append('title', this.items[this.item_index].title)
         data.append('content', this.items[this.item_index].content)
-        fetch('/API/back_mediaClass_edit.php', {
+        fetch('API/back_mediaClass_edit.php', {
           method: 'POST',
           // mode: 'cors',
 
