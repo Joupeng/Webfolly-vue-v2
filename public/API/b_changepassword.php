@@ -1,9 +1,4 @@
 <?php
-// header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-// header("Access-Control-Allow-Headers: Content-Type");
-// header('Content-Type: application/json');
-
  //取得 HTTP POST  Client 端所傳送過來的原始資料
  $postData = file_get_contents("php://input");
  //將 JSON 格式的資料轉換成 PHP 陣列或物件形式的函式
@@ -22,7 +17,6 @@ echo json_encode(["success" => true]);
 
 // =============取消非同源 連接資料庫
 include("./DBconnect.php");
-// =============取消非同源 連接資料庫
 
 $sql="UPDATE `admin` SET `PASSWORD` = :newPWD WHERE `PASSWORD` =:oldPWD";
 $stmt = $pdo->prepare($sql);
@@ -42,10 +36,6 @@ $stmt->execute();
 
 
 }
-
-
-// 關閉資料庫連線
-// $pdo->close();
 
 ?>
 
