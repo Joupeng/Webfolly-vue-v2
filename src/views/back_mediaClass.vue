@@ -68,7 +68,6 @@
               <div class="tbItem" @click="warning_open(index)">
                 <p class="tableP" style="cursor: pointer;">刪除</p>
               </div>
-
             </li>
           </ul>
         </div>
@@ -101,9 +100,7 @@
             <span id="closeModal" class="close"><img src="../assets/images/common/back_iconClose.svg" alt="close"
                 @click="closeModal"> </span>
           </header>
-
           <div class="wrap">
-
             <div class="wrap_fram">
               <!-- 編號 -->
               <!-- 來源 -->
@@ -148,28 +145,30 @@
                     <input class="input_box_textarea" type="file" ref="fileInput" id="input_box_textarea"
                       @change="handleFileChange">
                   </button>
+                  <!-- <span class="image_text">{{ fileInput }}</span> -->
                   <span class="image_text">{{ fileInput }}</span>
                 </div>
                 <!-- 編輯輸入框 -->
                 <div class="image_box_file" v-if="editWindow">
-                  <button type="button" class="image_name">選取檔案
+                  <button type="button" class="image_name">更換檔案
                     <input class="input_box_textarea" type="file" ref="fileInput" id="input_box_textarea"
                       @change="handleFileChange">
                   </button>
-                  <span class="image_text">{{ fileInput }}</span>
+                  <!-- <span class="image_text">{{ items[item_index].picture }}</span> -->
+                  <span class="image_text">{{ fileInput !== '' ? fileInput : items[item_index].picture }}</span>
                 </div>
-
+              </div>
+              <div class="button">
+                <div class="button_add_window">
+                  <div class="btn" type="button" @click="itemAdd" v-if="addWindow">儲存新增</div>
+                </div>
+                <div class="button_add_window">
+                  <div class="btn" type="button" @click="itemEditOk" v-if="editWindow">儲存變更</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="button">
-            <div class="button_add_window">
-              <div class="btn" type="button" @click="itemAdd" v-if="addWindow">儲存新增</div>
-            </div>
-            <div class="button_add_window">
-              <div class="btn" type="button" @click="itemEditOk" v-if="editWindow">儲存變更</div>
-            </div>
-          </div>
+
         </div>
       </div>
       <!-- <modal_warning></modal_warning> -->
@@ -258,6 +257,9 @@ export default {
       this.fileInput = this.$refs.fileInput.files[0].name;
 
     },
+    // handleFileChangeEdit() {
+    //   this.fileInput = this.$refs.fileInput.files[0].name;
+    // },
     // 新增內容視窗打開
     itemAddWindow() {
       this.itemAddWindowOpen = !this.itemAddWindowOpen;
@@ -338,10 +340,10 @@ export default {
         })
           .then(resp => resp.json())
           // 找到父層
-          .then(resbody => {
+          .then(respbody => {
             // 要回傳id回來由資料庫定義的
-            this.items[0].id = resbody.id;
-            this.items[0].picture = resbody.filePath;
+            this.items[0].id = respbody.id;
+            this.items[0].picture = respbody.filePath;
             // console.log(taskList)
             alert("新增成功");
             console.log("新增成功")
@@ -371,49 +373,63 @@ export default {
       this.editWindow = true;
     },
     itemEditOk() {
-
-      if (this.editWindow) {
+      this.fileInput = ''
+      if (this.items[this.item_index].id !== '' &&
+        this.items[this.item_index].source !== '' &&
+        this.items[this.item_index].title !== '' &&
+        this.items[this.item_index].content !== '' &&
+        this.items[this.item_index].link !== '' &&
+        // 檢查是否選入圖片
+        this.$refs.fileInput.files.length > 0) {
+        this.items[this.item_index].picture = this.$refs.fileInput.files[0].name
         // 編輯操作
-        const editedItemIndex = this.items.findIndex(item => item.id === this.itemText[0].id);
-        // if (editedItemIndex !== -1) {
-        //   this.items[editedItemIndex] = { ...this.itemText[0] };
-        // localStorage.setItem("items", JSON.stringify(this.items));
-        // 'http://localhost/API/back_mediaClass_edit.php'
-        fetch('API/back_mediaClass_edit.php', {
+        console.log(this.items[this.item_index].picture);
+        var input = document.querySelector('input[type="file"]')
+        // 直接使用FormData方式
+        var data = new FormData()
+        // input.files[0]等等是變數
+        // file會對應php，其他不需要轉譯所以不用
+        data.append('file', this.items[this.item_index].picture)
+        data.append('id', this.items[this.item_index].id)
+        data.append('source', this.items[this.item_index].source)
+        data.append('link', this.items[this.item_index].link)
+        data.append('title', this.items[this.item_index].title)
+        data.append('content', this.items[this.item_index].content)
+        fetch('/API/back_mediaClass_edit.php', {
           method: 'POST',
           // mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+
           // 要對應php裡的名稱
-          body: JSON.stringify({
-            id: this.items[this.item_index].id,
-            title: this.items[this.item_index].title,
-            source: this.items[this.item_index].source,
-            content: this.items[this.item_index].content,
-            link: this.items[this.item_index].link,
-            picture: this.items[this.item_index].picture,
-          })
+          body: data
+          // body: JSON.stringify({
+          //   id: this.items[this.item_index].id,
+          //   title: this.items[this.item_index].title,
+          //   source: this.items[this.item_index].source,
+          //   content: this.items[this.item_index].content,
+          //   link: this.items[this.item_index].link,
+          //   picture: this.items[this.item_index].picture,
+          // })
         })
           .then(resp => resp.json())
           .then(resbody => {
             // 要回傳id回來由資料庫定義的
-            this.items[0].picture = resbody.filePath;
+            this.items[item_index].picture = resbody.filePath;
             // alert("新增成功");
             // console.log("新增成功")
           })
         // alert("編輯成功")
-      } else {
-        // 如果有任何一個欄位為空，顯示警示框
-        alert('所有欄位都是必填欄位，請填寫完整資訊');
+        // } else {
+        //   // 如果有任何一個欄位為空，顯示警示框
+        //   alert('所有欄位都是必填欄位，請填寫完整資訊');
+        // }
+        // } else {
+        //   // 找不到相對應的內容時
+        //   console.error("Item not found for editing");
       }
-      // } else {
-      //   // 找不到相對應的內容時
-      //   console.error("Item not found for editing");
-      // }
 
       this.editWindow = false;
       this.itemAddWindowOpen = false;
+      this.fileEdit = false;
 
     },
     // 刪除警告
@@ -455,6 +471,8 @@ export default {
     closeModal() {
       this.itemAddWindowOpen = false;
       this.warningOpen = null;
+      this.addWindow = false;
+      this.editWindow = false;
 
     },
   },

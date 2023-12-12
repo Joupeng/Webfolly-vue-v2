@@ -333,7 +333,7 @@ export default {
 
     },
     nextQs() {
-      // 題目判斷要全部迴盪flase
+      // 題目判斷要全部回到false
       this.isCorrect = false;
       this.isResult = true;
       this.isCorrectOk = false;
@@ -343,10 +343,6 @@ export default {
       // 題目變成第二題
       this.current_question += 1;
       this.showAnswerQs = false;
-
-
-
-
     },
     showAnswer() {
       this.isCorrect = false;
@@ -422,10 +418,10 @@ export default {
     // 資料庫串接
     //上server要改成相對路徑
     // fetch('http://localhost/API/game_fakenews.php'
-    fetch('API/game_fakenews.php', {
+    fetch('http://localhost/API/game_fakenews.php', {
       method: 'POST',
       // 非同源
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -2,8 +2,6 @@
 @import "../base/font";
 
 .ClassTable {
-
-
   .thead {
     width: 1028px;
     height: 64px;
@@ -76,34 +74,49 @@
   }
 }
 
-.image_box_file {
+.modalContent {
+  align-items: self-start;
 
-  button {
-    border: none;
-    width: 160px;
-    height: 44px;
-    background-color: $primary-b;
-    border-radius: 32px;
-    color: $white;
-    margin-left: -20px;
-    position: relative;
+  .wrap {
+
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+
+    .image_box_file {
+
+      button {
+        border: none;
+        width: 160px;
+        height: 44px;
+        background-color: $primary-b;
+        border-radius: 32px;
+        color: $white;
+        margin-left: -20px;
+        position: relative;
 
 
-    #input_box_textarea {
-      width: 160px;
-      height: 44px;
-      border: 1px solid red;
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      border-radius: 32px;
+        #input_box_textarea {
+          width: 160px;
+          height: 44px;
+          border: 1px solid red;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          border-radius: 32px;
 
-      // span.image_text {
-      //   // align-self: center;
-      //   width: 160px;
-      //   height: 44px;
-      // }
+          // span.image_text {
+          //   // align-self: center;
+          //   width: 160px;
+          //   height: 44px;
+          // }
+        }
+      }
+    }
+
+    .button_add_window {
+      margin-right: -10px;
     }
   }
 }

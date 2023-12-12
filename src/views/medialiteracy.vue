@@ -163,10 +163,10 @@ export default {
     getLink() {
       // alert("123");
       // fetch('http://localhost/API/medialiteracy.php', 
-      fetch('API/medialiteracy.php', {
+      fetch('http://localhost/API/medialiteracy.php', {
         method: 'POST',
         //非同源
-        // mode: 'cors',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -191,10 +191,10 @@ export default {
   },
   mounted() {
     // fetch('http://localhost/API/medialiteracy.php'
-    fetch('API/medialiteracy.php', {
+    fetch('http://localhost/API/medialiteracy.php', {
       method: 'POST',
       //非同源
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

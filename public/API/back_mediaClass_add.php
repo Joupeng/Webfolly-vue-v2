@@ -21,9 +21,6 @@ if ($_FILES["file"]["error"] > 0) {
   $RelativePath = "/assets/medialiteracy/";
 
   //檔案最終存放位置
-  //$fileName改名可以使用時間搓記
-  // $filePath = $ServerRoot . "/medialiteracy/" . $fileName;
-  // $filePath = $RelativePath . $fileName;
   $filePath = $ServerRoot . "/thd103/g1/dist/assets/medialiteracy/" . $fileName;
 
   //將暫存檔搬移到正確位置
@@ -31,15 +28,15 @@ if ($_FILES["file"]["error"] > 0) {
   move_uploaded_file($filePath_Temp, $filePath);
 
   //顯示檔案資訊
-  echo "檔案存放位置：" . $filePath;
-  echo "<br/>";
-  echo "類型：" . $fileType;
-  echo "<br/>";
-  echo "大小：" . $fileSize;
-  echo "<br/>";
-  echo "副檔名：" . getExtensionName($filePath);
-  echo "<br/>";
-  echo "<img src='/FileUpload/" . $fileName . "'/>";
+  // echo "檔案存放位置：" . $filePath;
+  // echo "<br/>";
+  // echo "類型：" . $fileType;
+  // echo "<br/>";
+  // echo "大小：" . $fileSize;
+  // echo "<br/>";
+  // echo "副檔名：" . getExtensionName($filePath);
+  // echo "<br/>";
+  // echo "<img src='/FileUpload/" . $fileName . "'/>";
 }
 
 //取得檔案副檔名
@@ -74,4 +71,4 @@ $respbody["filePath"] = "$filePath";
 echo json_encode($respbody);
 
 header('Content-Type: application/json');
-echo json_encode($respbody, JSON_UNESCAPED_UNICODE);
+// echo json_encode($respbody, JSON_UNESCAPED_UNICODE);
