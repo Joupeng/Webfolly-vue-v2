@@ -260,7 +260,6 @@ export default {
           return cookie.substring(name.length, cookie.length);
         }
       }
-
       return null;
     },
     // 右控制新增按鈕出現消失
@@ -387,11 +386,11 @@ export default {
           console.log(data);
           alert(`新增成功\n使用者名稱: ${this.addUserName}\n密碼: ${this.addPassword}`)
           this.isOpenBTN();
+          this.showAdminList();
         }
 
 
         // 3.回傳json檔到php
-        // const response = await fetch("http://localhost/AJAX/APITEST/b_addaccount.php", {
         const response = await fetch("API/b_addaccount.php", {
           method: "POST", // or 'PUT'
           headers: {
@@ -399,13 +398,8 @@ export default {
             "Content-Type": "application/json",
             "Content-Type": "text/plain",
           },
-          body: JSON.stringify(data), // data can be string or {object}!
+          body: JSON.stringify(data),
         });
-        // if (!response.ok) {
-        //   throw new Error(`網路回應錯誤: ${response.status}`);
-        // };
-        // const resData = await response.json();
-        // console.log('PHP response:', response);
 
       } catch (message) {
         console.log(`Error : ${message}`);
@@ -414,7 +408,6 @@ export default {
     // 抓取管理員清單
     async showAdminList() {
       try {
-        // let getAdminList = await fetch("http://localhost/AJAX/APITEST/b_account.php");
         let getAdminList = await fetch("API/b_account.php");
         const data = await getAdminList.json();
         // console.log(data);
@@ -430,12 +423,7 @@ export default {
     getAdminINF() {
       // 取得cookie值
       this.cookie = this.getCookie('adminName');
-      // console.log(this.adminList2);
       this.adminFilter = this.adminList.filter(item => item.NAME === this.cookie);
-      // console.log(this.adminINF2);
-      // console.log(this.adminINF2[0].NAME);
-      //this.adminINF[0] = this.adminINF2[0];
-      // 取值後放到admin
       this.adminINF.admID = this.adminFilter[0].id;
       this.adminINF.admNAME = this.adminFilter[0].NAME;
       this.adminINF.admPERMISSION = this.adminFilter[0].PERMISSION;
@@ -454,7 +442,6 @@ export default {
     // 更新密碼比對功能
     confirmPWD() {
       let refPWD = this.getRefPWD();
-      // console.log(refPWD);
       let oldPWD = this.changePWD.oldPWD;
       let newPWD = this.changePWD.newPWD;
       let confirmPWD = this.changePWD.confirmPWD;
@@ -492,7 +479,6 @@ export default {
         };
         console.log(PWD);
         // 3.回傳值
-        // response = await fetch("http://localhost/AJAX/APITEST/b_changepassword.php", {
         const response = await fetch("API/b_changepassword.php", {
           method: "POST",
           headers: {
@@ -502,12 +488,6 @@ export default {
           body: JSON.stringify(PWD),
         });
 
-        // if (!response.ok) {
-        //   throw new Error(`網路回應錯誤: ${response.status}`);
-        // };
-        // 沒有回傳值
-        // const resData = await response.json();
-        // console.log('PHP response:', resData);
         // 5.清空輸入的數值
         this.changePWD.refPWD = "";
         this.changePWD.oldPWD = "";
@@ -554,16 +534,13 @@ export default {
         const delIdCookie = cookiesArray.find(cookie => cookie.startsWith('del_id='));
         const del_id = delIdCookie ? delIdCookie.split('=')[1] : null;
 
-        // 将新的对象添加到数组並不能為99111101
+        // 刪除帳號不能為99111101
         if (del_id === '99111101') {
           selectedItem.checked = false;
           alert('此帳號不能被刪除')
         } else {
           this.delAdminList.push({ del_id: del_id });
         }
-        // this.delAdminList.push({ del_id: del_id });
-        // console.log(this.delAdminList);
-
         setTimeout(() => {
 
           const confirmDelete = window.confirm(`您確定要刪除使用者編號${this.delAdminList[0].del_id}嗎？`);
@@ -583,7 +560,6 @@ export default {
                 console.log(data);
                 alert(`您所刪除的使用者編號為${DELid}`);
               }
-              // const response = fetch("http://localhost/AJAX/APITEST/b_deleteaccount.php", {
               const response = fetch("API/b_deleteaccount.php", {
                 method: "POST",
                 headers: {
@@ -609,9 +585,6 @@ export default {
   },
   mounted() {
     this.showAdminList();
-    // this.getAdminINF();
-    // this.getcookie();
-    // this.updatePWD()
     this.intervalId = setInterval(() => {
       this.showAdminList();
     }, 3000);

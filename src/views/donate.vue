@@ -112,12 +112,6 @@
           <div class="DonationAmount">
             <h3>捐款金額</h3>
 
-            <!-- <div id="app">
-              <button type="button" :class="{ bg: active }" @click="handleButtonClick_100">100</button>
-              <button type="button" :class="{ bg: active1 }" @click="handleButtonClick_500">500</button>
-              <button type="button" :class="{ bg: active2 }" @click="handleButtonClick_1000">1000</button>
-              <button type="button" :class="{ bg: active3 }" @click="handleButtonClick_2000">2000</button>
-            </div> -->
             <div class="donateOption">
               <input class="number" type="text" value="100" readonly :class="{ '-on': isChoose === 100 }"
                 @click="handleIsChoose(100)">
@@ -131,11 +125,6 @@
 
           </div>
           <!-- 查詢捐款按鈕 -->
-          <!-- <div class="donate_btn_outer">
-            <router-link :to="{ name: 'donate_basicinformation' }" class="donate_btn"><span
-                :class="{ 'frontheader_menu-on': $route.name == 'donate' }">確認送出</span>
-            </router-link>
-          </div> -->
           <button class="donate_btn" @click="handleDonation()">確認送出</button>
         </div>
       </div>
@@ -178,7 +167,6 @@ export default {
       this.isChoose = this.isChoose === value ? null : value;
     },
     handleDonation() {
-      // alert('hello')
       document.cookie = '';
       document.cookie = `donationAmt=${this.isChoose}`;
       console.log(this.isChoose)
