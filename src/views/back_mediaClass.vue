@@ -322,6 +322,7 @@ export default {
         var data = new FormData()
         // input.files[0]等等是變數
         // file會對應php，其他不需要轉譯所以不用
+        console.log(input.files[0])
         data.append('file', input.files[0])
         data.append('source', this.items[0].source)
         data.append('link', this.items[0].link)
@@ -373,34 +374,38 @@ export default {
       this.editWindow = true;
     },
     itemEditOk() {
-      this.fileInput = ''
+      this.fileInput = '';
       if (this.items[this.item_index].id !== '' &&
         this.items[this.item_index].source !== '' &&
         this.items[this.item_index].title !== '' &&
         this.items[this.item_index].content !== '' &&
         this.items[this.item_index].link !== '' &&
-        // 檢查是否選入圖片
+        // 檢查是否選入圖片，且填入檔名
         this.$refs.fileInput.files.length > 0) {
         this.items[this.item_index].picture = this.$refs.fileInput.files[0].name
+        // console.log(this.$refs.fileInput.files[0]);
+
         // 編輯操作
-        console.log(this.items[this.item_index].picture);
-        var input = document.querySelector('input[type="file"]')
+        // console.log(this.items[this.item_index].picture);
+        var inputEdit = document.querySelector('input[type="file"]')
         // 直接使用FormData方式
-        var data = new FormData()
-        // input.files[0]等等是變數
+        var dataEdit = new FormData()
+
         // file會對應php，其他不需要轉譯所以不用
-        data.append('file', this.items[this.item_index].picture)
-        data.append('id', this.items[this.item_index].id)
-        data.append('source', this.items[this.item_index].source)
-        data.append('link', this.items[this.item_index].link)
-        data.append('title', this.items[this.item_index].title)
-        data.append('content', this.items[this.item_index].content)
+        // dataEdit.append('file', inputEdit.files[0])寫的是檔案不是欄位
+        dataEdit.append('file', inputEdit.files[0])
+        dataEdit.append('id', this.items[this.item_index].id)
+        dataEdit.append('source', this.items[this.item_index].source)
+        dataEdit.append('link', this.items[this.item_index].link)
+        dataEdit.append('title', this.items[this.item_index].title)
+        dataEdit.append('content', this.items[this.item_index].content)
+        // http://localhost/API/back_mediaClass_edit.php
+        // console.log(inputEdit.files[0]);
         fetch('API/back_mediaClass_edit.php', {
           method: 'POST',
           // mode: 'cors',
-
           // 要對應php裡的名稱
-          body: data
+          body: dataEdit
           // body: JSON.stringify({
           //   id: this.items[this.item_index].id,
           //   title: this.items[this.item_index].title,
@@ -413,23 +418,17 @@ export default {
           .then(resp => resp.json())
           .then(respbody => {
             // 要回傳id回來由資料庫定義的
-            this.items[item_index].picture = respbody.filePath;
-            // alert("新增成功");
+            this.items[this.item_index].picture = respbody.filePath;
+            alert("編輯成功");
             // console.log("新增成功")
           })
-        // alert("編輯成功")
-        // } else {
-        //   // 如果有任何一個欄位為空，顯示警示框
-        //   alert('所有欄位都是必填欄位，請填寫完整資訊');
-        // }
-        // } else {
-        //   // 找不到相對應的內容時
-        //   console.error("Item not found for editing");
+
+        this.editWindow = false;
+        this.itemAddWindowOpen = false;
+        this.fileEdit = false;
       }
 
-      this.editWindow = false;
-      this.itemAddWindowOpen = false;
-      this.fileEdit = false;
+
 
     },
     // 刪除警告
@@ -479,9 +478,9 @@ export default {
   mounted() {
     // 資料庫串接
     // http://localhost/API/back_mediaClass.php
-    fetch('API/back_mediaClass.php', {
+    fetch('http://localhost/API/back_mediaClass.php', {
       method: 'POST',
-      // mode: 'cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
