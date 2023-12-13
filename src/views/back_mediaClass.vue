@@ -478,9 +478,9 @@ export default {
   mounted() {
     // 資料庫串接
     // http://localhost/API/back_mediaClass.php
-    fetch('http://localhost/API/back_mediaClass.php', {
+    fetch('API/back_mediaClass.php', {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
