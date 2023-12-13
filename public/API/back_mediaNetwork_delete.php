@@ -5,7 +5,7 @@ include("DBconnect.php");
 // header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 // header("Access-Control-Allow-Headers: Content-Type");
 
-// 連自己的資料庫
+// // 連自己的資料庫
 // $db_host = "127.0.0.1";
 // $db_user = "root";
 // $db_pass = "password";
@@ -16,7 +16,7 @@ include("DBconnect.php");
 // // 建立PDO物件
 // $pdo = new PDO($dsn, $db_user, $db_pass);
 
-// 要補寫一下收前端的訊號id值傳進來要刪的內容才刪掉，應該要取的正確的id值進行刪除
+// // 要補寫一下收前端的訊號id值傳進來要刪的內容才刪掉，應該要取的正確的id值進行刪除
 $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data)) {
   // print_r($data);
@@ -46,3 +46,4 @@ if (isset($data)) {
   }
   echo json_encode($respBody);
 }
+?>

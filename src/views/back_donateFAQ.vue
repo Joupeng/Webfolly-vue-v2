@@ -249,7 +249,7 @@ export default {
         this.addWindow = false;
         this.itemAddWindowOpen = false;
         console.log(this.items[0]);
-        fetch('API/back_mediaNetwork_add.php', {
+        fetch('API/back_donateFAQ_add.php', {
           method: 'POST',
           // mode: 'cors',
           headers: {
