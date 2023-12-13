@@ -1,11 +1,11 @@
 <?php
 include("DBconnect.php");
-// // 允許不同源
+// 允許不同源
 // header("Access-Control-Allow-Origin: *");
 // header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 // header("Access-Control-Allow-Headers: Content-Type");
 
-// 連自己的資料庫
+// // 連自己的資料庫
 // $db_host = "127.0.0.1";
 // $db_user = "root";
 // $db_pass = "password";
