@@ -36,9 +36,9 @@
 
 <script>
 export default {
-  //父層傳過來使用的屬性
+  //父層傳過來使用的屬性，本身自層沒有這個定義
   props: ["tasks"],
-  // 觸發的事件
+  // 在子層觸發的事件，要反應在父層頁面
   emits: ["taskEdit", "taskSwap", "taskRemove"]
 }
 </script>

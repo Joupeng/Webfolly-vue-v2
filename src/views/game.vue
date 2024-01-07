@@ -1,10 +1,20 @@
 <template>
   <frontnav></frontnav>
+  <div class="people_caculator">
+    <div class="inside_box">
+      <div class="caculator_square">
+        <p>遊戲遊玩人數</p>
+        <div class="actual_people">{{ people_count }}人</div>
+      </div>
+      <div class="stand_image">
+        <img src="../assets/images/game_fakenews/game_blue.svg" alt="">
+      </div>
+    </div>
+  </div>
   <div class="game_outside_box">
     <div class="game_content_box">
       <div class="title">趣味小測驗</div>
       <div class="content_text">{{ content }}</div>
-
     </div>
     <div class="game_choice_outside">
       <div class="choice_title">選擇遊戲進入挑戰</div>
@@ -23,7 +33,8 @@
               </ol>
             </div>
             <router-link :to="{ name: 'game_fakenews' }"><span
-                :class="{ 'frontheader_menu-on': $route.name == 'game_fakenews' }">進入遊戲</span></router-link>
+                :class="{ 'frontheader_menu-on': $route.name == 'game_fakenews' }"
+                @click="peopleCount">進入遊戲</span></router-link>
           </div>
         </div>
       </div>
@@ -78,7 +89,8 @@ export default {
         //   name: "ttt",
         //   editable: false,
         // }
-      ]
+      ],
+      people_count: 0,
     };
   },
   beforeMount() {
@@ -90,8 +102,24 @@ export default {
     //要有資料才放入，不然如果是陣列是空的跑迴圈，會有問題，所以要有判斷式
     if (all_tasks)
       this.tasks = all_tasks;
-  },
+
+
+    // 進來頁面時，讀取 localStorage 中的 people_count
+    let storedPeopleCount = localStorage.getItem("people_count");
+
+    if (storedPeopleCount) {
+      // 將 localStorage 中的資料轉換為數字，採用10進位
+      this.people_count = parseInt(storedPeopleCount, 10);
+    }
+  }
+
+  ,
   methods: {
+    peopleCount() {
+      this.people_count += 1;
+      localStorage.setItem("people_count", this.people_count.toString());
+    },
+
     //focus blur事件觸發
     toggleShadow() {
       // console.log("ttt");

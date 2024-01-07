@@ -29,6 +29,7 @@ li.task_list_content {
       background-color: lightgray !important;
       cursor: not-allowed !important;
       color: gray;
+
     }
   }
 
@@ -56,6 +57,11 @@ li.task_list_content {
           border: 0;
           cursor: pointer;
           border: 1px solid #eee;
+
+          &:hover {
+            background-color: $primary-b ;
+            color: #fff;
+          }
         }
       }
     }
@@ -92,7 +98,7 @@ li.task_list_content {
       .task_name_update {
         width: 100%;
         border: 1px solid lightgray;
-        border-radius: 3px 0 0 3px;
+        border-radius: 32px;
         height: 40px;
         font-size: 1.5rem;
         padding: 5px 10px;
@@ -128,6 +134,11 @@ li.task_list_content {
           border: 0;
           cursor: pointer;
           border: 1px solid #eee;
+
+          &:hover {
+            background-color: $primary-b ;
+            color: #fff;
+          }
         }
       }
     }

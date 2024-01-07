@@ -131,7 +131,6 @@
 <script>
 
 import { gsap } from 'gsap';
-import { useSSRContext } from 'vue';
 export default {
   data() {
     return {
@@ -145,7 +144,8 @@ export default {
       isVisibleBlack: false,
       isQsappear: false,   //手機黑幕跟qs出現
       click_text: false,
-
+      // 完成遊戲人數
+      // people_finish: 0,
 
 
       // 可以寫成一兩題為一個的寫法
@@ -356,6 +356,7 @@ export default {
       this.isEnd = true;
       this.isCorrect = false;
       this.isResult = false;
+      this.people_finish += 1;
       // this.isQsappear = false;
       // alert('123');
     },
