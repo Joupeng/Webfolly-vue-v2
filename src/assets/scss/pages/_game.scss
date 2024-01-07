@@ -152,8 +152,6 @@
         //   &:hover {
         //     background-color: $primary-b ;
         //   }
-
-        // 改不了顏色
         a {
           display: flex;
           justify-content: center;
@@ -198,7 +196,7 @@
   // border: 1px solid red;
   margin: 0 auto;
   margin-top: 60px;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 
   @media (min-width:767.98px) and (max-width:992px) {
     width: 600px;
@@ -247,8 +245,119 @@
       // width: 300px;
     }
 
+  }
+}
 
+//留言區
+
+.title_note p {
+  text-align: center;
+  color: $font-L-20;
+  margin-top: 50px;
+  font-size: $font-L-20;
+  margin-bottom: 30px;
+
+  @media (max-width:768px) {
+    margin-top: 30px;
+  }
+}
+
+article.task_container_game {
+  // border: 1px solid red;
+  width: 650px;
+  margin: 0 auto;
+  padding: 10px;
+  // 陰影效果
+  box-shadow: 1px 1px 5px gray;
+  max-width: 100%;
+  background-color: #fcfcfc;
+  margin-bottom: 100px;
+
+  h1.titleNote {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+  }
+
+  //留言新增區域
+  .task_add_block {
+    font-size: 0;
+    transition: transform .5s, box-shadow .5s;
+
+    &.-on {
+      box-shadow: 0 0 5px gray;
+      transform: scale(1.01);
+      transform-origin: center center;
+    }
+
+    input.task_name {
+      //減去新增鈕的寬
+      width: calc(100% - 60px);
+      border: 1px solid lightgray;
+      border-radius: 3px 0 0 3px;
+      height: 40px;
+      font-size: 1.5rem;
+      padding: 5px 10px;
+      outline: none;
+      display: inline-block;
+      vertical-align: top;
+
+      // 提示文字顏色
+      input.task_name::placeholder {
+        color: lightgray;
+      }
+    }
+
+    button {
+      display: inline-block;
+      width: 60px;
+      height: 40px;
+      vertical-align: top;
+      border: 1px solid lightgray;
+      // 消除小小的線
+      border-left: 0;
+      background-color: white;
+      box-shadow: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      outline: none;
+      border-radius: 0 3px 3px 0;
+
+      &:active {
+        //inset陰影在框的內部
+        box-shadow: 1px 1px 3px lightgray inset, -1px -1px 3px lightgray inset;
+        background-color: #fcfcfc;
+        font-size: 0.8rem;
+      }
+    }
 
   }
 
+  .task_list_parent {
+    margin-top: 30px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+
+    }
+
+  }
+
+
+  button.button_empty {
+    float: right;
+    background: none;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    height: 30px;
+    width: 50px;
+    outline: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
 }

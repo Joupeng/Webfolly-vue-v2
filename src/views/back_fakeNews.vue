@@ -449,7 +449,7 @@ export default {
     // 確定刪除鍵
     taskRemove() {
       // console.log(this.tasks);
-      // 沒有資料庫的時候要加local host
+      // 沒有資料庫的時候要加localStorage
       // localStorage.setItem("tasks", JSON.stringify(this.tasks));
 
       // 資料連接

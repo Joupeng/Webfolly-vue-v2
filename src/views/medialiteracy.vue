@@ -16,6 +16,9 @@
       <!-- 深黃頁首 -->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <!-- 相關連結 -->
+        <!-- 自訂屬性:data-value="webLink"可以參考，不能直接寫:value -->
+        <!-- <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+            role="tab" aria-controls="home-tab-pane" aria-selected="true" :data-value="webLink">相關連結</button> -->
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
             role="tab" aria-controls="home-tab-pane" aria-selected="true" :value="webLink">相關連結</button>

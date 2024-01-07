@@ -1,0 +1,135 @@
+li.task_list_content {
+  margin-bottom: 20px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 20px;
+  opacity: 1;
+  transition: opacity 1s;
+
+  &.fade_out {
+    opacity: 0
+  }
+
+  //第一個li設定
+  &:first-child {
+    border-top: 1px solid black;
+    padding-top: 20px;
+
+    button.btn_up {
+      background-color: lightgray !important;
+      cursor: not-allowed !important;
+      color: gray;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+
+    button.btn_down {
+      background-color: lightgray !important;
+      cursor: not-allowed !important;
+      color: gray;
+    }
+  }
+
+  .item_flex {
+    display: flex;
+
+    .left_block {
+      width: 100px;
+      //不斷行
+      flex-shrink: 0;
+
+      .btn_flex {
+        display: flex;
+
+        button {
+          // 填滿空間
+          flex-grow: 1;
+          outline: none;
+          height: 40px;
+          font-size: 1rem;
+          padding: 0;
+          margin: 0;
+          background: none;
+          background-color: white;
+          border: 0;
+          cursor: pointer;
+          border: 1px solid #eee;
+        }
+      }
+    }
+
+    .middle_block {
+      font-size: 1.4rem;
+      flex-grow: 1;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      // 重要的星星
+      .star_block {
+        display: inline-block;
+
+        span.star {
+          cursor: pointer;
+          display: inline-block;
+          margin-right: 3px;
+
+          &.-on {
+            color: yellow;
+          }
+        }
+      }
+
+      p.para {
+        margin: 0;
+
+        &.-none {
+          display: none;
+        }
+      }
+
+      .task_name_update {
+        width: 100%;
+        border: 1px solid lightgray;
+        border-radius: 3px 0 0 3px;
+        height: 40px;
+        font-size: 1.5rem;
+        padding: 5px 10px;
+        outline: none;
+
+        &.-none {
+          display: none;
+        }
+
+        &::placeholder {
+          color: lightgray;
+        }
+      }
+    }
+
+    .right_block {
+      width: 100px;
+      flex-shrink: 0;
+
+      .btn_flex {
+        display: flex;
+
+        button {
+          // 填滿空間
+          flex-grow: 1;
+          outline: none;
+          height: 40px;
+          font-size: 1rem;
+          padding: 0;
+          margin: 0;
+          background: none;
+          background-color: white;
+          border: 0;
+          cursor: pointer;
+          border: 1px solid #eee;
+        }
+      }
+    }
+  }
+}

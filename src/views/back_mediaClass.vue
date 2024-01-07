@@ -330,7 +330,7 @@ export default {
         data.append('content', this.items[0].content)
 
         // http://localhost/API/back_mediaClass_add.php
-        fetch('API/back_mediaClass_add.php', {
+        fetch(' API/back_mediaClass_add.php', {
           method: 'POST',
           // mode: 'cors',
           headers: {
@@ -342,6 +342,9 @@ export default {
           .then(resp => resp.json())
           // 找到父層
           .then(respbody => {
+            console.log("abc");
+            console.log(respbody.filePath)
+
             // 要回傳id回來由資料庫定義的
             this.items[0].id = respbody.id;
             this.items[0].picture = respbody.filePath;
